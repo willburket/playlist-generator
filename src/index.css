@@ -81,12 +81,32 @@ a {
   position: absolute;
   top: 58px;
   width: 300px;
-  transform: translateX(-45%);
+  transform: translateX(45%);
   background-color: var(--bg);
   border: var(--border);
   border-radius: var(--border-radius);
   padding: 1rem;
   overflow: hidden;
+}
+
+.dropdown-button{
+  --button-size: calc(var(--nav-size) * 0.5);
+  width: fit-content;
+  float: left;
+  margin-right: 20px;
+  white-space: nowrap;
+  height: var(--button-size);
+  border-radius: 5%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.dropdown-button:hover{
+  filter: brightness(1.2);
 }
 
 .menu-item{
@@ -102,6 +122,3 @@ a {
   background-color: #525357;
 }
 
-.icon-right{
-  margin-left: auto;
-}
