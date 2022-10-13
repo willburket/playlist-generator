@@ -9,25 +9,37 @@ function App(){
     <Navbar>
       <NavItem icon= "Genre 😀">
         <DropdownMenu>
-          <DropdownItem>Pop</DropdownItem>
-          <DropdownItem>Hip-Hop/Rap</DropdownItem>
-          <DropdownItem>Rock</DropdownItem>
-          <DropdownItem>R&B</DropdownItem>
-          <DropdownItem>House</DropdownItem>
-          <DropdownItem>EDM</DropdownItem>
-          <DropdownItem>Country</DropdownItem>
-          <DropdownItem>Alternative</DropdownItem>
-          <DropdownItem>Punk</DropdownItem>
-          <DropdownItem>Classic Rock</DropdownItem>
-          <DropdownItem>Hard Rock</DropdownItem>
-          <DropdownItem>Latin</DropdownItem>
-          <DropdownItem>Soul/Funk</DropdownItem>
-          <DropdownItem>Jazz</DropdownItem>
+          <DropdownItem name = "Pop"/>
+          <DropdownItem name = "Hip-Hop/Rap"/>
+          <DropdownItem name = "Rock"/>
+          <DropdownItem name = "R&B"/>
+          <DropdownItem name = "Dance"/>
+          <DropdownItem name = "Country"/>
+          <DropdownItem name = "Alternative"/>
+          <DropdownItem name = "Latin"/>
+          <DropdownItem name = "Soul/Funk"/>
+          <DropdownItem name = "Jazz"/>
         </DropdownMenu>
       </NavItem>
-      <NavItem icon= "Category 😀"/>
-      <NavItem icon= "Time Frame 😀"/>
-      <NavItem icon="Number of Items 😘"/> 
+      <NavItem icon= "Category 😀">
+        <DropdownMenu>
+        <DropdownItem name = "Top Songs"/>
+        <DropdownItem name = "Other"/>
+        </DropdownMenu>
+      </NavItem>
+      <NavItem icon= "Time Frame 😀">
+        <DropdownMenu> 
+        <DropdownItem name = "Current"/>  {/*should probably just make this a form instead where users input start and end year*/}
+        <DropdownItem name = "2020's"/>
+        <DropdownItem name = "2010's"/>
+        <DropdownItem name = "2000's"/>
+        <DropdownItem name = "1990's"/>
+        <DropdownItem name = "1980's"/>
+        <DropdownItem name = "1970's"/>
+        <DropdownItem name = "1960's"/>
+        </DropdownMenu>
+      </NavItem>
+      <NavItem icon="Number of Items 😘"></NavItem>
         
     </Navbar>
   );
