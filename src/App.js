@@ -9,16 +9,6 @@ function App(){
     <Navbar>
       <NavItem icon= "Genre 😀">
         <DropdownMenu>
-          <DropdownItem name = "Pop"/>
-          <DropdownItem name = "Hip-Hop/Rap"/>
-          <DropdownItem name = "Rock"/>
-          <DropdownItem name = "R&B"/>
-          <DropdownItem name = "Dance"/>
-          <DropdownItem name = "Country"/>
-          <DropdownItem name = "Alternative"/>
-          <DropdownItem name = "Latin"/>
-          <DropdownItem name = "Soul/Funk"/>
-          <DropdownItem name = "Jazz"/>
         </DropdownMenu>
       </NavItem>
       <NavItem icon= "Category 😀">

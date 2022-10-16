@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+
+
+
 function DropdownItem(props){
 
     const [selected, setSelected ] = useState(false);
@@ -14,16 +17,31 @@ function DropdownItem(props){
 }
 
 function DropdownMenu(props){
-    const [picked, setPicked] = useState("")
+    const [picked, setPicked] = useState("")    
+
+    function DropdownItem(props){
+
+        const [selected, setSelected ] = useState(false);
+    
+        return(
+            <a href="#" className="menu-item">
+                <div className="dropdown-button" onClick={()=> setSelected(true)}>{props.name} 
+                {/* {selected.toString()}    */}
+                </div>
+            </a>
+        );
+    }
 
     // code for what happens when a dropdownitem is picked 
 
     return (
         <div className="dropdown">
-            {props.children} 
+            {props.children}
         </div>
     );
 }
+
+
 
 export {
     DropdownMenu,

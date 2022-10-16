@@ -91,7 +91,7 @@ a {
 
 .dropdown-button{
   --button-size: calc(var(--nav-size) * 0.5);
-  width: fit-content;
+  width: 100%;
   float: left;
   margin-right: 20px;
   white-space: nowrap;
@@ -101,7 +101,7 @@ a {
   margin: 2px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: left;
   transition: filter 300ms;
 }
 
