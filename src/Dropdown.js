@@ -5,11 +5,11 @@ import React, { useState } from "react";
 
 function DropdownItem(props){
 
-    const [selected, setSelected ] = useState(false);
+    //const [selected, setSelected ] = useState(false);
 
     return(
         <a href="#" className="menu-item">
-            <div className="dropdown-button" onClick={()=> setSelected(true)}>{props.name} 
+            <div className="dropdown-button" >{props.name} 
             {/* {selected.toString()}    */}
             </div>
         </a>

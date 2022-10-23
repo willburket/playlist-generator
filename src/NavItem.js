@@ -18,19 +18,20 @@ const categories = [{value: 'top', label: 'Top Songs'}];
 function NavItem (props) {
 
     const [open, setOpen] = useState(false);
-    const [active, setActive] = useState(null);
+    const [active, setActive] = useState("null");
 
-    function openOne(props){
-        setOpen(!open)
-        setActive(props.value)
+    function openOne(value){
+        setOpen(!open);
+        setActive(value);
         //code for closing other navitems?
     }
 
-
+    var value;
+    
     return (
         <li className = "nav-item">
-            <a href="#" className="icon-button" onClick={() => setOpen(!open)}>
-                {props.icon}
+            <a href="#" className="icon-button" onClick={() => openOne(value="open")}>
+                {props.icon}{active}
             </a>
 
             {open && props.children}
