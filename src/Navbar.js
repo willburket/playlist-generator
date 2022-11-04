@@ -1,15 +1,19 @@
 import React, {useEffect, useState, useRef} from "react";
 
-function DropdownItem(props){
+var genre = null
+var category = null
+
+function GenreDropdownItem(props){
 
     const[selected_item,setSelectedItem] = useState(null)
 
     function itemClick (){
-        
+        genre = props.value
+        console.log(genre)
     }
 
     return(
-        <a href="#" className="menu-item" >
+        <a href="#" className="menu-item" onClick = {() => itemClick()}>
             <div className="dropdown-button">
                 {props.name} 
             </div>
@@ -17,40 +21,31 @@ function DropdownItem(props){
     );
 }
 
-function useActiveMenu(menu){
-    const [active_menu, setActiveMenu] = useState(null);
+function CategoryDropdownItem(props){
 
-    function handleStatusChange(status) {
-        setActiveMenu(status.value);
-      }
-    
-    useEffect(() => {
-        
-    })
+    const[selected_item,setSelectedItem] = useState(null)
 
-    return(active_menu)  
+    function itemClick (){
+        category = props.value
+        console.log(category)
+    }
+
+    return(
+        <a href="#" className="menu-item" onClick={() => itemClick()}>
+            <div className="dropdown-button">
+                {props.name} 
+            </div>
+        </a>
+    );
 }
 
 function DropdownMenu(props){
 
-    
-
     return (
         <div className="dropdown">
             {props.children}
         </div>
     );
-}
-
-function Dropdown(props){
-
-
-    return (
-        <div className="dropdown">
-            {props.children}
-        </div>
-    );
-
 }
 
 
@@ -58,7 +53,7 @@ function NavItem (props) {
 
     const [open, setOpen] = useState(false);
     const [active, setActive] = useState(null);
-    const dropdownRef = useRef(null)
+    const dropdownRef = useRef(null);
     
 
     function clickChange(){
@@ -108,6 +103,7 @@ function NavItem (props) {
 }
 
 function Navbar(props){
+
     
     return(
         <nav className= "navbar">
@@ -116,25 +112,21 @@ function Navbar(props){
                 <NavItem icon= "Genre 😀" value= "genre">
                     
                     <DropdownMenu>
-                        <DropdownItem name = "Rap" value = "rap"/>
-                        <DropdownItem name = "Pop" value = "pop"/>
+                        <GenreDropdownItem name = "Rap" value = "rap"/>
+                        <GenreDropdownItem name = "Pop" value = "pop"/>
                     </DropdownMenu>
-                    
-                    
+                     
                 </NavItem>
             
-            
-                
-            <NavItem icon= "Category 😀" value= "category">
-            <DropdownMenu>
-                    
-                    <DropdownItem name = "Top Songs" value = "top"/>
+                <NavItem icon= "Category 😀" value= "category">
+                    <DropdownMenu>
+                        <CategoryDropdownItem name = "Top Songs" value = "top"/>
+                            
+                                        {/*do some sort of 'set selected' onclick event */}
+                        <CategoryDropdownItem name = "Other" value = "other" />
                         
-                                     {/*do some sort of 'set selected' onclick event */}
-                    <DropdownItem name = "Other" value = "other" onClick={()=> Object.assign()}/>
-                    
-                </DropdownMenu>
-            </NavItem>
+                    </DropdownMenu>
+                </NavItem>
             </ul>
         </nav>
     );
