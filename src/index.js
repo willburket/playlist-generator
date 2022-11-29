@@ -3,11 +3,15 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { MusicProvider } from './AppleMusic';
 
+let musicProvider = MusicProvider.sharedProvider(); //this is returning null
+musicProvider.configure();  //this isn't working
+let musicInstance = musicProvider.getMusicInstance();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <App musicInstance = {musicInstance}/>
   </React.StrictMode>
 );
 

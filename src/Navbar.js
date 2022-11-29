@@ -237,7 +237,6 @@ function Navbar(props){
     return(
         <nav className= "navbar">
             <ul className= "navbar-nav">
-
                 <GenreNavItem icon= "Genre 😀" value= "genre">
                     <DropdownMenu>
                         <GenreDropdownItem name = "Pop" value = "pop"/>
@@ -250,11 +249,9 @@ function Navbar(props){
                         <GenreDropdownItem name = "Latin" value = "latin"/>
                         <GenreDropdownItem name = "Alternative" value = "alternative"/>
                         <GenreDropdownItem name = "Indie" value = "indie"/>
-                        <GenreDropdownItem name = "Raggae" value = "raggae"/>
-                        
+                        <GenreDropdownItem name = "Raggae" value = "raggae"/>      
                     </DropdownMenu>   
                 </GenreNavItem>
-            
                 <CategoryNavItem icon= "Category 😀" value= "category">
                     <DropdownMenu>
                         <CategoryDropdownItem name = "Top Songs" value = "top"/>
