@@ -23,4 +23,4 @@ yarn-debug.log*
 yarn-error.log*
 
 #api key
-/backend/AuthKey_PA6274NFYR.p8
+src/backend/AuthKey_PA6274NFYR.p8
