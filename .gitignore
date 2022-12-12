@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+/backend/AuthKey_4M6TDNT62W.p8
+/backend/AuthKey_PA6274NFYR.p8
