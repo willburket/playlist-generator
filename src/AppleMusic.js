@@ -52,9 +52,9 @@ class MusicProvider{
   configure() {
     document.addEventListener("musickitloaded", () => {
       window.MusicKit.configure({
-        developerToken: 'MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgbN4lf9Mm/gKuczmgyOIwpiGZ6XHh2SC0eDSSGavHFhmgCgYIKoZIzj0DAQehRANCAASYrxk13YnEOWHzNPNrdxuLqFtHqyl5eE+HhVI19zUX8ogOLqgDQ2JT8Jjip0vXVxOfab681EvRHrh5JMCueOpN',
+        developerToken: 'MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgIr73FJAvLQtymY+oOKz8W668qypyZpMH/fBllR7bxqWgCgYIKoZIzj0DAQehRANCAASYGFz5GcWotIr+ytQb1fWWglQ/3f/JILmxN33qNif3qYV831rP5iFLz2/p4A+AxdOdCvOLtTMwkUoAZ9PTupKW',
         app: {
-            name: 'Playlist Generator',
+            name: 'PlaylistGenerator',
             build: '1.0.0'
         }
     });
@@ -74,6 +74,20 @@ class MusicProvider{
   }
 }
 
+function AuthorizeButton(props){
+  // let music = MusicKit.getInstance()
+  // let song = music.api.song('1207120538').then(callback);
+  //console.log(song)
+
+  return (
+    <div>
+      <button data-apple-music-play>
+        Play
+      </button>
+
+    </div>
+  );
+}
 
 
-export {MusicProvider}
+export {MusicProvider, AuthorizeButton, }
