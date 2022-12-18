@@ -6,22 +6,6 @@
 import React from "react";
 
 
-// const fs = require("fs");       this is a node (server side) module, need to find a different one/ run this code on the server side 
-// const jwt = require("jsonwebtoken");    need to use react-jwt
-
-// const privateKeyPath = "./AuthKey_PA6274NFYR.p8";
-// const privateKey = fs.readFileSync(privateKeyPath).toString();
-// const teamId = "S3PHBMG8Q4";
-// const keyId = "PA6274NFYR";
-// const token = jwt.sign({}, privateKey, {
-//   algorithm: "ES256",
-//   expiresIn: "180d",
-//   issuer: teamId,
-//   header: {
-//     alg: "ES256",
-//     kid: keyId,
-//   },
-// });
 
 // console.log(token);
 
