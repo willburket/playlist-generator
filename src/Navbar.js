@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from "react";
 
-var genre = null
+var genre = null        
 var category = null
 var decade = null
 

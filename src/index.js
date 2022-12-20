@@ -9,19 +9,24 @@ import { MusicProvider } from './AppleMusic';
 // musicProvider.configure();  //this isn't working
 // let musicInstance = musicProvider.getMusicInstance(); // add to app component musicInstance = {musicInstance}
 
-document.addEventListener('musickitloaded', async function(){
-  try {
-    await window.MusicKit.configure({
-      developerToken: 'MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgbN4lf9Mm/gKuczmgyOIwpiGZ6XHh2SC0eDSSGavHFhmgCgYIKoZIzj0DAQehRANCAASYrxk13YnEOWHzNPNrdxuLqFtHqyl5eE+HhVI19zUX8ogOLqgDQ2JT8Jjip0vXVxOfab681EvRHrh5JMCueOpN',
-        app: {
-            name: 'PlaylistGenerator',
-            build: '1.0.0'
-        }
-    });
-  } catch(err){
-    console.log(err)
-  }
-});
+// document.addEventListener('musickitloaded', async function(){
+//   try {
+//     fetch("/jwt").then(response => response.json).then(res => {
+//       const music =  window.MusicKit.configure({
+//         developerToken: res.token,
+//           app: {
+//               name: 'PlaylistGenerator',
+//               build: '1.0.0'
+//           }
+//       });
+//     })
+    
+//   } catch(err){
+//     console.log(err)
+//   }
+
+  
+// });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
