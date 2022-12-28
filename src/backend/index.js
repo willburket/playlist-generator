@@ -16,8 +16,9 @@ app.get("/jwt", (req,res) => {
 
 app.get("/artist", (req,res) => {
 
-  const artistId = '123456789'
+  const artistId = '1147783278'
   const artist = apple.fetchArtist(artistId)
+  console.log(artist)
   res.send(artist)
 })
 

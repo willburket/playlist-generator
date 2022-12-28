@@ -30,13 +30,15 @@ function AppleMusicConfig() {
     // MusicKit instance is available
     const music = window.MusicKit.getInstance()
     // await music.authorize();
-    const result = await music.api.music(
-        `/v1/catalog/us/search`,
-        { term: 'gunna', types: 'albums'}
-      );
+
+    // testing music
+    // const result = await music.api.music(
+    //     `/v1/catalog/us/search`,
+    //     { term: 'gunna', types: 'albums'}
+    //   );
     
-    console.log(result)
-    // await music.play();
+    // console.log(result)
+    
   });
 
   if (!data) {

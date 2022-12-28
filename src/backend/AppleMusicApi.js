@@ -12,14 +12,18 @@ module.exports = {
 
     fetchArtist: async (artistId) => {
         try {
-          const { data } = await axios.get(`/v1/catalog/us/artists/${artistId}`);
+          const { data } = await axios.get(`/v1/catalog/us/artists/${artistId}`).then(data => {
+            return data
+          });
     
-          return data.data[0];
+  
         } catch (error) {
           console.error(error);
           return null;
         }
       },
+
+    
 
 }
 
