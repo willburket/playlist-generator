@@ -1,22 +1,50 @@
 import React, { useState, useEffect } from 'react';
 
-function AppleMusicConfig() {
+let token = null
+
+function AppleMusicToken() {
   const [data, setData] = useState(null);
   useEffect(() => {
     async function fetchData() {
       const response = await fetch('/jwt');     // will need to switch to using cookie eventually
       const json = await response.json();
       setData(json);
+      token = data
     }
-    fetchData();
+    fetchData();    
   }, []);
+  
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+  else{  
+    return (
+        <div>
+          <p>Received data {data.token} </p>
+        </div>
+      );
+  }
+  
+}
 
-  document.addEventListener('musickitloaded', async function () {
-    const dev_token = data.token
+function AppleMusicConfig(){
+  useEffect(() => {
+    if (token != null){
+      document.addEventListener('musickitloaded', config);
+        // MusicKit instance is available
+        // const music = window.MusicKit.getInstance()
+    }
+    return () => {
+      document.removeEventListener('musickitloaded', config)
+    }
+  }, []);
+  
+  async function config() {
+    // const dev_token = data.token
     // Call configure() to configure an instance of MusicKit on the Web.
     try {
       await window.MusicKit.configure({
-        developerToken: dev_token,
+        developerToken: token,
         app: {
           name: 'PlaylistGenerator',
           build: '1',
@@ -26,33 +54,23 @@ function AppleMusicConfig() {
       // Handle configuration error
      console.log(err)
     }
-  
-    // MusicKit instance is available
-    const music = window.MusicKit.getInstance()
-    // await music.authorize();
-
-    // testing music
-    // const result = await music.api.music(
-    //     `/v1/catalog/us/search`,
-    //     { term: 'gunna', types: 'albums'}
-    //   );
-    
-    // console.log(result)
-    
-  });
-
-  if (!data) {
-    return <p>Loading...</p>;
+  return(
+    <div>
+      <p>{token}</p>
+    </div>
+  )
   }
-  else{
-    return (
-        <div>
-          <p>Received data {data.token} </p>
-          
-        </div>
-      );
-  }
-  
 }
 
-export default AppleMusicConfig;
+export {AppleMusicConfig, AppleMusicToken};
+
+// const music = window.MusicKit.getInstance()
+      // // await music.authorize();
+  
+      // // testing music
+      
+  
+      // const queryParameters = { ids: ['1233456789', '987654321'], l: 'en-us' };
+      // const result = await music.api.music(`/v1/catalog/{{storefrontId}}/activities`, queryParameters);
+      // console.log(result)
+      
