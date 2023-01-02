@@ -68,15 +68,28 @@ class AppleConfig extends React.Component{
       .then(response => response.json())
       .then(data => {
         this.setState({data})
-        document.addEventListener('musickitloaded', this.configure)
+        window.MusicKit.configure({
+          developerToken: data.token,
+          app: {
+            name: 'PlaylistGenerator',
+            build: '1',
+          },
+        });
+      
+      const music = window.MusicKit.getInstance()
+      const queryParameters = { ids: ['1233456789', '987654321'], l: 'en-us' };
+      const result = music.api.music(`/v1/catalog/{{storefrontId}}/activities`, queryParameters);
+      console.log(result)
+
+        // document.addEventListener('musickitloaded', this.configure)
       });
     ;
   }
 
-  componentWillUnmount(){
-    document.removeEventListener('musickitloaded', this.configure);
+  // componentWillUnmount(){
+  //   document.removeEventListener('musickitloaded', this.configure);
 
-  }
+  // }
 
   configure(){
     // const dev_token = data.token
