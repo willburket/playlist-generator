@@ -1,14 +1,13 @@
 import React from "react";
 import Navbar from "./Navbar";
-import {AppleMusicConfig, AppleConfig} from "./AppleMusicConfig";
+import AppleMusicConfig from "./AppleMusicConfig";
 // import Submit from "./AppleMusic";
 
 function App(){
   return(
     <div>
     <Navbar/>
-    <AppleConfig />
-    {/* <AppleMusicConfig/> */}
+    <AppleMusicConfig/>
     {/* <Submit/> */}
     </div>
   );
