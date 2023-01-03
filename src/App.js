@@ -1,6 +1,6 @@
 import React from "react";
 import Navbar from "./Navbar";
-import AppleMusicConfig from "./AppleMusicConfig";
+import {AppleMusicConfig, AppleMusicAuth} from "./AppleMusicConfig";
 // import Submit from "./AppleMusic";
 
 function App(){
@@ -8,6 +8,7 @@ function App(){
     <div>
     <Navbar/>
     <AppleMusicConfig/>
+    {/* <AppleMusicAuth/> */}
     {/* <Submit/> */}
     </div>
   );

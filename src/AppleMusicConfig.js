@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 class AppleMusicConfig extends React.Component{
   constructor (props){
@@ -24,14 +24,14 @@ class AppleMusicConfig extends React.Component{
         catch(err){
           console.log(err)
         }
-        
-      const music = window.MusicKit.getInstance()
-      // music.authorize()
-      // const queryParameters = { ids: ['1233456789', '987654321'], l: 'en-us' };
-      // const result = music.api.music(`/v1/catalog/{{storefrontId}}/activities`, queryParameters);
-      // console.log(result)
-
-      });
+      }).then(() => {
+        var music = window.MusicKit.getInstance()
+        music.authorize()
+        const { data: result } = music.api.music('v1/me/library/albums');
+        console.log(result)
+        music.unauthorize()
+      }
+      );
     ;
   }
 
@@ -51,15 +51,31 @@ class AppleMusicConfig extends React.Component{
 
 }
 
-export default AppleMusicConfig;
+function AppleMusicAuth(){
+  const [isAuthorized, setIsAuthorized] = useState(false)
+  var music = window.MusicKit.getInstance()
+        
+  function handleStatusChange(){
+    if (isAuthorized == false){
+      music.authorize()
+    }
+    else{
+      music.unauthorize()
+    }
+    setIsAuthorized(!isAuthorized)
+  }
+  
 
-// const music = window.MusicKit.getInstance()
-      // // await music.authorize();
-  
-      // // testing music
-      
-  
-      // const queryParameters = { ids: ['1233456789', '987654321'], l: 'en-us' };
-      // const result = await music.api.music(`/v1/catalog/{{storefrontId}}/activities`, queryParameters);
-      // console.log(result)
+  return(
+    <div>
+      <button onClick = {handleStatusChange}>
+        Authorize
+      </button>
+    </div>
+  );
+}
+
+export {AppleMusicConfig, AppleMusicAuth};
+
+
       

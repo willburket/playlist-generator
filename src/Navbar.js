@@ -176,40 +176,30 @@ function DecadeNavItem (props) {
     const [active, setActive] = useState(null);
     const dropdownRef = useRef(null);
     
-
-    function clickChange(){
-        
+    function clickChange(){ 
         if (open && active != null){
             setActive(null)
             setOpen(!open)
-            
         }
         else{
-            
             setActive(props.value)
             setOpen(!open)
         }       
-
     };
 
     useEffect(()=> {
         const pageClickEvent = (e) =>{
-            
                 if(dropdownRef.current !== null && !dropdownRef.current.contains(e.target)){
                     setOpen(false)
                 }
-
         };
         if(active){
             window.addEventListener('click', pageClickEvent);
         }
-        
         return () =>{
             window.removeEventListener('click', pageClickEvent);
         }
-
     }, [active]);
-
 
     return (
         <li className = "nav-item">
@@ -232,6 +222,7 @@ function SubmitButton (props){
         </li>
     );
 }
+
 function Navbar(props){
 
     return(
@@ -278,7 +269,5 @@ function Navbar(props){
     );
 
 }
-
-
 
 export default Navbar
