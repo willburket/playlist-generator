@@ -19,7 +19,7 @@ class AppleMusicConfig extends React.Component{
               build: '1',
             },
           });
-        console.log("success")
+        console.log("configuration success")
         }
         catch(err){
           console.log(err)
@@ -27,8 +27,11 @@ class AppleMusicConfig extends React.Component{
       }).then(() => {
         var music = window.MusicKit.getInstance()
         music.authorize()
-        const { data: result } = music.api.music('v1/me/library/albums');
-        console.log(result)
+        const storefront = 'us'
+        const search_term = 'dance'
+        const genre = 'dance'
+        const data = music.api.music('v1/catalog/{storefront}/search?term={search_term}&genre={genre}');
+        // console.log(data.toString())
         music.unauthorize()
       }
       );
@@ -46,9 +49,7 @@ class AppleMusicConfig extends React.Component{
             </div>
           );
       }
-    
   }
-
 }
 
 function AppleMusicAuth(){
