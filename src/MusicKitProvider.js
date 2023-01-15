@@ -1,22 +1,23 @@
-import React, { useState, useContext } from 'react'
+import React, { createContext, useState, useContext } from 'react'
 
-const MusicKitContext = React.createContext();
+const MusicKitContext = createContext(null);
 
 function MusicKitProvider (props){
-    const {children, musicKit} = props;
+    const {children, music} = props;
+    
     
     return(
-        <MusicKitContext.Provider value = {musicKit}>
+        <MusicKitContext.Provider value = {music}>
             {children}
         </MusicKitContext.Provider>
     )
 }
 
 function AuthorizeButton(){
-    const musicKit = useContext(MusicKitContext);
+    var music = useContext(MusicKitContext);
 
-    const [isAuthorized, setIsAuthorized] = useState(false)
-    var music = musicKit
+    const [isAuthorized, setIsAuthorized] = useState(false)     //might need to make this a custom hook eventually
+    
         
     function handleStatusChange(){
     if (isAuthorized == false){

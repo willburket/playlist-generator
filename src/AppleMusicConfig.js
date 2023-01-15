@@ -27,10 +27,10 @@ class AppleMusicConfig extends React.Component{
       }).then(() => {
         var music = window.MusicKit.getInstance()
         music.authorize()
-        const storefront = 'us'
-        const search_term = 'dance'
-        const genre = 'dance'
-        const data = music.api.music('v1/catalog/{storefront}/search?term={search_term}&genre={genre}');
+        // const storefront = 'us'
+        // const search_term = 'dance'
+        // const genre = 'dance'
+        // const data = music.api.music('v1/catalog/{storefront}/search?term={search_term}&genre={genre}');
         // console.log(data.toString())
         music.unauthorize()
       }
@@ -57,7 +57,7 @@ function AppleMusicAuth(){
   var music = window.MusicKit.getInstance()
         
   function handleStatusChange(){
-    if (isAuthorized == false){
+    if (isAuthorized === false){
       music.authorize()
     }
     else{
