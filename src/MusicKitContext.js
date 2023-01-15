@@ -2,21 +2,10 @@ import React, { createContext, useState, useContext } from 'react'
 
 const MusicKitContext = createContext(null);
 
-function MusicKitProvider (props){
-    const {children, music} = props;
-    
-    
-    return(
-        <MusicKitContext.Provider value = {music}>
-            {children}
-        </MusicKitContext.Provider>
-    )
-}
-
 function AuthorizeButton(){
-    var music = useContext(MusicKitContext);
+    const music = useContext(MusicKitContext);
 
-    const [isAuthorized, setIsAuthorized] = useState(false)     //might need to make this a custom hook eventually
+    const [isAuthorized, setIsAuthorized] = useState(false)    
     
         
     function handleStatusChange(){
@@ -28,7 +17,7 @@ function AuthorizeButton(){
     }
     setIsAuthorized(!isAuthorized)
     }
-
+    // make button change to say unauthorize/log out eventually
 
     return(
     <div>
@@ -40,4 +29,4 @@ function AuthorizeButton(){
 
 }
 
-export {MusicKitProvider, AuthorizeButton}
+export {MusicKitContext, AuthorizeButton}

@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import {AppleMusicConfig, AppleMusicAuth} from "./AppleMusicConfig";
-import {MusicKitProvider, AuthorizeButton} from "./MusicKitProvider"
+import {MusicKitContext, AuthorizeButton} from "./MusicKitContext"
 // import { useState, useEffect } from "react";
 
 
@@ -13,7 +13,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){
-    fetch('/jwt')
+      fetch('/jwt')
       .then(response => response.json())
       .then(data => {
         this.setState({data})
@@ -25,27 +25,27 @@ class App extends React.Component{
               build: '1',
             },
           });
-        console.log("configuration success")
+          const music = window.MusicKit.getInstance()
+          this.setState({music:music})
+          console.log("configuration success")
         }
         catch(err){
           console.log(err)
         }
-      }).then(() => {
-        var music = window.MusicKit.getInstance()
-        // music.authorize()
-        this.setState({music:music})
-      }
-      );
+      });
+     
   }
+
+  // add a component did unmount method
 
 
   render(){
     return(
       <div>
       <Navbar/>
-      <MusicKitProvider value={this.state.music}>
+      <MusicKitContext.Provider value={this.state.music}>
         <AuthorizeButton />
-      </MusicKitProvider>
+      </MusicKitContext.Provider>
       {/* <AppleMusicConfig/> */}
       {/* <AppleMusicAuth/> */}
       {/* <Submit/> */}

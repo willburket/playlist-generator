@@ -7,7 +7,8 @@ class AppleMusicConfig extends React.Component{
   }
 
   componentDidMount(){
-    fetch('/jwt')
+    
+      fetch('/jwt')
       .then(response => response.json())
       .then(data => {
         this.setState({data})
@@ -19,23 +20,15 @@ class AppleMusicConfig extends React.Component{
               build: '1',
             },
           });
+          const music = window.MusicKit.getInstance()
+          music.authorize()
+
         console.log("configuration success")
         }
         catch(err){
           console.log(err)
         }
-      }).then(() => {
-        var music = window.MusicKit.getInstance()
-        music.authorize()
-        // const storefront = 'us'
-        // const search_term = 'dance'
-        // const genre = 'dance'
-        // const data = music.api.music('v1/catalog/{storefront}/search?term={search_term}&genre={genre}');
-        // console.log(data.toString())
-        music.unauthorize()
-      }
-      );
-    ;
+      });
   }
 
   render(){

@@ -24,3 +24,8 @@ yarn-error.log*
 
 #api key
 src/backend/AuthKey_PA6274NFYR.p8
+
+#CA keys 
+cert/CA/localhost.decrypted.key
+cert/CA/localhost.key
+cert/CA/myCA.key
