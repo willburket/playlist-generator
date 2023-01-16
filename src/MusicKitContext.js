@@ -5,12 +5,13 @@ const MusicKitContext = createContext(null);
 function AuthorizeButton(){
     const music = useContext(MusicKitContext);
 
+    // probably need to make this a custom hook so other components can access it
     const [isAuthorized, setIsAuthorized] = useState(false)    
-    
         
     function handleStatusChange(){
-    if (isAuthorized == false){
+    if (isAuthorized === false){
     music.authorize()
+    
     }
     else{
     music.unauthorize()

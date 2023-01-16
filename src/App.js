@@ -1,9 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
-import {AppleMusicConfig, AppleMusicAuth} from "./AppleMusicConfig";
 import {MusicKitContext, AuthorizeButton} from "./MusicKitContext"
-// import { useState, useEffect } from "react";
-
+import SearchButton from "./Search";
 
 class App extends React.Component{
 
@@ -12,8 +10,8 @@ class App extends React.Component{
     this.state = {data: null, music: null};
   }
 
-  componentDidMount(){
-      fetch('/jwt')
+  componentDidMount(){        // switch back to async eventually and add event listener
+      fetch('/jwt')           // store in cookies eventually 
       .then(response => response.json())
       .then(data => {
         this.setState({data})
@@ -42,13 +40,11 @@ class App extends React.Component{
   render(){
     return(
       <div>
-      <Navbar/>
       <MusicKitContext.Provider value={this.state.music}>
+        <Navbar/>
         <AuthorizeButton />
+        {/* <SearchButton /> */}
       </MusicKitContext.Provider>
-      {/* <AppleMusicConfig/> */}
-      {/* <AppleMusicAuth/> */}
-      {/* <Submit/> */}
       </div>
     )
   }

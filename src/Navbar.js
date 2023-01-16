@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
+import SearchButton from "./Search";
 
 var genre = null        
 var category = null
@@ -263,7 +264,8 @@ function Navbar(props){
                         <DecadeDropdownItem name = "1960's" value = "1960" />  
                     </DropdownMenu>
                 </DecadeNavItem>
-                <SubmitButton/>
+                <SearchButton />
+                {/* <SubmitButton/> */}
             </ul>
         </nav>
     );
