@@ -27,11 +27,12 @@ app.get("/artist", (req,res) => {
 })
 
 
+server.listen(PORT, () => {
+  console.log(`Server is listening on https://localhost:${PORT}`);
+})
+
 // app.listen(
 //     PORT,
 //     () => {console.log(`Server started on http://localhost:${PORT}`)}
 // )
-server.listen(PORT, () => {
-  console.log(`Server is listening on https://localhost:${PORT}`);
-})
 

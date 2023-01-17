@@ -5,9 +5,9 @@ function SearchButton (){
     const music = useContext(MusicKitContext);
 
     function searchMusic(){
-        let album = music.library.api.album(1025210938);
-        console.log(album.data)
-          
+        const { data: result } = music.api.music('v1/me/library/albums');
+        // User's iCloud Music Library Albums
+        console.log(result.data);
     }
 
     return(
