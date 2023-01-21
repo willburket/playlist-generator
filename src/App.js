@@ -10,13 +10,20 @@ class App extends React.Component{
     this.state = {data: null, music: null};
   }
 
-  componentDidMount(){        // switch back to async eventually and add event listener
-      fetch('/jwt')           // store in cookies eventually 
-      .then(response => response.json())
-      .then(data => {
-        this.setState({data})
+  componentDidMount(){  
+    window.addEventListener('musickitloaded',this.handleEvent);      
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('musickitloaded',this.handleEvent);  
+  }
+
+  handleEvent = async () => {
         try{
-          window.MusicKit.configure({
+          const response = await fetch('/jwt');
+          const data = await response.json() 
+          this.setState({data})  
+          await window.MusicKit.configure({
             developerToken: data.token,
             app: {
               name: 'PlaylistGenerator',
@@ -30,12 +37,7 @@ class App extends React.Component{
         catch(err){
           console.log(err)
         }
-      });
-     
-  }
-
-  // add a component did unmount method
-
+      }
 
   render(){
     return(
@@ -53,3 +55,4 @@ class App extends React.Component{
 }
 
 export default App;
+

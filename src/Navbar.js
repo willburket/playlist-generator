@@ -90,12 +90,10 @@ function GenreNavItem (props) {
     };
 
     useEffect(()=> {
-        const pageClickEvent = (e) =>{
-            
-                if(dropdownRef.current !== null && !dropdownRef.current.contains(e.target)){
-                    setOpen(false)
-                }
-                
+        const pageClickEvent = (e) =>{ 
+            if(dropdownRef.current !== null && !dropdownRef.current.contains(e.target)){
+                setOpen(false)
+            }
         };
 
         if(active){
