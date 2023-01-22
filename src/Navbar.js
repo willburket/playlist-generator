@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from "react";
-import SearchButton from "./Search";
+import {SearchButton} from "./Search";
 
 var genre = null        
 var category = null
@@ -7,7 +7,7 @@ var decade = null
 
 function GenreDropdownItem(props){
 
-    const[selected_item,setSelectedItem] = useState(null)
+    // const[selected_item,setSelectedItem] = useState(null)
 
     function itemClick (){
         genre = props
@@ -25,7 +25,7 @@ function GenreDropdownItem(props){
 
 function CategoryDropdownItem(props){
 
-    const[selected_item,setSelectedItem] = useState(null)
+    // const[selected_item,setSelectedItem] = useState(null)
 
     function itemClick (){
         category = props
@@ -43,7 +43,7 @@ function CategoryDropdownItem(props){
 
 function DecadeDropdownItem(props){
 
-    const[selected_item,setSelectedItem] = useState(null)
+    // const[selected_item,setSelectedItem] = useState(null)
 
     function itemClick (){
         decade = props

@@ -19,4 +19,17 @@ function SearchButton (){
     );
 }
 
-export default SearchButton;
+function Albums (){
+    // const music = useContext(MusicKitContext);
+    // const imgSrc = music.formatArtworkURL(artwork, 200, 200);
+    // console.log(imgSrc);
+    // return(
+    //     <div>
+    //         <img src = {imgSrc} alt = 'album art' />
+    //     </div>
+    // )
+
+}
+
+
+export  {SearchButton, Albums};

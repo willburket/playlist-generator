@@ -8,13 +8,13 @@ function AuthorizeButton(){
     // probably need to make this a custom hook so other components can access it
     const [isAuthorized, setIsAuthorized] = useState(false)    
         
-    function handleStatusChange(){
-    if (isAuthorized === false){
-    music.authorize()
+    async function handleStatusChange(){
+    if (isAuthorized === false){                // wrap this in a try catch statement 
+    await music.authorize()
     
     }
     else{
-    music.unauthorize()
+    await music.unauthorize()
     }
     setIsAuthorized(!isAuthorized)
     }
