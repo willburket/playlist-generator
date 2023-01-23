@@ -13,21 +13,12 @@ function SearchButton (){
     }
 
     return(
-        
-            <li className = "nav-item">
-                <a href="#" className="icon-button" onClick = {searchMusic}>
-                    Search
-                </a>
-            </li>
-        
+        <li className = "nav-item">
+            <a href="#" className="icon-button" onClick = {searchMusic}>
+                Search
+            </a>
+        </li>
     );
-}
-
-
-function SearchResults(){
-
-
-
 }
 
 export  {SearchButton};

@@ -2,7 +2,7 @@ import React , { useContext, createContext, useState} from "react";
 import { MusicKitContext } from "./MusicKitContext";
 
 
-const AlbumsContext = createContext(null);
+const SearchContext = createContext(null);
 
 const music = useContext(MusicKitContext)
 
@@ -22,10 +22,8 @@ function Albums (){
             <div>
                 <img src = {imgSrc} alt = 'album art' />
             </div>
-        )
+        );
     
-    
-    
-
-
 }
+
+export {SearchContext}
