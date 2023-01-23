@@ -9,14 +9,19 @@ function AuthorizeButton(){
     const [isAuthorized, setIsAuthorized] = useState(false)    
         
     async function handleStatusChange(){
-    if (isAuthorized === false){                // wrap this in a try catch statement 
-    await music.authorize()
-    
-    }
-    else{
-    await music.unauthorize()
-    }
-    setIsAuthorized(!isAuthorized)
+        try{
+            if (isAuthorized === false){                // wrap this in a try catch statement 
+                await music.authorize()
+            }
+            else{
+                await music.unauthorize()
+            }
+            setIsAuthorized(!isAuthorized)
+        }
+        catch(err){
+            console.log(err)
+        }
+        
     }
     // make button change to say unauthorize/log out eventually
 

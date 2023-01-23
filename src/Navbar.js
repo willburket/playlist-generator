@@ -1,9 +1,9 @@
 import React, {useEffect, useState, useRef} from "react";
 import {SearchButton} from "./Search";
 
-var genre = null        
-var category = null
-var decade = null
+let genre = null        // gonna need to change these
+let category = null
+let decade = null
 
 function GenreDropdownItem(props){
 

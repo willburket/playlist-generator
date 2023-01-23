@@ -11,11 +11,11 @@ class App extends React.Component{
   }
 
   componentDidMount(){  
-    window.addEventListener('musickitloaded',this.handleEvent);      
+    window.addEventListener('musickitloaded', this.handleEvent);      
   }
 
   componentWillUnmount(){
-    window.removeEventListener('musickitloaded',this.handleEvent);  
+    window.removeEventListener('musickitloaded', this.handleEvent);  
   }
 
   handleEvent = async () => {
