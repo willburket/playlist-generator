@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import {MusicKitContext, AuthorizeButton} from "./MusicKitContext"
 import { SearchButton } from "./Search";
-
+import Main from "./Main";
 
 class App extends React.Component{
 
@@ -47,7 +47,7 @@ class App extends React.Component{
         <Navbar/>
         <SearchButton/>
         <AuthorizeButton />
-        
+        <Main/>
       </MusicKitContext.Provider>
       </div>
     )
