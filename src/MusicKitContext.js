@@ -10,7 +10,7 @@ function AuthorizeButton(){
         
     async function handleStatusChange(){
         try{
-            if (isAuthorized === false){                // wrap this in a try catch statement 
+            if (isAuthorized === false){               
                 await music.authorize()
             }
             else{
@@ -27,9 +27,9 @@ function AuthorizeButton(){
 
     return(
     <div>
-    <button onClick = {handleStatusChange}>
-        Authorize
-    </button>
+        <a href="#" className="icon-button" onClick = {handleStatusChange}>
+            Log In
+        </a>
     </div>
     );
 

@@ -1,6 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import {MusicKitContext, AuthorizeButton} from "./MusicKitContext"
+import { SearchButton } from "./Search";
 
 
 class App extends React.Component{
@@ -44,14 +45,13 @@ class App extends React.Component{
       <div>
       <MusicKitContext.Provider value={this.state.music}>
         <Navbar/>
+        <SearchButton/>
         <AuthorizeButton />
         
       </MusicKitContext.Provider>
       </div>
     )
-  }
-  
-  
+  } 
 }
 
 export default App;

@@ -262,9 +262,10 @@ function Navbar(props){
                         <DecadeDropdownItem name = "1960's" value = "1960" />  
                     </DropdownMenu>
                 </DecadeNavItem>
-                <SearchButton />
+                {/* <SearchButton /> */}
                 {/* <SubmitButton/> */}
             </ul>
+            
         </nav>
     );
 

@@ -7,6 +7,8 @@ function SearchButton (){
 
     async function searchMusic(){
         const { data: result } = await music.api.music('v1/me/library/albums');
+
+        
         setSearchResult(result.data)
         // User's iCloud Music Library Albums
         console.log(result.data);
