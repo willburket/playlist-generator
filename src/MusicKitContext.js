@@ -4,8 +4,7 @@ const MusicKitContext = createContext(null);
 
 function AuthorizeButton(){
     const music = useContext(MusicKitContext);
-
-    // probably need to make this a custom hook so other components can access it
+    // probably need to make this a custom hook so other components can use that hook
     const [isAuthorized, setIsAuthorized] = useState(false)    
         
     async function handleStatusChange(){
@@ -21,9 +20,7 @@ function AuthorizeButton(){
         catch(err){
             console.log(err)
         }
-        
     }
-    // make button change to say unauthorize/log out eventually
 
     return(
     <div>
