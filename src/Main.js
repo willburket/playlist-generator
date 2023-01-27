@@ -1,14 +1,15 @@
 import React from "react";
-import useSearchData from "./hooks/useSearchData";
 
 
-function Main ({searchData}){
-    // const [searchData] = useSearchData()    // this is not going to work
+
+
+function Main (){
+    
 
     return(
         <div>
             <p>
-                {searchData}
+                
             </p>
         </div>
     )
@@ -17,6 +18,5 @@ function Main ({searchData}){
 export default Main;
 
 // app
-    // main 
         // navbar
             // search

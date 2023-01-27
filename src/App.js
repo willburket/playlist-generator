@@ -47,7 +47,7 @@ class App extends React.Component{
         <Navbar/>
         <SearchButton/>
         <AuthorizeButton />
-        <Main/>
+        
       </MusicKitContext.Provider>
       </div>
     )

@@ -1,8 +1,8 @@
 import React, { createContext, useState, useContext } from 'react'
 
-const MusicKitContext = createContext(null);
+const MusicKitContext = createContext(null);        // might just move this to app.js & name this file auth button
 
-function AuthorizeButton(){
+function AuthorizeButton(){             
     const music = useContext(MusicKitContext);
     // probably need to make this a custom hook so other components can use that hook
     const [isAuthorized, setIsAuthorized] = useState(false)    
@@ -24,7 +24,7 @@ function AuthorizeButton(){
 
     return(
     <div>
-        <a href="#" className="icon-button" onClick = {handleStatusChange}>
+        <a href="#" className="login-button" onClick = {handleStatusChange}>
             {isAuthorized ? 'Log Out' : 'Log In'}
         </a>
     </div>
