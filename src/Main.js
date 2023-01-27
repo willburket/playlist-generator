@@ -1,8 +1,9 @@
 import React from "react";
 import useSearchData from "./hooks/useSearchData";
 
-function Main (){
-    const [searchData] = useSearchData()    // this is not going to work
+
+function Main ({searchData}){
+    // const [searchData] = useSearchData()    // this is not going to work
 
     return(
         <div>

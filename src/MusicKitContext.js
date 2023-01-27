@@ -28,7 +28,7 @@ function AuthorizeButton(){
     return(
     <div>
         <a href="#" className="icon-button" onClick = {handleStatusChange}>
-            Log In
+            {isAuthorized ? 'Log Out' : 'Log In'}
         </a>
     </div>
     );
