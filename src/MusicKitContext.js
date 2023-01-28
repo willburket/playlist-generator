@@ -19,6 +19,8 @@ function AuthorizeButton(){
         }
         catch(err){
             console.log(err)
+            // need to add code for a popup or something when theres an error
+            // maybe don't let login button pop up till musickit instance is available??
         }
     }
 
