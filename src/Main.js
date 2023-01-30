@@ -51,14 +51,4 @@ function Main (){
 
 export {Main, SearchContext};
 
-                // <div>
-                //     {searchResult ? (
-                //     <ul>
-                //     {searchResult.map(item => (
-                //     <li key={item.id}>{item.attributes.artistName}: {item.attributes.name}</li>
-                //     ))}
-                //     </ul>
-                //     ) : (
-                //     <p>No items found</p>
-                //     )}
-                // </div>   
+                
