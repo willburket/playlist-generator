@@ -1,5 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import { MusicKitContext } from "./MusicKitContext";
+import SearchItems from "./SearchItems";
 
 const SearchContext = createContext(null);  
 
@@ -42,22 +43,22 @@ function Main (){
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                <div>
-                    {searchResult ? (
-                    <ul>
-                    {searchResult.map(item => (
-                    <li key={item.id}>{item.attributes.artistName}: {item.attributes.name}</li>
-                    ))}
-                    </ul>
-                    ) : (
-                    <p>No items found</p>
-                    )}
-                </div>        
+                    <SearchItems/>
                 </SearchContext.Provider>
             </div>
         );
 }
 
-export default Main;
+export {Main, SearchContext};
 
-
+                // <div>
+                //     {searchResult ? (
+                //     <ul>
+                //     {searchResult.map(item => (
+                //     <li key={item.id}>{item.attributes.artistName}: {item.attributes.name}</li>
+                //     ))}
+                //     </ul>
+                //     ) : (
+                //     <p>No items found</p>
+                //     )}
+                // </div>   
