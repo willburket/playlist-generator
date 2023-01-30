@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import {MusicKitContext, AuthorizeButton} from "./MusicKitContext"
 import Main from "./Main";
-// import { SearchButton } from "./Search";
+
 
 
 class App extends React.Component{
