@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "./Navbar";
-import {MusicKitContext, AuthorizeButton} from "./MusicKitContext"
-import {Main} from "./Main";
+import Navbar from "./components/Navbar";
+import {MusicKitContext, AuthorizeButton} from "./components/MusicKitContext"
+import {Main} from "./components/Main";
 
 class App extends React.Component{
 
