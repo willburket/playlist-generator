@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { QueueContext } from "./Main";
+import { SearchContext } from "./Main";
 import { MusicKitContext } from "./MusicKitContext";
 
 function PlayButton(){
-    const queue = useContext(QueueContext)
+    const queue = useContext(SearchContext)
     const music = useContext(MusicKitContext)
 
     const play = async () => {

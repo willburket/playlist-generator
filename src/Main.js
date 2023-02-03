@@ -4,19 +4,16 @@ import SearchItems from "./SearchItems";
 import { PlayButton } from "./Playback";
 
 const SearchContext = createContext(null);  
-const QueueContext = createContext(null);
+
 
 function Main (){
     const music = useContext(MusicKitContext);
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false)
-    const [queue, setQueue] = useState([])
+    
 
     useEffect(() => {
-        // if(searchResult){
-        //     makeQueue()
-        // }
-        // console.log(queue)
+
     },[searchResult]);
 
     function SearchButton (){
@@ -26,7 +23,6 @@ function Main (){
             try{
                 const { data: result } = await music.api.music('v1/me/library/albums'); // can probably make this simpler
                 setSearchResult([...result.data])
-                setQueue([...result.data])
             }
             catch(err){
                 console.log(err)
@@ -51,14 +47,12 @@ function Main (){
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
                     <SearchItems/>
-                    <QueueContext.Provider value ={queue}>
-                        <PlayButton/>
-                    </QueueContext.Provider>
+                    <PlayButton/> 
                 </SearchContext.Provider>
             </div>
         );
 }
 
-export {Main, SearchContext, QueueContext};
+export {Main, SearchContext};
 
                 
