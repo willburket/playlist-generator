@@ -2,6 +2,7 @@ import React, {createContext, useContext, useEffect, useState} from "react";
 import { MusicKitContext } from "./MusicKitContext";
 import SearchItems from "./SearchItems";
 import { PlayButton } from "./Playback";
+import AlbumCovers from "./AlbumCovers";
 
 const SearchContext = createContext(null);  
 
@@ -46,7 +47,8 @@ function Main (){
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                    <SearchItems/>
+                    {/* <SearchItems/> */}
+                    <AlbumCovers />
                     <PlayButton/> 
                 </SearchContext.Provider>
             </div>
