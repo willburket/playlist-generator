@@ -4,7 +4,6 @@ import { MusicKitContext } from "./MusicKitContext";
 
 function AlbumCovers(){
     const search = useContext(SearchContext)
-    const music = useContext(MusicKitContext)
     const images = []
 
     if(search){
@@ -16,7 +15,7 @@ function AlbumCovers(){
         for (let i = 0; i < search.length; i++ ){
             const artwork = search[i].attributes.artwork;
             const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
-            images.push(img)
+            images.push({image: img, id: search[i].id})
         }
         
     }
@@ -28,22 +27,10 @@ function AlbumCovers(){
     return(
         <div className= "album-cover-grid">
             {images.map(item => (
-                <img src={item} key = {item.id} className = "album-cover"/>
+                <img src={item.image} key = {item.id} className = "album-cover"/>
             ))}
         </div>
     )
 }
 
 export default AlbumCovers;
-
-    // <div>
-    //     {search ? (
-    //     <ul>
-    //     {search.map(item => (
-    //     <li key={item.id}>{item.attributes.artistName}: {item.attributes.name}</li>
-    //     ))}
-    //     </ul>
-    //     ) : (
-    //     <p>No items found</p>
-    //     )}
-    // </div>   

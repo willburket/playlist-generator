@@ -6,12 +6,14 @@ function PlayButton(){
     const queue = useContext(SearchContext)
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)
-    let player_queue = null
+    let playerQueue = null
+    // const [playerQueue, setPlayerQueue] = useState([])
 
     const play = async () => {
-        if(!player_queue){
+        if(playerQueue == null){
             try{  
-                player_queue = await music.setQueue({album: queue[0].id, startPlaying: true}); 
+                playerQueue = await music.setQueue({album: queue[0].id, startPlaying: true}); 
+                // setPlayerQueue([up_next])
                 console.log(queue[0])
                 setPlaying(!playing)
             }
@@ -22,9 +24,11 @@ function PlayButton(){
         else{
             if(!playing){
                 music.play()
+                setPlaying(true)
             }
             else{
                 music.pause()
+                setPlaying(false)
             }
         }
         
@@ -34,9 +38,9 @@ function PlayButton(){
         // makeQueue();
     }, [queue])
 
-    // useEffect(() => {
+    useEffect(() => {
 
-    // },[playing])
+    },[playerQueue])
     
 
     return(

@@ -9,6 +9,7 @@ const SearchContext = createContext(null);
 
 function Main (){
     const music = useContext(MusicKitContext);
+    // use navbar context
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false)
     
@@ -47,7 +48,6 @@ function Main (){
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                    {/* <SearchItems/> */}
                     <AlbumCovers />
                     <PlayButton/> 
                 </SearchContext.Provider>
