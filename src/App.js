@@ -44,7 +44,7 @@ class App extends React.Component{
       <div>
       <MusicKitContext.Provider value={this.state.music}>
         <Navbar/>
-        <AuthorizeButton />
+        <AuthorizeButton/>
         <Main/>
       </MusicKitContext.Provider>
       </div>
