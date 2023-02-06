@@ -1,87 +1,92 @@
 import React, {useEffect, useState, useRef, createContext} from "react";
 import { ReactComponent as MusicIcon } from "../assets/music.svg"
+import { Main } from "./Main";
 
 const NavbarContext = createContext(null)       // use this to pass picked items to search
 
-function Navbar(props){
-    let genre = null
+function Outline(){
+    const [selected, setSelected] = useState(null)
+        
+    useEffect(() => {
+        // console.log(selected)
+    }, [selected])
 
-    function GenreDropdownItem(props){
-
-        function itemClick (){
-            genre = props
-            console.log(genre)
+    function Navbar(props){
+    
+        function GenreDropdownItem(props){
+    
+            function itemClick (){
+                setSelected(props)
+            }
+        
+            return(
+                <a href="#" className="menu-item" onClick = {() => itemClick()}>
+                    <div className="dropdown-button">
+                        {props.name} 
+                    </div>
+                </a>
+            );
+        }
+        
+        function DropdownMenu(props){
+        
+            return (
+                <div className="dropdown">
+                    {props.children}
+                </div>
+            );
+        }
+        
+        function GenreNavItem (props) {
+        
+            const [open, setOpen] = useState(false);
+            const [active, setActive] = useState(null);
+            const dropdownRef = useRef(null);
+        
+            function clickChange(){
+                
+                if (open && active != null){
+                    setActive(null)
+                    setOpen(!open)
+                    
+                }
+                else{
+                    
+                    setActive(props.value)
+                    setOpen(!open)
+                }       
+        
+            };
+        
+            useEffect(()=> {
+                const pageClickEvent = (e) =>{ 
+                    if(dropdownRef.current !== null && !dropdownRef.current.contains(e.target)){
+                        setOpen(false)
+                    }
+                };
+        
+                if(active){
+                    window.addEventListener('click', pageClickEvent);
+                }
+                
+                return () =>{
+                    window.removeEventListener('click', pageClickEvent);
+                }
+        
+            }, [active]);
+        
+            return (
+                <li className = "nav-item">
+                    <a href="#" className="icon-button" onClick={() => clickChange()} ref={dropdownRef}>
+                        {selected === null ? props.icon : selected.name}
+                    </a>
+                    {open && props.children}
+                </li>
+            );
+        
         }
     
-        return(
-            <a href="#" className="menu-item" onClick = {() => itemClick()}>
-                <div className="dropdown-button">
-                    {props.name} 
-                </div>
-            </a>
-        );
-    }
-    
-    function DropdownMenu(props){
-    
-        return (
-            <div className="dropdown">
-                {props.children}
-            </div>
-        );
-    }
-    
-    function GenreNavItem (props) {
-    
-        const [open, setOpen] = useState(false);
-        const [active, setActive] = useState(null);
-        const dropdownRef = useRef(null);
-    
-        function clickChange(){
-            
-            if (open && active != null){
-                setActive(null)
-                setOpen(!open)
-                
-            }
-            else{
-                
-                setActive(props.value)
-                setOpen(!open)
-            }       
-    
-        };
-    
-        useEffect(()=> {
-            const pageClickEvent = (e) =>{ 
-                if(dropdownRef.current !== null && !dropdownRef.current.contains(e.target)){
-                    setOpen(false)
-                }
-            };
-    
-            if(active){
-                window.addEventListener('click', pageClickEvent);
-            }
-            
-            return () =>{
-                window.removeEventListener('click', pageClickEvent);
-            }
-    
-        }, [active]);
-    
-        return (
-            <li className = "nav-item">
-                <a href="#" className="icon-button" onClick={() => clickChange()} ref={dropdownRef}>
-                    {genre === null ? props.icon : genre.name}
-                </a>
-                {open && props.children}
-            </li>
-        );
-    
-    }
-
-    return(
-        <div>
+        return(        
             <nav className= "navbar">
                 <ul className= "navbar-nav">
                     <GenreNavItem icon= {<MusicIcon/>} value= "genre">
@@ -100,12 +105,20 @@ function Navbar(props){
                         </DropdownMenu>   
                     </GenreNavItem>
                 </ul>
-            </nav>
+            </nav>  
+        );
+    
+    }
 
+    return(
+        <div>
+            <Navbar/>
+            <NavbarContext.Provider value = {selected}>
+                <Main/>
+            </NavbarContext.Provider>
         </div>
-        
     );
 
 }
 
-export default Navbar
+export { Outline, NavbarContext};

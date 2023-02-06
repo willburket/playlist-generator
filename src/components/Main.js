@@ -3,19 +3,24 @@ import { MusicKitContext } from "./MusicKitContext";
 import SearchItems from "./SearchItems";
 import { PlayButton } from "./Playback";
 import AlbumCovers from "./AlbumCovers";
+import { NavbarContext } from "./Navbar";
+
 
 const SearchContext = createContext(null);  
 
 
 function Main (){
     const music = useContext(MusicKitContext);
-    // use navbar context
+    const selected = useContext(NavbarContext);
     const [searchResult, setSearchResult] = useState([]);
-    const [loading, setLoading] = useState(false)
-    
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() =>{
+        console.log(selected)
+    }, [selected]);
 
     useEffect(() => {
-
+        // is this necessary??
     },[searchResult]);
 
     function SearchButton (){

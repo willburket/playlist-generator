@@ -1,7 +1,6 @@
 import React from "react";
-import Navbar from "./components/Navbar";
 import {MusicKitContext, AuthorizeButton} from "./components/MusicKitContext"
-import {Main} from "./components/Main";
+import {Outline} from "./components/Navbar";
 
 class App extends React.Component{
 
@@ -43,9 +42,8 @@ class App extends React.Component{
     return(
       <div>
       <MusicKitContext.Provider value={this.state.music}>
-        <Navbar/>
         <AuthorizeButton/>
-        <Main/>
+        <Outline/>
       </MusicKitContext.Provider>
       </div>
     )
