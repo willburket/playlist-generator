@@ -20,7 +20,7 @@ function Main (){
     }, [selected]);
 
     useEffect(() => {
-        console.log(searchResult)
+        // console.log(searchResult)
     },[searchResult]);
 
     function SearchButton (){
@@ -31,11 +31,14 @@ function Main (){
                 // const { data: result } = await music.api.music('v1/me/library/albums'); // this actually works for v3
                 // const {data: result} = await music.api.music('/v1/catalog/{{storefrontId}}/albums/1025210938'); // works
                 // setSearchResult([...result.data])
+
+                // const search = await music.api.charts(['songs'], queryParameters)    // works for v1
+                // const search = await music.api.search('rap', queryParameters);   // works for v1
                 
-                const queryParameters = {l: 'en-us', limit: 25};
-                const search = await music.api.charts(['songs'], queryParameters)
-                // const search = await music.api.search('rap', queryParameters);   // works 
-                setSearchResult([search])
+                const queryParameters = {types: ['songs'], l: 'en-us', limit: 25};
+                const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);
+                
+                setSearchResult([...search.data.results.songs[0].data])
             
                 
             }
@@ -61,7 +64,7 @@ function Main (){
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                    {/* <AlbumCovers /> */}
+                    <AlbumCovers />
                     <PlayButton/> 
                 </SearchContext.Provider>
             </div>

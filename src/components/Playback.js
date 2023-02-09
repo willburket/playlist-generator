@@ -36,6 +36,7 @@ function PlayButton(){
     
     useEffect(() =>{
         // makeQueue();
+        console.log(queue[0])
     }, [queue])
 
     useEffect(() => {
