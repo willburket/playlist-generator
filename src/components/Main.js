@@ -20,7 +20,7 @@ function Main (){
     }, [selected]);
 
     useEffect(() => {
-        // is this necessary??
+        console.log(searchResult)
     },[searchResult]);
 
     function SearchButton (){
@@ -28,8 +28,16 @@ function Main (){
         async function searchMusic(){    
             setLoading(true)
             try{
-                const { data: result } = await music.api.music('v1/me/library/albums'); // can probably make this simpler
-                setSearchResult([...result.data])
+                // const { data: result } = await music.api.music('v1/me/library/albums'); // this actually works for v3
+                // const {data: result} = await music.api.music('/v1/catalog/{{storefrontId}}/albums/1025210938'); // works
+                // setSearchResult([...result.data])
+                
+                const queryParameters = {l: 'en-us', limit: 25};
+                const search = await music.api.charts(['songs'], queryParameters)
+                // const search = await music.api.search('rap', queryParameters);   // works 
+                setSearchResult([search])
+            
+                
             }
             catch(err){
                 console.log(err)
@@ -53,7 +61,7 @@ function Main (){
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                    <AlbumCovers />
+                    {/* <AlbumCovers /> */}
                     <PlayButton/> 
                 </SearchContext.Provider>
             </div>
