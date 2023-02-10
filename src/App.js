@@ -10,7 +10,8 @@ class App extends React.Component{
   }
 
   componentDidMount(){  
-    window.addEventListener('musickitloaded', this.handleEvent);      
+    window.addEventListener('musickitloaded', this.handleEvent);  
+    // console.log("mounted")    
   }
 
   componentWillUnmount(){

@@ -20,7 +20,7 @@ function Main (){
     }, [selected]);
 
     useEffect(() => {
-        // console.log(searchResult)
+        console.log(searchResult)
     },[searchResult]);
 
     function SearchButton (){
@@ -28,28 +28,31 @@ function Main (){
         async function searchMusic(){    
             setLoading(true)
             try{
-                // const { data: result } = await music.api.music('v1/me/library/albums'); // this actually works for v3
-                // const {data: result} = await music.api.music('/v1/catalog/{{storefrontId}}/albums/1025210938'); // works
-                // setSearchResult([...result.data])
-
-                // const search = await music.api.charts(['songs'], queryParameters)    // works for v1
-                // const search = await music.api.search('rap', queryParameters);   // works for v1
+                const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
+                const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
+                setSearchResult([...search.data.results.songs.data])
                 
-                const queryParameters = {types: ['songs'], l: 'en-us', limit: 25};
-                const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);
-                
-                setSearchResult([...search.data.results.songs[0].data])
-            
+                // charts with v3
+                // const queryParameters = {types: ['songs'], l: 'en-us', limit: 25};
+                // const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
+                // setSearchResult([...search.data.results.songs[0].data])  // works for charts 
                 
             }
             catch(err){
-                console.log(err)
+                console.log(err)        // add popup for when nothing is selected 
             }
             finally{
                 setLoading(false)
             }
         }
-    
+        
+        if(!searchResult) {
+            return(
+                <div>
+                    <h1>Pick a Genre</h1>
+                </div>
+            )
+        }
         return(
             <li className = "nav-item">
                 <a href="#" className="search-button" onClick = {searchMusic}>
@@ -57,14 +60,15 @@ function Main (){
                 </a>
             </li>
         );
-    }
-        if(loading) return <p>Loading...</p>        // search button and play button disappear during load 
+    }   
+
+        // if(loading) return <p>Loading...</p>        // search button and play button disappear during load 
 
         return(
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                    <AlbumCovers />
+                    <AlbumCovers /> 
                     <PlayButton/> 
                 </SearchContext.Provider>
             </div>
@@ -74,3 +78,12 @@ function Main (){
 export {Main, SearchContext};
 
                 
+// works with player
+// const { data: result } = await music.api.music('v1/me/library/albums'); // this actually works for v3
+// const {data: result} = await music.api.music('/v1/catalog/{{storefrontId}}/albums/1025210938'); // works
+// setSearchResult([...result.data])
+
+
+// works with v1 api
+// const search = await music.api.charts(['songs'], queryParameters)    // works for v1
+// const search = await music.api.search('rap', queryParameters);   // works for v1

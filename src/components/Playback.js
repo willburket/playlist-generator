@@ -12,7 +12,7 @@ function PlayButton(){
     const play = async () => {
         if(playerQueue == null){
             try{  
-                playerQueue = await music.setQueue({album: queue[0].id, startPlaying: true}); 
+                playerQueue = await music.setQueue({album: queue[0], startPlaying: true}); 
                 // setPlayerQueue([up_next])
                 console.log(queue[0])
                 setPlaying(!playing)
