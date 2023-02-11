@@ -13,9 +13,9 @@ function Home(){
         console.log(load)
     }, [load])
 
-    if(!load && search === []) return <p>Pick a Genre</p>
+    if(!load && search.length === 0) return (<div className="prompt-text"><p>Pick a Genre</p></div>)
 
-    if(load) return <p>Loading...</p>
+    if(load) return(<div className="prompt-text"><p>Loading...</p></div>) 
 }
 
 export default Home;

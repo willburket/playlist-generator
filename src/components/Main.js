@@ -56,8 +56,6 @@ function Main (){
             </li>
         );
     }   
-        // if(searchResult === [] && !loading) return <p>Pick a Genre</p>    
-        // search button and play button disappear during load 
 
         return(
             <div>

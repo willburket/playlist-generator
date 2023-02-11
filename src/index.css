@@ -209,3 +209,10 @@ a {
   object-fit: cover;
   display: block;
 }
+
+.prompt-text{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
