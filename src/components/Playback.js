@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./Main";
 import { MusicKitContext } from "./MusicKitContext";
+import { ReactComponent as PlayIcon} from "../assets/play.svg"
+import { ReactComponent as PauseIcon} from "../assets/pause.svg"
 
 function PlayButton(){
     const queue = useContext(SearchContext)
@@ -12,7 +14,7 @@ function PlayButton(){
     const play = async () => {
         if(playerQueue == null){
             try{  
-                playerQueue = await music.setQueue({album: queue[0], startPlaying: true}); 
+                
                 // setPlayerQueue([up_next])
                 console.log(queue[0])
                 setPlaying(!playing)
@@ -37,6 +39,7 @@ function PlayButton(){
     useEffect(() =>{
         // makeQueue();
         console.log(queue[0])
+        
     }, [queue])
 
     useEffect(() => {
@@ -47,7 +50,7 @@ function PlayButton(){
     return(
         <li className = "nav-item">
             <a href="#" className="play-button" onClick = {play}>
-                {playing ? 'Pause' : 'Play'}
+                {playing ? <PauseIcon/> : <PlayIcon/>}
             </a>
         </li>
     )

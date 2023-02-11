@@ -85,7 +85,9 @@ function Outline(){
             );
         
         }
-    
+        
+
+        // we can make this better 
         return(        
             <nav className= "navbar">
                 <ul className= "navbar-nav">

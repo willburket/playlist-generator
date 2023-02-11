@@ -1,12 +1,13 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import { MusicKitContext } from "./MusicKitContext";
-import SearchItems from "./SearchItems";
 import { PlayButton } from "./Playback";
 import AlbumCovers from "./AlbumCovers";
 import { NavbarContext } from "./Navbar";
+import Home from "./Home";
 
 
 const SearchContext = createContext(null);  
+const LoadContext = createContext(null);
 
 
 function Main (){
@@ -16,11 +17,11 @@ function Main (){
     const [loading, setLoading] = useState(false);
 
     useEffect(() =>{
-        console.log(selected)
+        // console.log(selected)
     }, [selected]);
 
     useEffect(() => {
-        console.log(searchResult)
+        // console.log(searchResult)
     },[searchResult]);
 
     function SearchButton (){
@@ -46,13 +47,7 @@ function Main (){
             }
         }
         
-        if(!searchResult) {
-            return(
-                <div>
-                    <h1>Pick a Genre</h1>
-                </div>
-            )
-        }
+        
         return(
             <li className = "nav-item">
                 <a href="#" className="search-button" onClick = {searchMusic}>
@@ -61,21 +56,24 @@ function Main (){
             </li>
         );
     }   
-
-        // if(loading) return <p>Loading...</p>        // search button and play button disappear during load 
+        // if(searchResult === [] && !loading) return <p>Pick a Genre</p>    
+        // search button and play button disappear during load 
 
         return(
             <div>
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
-                    <AlbumCovers /> 
                     <PlayButton/> 
+                    <LoadContext.Provider value = {loading}>
+                        <Home/>
+                        <AlbumCovers/> 
+                    </LoadContext.Provider>
                 </SearchContext.Provider>
             </div>
         );
 }
 
-export {Main, SearchContext};
+export {Main, SearchContext, LoadContext};
 
                 
 // works with player

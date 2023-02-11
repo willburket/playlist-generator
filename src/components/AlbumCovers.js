@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from "react";
 import { SearchContext } from "./Main";
-import { MusicKitContext } from "./MusicKitContext";
 
 function AlbumCovers(){
     const search = useContext(SearchContext)
@@ -26,13 +25,12 @@ function AlbumCovers(){
     }
 
     useEffect(() => {
-
     }, [search])
 
     return(
         <div className= "album-cover-grid">
             {images.map(item => (
-                <img src={item.image} key = {item.id} className = "album-cover"/>
+                <img src={item.image} key = {item.id} className = "album-cover" alt = {item.id}/>
             ))}
         </div>
     )
