@@ -5,7 +5,7 @@ import { ReactComponent as PlayIcon} from "../assets/play.svg"
 import { ReactComponent as PauseIcon} from "../assets/pause.svg"
 
 function PlayButton(){
-    const queue = useContext(SearchContext)
+    const search = useContext(SearchContext)
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)
     const [playerQueue, setPlayerQueue] = useState(null)
@@ -19,32 +19,29 @@ function PlayButton(){
             music.pause()
             setPlaying(false)
         }
-        
     }
     
     const makeQueue = async () => {
         try{
-            const init_queue = await music.setQueue({song: queue[0].id, startPlaying: true}); 
+            const init_queue = await music.setQueue({song: search[0].id, startPlaying: false}); 
             setPlayerQueue(init_queue)
         }
         catch(err){
             console.log(err)
-        }
-        
+        }   
     }
 
     useEffect(() =>{
-        if(queue.length !== 0){
+        if(search.length !== 0){
             makeQueue()
             console.log("queue made")
         }     
-    }, [queue])
+    }, [search])
 
     useEffect(() => {
         if(playerQueue !== null){
-            console.log(playerQueue.id) 
-        }
-        
+            console.log(playerQueue) 
+        } 
     },[playerQueue])
     
 
