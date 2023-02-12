@@ -23,7 +23,10 @@ function PlayButton(){
     
     const makeQueue = async () => {
         try{
-            const init_queue = await music.setQueue({song: search[0].id, startPlaying: false}); 
+            const id_array = search.map(function(song){
+                return song.id;
+            })
+            const init_queue = await music.setQueue({songs: id_array, startPlaying: false}); 
             setPlayerQueue(init_queue)
         }
         catch(err){
