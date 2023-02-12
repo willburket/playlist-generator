@@ -8,42 +8,43 @@ function PlayButton(){
     const queue = useContext(SearchContext)
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)
-    let playerQueue = null
-    // const [playerQueue, setPlayerQueue] = useState([])
+    const [playerQueue, setPlayerQueue] = useState(null)
 
-    const play = async () => {
-        if(playerQueue == null){
-            try{  
-                
-                // setPlayerQueue([up_next])
-                console.log(queue[0])
-                setPlaying(!playing)
-            }
-            catch(err){
-                console.log(err)
-            }
+    const play = async () => {     
+        if(!playing){
+            music.play()
+            setPlaying(true)
         }
         else{
-            if(!playing){
-                music.play()
-                setPlaying(true)
-            }
-            else{
-                music.pause()
-                setPlaying(false)
-            }
+            music.pause()
+            setPlaying(false)
         }
         
     }
     
-    useEffect(() =>{
-        // makeQueue();
-        console.log(queue[0])
+    const makeQueue = async () => {
+        try{
+            const init_queue = await music.setQueue({song: queue[0].id, startPlaying: true}); 
+            setPlayerQueue(init_queue)
+        }
+        catch(err){
+            console.log(err)
+        }
         
+    }
+
+    useEffect(() =>{
+        if(queue.length !== 0){
+            makeQueue()
+            console.log("queue made")
+        }     
     }, [queue])
 
     useEffect(() => {
-
+        if(playerQueue !== null){
+            console.log(playerQueue.id) 
+        }
+        
     },[playerQueue])
     
 
