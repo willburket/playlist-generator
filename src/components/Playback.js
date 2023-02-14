@@ -7,10 +7,36 @@ import { ReactComponent as PauseIcon} from "../assets/pause.svg"
 function MusicPlayer(){
     const search = useContext(SearchContext)
     const music = useContext(MusicKitContext)
-    const [playing, setPlaying] = useState(false)
+    const [playing, setPlaying] = useState(false)       // maybe change this to what song is playing
     const [playerQueue, setPlayerQueue] = useState(null)
 
-    function PlayButton(){
+    const makeQueue = async () => {
+        try{
+            const id_array = search.map(function(song){
+                return song.id;
+            })
+            const init_queue = await music.setQueue({songs: id_array, startPlaying: false}); 
+            setPlayerQueue(init_queue)
+        }
+        catch(err){
+            console.log(err)
+        }   
+    }
+
+    useEffect(() =>{
+        if(search.length !== 0){
+            makeQueue()
+            console.log("queue made")
+        }     
+    }, [search])
+
+    useEffect(() => {
+        if(playerQueue !== null){
+            console.log(playerQueue) 
+        } 
+    }, [playerQueue])
+      
+    function PlayButton(){ 
     
         const play = async () => {     
             if(!playing){
@@ -22,33 +48,6 @@ function MusicPlayer(){
                 setPlaying(false)
             }
         }
-        
-        const makeQueue = async () => {
-            try{
-                const id_array = search.map(function(song){
-                    return song.id;
-                })
-                const init_queue = await music.setQueue({songs: id_array, startPlaying: false}); 
-                setPlayerQueue(init_queue)
-            }
-            catch(err){
-                console.log(err)
-            }   
-        }
-    
-        useEffect(() =>{
-            if(search.length !== 0){
-                makeQueue()
-                console.log("queue made")
-            }     
-        }, [search])
-    
-        useEffect(() => {
-            if(playerQueue !== null){
-                console.log(playerQueue) 
-            } 
-        },[playerQueue])
-        
     
         return(
             <li className = "nav-item">
@@ -57,13 +56,13 @@ function MusicPlayer(){
                 </a>
             </li>
         )
-    
     }
+    
     
     function NextButton(){
     
         const next = async () => {
-    
+            
         }
     
         return (
@@ -80,6 +79,7 @@ function MusicPlayer(){
         const back = async () =>{
 
         }
+
         return(
             <li className = "nav-item">
                 <a href="#" className="back-button" onClick = {back}>
@@ -99,4 +99,59 @@ function MusicPlayer(){
 
 }
 
-export {MusicPlayer};
+function PlayButton(){
+    const search = useContext(SearchContext)
+    const music = useContext(MusicKitContext)
+    const [playing, setPlaying] = useState(false)
+    const [playerQueue, setPlayerQueue] = useState(null)
+
+    const play = async () => {     
+        if(!playing){
+            music.play()
+            setPlaying(true)
+        }
+        else{
+            music.pause()
+            setPlaying(false)
+        }
+    }
+    
+    const makeQueue = async () => {
+        try{
+            const id_array = search.map(function(song){
+                return song.id;
+            })
+            const init_queue = await music.setQueue({songs: id_array, startPlaying: false}); 
+            setPlayerQueue(init_queue)
+        }
+        catch(err){
+            console.log(err)
+        }   
+    }
+
+    useEffect(() =>{
+        if(search.length !== 0){
+            makeQueue()
+            console.log("queue made")
+        }     
+    }, [search])
+
+    useEffect(() => {
+        if(playerQueue !== null){
+            console.log(playerQueue) 
+        } 
+    },[playerQueue])
+    
+
+    return(
+        <li className = "nav-item">
+            <a href="#" className="play-button" onClick = {play}>
+                {playing ? <PauseIcon/> : <PlayIcon/>}
+            </a>
+        </li>
+    )
+
+}
+
+
+export {MusicPlayer, PlayButton};

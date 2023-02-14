@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import { MusicKitContext } from "./MusicKitContext";
-import { MusicPlayer } from "./Playback";
+import { MusicPlayer, PlayButton } from "./Playback";
 import AlbumCovers from "./AlbumCovers";
 import { NavbarContext } from "./Navbar";
 import Home from "./Home";
@@ -62,6 +62,7 @@ function Main (){
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
                     <MusicPlayer/>
+                    {/* <PlayButton/> */}
                     <LoadContext.Provider value = {loading}>
                         <Home/>
                         <AlbumCovers/> 
