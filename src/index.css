@@ -139,7 +139,7 @@ a {
   transition: filter 300ms;
   position: absolute;
   top: 3.25%;        /*fix this eventually */
-  right: 60%;
+  right: 85%;
   transform: translateY(-50%);
 }
 
@@ -215,4 +215,54 @@ a {
   align-items: center;
   justify-content: center;
   height: 100vh;
+}
+
+.next-button{
+  --button-size: calc(var(--nav-size) * 0.5);
+  width: fit-content;
+  float: left;
+  margin-right: 20px;
+  white-space: nowrap;
+  height: var(--button-size);
+  background-color: #484a4d;
+  border-radius: 5%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+  position: absolute;
+  top: 3.25%;        /*fix this eventually */
+  right: 45%;
+  transform: translateY(-50%);
+}
+
+.next-button:hover{
+  filter: brightness(1.2);
+}
+
+.back-button{
+  --button-size: calc(var(--nav-size) * 0.5);
+  width: fit-content;
+  float: left;
+  margin-right: 20px;
+  white-space: nowrap;
+  height: var(--button-size);
+  background-color: #484a4d;
+  border-radius: 5%;
+  padding: 5px;
+  margin: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: filter 300ms;
+  position: absolute;
+  top: 3.25%;        /*fix this eventually */
+  right: 57.5%;
+  transform: translateY(-50%);
+}
+
+.back-button:hover{
+  filter: brightness(1.2);
 }

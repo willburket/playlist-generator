@@ -10,17 +10,12 @@ function AlbumCovers(){
     }
 
     function image_extract(){
-        // v3 code 
+      
         for (let i = 0; i < search.length; i++ ){
             const artwork = search[i].attributes.artwork;
             const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
             images.push({image: img, id: search[i].id})
         }
-        // for (let i = 0; i < search.songs.length; i++ ){
-        //     const artwork = search.songs[i].attributes.artwork;
-        //     const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
-        //     images.push({image: img, id: search[i].id})
-        // }
         
     }
 
