@@ -11,8 +11,8 @@ const server = https.createServer({key, cert}, app);
 const PORT = 8080;
 
 
-app.get("/jwt", (req,res) => {
-  // res.setHeader('Content-Type', 'application/json');  //not sure what this doesd
+app.get("/jwt", (req,res) => {        
+  // res.setHeader('Content-Type', 'application/json');  //not sure what this does
   // res.send(JSON.stringify({token: token.token}));
   res.send({token:token.token})
   // res.send(token)    // put developer token here 

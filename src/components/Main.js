@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useEffect, useState} from "react";
 import { MusicKitContext } from "./MusicKitContext";
-import { MusicPlayer, PlayButton } from "./Playback";
+import { MusicPlayer } from "./MusicPlayer";
 import AlbumCovers from "./AlbumCovers";
 import { NavbarContext } from "./Navbar";
 import Home from "./Home";
@@ -17,11 +17,11 @@ function Main (){
     const [loading, setLoading] = useState(false);
 
     useEffect(() =>{
-        // console.log(selected)
+        
     }, [selected]);
 
     useEffect(() => {
-        // console.log(searchResult)
+
     },[searchResult]);
 
     function SearchButton (){
@@ -62,7 +62,6 @@ function Main (){
                 <SearchButton/>
                 <SearchContext.Provider value = {searchResult}>
                     <MusicPlayer/>
-                    {/* <PlayButton/> */}
                     <LoadContext.Provider value = {loading}>
                         <Home/>
                         <AlbumCovers/> 
@@ -75,12 +74,3 @@ function Main (){
 export {Main, SearchContext, LoadContext};
 
                 
-// works with player
-// const { data: result } = await music.api.music('v1/me/library/albums'); // this actually works for v3
-// const {data: result} = await music.api.music('/v1/catalog/{{storefrontId}}/albums/1025210938'); // works
-// setSearchResult([...result.data])
-
-
-// works with v1 api
-// const search = await music.api.charts(['songs'], queryParameters)    // works for v1
-// const search = await music.api.search('rap', queryParameters);   // works for v1
