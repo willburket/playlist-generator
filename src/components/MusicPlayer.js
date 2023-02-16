@@ -9,6 +9,7 @@ function MusicPlayer(){
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)       // maybe change this to what song is playing
     const [playerQueue, setPlayerQueue] = useState(null)
+    const [currentSong,setCurrentSong] = useState({})
 
     const makeQueue = async () => {
         try{
@@ -34,6 +35,10 @@ function MusicPlayer(){
             console.log(playerQueue) 
         } 
     }, [playerQueue])
+
+    useEffect(() => {
+        console.log(currentSong)
+    }, [currentSong])
       
     function PlayButton(){ 
     
@@ -41,6 +46,7 @@ function MusicPlayer(){
             if(!playing){
                 music.play()
                 setPlaying(true)
+                setCurrentSong(music.queue.currentItem) // move out of here
             }
             else{
                 music.pause()
@@ -74,10 +80,8 @@ function MusicPlayer(){
 
     function BackButton(){
 
-
         const back = async () =>{
             music.skipToPreviousItem()
-
         }
 
         return(
@@ -89,13 +93,34 @@ function MusicPlayer(){
         )
     }
 
+    function CurrentSong(){
+        
+         
+
+        return(
+            <div>
+                
+            </div>
+        )
+
+    }
+
     return(
         <div>
             <PlayButton/>
             <NextButton/>
             <BackButton/>
+            <CurrentSong/>
         </div>
     )
 }
 
-export {MusicPlayer};
+function Progress(){
+    const music = useContext(MusicKitContext)
+
+    return(
+        <apple-music-progress></apple-music-progress>
+    )
+}
+
+export {MusicPlayer, Progress};
