@@ -23,7 +23,7 @@ function MusicPlayer(){
         }   
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         if(search.length !== 0){
             makeQueue()
         }     
@@ -57,26 +57,12 @@ function MusicPlayer(){
         )
     }
     
-    
     function NextButton(){
     
         const next = async () => {
-            console.log(playerQueue._queueItems.nextPlayableItem)
-            if(playing){
-                
-                // const next_up = playerQueue
-                // next_up.play()
-            }
-            else{
-
-            }
-            
-            
+            music.skipToNextItem()
         }
 
-        // playing and hit next
-        // paused and hit next 
-    
         return (
             <li className = "nav-item">
                 <a href="#" className="next-button" onClick = {next}>
@@ -88,7 +74,9 @@ function MusicPlayer(){
 
     function BackButton(){
 
+
         const back = async () =>{
+            music.skipToPreviousItem()
 
         }
 
@@ -108,7 +96,6 @@ function MusicPlayer(){
             <BackButton/>
         </div>
     )
-
 }
 
 export {MusicPlayer};
