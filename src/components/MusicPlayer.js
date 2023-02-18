@@ -9,7 +9,6 @@ function MusicPlayer(){
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)       // maybe change this to what song is playing
     const [playerQueue, setPlayerQueue] = useState(null)
-    const [currentSong,setCurrentSong] = useState({})
 
     const makeQueue = async () => {
         try{
@@ -32,24 +31,18 @@ function MusicPlayer(){
 
     useEffect(() => {
         if(playerQueue !== null){
-            console.log(playerQueue) 
         } 
     }, [playerQueue])
-
-    useEffect(() => {
-        console.log(currentSong)
-    }, [currentSong])
       
     function PlayButton(){ 
     
         const play = async () => {     
             if(!playing){
-                music.play()
+                await music.play()      // should this be await?
                 setPlaying(true)
-                setCurrentSong(music.queue.currentItem) // move out of here
             }
             else{
-                music.pause()
+                await music.pause()
                 setPlaying(false)
             }
         }
@@ -66,7 +59,7 @@ function MusicPlayer(){
     function NextButton(){
     
         const next = async () => {
-            music.skipToNextItem()
+            await music.skipToNextItem()            // await causing error
         }
 
         return (
@@ -81,7 +74,7 @@ function MusicPlayer(){
     function BackButton(){
 
         const back = async () =>{
-            music.skipToPreviousItem()
+            await music.skipToPreviousItem()
         }
 
         return(
@@ -91,18 +84,6 @@ function MusicPlayer(){
                 </a>
             </li>
         )
-    }
-
-    function CurrentSong(){
-        
-         
-
-        return(
-            <div>
-                
-            </div>
-        )
-
     }
 
     return(
@@ -115,12 +96,31 @@ function MusicPlayer(){
     )
 }
 
-function Progress(){
+function CurrentSong(){
     const music = useContext(MusicKitContext)
+    const [song, setSong] = useState(null)
 
-    return(
-        <apple-music-progress></apple-music-progress>
+    useEffect(() => {
+        if (music) {
+          const subscription = music.addEventListener('playbackStateDidChange', () => {
+            console.log("playback state changed")
+            const currentSong = music.nowPlayingItem
+            setSong(currentSong)
+          });
+          return () => {
+            music.removeEventListener('playbackStateDidChange', subscription);
+          };
+        }
+      }, [music]);
+
+    return(     
+        <div className="progress">
+            <p>
+                {song !== null ? song.attributes.name: ""}
+            </p>
+            <apple-music-progress></apple-music-progress>
+        </div>
     )
 }
 
-export {MusicPlayer, Progress};
+export {MusicPlayer};

@@ -53,7 +53,6 @@ a {
   align-items: center;
   justify-content: center;
   margin-right: 10px;
-  
 }
 
 .icon-button{
@@ -272,4 +271,18 @@ a {
 .back-button:hover{
   filter: brightness(1.2);
 }
+
+.progress{
+  width: 300px;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  right: 25%;
+  top: 1.25%; 
+  background-color: #8f939a;
+}
+
+
+
 
