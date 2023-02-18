@@ -99,13 +99,22 @@ function MusicPlayer(){
 function CurrentSong(){
     const music = useContext(MusicKitContext)
     const [song, setSong] = useState(null)
+    const [display, setDisplay] = useState(null)
 
     useEffect(() => {
         if (music) {
           const subscription = music.addEventListener('playbackStateDidChange', () => {
-            console.log("playback state changed")
-            const currentSong = music.nowPlayingItem
-            setSong(currentSong)
+            if(music.isPlaying){
+                console.log(music.nowPlayingItem)
+                const currentSong = music.nowPlayingItem
+                const displayString = `${currentSong.attributes.artistName} - ${currentSong.attributes.name}`
+                setSong(currentSong)
+                setDisplay(displayString)
+            }
+            else{
+                setSong(null)
+            }
+            
           });
           return () => {
             music.removeEventListener('playbackStateDidChange', subscription);
@@ -116,7 +125,7 @@ function CurrentSong(){
     return(     
         <div className="progress">
             <p>
-                {song !== null ? song.attributes.name: ""}
+                {song !== null ? display: ""}
             </p>
             <apple-music-progress></apple-music-progress>
         </div>
