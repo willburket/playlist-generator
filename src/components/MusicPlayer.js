@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./Main";
 import { MusicKitContext } from "./MusicKitContext";
-import { ReactComponent as PlayIcon} from "../assets/play.svg"
-import { ReactComponent as PauseIcon} from "../assets/pause.svg"
+import { ReactComponent as PlayIcon} from "../assets/images/play.svg"
+import { ReactComponent as PauseIcon} from "../assets/images/pause.svg"
 
 function MusicPlayer(){
     const search = useContext(SearchContext)
@@ -49,9 +49,9 @@ function MusicPlayer(){
     
         return(
             <li className = "nav-item">
-                <a href="#" className="play-button" onClick = {play}>
-                    {playing ? <PauseIcon/> : <PlayIcon/>}
-                </a>
+                    <a href="#" className="play-button" onClick = {play}>
+                        {playing ? <PauseIcon/> : <PlayIcon/>}
+                    </a>
             </li>
         )
     }
@@ -123,11 +123,14 @@ function CurrentSong(){
       }, [music]);
 
     return(     
-        <div className="progress">
+        <div className="display">
             <p>
                 {song !== null ? display: ""}
             </p>
-            <apple-music-progress></apple-music-progress>
+            <div className="progress">
+                <apple-music-progress></apple-music-progress>
+            </div>
+            
         </div>
     )
 }

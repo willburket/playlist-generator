@@ -49,11 +49,13 @@ function Main (){
         
         
         return(
+        <div className="top-right">
             <li className = "nav-item">
-                <a href="#" className="search-button" onClick = {searchMusic}>
+                <a href="#" className="icon-button" onClick = {searchMusic}>
                     Search
                 </a>
             </li>
+        </div>    
         );
     }   
 

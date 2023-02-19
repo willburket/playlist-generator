@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef, createContext} from "react";
-import { ReactComponent as MusicIcon } from "../assets/music.svg"
+import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
 import { Main } from "./Main";
 
 const NavbarContext = createContext(null)       // use this to pass picked items to search
@@ -76,12 +76,16 @@ function Outline(){
             }, [active]);
         
             return (
-                <li className = "nav-item">
+                <div className="top-right">
+                    <li className = "nav-item">
                     <a href="#" className="icon-button" onClick={() => clickChange()} ref={dropdownRef}>
                         {selected === null ? props.icon : selected.name}
                     </a>
                     {open && props.children}
-                </li>
+                    </li>
+                </div>
+                    
+                
             );
         
         }
