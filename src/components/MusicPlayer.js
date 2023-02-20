@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "./Main";
+import { SearchContext } from "./Navbar";
 import { MusicKitContext } from "./MusicKitContext";
 import { ReactComponent as PlayIcon} from "../assets/images/play.svg"
 import { ReactComponent as PauseIcon} from "../assets/images/pause.svg"
@@ -37,14 +37,20 @@ function MusicPlayer(){
     function PlayButton(){ 
     
         const play = async () => {     
-            if(!playing){
-                await music.play()      // should this be await?
-                setPlaying(true)
+            try{
+                if(!playing){
+                    await music.play()      // should this be await?
+                    setPlaying(true)
+                }
+                else{
+                    await music.pause()
+                    setPlaying(false)
+                }
             }
-            else{
-                await music.pause()
-                setPlaying(false)
+            catch(err){
+                console.log(err)
             }
+            
         }
     
         return(
@@ -59,7 +65,14 @@ function MusicPlayer(){
     function NextButton(){
     
         const next = async () => {
-            await music.skipToNextItem()            // await causing error
+            try{
+                await music.skipToNextItem()   // await causing error
+
+            }
+            catch(err){
+                console.log(err)
+            }
+                     
         }
 
         return (
@@ -74,7 +87,13 @@ function MusicPlayer(){
     function BackButton(){
 
         const back = async () =>{
-            await music.skipToPreviousItem()
+            try{
+                await music.skipToPreviousItem()
+            }
+            catch(err){
+                console.log(err)
+            }
+            
         }
 
         return(

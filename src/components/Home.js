@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { LoadContext, SearchContext } from "./Main";
+import { LoadContext, SearchContext } from "./Navbar";
 
 function Home(){
     const load = useContext(LoadContext)

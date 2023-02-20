@@ -1,15 +1,24 @@
-import React, {useEffect, useState, useRef, createContext} from "react";
+import React, {useEffect, useState, useRef, createContext, useContext} from "react";
 import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
-import { Main } from "./Main";
+import { MusicKitContext } from "./MusicKitContext";
+import { MusicPlayer } from "./MusicPlayer";
+import AlbumCovers from "./AlbumCovers";
+import { NavbarContext } from "./Navbar";
+import Home from "./Home";
 
-const NavbarContext = createContext(null)       // use this to pass picked items to search
+const SearchContext = createContext(null);  
+const LoadContext = createContext(null);
 
 function Outline(){
     const [selected, setSelected] = useState(null)
+    const music = useContext(MusicKitContext);
+    const [searchResult, setSearchResult] = useState([]);
+    const [loading, setLoading] = useState(false);
+
         
     useEffect(() => {
         // console.log(selected)
-    }, [selected])
+    }, [selected, searchResult])
 
     function Navbar(props){
     
@@ -75,20 +84,50 @@ function Outline(){
         
             }, [active]);
         
-            return (
-                <div className="top-right">
+            return (              
                     <li className = "nav-item">
                     <a href="#" className="icon-button" onClick={() => clickChange()} ref={dropdownRef}>
                         {selected === null ? props.icon : selected.name}
                     </a>
                     {open && props.children}
                     </li>
-                </div>
-                    
                 
             );
         
         }
+
+        function SearchButton (){
+        
+            async function searchMusic(){    
+                setLoading(true)
+                try{
+                    const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
+                    const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
+                    setSearchResult([...search.data.results.songs.data])
+                    
+                    // charts with v3
+                    // const queryParameters = {types: ['songs'], l: 'en-us', limit: 25};
+                    // const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
+                    // setSearchResult([...search.data.results.songs[0].data])  // works for charts 
+                    
+                }
+                catch(err){
+                    console.log(err)        // add popup for when nothing is selected 
+                }
+                finally{
+                    setLoading(false)
+                }
+            }
+            
+            
+            return(
+                <li className = "nav-item">
+                    <a href="#" className="icon-button" onClick = {searchMusic}>
+                        Search
+                    </a>
+                </li>
+            );
+        }   
         
 
         // we can make this better 
@@ -110,6 +149,7 @@ function Outline(){
                             <GenreDropdownItem name = "Raggae" value = "raggae"/>      
                         </DropdownMenu>   
                     </GenreNavItem>
+                    <SearchButton/>
                 </ul>
             </nav>  
         );
@@ -119,12 +159,16 @@ function Outline(){
     return(
         <div>
             <Navbar/>
-            <NavbarContext.Provider value = {selected}>
-                <Main/>
-            </NavbarContext.Provider>
+            <SearchContext.Provider value = {searchResult}>
+                    <MusicPlayer/>
+                    <LoadContext.Provider value = {loading}>
+                        <Home/>
+                        <AlbumCovers/> 
+                    </LoadContext.Provider>
+            </SearchContext.Provider>
         </div>
     );
 
 }
 
-export { Outline, NavbarContext};
+export { Outline, SearchContext, LoadContext};

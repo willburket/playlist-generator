@@ -4,7 +4,7 @@ const MusicKitContext = createContext(null);        // might just move this to a
 
 function AuthorizeButton(){             
     const music = useContext(MusicKitContext);
-    // probably need to make this a custom hook so other components can use that hook
+    
     const [isAuthorized, setIsAuthorized] = useState(false)    
         
     async function handleStatusChange(){
@@ -19,8 +19,7 @@ function AuthorizeButton(){
         }
         catch(err){
             console.log(err)
-            // need to add code for a popup or something when theres an error
-            // maybe don't let login button pop up till musickit instance is available??
+           
         }
     }
 
