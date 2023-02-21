@@ -3,6 +3,8 @@ import { SearchContext } from "./Navbar";
 import { MusicKitContext } from "../App";
 import { ReactComponent as PlayIcon} from "../assets/images/play.svg"
 import { ReactComponent as PauseIcon} from "../assets/images/pause.svg"
+import { ReactComponent as NextIcon} from "../assets/images/next.svg"
+import { ReactComponent as BackIcon} from "../assets/images/back.svg"
 
 function MusicPlayer(){
     const search = useContext(SearchContext)
@@ -74,7 +76,7 @@ function MusicPlayer(){
 
         return (           
                 <a href="#" className="player-button" onClick = {next}>
-                    <p>Next</p>
+                    <NextIcon/>
                 </a>           
         )
     }
@@ -93,17 +95,26 @@ function MusicPlayer(){
 
         return(           
                 <a href="#" className="player-button" onClick = {back}>
-                    <p>Back</p>
+                    <BackIcon/>
                 </a>
         )
     }
 
     return(
         <div className="display-container">
-            <BackButton/>
-            <PlayButton/>
-            <NextButton/>
-            <CurrentSong/>
+            <div className="display">
+                <div className="display-left">
+                    <BackButton/>
+                    <PlayButton/>
+                    <NextButton/>
+                </div>
+                <div classname= "display-right">
+                    <CurrentSong/>
+                </div>
+            
+
+            </div>
+            
         </div>
     )
 }
@@ -135,14 +146,14 @@ function CurrentSong(){
       }, [music]);
 
     return(     
-        // <div className="display">
-        <div>
-            <p>
-                {song !== null ? display: ""}
-            </p>
-            <div className="progress">
-                <apple-music-progress></apple-music-progress>
-            </div>
+        
+        <div>          
+                <p>
+                    {song !== null ? display: ""}
+                </p>
+                <div className="progress">
+                    <apple-music-progress></apple-music-progress>
+                </div>
             
         </div>
     )

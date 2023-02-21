@@ -1,11 +1,11 @@
 .progress{
-    position: relative;
-    height: 1em;
-    width: 60%;
-    bottom: 0em;
-    align-items: center;
-    justify-content: center;
-    float: right;
+  position: relative;
+  height: 1em;
+  width: 60%;
+  bottom: 0em;
+  align-items: center;
+  justify-content: center;
+  float: right;
   }
   
 .player{
@@ -34,32 +34,53 @@ display: flex;
   transition: filter 300ms;
 }
 
-.back-button:hover{
+.player-button:hover{
   filter: brightness(1.2);
 }
   
-  .display{
-    max-width: 500px; /*fix these*/
-    min-width:320px;
-    height: 45px;
-    font-size: .75em;
-    border-radius: 1em;
-    padding-left: 1em;
-    padding-right: 1em;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    right: 50%;
-    top: 1.25%; 
-    background-color: #8f939a;
-    z-index: 2;
-  }
+.display{
+  max-width: 640px; /*fix these*/
+  min-width: 320px;
+  height: 45px;
+  font-size: .75em;
+  border-radius: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #8f939a;
+}
 
-  .display-container{
-    width: 100%;
-    height: var(--nav-size);
-    justify-content: center;
-    display: flex;
-  }
-  
+.display-left{
+  display: flex;
+  width: 50%;
+}
+
+.display-right{
+  display: flex;
+  width: 50%;
+}
+
+.display-container{
+  width: 100%;
+  height: var(--nav-size);
+  justify-content: center;
+  display: flex;
+}
+
+.screen{
+  max-width: 640px; /*fix these*/
+  min-width:320px;
+  height: 45px;
+  font-size: .75em;
+  border-radius: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: #c7ccd4;
+}
+
   
