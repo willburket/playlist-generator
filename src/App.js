@@ -1,6 +1,7 @@
-import React from "react";
-import {MusicKitContext, AuthorizeButton} from "./components/MusicKitContext"
-import {Outline} from "./components/Navbar";
+import React, {createContext} from "react";
+import {Main} from "./components/Navbar";
+
+const MusicKitContext = createContext(null); 
 
 class App extends React.Component{
 
@@ -38,18 +39,17 @@ class App extends React.Component{
           console.log(err)
         }
       }
-
+  
   render(){
     return(
       <div>
       <MusicKitContext.Provider value={this.state.music}>
-        <AuthorizeButton/>
-        <Outline/>
+        <Main/>
       </MusicKitContext.Provider>
       </div>
     )
   } 
 }
 
-export default App;
+export {App, MusicKitContext};
 

@@ -1,8 +1,7 @@
 import React, { createContext, useState, useContext } from 'react'
+import {MusicKitContext} from "../App"
 
-const MusicKitContext = createContext(null);        // might just move this to app.js & name this file auth button
-
-function AuthorizeButton(){             
+function AuthButton(){             
     const music = useContext(MusicKitContext);
     
     const [isAuthorized, setIsAuthorized] = useState(false)    
@@ -19,13 +18,12 @@ function AuthorizeButton(){
         }
         catch(err){
             console.log(err)
-           
         }
     }
 
     return(
-    <div>
-        <a href="#" className="login-button" onClick = {handleStatusChange}>
+    <div className='nav-item'>
+        <a href="#" className="icon-button" onClick = {handleStatusChange}>
             {isAuthorized ? 'Log Out' : 'Log In'}
         </a>
     </div>
@@ -33,4 +31,4 @@ function AuthorizeButton(){
 
 }
 
-export {MusicKitContext, AuthorizeButton}
+export { AuthButton }

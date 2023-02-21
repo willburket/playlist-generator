@@ -33,83 +33,6 @@ a {
   text-decoration: none;
 }
 
-.navbar {
-  width: 100%;
-  height: var(--nav-size);
-  background-color: var(--bg);
-  padding: 0 1rem;
-  border-bottom: var(--border);
-  /* position: fixed; */
-  
-}
-
-.navbar-nav{
-  max-width: 100%;
-  height: 100%;
-  /* display: inline-block; */
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  /* position: fixed; */
-}
-
-.nav-item{
-  width: fit-content;
-  display: flex;
-  /* float: left; */
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-  /* position: fixed; */
-}
-
-.dropdown{
-  position: absolute;
-  top: 58px;
-  width: 300px;
-  transform: translateX(45%);
-  background-color: var(--bg);
-  border: var(--border);
-  border-radius: var(--border-radius);
-  padding: 1rem;
-  overflow: hidden;
-}
-
-.dropdown-button{
-  --button-size: calc(var(--nav-size) * 0.5);
-  width: 100%;
-  float: left;
-  margin-right: 20px;
-  white-space: nowrap;
-  height: var(--button-size);
-  border-radius: 5%;
-  padding: 5px;
-  margin: 2px;
-  display: flex;
-  align-items: center;
-  justify-content: left;
-  transition: filter 300ms;
-}
-
-.dropdown-button:hover{
-  filter: brightness(1.2);
-}
-
-.menu-item{
-  height: 50px;
-  display: flex;
-  align-items: center;
-  border-radius: var(--border-radius);
-  transition: background var(--speed);
-  padding: 0.5rem
-}
-
-.menu-item:hover{
-  background-color: #525357;
-}
-
-
-
 .album-cover-grid{
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -135,37 +58,8 @@ a {
   height: 100vh;
 }
 
-.display{
-  max-width: 500px; /*fix these*/
-  min-width:320px;
-  height: 45px;
-  font-size: .75em;
-  border-radius: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  right: 50%;
-  top: 1.25%; 
-  background-color: #8f939a;
-  z-index: 2;
-}
 
-.progress{
-  position: relative;
-  height: 1em;
-  width: 60%;
-  bottom: 0em;
-  align-items: center;
-  justify-content: center;
-  float: right;
-}
 
-.player{
-  position: absolute;
-
-}
 
 
 

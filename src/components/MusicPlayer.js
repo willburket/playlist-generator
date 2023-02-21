@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./Navbar";
-import { MusicKitContext } from "./MusicKitContext";
+import { MusicKitContext } from "../App";
 import { ReactComponent as PlayIcon} from "../assets/images/play.svg"
 import { ReactComponent as PauseIcon} from "../assets/images/pause.svg"
 
@@ -49,16 +49,13 @@ function MusicPlayer(){
             }
             catch(err){
                 console.log(err)
-            }
-            
+            }            
         }
     
-        return(
-            <li className = "nav-item">
-                    <a href="#" className="play-button" onClick = {play}>
+        return(           
+                    <a href="#" className="player-button" onClick = {play}>
                         {playing ? <PauseIcon/> : <PlayIcon/>}
-                    </a>
-            </li>
+                    </a>            
         )
     }
     
@@ -75,12 +72,10 @@ function MusicPlayer(){
                      
         }
 
-        return (
-            <li className = "nav-item">
-                <a href="#" className="next-button" onClick = {next}>
+        return (           
+                <a href="#" className="player-button" onClick = {next}>
                     <p>Next</p>
-                </a>
-            </li>
+                </a>           
         )
     }
 
@@ -96,20 +91,18 @@ function MusicPlayer(){
             
         }
 
-        return(
-            <li className = "nav-item">
-                <a href="#" className="back-button" onClick = {back}>
+        return(           
+                <a href="#" className="player-button" onClick = {back}>
                     <p>Back</p>
                 </a>
-            </li>
         )
     }
 
     return(
-        <div>
+        <div className="display-container">
+            <BackButton/>
             <PlayButton/>
             <NextButton/>
-            <BackButton/>
             <CurrentSong/>
         </div>
     )
@@ -142,7 +135,8 @@ function CurrentSong(){
       }, [music]);
 
     return(     
-        <div className="display">
+        // <div className="display">
+        <div>
             <p>
                 {song !== null ? display: ""}
             </p>

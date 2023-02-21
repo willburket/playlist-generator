@@ -1,15 +1,15 @@
 import React, {useEffect, useState, useRef, createContext, useContext} from "react";
 import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
-import { MusicKitContext } from "./MusicKitContext";
+import { MusicKitContext } from "../App";
+import { AuthButton } from "./AuthButton";
 import { MusicPlayer } from "./MusicPlayer";
 import AlbumCovers from "./AlbumCovers";
-import { NavbarContext } from "./Navbar";
 import Home from "./Home";
 
 const SearchContext = createContext(null);  
 const LoadContext = createContext(null);
 
-function Outline(){
+function Main(){
     const [selected, setSelected] = useState(null)
     const music = useContext(MusicKitContext);
     const [searchResult, setSearchResult] = useState([]);
@@ -20,7 +20,7 @@ function Outline(){
         // console.log(selected)
     }, [selected, searchResult])
 
-    function Navbar(props){
+    function Navbar(props){         // lets do some renaming on these components 
     
         function GenreDropdownItem(props){
     
@@ -129,7 +129,6 @@ function Outline(){
             );
         }   
         
-
         // we can make this better 
         return(        
             <nav className= "navbar">
@@ -150,6 +149,8 @@ function Outline(){
                         </DropdownMenu>   
                     </GenreNavItem>
                     <SearchButton/>
+                    <AuthButton/>
+                    
                 </ul>
             </nav>  
         );
@@ -160,7 +161,7 @@ function Outline(){
         <div>
             <Navbar/>
             <SearchContext.Provider value = {searchResult}>
-                    <MusicPlayer/>
+            <MusicPlayer/>
                     <LoadContext.Provider value = {loading}>
                         <Home/>
                         <AlbumCovers/> 
@@ -171,4 +172,4 @@ function Outline(){
 
 }
 
-export { Outline, SearchContext, LoadContext};
+export { Main, SearchContext, LoadContext};

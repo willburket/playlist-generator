@@ -7,11 +7,7 @@ function Home(){
 
     useEffect(()=>{
         // console.log(search)
-    }, [search])
-
-    useEffect(() => {
-        // console.log(load)
-    }, [load])
+    }, [search, load])
 
     if(!load && search.length === 0) return (<div className="prompt-text"><p>Pick a Genre</p></div>)
 
