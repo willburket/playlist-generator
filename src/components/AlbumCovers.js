@@ -23,11 +23,14 @@ function AlbumCovers(){
     }, [search])
 
     return(
-        <div className= "album-cover-grid">
+        <div className="grid-container">
+            <div className= "album-cover-grid">
             {images.map(item => (
                 <img src={item.image} key = {item.id} className = "album-cover" alt = {item.id}/>
             ))}
+            </div>
         </div>
+        
     )
 }
 

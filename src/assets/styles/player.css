@@ -1,47 +1,15 @@
-.progress{
-  position: relative;
-  height: 1em;
-  width: 60%;
-  bottom: 0em;
-  align-items: center;
+.display-container{
+  width: 100%;
+  height: var(--nav-size);
   justify-content: center;
-  float: right;
-  }
-  
-.player{
-position: absolute;
-}
-
-.player-controls{
-display: flex;
-}
-
-.player-button{
-  --button-size: calc(var(--nav-size) * 0.5);
-  width: fit-content;
-  float: left;
-  margin-right: 5px;
-  white-space: nowrap;
-  height: var(--button-size);
-  background-color: #484a4d;
-  border-radius: 5%;
-  padding: 5px;
-  margin: 2px;
+  align-items: center;
   display: flex;
-  align-items: center;
-  min-width: 50px;
-  justify-content: center;
-  transition: filter 300ms;
 }
 
-.player-button:hover{
-  filter: brightness(1.2);
-}
-  
 .display{
-  max-width: 640px; /*fix these*/
+  max-width: 720px; /*fix these*/
   min-width: 320px;
-  height: 45px;
+  height: 4.5em;
   font-size: .75em;
   border-radius: 1em;
   padding-left: 1em;
@@ -60,27 +28,55 @@ display: flex;
 .display-right{
   display: flex;
   width: 50%;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
 }
 
-.display-container{
-  width: 100%;
-  height: var(--nav-size);
-  justify-content: center;
+.player-button{
+  --button-size: calc(var(--nav-size) * 0.5);
+  width: fit-content;
+  float: left;
+  margin-right: 5px;
+  white-space: nowrap;
+  height: var(--button-size);
+  background-color: #484a4d;
+  border-radius: 5%;
+  padding: 1px;
+  margin: 1px;
   display: flex;
+  align-items: center;
+  min-width: 50px;
+  justify-content: center;
+  transition: filter 300ms;
+}
+
+.player-button:hover{
+  filter: brightness(1.2);
 }
 
 .screen{
-  max-width: 640px; /*fix these*/
-  min-width:320px;
-  height: 45px;
+  width: 90%;
+  height: 3em;
   font-size: .75em;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
   border-radius: 1em;
   padding-left: 1em;
   padding-right: 1em;
-  justify-content: center;
-  align-items: center;
   display: flex;
   background-color: #c7ccd4;
 }
+
+.progress{
+  position: sticky;
+  height: 1em;
+  width: 100%;
+  bottom: 0em;
+  align-items: center;
+  justify-content: center;
+  float: right;
+  }
 
   

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef, createContext, useContext} from "react";
 import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
-import { MusicKitContext } from "../App";
+import { App, MusicKitContext } from "../App";
 import { AuthButton } from "./AuthButton";
 import { MusicPlayer } from "./MusicPlayer";
 import AlbumCovers from "./AlbumCovers";

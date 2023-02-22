@@ -108,7 +108,7 @@ function MusicPlayer(){
                     <PlayButton/>
                     <NextButton/>
                 </div>
-                <div classname= "display-right">
+                <div className= "display-right">
                     <CurrentSong/>
                 </div>
             
@@ -147,10 +147,12 @@ function CurrentSong(){
 
     return(     
         
-        <div>          
-                <p>
-                    {song !== null ? display: ""}
-                </p>
+        <div>
+                <div className="screen">
+                    <p>
+                        {song !== null ? display: ""}
+                    </p>
+                </div>      
                 <div className="progress">
                     <apple-music-progress></apple-music-progress>
                 </div>
