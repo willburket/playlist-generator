@@ -26,7 +26,8 @@ function MusicPlayer(){
     }
 
     useEffect(() => {
-        if(search.length !== 0){
+        if(search.length !== 0){    
+            console.log(search)
             makeQueue()
         }     
     }, [search])
@@ -149,7 +150,7 @@ function CurrentSong(){
         
         <div>
                 <div className="screen">
-                    <p>
+                    <p className = "song">
                         {song !== null ? display: ""}
                     </p>
                 </div>      

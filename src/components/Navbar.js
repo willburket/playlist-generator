@@ -17,7 +17,7 @@ function Main(){
 
         
     useEffect(() => {
-        // console.log(selected)
+        // console.log(searchResult)
     }, [selected, searchResult])
 
     function Navbar(props){         // lets do some renaming on these components 
@@ -101,14 +101,19 @@ function Main(){
             async function searchMusic(){    
                 setLoading(true)
                 try{
-                    const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
-                    const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
-                    setSearchResult([...search.data.results.songs.data])
+                    // const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
+                    // const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
+                    // setSearchResult([...search.data.results.songs.data])
                     
                     // charts with v3
-                    // const queryParameters = {types: ['songs'], l: 'en-us', limit: 25};
-                    // const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
-                    // setSearchResult([...search.data.results.songs[0].data])  // works for charts 
+                    const queryParameters = {types: ['songs'], l: 'en-us', limit: 100};
+                    const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
+                    setSearchResult([...search.data.results.songs[0].data])  // works for charts 
+
+                    // works for finding genre? 
+                    // const queryParameters = { ids: ['R&B/Soul'], l: 'en-us' };
+                    // const search = await music.api.music('/v1/catalog/{{storefrontId}}/genres', queryParameters);
+                    // setSearchResult(search) 
                     
                 }
                 catch(err){

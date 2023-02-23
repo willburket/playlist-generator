@@ -29,7 +29,7 @@
 }
 
  
-@media (max-width: 390px) {
+@media (max-width: 440px) {
     .album-cover-grid {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(25, 1fr);
@@ -52,4 +52,11 @@
 
 .album-cover:hover{
     filter: brightness(1.2);
+}
+
+@media (max-width: 440px) {
+    .album-cover {
+    max-width: 200px;
+    max-height: 200px;
+    }
 }
