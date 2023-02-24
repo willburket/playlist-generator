@@ -9,18 +9,29 @@ const axios = require("axios").create({
 });
 
 module.exports = {
+ 
+    fetchCharts: async (storefront) => {
+      try {
+        axios.get(`/v1/catalog/${storefront}/charts`, {
+          params: {
+            types: 'songs',
+            limit: 25,
+            genre: '14'
+            // genre: '',
+          }
+        }).then(function(response){
+          const songs = [...response.data.results.songs]
+          console.log(songs)
+        });
 
-    fetchArtist: async (artistId) => {
-        try {
-          const { data } = await axios.get(`/v1/catalog/us/artists/${artistId}`).then(data => {
-            return data
-          });
-    
-        } catch (error) {
-          console.error(error);
-          return null;
-        }
-      },  
+      } catch (error) {
+        console.error(error);
+
+      }
+    },
 
 }
+
+
+
 

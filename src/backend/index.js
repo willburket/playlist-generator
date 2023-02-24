@@ -18,12 +18,14 @@ app.get("/jwt", (req,res) => {
   // res.send(token)    // put developer token here 
 })
 
-app.get("/artist", (req,res) => {
+app.get("/music", (req,res) => {
 
-  const artistId = '1147783278'
-  const artist = apple.fetchArtist(artistId)
-  console.log(artist)
-  res.send(artist)
+  // const artistId = '1147783278'
+  // const artist = apple.fetchArtist(artistId)
+  // console.log(artist)
+  const storefront = 'us'
+  const chart = apple.fetchCharts(storefront)
+  res.send(chart)
 })
 
 

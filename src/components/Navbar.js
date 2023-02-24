@@ -101,19 +101,20 @@ function Main(){
             async function searchMusic(){    
                 setLoading(true)
                 try{
+                    // v3 search
                     // const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
                     // const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
                     // setSearchResult([...search.data.results.songs.data])
                     
-                    // charts with v3
+                    // v3 charts 
                     const queryParameters = {types: ['songs'], l: 'en-us', limit: 100};
                     const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
                     setSearchResult([...search.data.results.songs[0].data])  // works for charts 
 
-                    // works for finding genre? 
-                    // const queryParameters = { ids: ['R&B/Soul'], l: 'en-us' };
-                    // const search = await music.api.music('/v1/catalog/{{storefrontId}}/genres', queryParameters);
-                    // setSearchResult(search) 
+                    // test 
+                    // const queryParameters = {types: ['songs'], l: 'en-us', genre: 'R&B/Soul',limit: 100};
+                    // const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
+                    // setSearchResult([...search.data.results.songs[0].data])  // works for charts 
                     
                 }
                 catch(err){
