@@ -10,25 +10,26 @@ const axios = require("axios").create({
 
 module.exports = {
  
-    fetchCharts: async (storefront) => {
+    fetchCharts: async (storefront, genre) => {
       try {
         axios.get(`/v1/catalog/${storefront}/charts`, {
           params: {
             types: 'songs',
-            limit: 25,
-            genre: '14'
-            // genre: '',
+            limit: 2,       //change
+            genre: genre,
           }
         }).then(function(response){
-          const songs = [...response.data.results.songs]
+          const songs = response.data.results.songs[0].data
+          // console.log(songs[0])
           console.log(songs)
+          return songs;
         });
 
       } catch (error) {
         console.error(error);
-
       }
     },
+
 
 }
 

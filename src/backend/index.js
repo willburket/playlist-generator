@@ -7,6 +7,7 @@ const apple = require('./AppleMusicApi');
 const token = require('./TokenConfig');
 const https = require('https')
 const server = https.createServer({key, cert}, app);
+const bodyParser = require('body-parser');
 
 const PORT = 8080;
 
@@ -18,14 +19,24 @@ app.get("/jwt", (req,res) => {
   // res.send(token)    // put developer token here 
 })
 
-app.get("/music", (req,res) => {
+app.use(bodyParser.text());
 
-  // const artistId = '1147783278'
-  // const artist = apple.fetchArtist(artistId)
-  // console.log(artist)
-  const storefront = 'us'
-  const chart = apple.fetchCharts(storefront)
-  res.send(chart)
+app.use((req,res,next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  next();
+})
+
+app.post("/music", (req,res) => {
+  
+  const storefront = 'us'   //change later?
+  const genre = req.body
+  const chart = apple.fetchCharts(storefront, genre)
+  const responseData = {data: chart}
+  res.setHeader('Content-Type', 'application/json');
+  res.send(JSON.stringify(responseData));
+  // res.send({data: responseData})
 })
 
 

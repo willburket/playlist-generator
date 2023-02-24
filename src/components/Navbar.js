@@ -111,10 +111,6 @@ function Main(){
                     const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
                     setSearchResult([...search.data.results.songs[0].data])  // works for charts 
 
-                    // test 
-                    // const queryParameters = {types: ['songs'], l: 'en-us', genre: 'R&B/Soul',limit: 100};
-                    // const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
-                    // setSearchResult([...search.data.results.songs[0].data])  // works for charts 
                     
                 }
                 catch(err){
@@ -125,10 +121,34 @@ function Main(){
                 }
             }
             
+            async function genreSearch(){
+
+                
+
+                await fetch('https://localhost:8080/music', {
+                    method: 'POST',
+                    headers: {
+                        // 'Content-Type': 'application/json'
+                        'Content-Type': 'text/plain'
+                    },
+                    // body: JSON.stringify( selected.id )
+                    body: selected.id
+                  })
+                    .then(response => response.json())
+                    .then(data => {
+                      console.log(data);
+        
+                    })
+                    .catch(error => {
+                          console.error(error);
+                        // console.log('Error parsing JSON:', error, data);
+                    });
+
+            }
             
             return(
                 <li className = "nav-item">
-                    <a href="#" className="icon-button" onClick = {searchMusic}>
+                    <a href="#" className="icon-button" onClick = {genreSearch}>
                         Search
                     </a>
                 </li>
@@ -141,17 +161,16 @@ function Main(){
                 <ul className= "navbar-nav">
                     <GenreNavItem icon= {<MusicIcon/>} value= "genre">
                         <DropdownMenu>
-                            <GenreDropdownItem name = "Pop" value = "pop"/>
-                            <GenreDropdownItem name = "Rap" value = "rap"/>
-                            <GenreDropdownItem name = "Rock" value = "rock"/>
-                            <GenreDropdownItem name = "R&B" value = "r&b"/>
-                            <GenreDropdownItem name = "Country" value = "country"/>
-                            <GenreDropdownItem name = "Dance" value = "dance"/>
-                            <GenreDropdownItem name = "Dubstep" value = "dubstep"/>
-                            <GenreDropdownItem name = "Latin" value = "latin"/>
-                            <GenreDropdownItem name = "Alternative" value = "alternative"/>
-                            <GenreDropdownItem name = "Indie" value = "indie"/>
-                            <GenreDropdownItem name = "Raggae" value = "raggae"/>      
+                            <GenreDropdownItem name = "Pop" value = "pop" id = "14"/>
+                            <GenreDropdownItem name = "Hip-Hop/Rap" value = "rap" id ="18"/>
+                            <GenreDropdownItem name = "Rock" value = "rock" id = "21"/>
+                            <GenreDropdownItem name = "R&B/Soul" value = "r&b" id = "15"/>
+                            <GenreDropdownItem name = "Alternative" value = "alt" id = "20"/>
+                            <GenreDropdownItem name = "Dance" value = "dance" id = "17"/>
+                            <GenreDropdownItem name = "Country" value = "country" id = "6"/>
+                            <GenreDropdownItem name = "Latin" value = "latin" id = "12"/>
+                            <GenreDropdownItem name = "Raggae" value = "raggae" id = "24"/>      
+                            <GenreDropdownItem name = "Classical" value = "classical" id = "5"/>
                         </DropdownMenu>   
                     </GenreNavItem>
                     <SearchButton/>
