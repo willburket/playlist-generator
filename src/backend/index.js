@@ -28,15 +28,27 @@ app.use((req,res,next) => {
   next();
 })
 
-app.post("/music", (req,res) => {
+app.post("/music", async (req,res) => {
   
   const storefront = 'us'   //change later?
   const genre = req.body
-  const chart = apple.fetchCharts(storefront, genre)
-  const responseData = {data: chart}
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify(responseData));
-  // res.send({data: responseData})
+
+    const songs = await apple.fetchCharts(storefront, genre)
+
+    res.setHeader('Content-Type', 'application/json');
+    console.log(songs)
+    res.send(songs)
+    // res.send(JSON.stringify(songs))
+    
+  
+
+
+  // const responseData = {data: chart}
+  
+  // res.send(JSON.stringify(responseData));
+  // res.send(responseData)
+  // res.send(JSON.stringify(chart))
+  
 })
 
 

@@ -123,27 +123,15 @@ function Main(){
             
             async function genreSearch(){
 
-                
-
-                await fetch('https://localhost:8080/music', {
-                    method: 'POST',
-                    headers: {
-                        // 'Content-Type': 'application/json'
-                        'Content-Type': 'text/plain'
-                    },
-                    // body: JSON.stringify( selected.id )
-                    body: selected.id
+                const response = await fetch('https://localhost:8080/music', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: selected.id
                   })
-                    .then(response => response.json())
-                    .then(data => {
-                      console.log(data);
-        
-                    })
-                    .catch(error => {
-                          console.error(error);
-                        // console.log('Error parsing JSON:', error, data);
-                    });
-
+                const data = await response.json()
+                setSearchResult([...data.songs[0].data])
             }
             
             return(
@@ -188,7 +176,7 @@ function Main(){
             <SearchContext.Provider value = {searchResult}>
             <MusicPlayer/>
                     <LoadContext.Provider value = {loading}>
-                        <Home/>
+                        <Home/> 
                         <AlbumCovers/> 
                     </LoadContext.Provider>
             </SearchContext.Provider>
