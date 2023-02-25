@@ -1,31 +1,42 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./Navbar";
 
 function AlbumCovers(){
     const search = useContext(SearchContext)
     const images = []
+    const [covers,setCovers] = useState([])
 
-    if(search){
-        image_extract()
-    }
+    function image_extract(search){
+        
+        const length = 25
+        try{
+           
+                for (let i = 0; i < length; i++ ){
+                    const artwork = search[i].attributes.artwork;
+                    const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
+                    images.push({image: img, id: search[i].id})
+                }
+                setCovers(images)
+        
 
-    function image_extract(){
-      
-        for (let i = 0; i < search.length; i++ ){
-            const artwork = search[i].attributes.artwork;
-            const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
-            images.push({image: img, id: search[i].id})
+        }catch(err){
+           //  console.log(err)
         }
+          
         
     }
 
     useEffect(() => {
+            if(search){
+                image_extract(search)
+            }
+            
     }, [search])
 
     return(
         <div className="grid-container">
             <div className= "album-cover-grid">
-            {images.map(item => (
+            {covers.map(item => (
                 <img src={item.image} key = {item.id} className = "album-cover" alt = {item.id}/>
             ))}
             </div>

@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useRef, createContext, useContext} from "react";
 import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
+import { ReactComponent as RecordIcon } from "../assets/images/record.svg"
 import { App, MusicKitContext } from "../App";
 import { AuthButton } from "./AuthButton";
 import { MusicPlayer } from "./MusicPlayer";
@@ -98,8 +99,6 @@ function Main(){
 
         function SearchButton (){
 
-          
-
             function shuffle(search){
                 let currentIndex = search.length,  randomIndex;
 
@@ -114,12 +113,9 @@ function Main(){
                     [search[currentIndex], search[randomIndex]] = [
                     search[randomIndex], search[currentIndex]];
                 }
-
                 return search;
             }
-
-    
-        
+  
             async function genreSearch(){
 
                 const response = await fetch('https://localhost:8080/music', {
@@ -146,8 +142,9 @@ function Main(){
         
         // we can make this better 
         return(        
-            <nav className= "navbar">
+            <nav className= "navbar" >
                 <ul className= "navbar-nav">
+                    {/* <RecordIcon/> */}
                     <GenreNavItem icon= {<MusicIcon/>} value= "genre">
                         <DropdownMenu>
                             <GenreDropdownItem name = "Pop" value = "pop" id = "14"/>
@@ -172,7 +169,7 @@ function Main(){
     }
 
     return(
-        <div>
+        <div data-testid = "navbar">
             <Navbar/>
             <SearchContext.Provider value = {searchResult}>
             <MusicPlayer/>
