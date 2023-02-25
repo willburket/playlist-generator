@@ -10,7 +10,6 @@ const axios = require("axios").create({
 
 async function fetchCharts(storefront, genre){
   
-  
     const response = await axios.get(`/v1/catalog/${storefront}/charts`, {
       params: {
         types: 'songs',

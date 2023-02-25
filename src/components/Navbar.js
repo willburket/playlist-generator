@@ -97,30 +97,29 @@ function Main(){
         }
 
         function SearchButton (){
-        
-            async function searchMusic(){    
-                setLoading(true)
-                try{
-                    // v3 search
-                    // const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
-                    // const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
-                    // setSearchResult([...search.data.results.songs.data])
-                    
-                    // v3 charts 
-                    const queryParameters = {types: ['songs'], l: 'en-us', limit: 100};
-                    const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
-                    setSearchResult([...search.data.results.songs[0].data])  // works for charts 
 
-                    
+          
+
+            function shuffle(search){
+                let currentIndex = search.length,  randomIndex;
+
+                // While there remain elements to shuffle.
+                while (currentIndex != 0) {
+
+                    // Pick a remaining element.
+                    randomIndex = Math.floor(Math.random() * currentIndex);
+                    currentIndex--;
+
+                    // And swap it with the current element.
+                    [search[currentIndex], search[randomIndex]] = [
+                    search[randomIndex], search[currentIndex]];
                 }
-                catch(err){
-                    console.log(err)        // add popup for when nothing is selected 
-                }
-                finally{
-                    setLoading(false)
-                }
+
+                return search;
             }
-            
+
+    
+        
             async function genreSearch(){
 
                 const response = await fetch('https://localhost:8080/music', {
@@ -131,7 +130,9 @@ function Main(){
                 body: selected.id
                   })
                 const data = await response.json()
-                setSearchResult([...data.songs[0].data])
+                const charts = [...data.songs[0].data]
+                shuffle(charts)
+                setSearchResult(charts)
             }
             
             return(
@@ -186,3 +187,26 @@ function Main(){
 }
 
 export { Main, SearchContext, LoadContext};
+
+// async function searchMusic(){    
+//     setLoading(true)
+//     try{
+//         // v3 search
+//         // const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
+//         // const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
+//         // setSearchResult([...search.data.results.songs.data])
+        
+//         // v3 charts 
+//         const queryParameters = {types: ['songs'], l: 'en-us', limit: 100};
+//         const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
+//         setSearchResult([...search.data.results.songs[0].data])  // works for charts 
+
+        
+//     }
+//     catch(err){
+//         console.log(err)        // add popup for when nothing is selected 
+//     }
+//     finally{
+//         setLoading(false)
+//     }
+// }
