@@ -10,15 +10,17 @@ function MusicPlayer(){
     const search = useContext(SearchContext)
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)       // maybe change this to what song is playing
+
     
+
 
     const makeQueue = async () => {
         try{
             const id_array = search.map(function(song){
                 return song.id;
-            })
-            await music.setQueue({songs: id_array, startPlaying: false}); 
-            
+            });
+            await music.setQueue({songs: id_array, startPlaying: false});    
+           
         }
         catch(err){
             console.log(err)
@@ -27,7 +29,6 @@ function MusicPlayer(){
 
     useEffect(() => {
         if(search && search.length !== 0){    
-    
             makeQueue()
             setPlaying(false)
         }     
@@ -75,13 +76,13 @@ function MusicPlayer(){
         const next = () => {     
             music.skipToNextItem().catch(error => {
                 console.log(error)
-            }) ;          
+            });          
         }
 
         return (           
-                <a href="#" className="player-button" onClick = {next}>
-                    <NextIcon/>
-                </a>           
+            <a href="#" className="player-button" onClick = {next}>
+                <NextIcon/>
+            </a>           
         )
     }
 
@@ -90,13 +91,13 @@ function MusicPlayer(){
         const back = () =>{
             music.skipToPreviousItem().catch(error => {
                 console.log(error)
-            })
+            });
         }
 
         return(           
-                <a href="#" className="player-button" onClick = {back}>
-                    <BackIcon/>
-                </a>
+            <a href="#" className="player-button" onClick = {back}>
+                <BackIcon/>
+            </a>
         )
     }
 
@@ -111,8 +112,6 @@ function MusicPlayer(){
                 <div className= "display-right">
                     <CurrentSong/>
                 </div>
-            
-
             </div>
             
         </div>
@@ -124,39 +123,36 @@ function CurrentSong(){
     const [song, setSong] = useState(null)
     const [display, setDisplay] = useState(null)
 
-    useEffect(() => {
-        if (music) {                                    // change to media item did change?
-          const subscription = music.addEventListener('playbackStateDidChange', () => {
-            if(music.isPlaying){
-                console.log(music.nowPlayingItem)
-                const currentSong = music.nowPlayingItem
-                const displayString = `${currentSong.attributes.artistName} - ${currentSong.attributes.name}`
-                setSong(currentSong)
-                setDisplay(displayString)
-            }
-            else{
-                setSong(null)
+        useEffect(() =>{
+            if(music){
+                const subscription = music.addEventListener('queuePositionDidChange', () =>{
+                  
+                    const currentSong = music.queue.currentItem;
+                    console.log(currentSong);
+                    const displayString = `${currentSong.attributes.artistName} - ${currentSong.attributes.name}`;
+                    setSong(currentSong);
+                    setDisplay(displayString);
+  
+                });
+    
+                return () =>{
+                    music.removeEventListener('queuePositionDidChange', subscription);
+                }
             }
             
-          });
-          return () => {
-            music.removeEventListener('playbackStateDidChange', subscription);
-          };
-        }
-      }, [music]);
-
-    return(     
+        }, [music]);
         
+   
+    return(             
         <div>
-                <div className="screen">
-                    <p className = "song">
-                        {song !== null ? display: ""}
-                    </p>
-                </div>      
-                <div className="progress">
-                    <apple-music-progress></apple-music-progress>
-                </div>
-            
+            <div className="screen">
+                <p className = "song">
+                    {song !== null ? display: ""}
+                </p>
+            </div>      
+            <div className="progress">
+                <apple-music-progress></apple-music-progress>
+            </div>
         </div>
     )
 }
