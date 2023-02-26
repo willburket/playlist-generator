@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./Navbar";
 import { MusicKitContext } from "../App";
-import { ReactComponent as PlayIcon} from "../assets/images/play.svg"
-import { ReactComponent as PauseIcon} from "../assets/images/pause.svg"
-import { ReactComponent as NextIcon} from "../assets/images/next.svg"
-import { ReactComponent as BackIcon} from "../assets/images/back.svg"
+import { ReactComponent as PlayIcon } from "../assets/images/play.svg"
+import { ReactComponent as PauseIcon } from "../assets/images/pause.svg"
+import { ReactComponent as NextIcon } from "../assets/images/next.svg"
+import { ReactComponent as BackIcon } from "../assets/images/back.svg"
 
 function MusicPlayer(){
     const search = useContext(SearchContext)
@@ -26,39 +26,56 @@ function MusicPlayer(){
     }
 
     useEffect(() => {
-        if(search.length !== 0){    
-            console.log(search)
+        if(search && search.length !== 0){    
+    
             makeQueue()
+            setPlaying(false)
         }     
     }, [search])
 
     useEffect(() => {
-        if(playerQueue !== null){
-        } 
-    }, [playerQueue])
+        if (music) {                                    // change to media item did change?
+          const subscription = music.addEventListener('playbackStateDidChange', () => {
+            if(music.isPlaying){
+                setPlaying(true)
+            }
+            else{
+                setPlaying(false)
+            }
+            
+          });
+          return () => {
+            music.removeEventListener('playbackStateDidChange', subscription);
+          };
+        }
+      }, [music]);
       
     function PlayButton(){ 
     
-        const play = async () => {     
-            try{
-                if(!playing){
-                    await music.play()      // should this be await?
-                    setPlaying(true)
+        const play = async () => {    
+            if(search && search.length !== 0){
+                try{
+                    if(!playing){
+                        await music.play()      // should this be await?
+                        // setPlaying(true)
+                    }
+                    else{
+                        await music.pause()
+                        // setPlaying(false)
+                    }
+                    setPlaying(!playing)
+                    
                 }
-                else{
-                    await music.pause()
-                    setPlaying(false)
+                catch(err){
+                    // console.log(err)
                 }
-            }
-            catch(err){
-                console.log(err)
-            }            
+            }               
         }
     
         return(           
-                    <a href="#" className="player-button" onClick = {play}>
-                        {playing ? <PauseIcon/> : <PlayIcon/>}
-                    </a>            
+            <a href="#" className="player-button" onClick = {play}>
+                {playing ? <PauseIcon/> : <PlayIcon/>}
+            </a>            
         )
     }
     
@@ -102,7 +119,7 @@ function MusicPlayer(){
     }
 
     return(
-        <div className="display-container">
+        <div className="display-container" data-testid = "player">
             <div className="display">
                 <div className="display-left">
                     <BackButton/>
@@ -126,7 +143,7 @@ function CurrentSong(){
     const [display, setDisplay] = useState(null)
 
     useEffect(() => {
-        if (music) {
+        if (music) {                                    // change to media item did change?
           const subscription = music.addEventListener('playbackStateDidChange', () => {
             if(music.isPlaying){
                 console.log(music.nowPlayingItem)

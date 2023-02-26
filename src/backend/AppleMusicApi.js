@@ -32,29 +32,3 @@ module.exports = {
 
 
 
-
-// async function fetchCharts(storefront, genre){
-//   let songs = null
-//   try {
-//     axios.get(`/v1/catalog/${storefront}/charts`, {
-//       params: {
-//         types: 'songs',
-//         limit: 2,       //change
-//         genre: genre,
-//       }
-      
-//     }).then(function(response){
-//       // const songs = response.data.results.songs[0]
-//       songs = response.data.results
-//       // console.log(songs[0])
-//       // console.log(genre)
-//       console.log(songs)
-//     });
-
-//   } catch (error) {
-//     console.error(error);
-//     return null
-//   }
-//   return songs
-  
-// }

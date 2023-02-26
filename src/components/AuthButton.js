@@ -1,10 +1,29 @@
-import React, { createContext, useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {MusicKitContext} from "../App"
 
 function AuthButton(){             
     const music = useContext(MusicKitContext);
     
-    const [isAuthorized, setIsAuthorized] = useState(false)    
+    const [isAuthorized, setIsAuthorized] = useState(false) 
+    
+    // useEffect(() => {
+    //     if (music) {                                  
+    //       const subscription = music.addEventListener('authorizationStatusDidChange', () => {
+    //         if(!isAuthorized){
+    //             setIsAuthorized(true)
+    //         }
+    //         else{
+    //             setIsAuthorized(false)
+    //         }
+            
+          
+            
+    //       });
+    //       return () => {
+    //         music.removeEventListener('authorizationStatusDidChange', subscription);
+    //       };
+    //     }
+    //   }, [music]);
         
     async function handleStatusChange(){
         try{
@@ -22,11 +41,11 @@ function AuthButton(){
     }
 
     return(
-    <div className='nav-item'>
-        <a href="#" className="icon-button" onClick = {handleStatusChange}>
-            {isAuthorized ? 'Log Out' : 'Log In'}
-        </a>
-    </div>
+        <div className='nav-item'>
+            <a href="#" className="icon-button" onClick = {handleStatusChange}>
+                {isAuthorized ? 'Log Out' : 'Log In'}
+            </a>
+        </div>
     );
 
 }

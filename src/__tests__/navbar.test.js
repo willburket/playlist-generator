@@ -9,5 +9,8 @@ afterEach(() =>{
 test('should render navbar component', () => {
     render(<Main/>)
     const nav = screen.getByTestId('navbar');
+    const drop = screen.getByTestId('drop');
     expect(nav).toBeInTheDocument()
+    expect(drop).toBeInTheDocument()
+
 });

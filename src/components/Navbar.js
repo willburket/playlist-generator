@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useRef, createContext, useContext} from "react";
+import React, {useEffect, useState, useRef, createContext } from "react";
 import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
-import { ReactComponent as RecordIcon } from "../assets/images/record.svg"
-import { App, MusicKitContext } from "../App";
+// import { ReactComponent as RecordIcon } from "../assets/images/record.svg"
+// import { MusicKitContext } from "../App";
 import { AuthButton } from "./AuthButton";
 import { MusicPlayer } from "./MusicPlayer";
 import AlbumCovers from "./AlbumCovers";
@@ -12,14 +12,9 @@ const LoadContext = createContext(null);
 
 function Main(){
     const [selected, setSelected] = useState(null)
-    const music = useContext(MusicKitContext);
+    // const music = useContext(MusicKitContext);
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
-
-        
-    useEffect(() => {
-        // console.log(searchResult)
-    }, [selected, searchResult])
 
     function Navbar(props){         // lets do some renaming on these components 
     
@@ -30,8 +25,8 @@ function Main(){
             }
         
             return(
-                <a href="#" className="menu-item" onClick = {() => itemClick()}>
-                    <div className="dropdown-button">
+                <a href="#" className = "menu-item" onClick = {itemClick}>
+                    <div className="dropdown-button" data-testid = "drop">
                         {props.name} 
                     </div>
                 </a>
@@ -103,7 +98,7 @@ function Main(){
                 let currentIndex = search.length,  randomIndex;
 
                 // While there remain elements to shuffle.
-                while (currentIndex != 0) {
+                while (currentIndex !== 0) {
 
                     // Pick a remaining element.
                     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -160,8 +155,7 @@ function Main(){
                         </DropdownMenu>   
                     </GenreNavItem>
                     <SearchButton/>
-                    <AuthButton/>
-                    
+                    <AuthButton/>                   
                 </ul>
             </nav>  
         );

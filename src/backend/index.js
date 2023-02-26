@@ -36,18 +36,7 @@ app.post("/music", async (req,res) => {
     const songs = await apple.fetchCharts(storefront, genre)
 
     res.setHeader('Content-Type', 'application/json');
-    console.log(songs)
     res.send(songs)
-    // res.send(JSON.stringify(songs))
-    
-  
-
-
-  // const responseData = {data: chart}
-  
-  // res.send(JSON.stringify(responseData));
-  // res.send(responseData)
-  // res.send(JSON.stringify(chart))
   
 })
 

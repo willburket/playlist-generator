@@ -8,9 +8,8 @@ function AlbumCovers(){
 
     function image_extract(search){
         
-        const length = 25
+        const length = 20
         try{
-           
                 for (let i = 0; i < length; i++ ){
                     const artwork = search[i].attributes.artwork;
                     const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
