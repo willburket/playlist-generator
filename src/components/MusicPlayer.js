@@ -10,15 +10,15 @@ function MusicPlayer(){
     const search = useContext(SearchContext)
     const music = useContext(MusicKitContext)
     const [playing, setPlaying] = useState(false)       // maybe change this to what song is playing
-    const [playerQueue, setPlayerQueue] = useState(null)
+    
 
     const makeQueue = async () => {
         try{
             const id_array = search.map(function(song){
                 return song.id;
             })
-            const init_queue = await music.setQueue({songs: id_array, startPlaying: false}); 
-            setPlayerQueue(init_queue)
+            await music.setQueue({songs: id_array, startPlaying: false}); 
+            
         }
         catch(err){
             console.log(err)
@@ -34,7 +34,7 @@ function MusicPlayer(){
     }, [search])
 
     useEffect(() => {
-        if (music) {                                    // change to media item did change?
+        if (music) {                                   
           const subscription = music.addEventListener('playbackStateDidChange', () => {
             if(music.isPlaying){
                 setPlaying(true)
@@ -52,23 +52,14 @@ function MusicPlayer(){
       
     function PlayButton(){ 
     
-        const play = async () => {    
+        const play = () => {    
             if(search && search.length !== 0){
-                try{
-                    if(!playing){
-                        await music.play()      // should this be await?
-                        // setPlaying(true)
-                    }
-                    else{
-                        await music.pause()
-                        // setPlaying(false)
-                    }
-                    setPlaying(!playing)
-                    
+                if(!playing){
+                    music.play().catch(error => {console.log(error)})      
                 }
-                catch(err){
-                    // console.log(err)
-                }
+                else{
+                    music.pause().catch(error => {console.log(error)})    
+                }                                            
             }               
         }
     
@@ -81,15 +72,10 @@ function MusicPlayer(){
     
     function NextButton(){
     
-        const next = async () => {
-            try{
-                await music.skipToNextItem()   // await causing error
-
-            }
-            catch(err){
-                console.log(err)
-            }
-                     
+        const next = () => {     
+            music.skipToNextItem().catch(error => {
+                console.log(error)
+            }) ;          
         }
 
         return (           
@@ -101,14 +87,10 @@ function MusicPlayer(){
 
     function BackButton(){
 
-        const back = async () =>{
-            try{
-                await music.skipToPreviousItem()
-            }
-            catch(err){
-                console.log(err)
-            }
-            
+        const back = () =>{
+            music.skipToPreviousItem().catch(error => {
+                console.log(error)
+            })
         }
 
         return(           

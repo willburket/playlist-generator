@@ -113,10 +113,11 @@ function Main(){
   
             async function genreSearch(){
 
-                const response = await fetch('https://localhost:8080/music', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'text/plain'
+                if(selected){
+                    const response = await fetch('https://localhost:8080/music', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain'
                 },
                 body: selected.id
                   })
@@ -124,6 +125,9 @@ function Main(){
                 const charts = [...data.songs[0].data]
                 shuffle(charts)
                 setSearchResult(charts)
+                }
+
+                
             }
             
             return(
