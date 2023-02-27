@@ -4,6 +4,7 @@ import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
 // import { MusicKitContext } from "../App";
 import { AuthButton } from "./AuthButton";
 import { MusicPlayer } from "./MusicPlayer";
+import PopUp from "./PopUp";
 import AlbumCovers from "./AlbumCovers";
 import Home from "./Home";
 
@@ -172,6 +173,7 @@ function Main(){
             <MusicPlayer/>
                     <LoadContext.Provider value = {loading}>
                         <Home/> 
+                        <PopUp/>
                         <AlbumCovers/> 
                     </LoadContext.Provider>
             </SearchContext.Provider>

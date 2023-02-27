@@ -54,3 +54,23 @@ class App extends React.Component{
 
 export {App, MusicKitContext};
 
+// handleEvent = async () => {
+//   try{
+//     const response = await fetch('/jwt');
+//     const data = await response.json() 
+//     this.setState({data})  
+//     await window.MusicKit.configure({
+//       developerToken: data.token,
+//       app: {
+//         name: 'PlaylistGenerator',
+//         build: '1',
+//       },
+//     });
+//     const music = window.MusicKit.getInstance()
+//     this.setState({music:music})
+//     console.log("configuration success")
+//   }
+//   catch(err){
+//     console.log(err)
+//   }
+// }

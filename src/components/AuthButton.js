@@ -3,35 +3,22 @@ import {MusicKitContext} from "../App"
 
 function AuthButton(){             
     const music = useContext(MusicKitContext);
-    
-    
     const [isAuthorized, setIsAuthorized] = useState(false); 
     
-    // useEffect(() => {
-    //     if (music) {                                  
-    //       const subscription = music.addEventListener('authorizationStatusDidChange', () => {
-    //         console.log("auth changed")
-            
-            
-    //       });
-    //       return () => {
-    //         music.removeEventListener('authorizationStatusDidChange', subscription);
-    //       };
-    //     }
-    //   }, [music]);
     useEffect(() => {
-
-    }, [music])
+        if(music){
+            setIsAuthorized(music.isAuthorized);
+        }
+        
+    }, [music]);
         
     async function handleStatusChange(){
         try{
-            if (music.isAuthorized === false){               
+            if (isAuthorized === false){               
                 await music.authorize();
-                // setIsAuthorized(true)
             }
             else{
                 await music.unauthorize();
-                // setIsAuthorized(false)
             }
             setIsAuthorized(!isAuthorized);
             
