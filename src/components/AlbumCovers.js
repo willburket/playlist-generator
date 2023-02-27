@@ -2,36 +2,33 @@ import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "./Navbar";
 
 function AlbumCovers(){
-    const search = useContext(SearchContext)
-    const images = []
-    const [covers,setCovers] = useState([])
+    const search = useContext(SearchContext);
+    const images = [];
+    const [covers,setCovers] = useState([]);
 
     function image_extract(search){
         
-        const length = 20
-        try{
-                for (let i = 0; i < length; i++ ){
-                    const artwork = search[i].attributes.artwork;
-                    const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
-                    images.push({image: img, id: search[i].id})
-                }
-                setCovers(images)
-        
+        const length = 20;
 
-        }catch(err){
-           //  console.log(err)
-        }
-          
-        
+        if (search && search.length !== 0){
+            for (let i = 0; i < length; i++ ){
+                const artwork = search[i].attributes.artwork;
+                const img = window.MusicKit.formatArtworkURL(artwork, 200, 200);
+                images.push({image: img, id: search[i].id});
+            }
+            setCovers(images);
+        }                
     }
 
     useEffect(() => {
             if(search){
-                image_extract(search)
+                image_extract(search);
             }
             
-    }, [search])
+    }, [search]);
 
+
+    // grid and grid container shouldn't be on the screen until search
     return(
         <div className="grid-container">
             <div className= "album-cover-grid">
@@ -41,7 +38,7 @@ function AlbumCovers(){
             </div>
         </div>
         
-    )
+    );
 }
 
 export default AlbumCovers;

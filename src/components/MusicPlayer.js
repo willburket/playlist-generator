@@ -7,12 +7,9 @@ import { ReactComponent as NextIcon } from "../assets/images/next.svg"
 import { ReactComponent as BackIcon } from "../assets/images/back.svg"
 
 function MusicPlayer(){
-    const search = useContext(SearchContext)
-    const music = useContext(MusicKitContext)
-    const [playing, setPlaying] = useState(false)       // maybe change this to what song is playing
-
-    
-
+    const search = useContext(SearchContext);
+    const music = useContext(MusicKitContext);
+    const [playing, setPlaying] = useState(false);       
 
     const makeQueue = async () => {
         try{
@@ -23,25 +20,25 @@ function MusicPlayer(){
            
         }
         catch(err){
-            console.log(err)
+            console.log(err);
         }   
     }
 
     useEffect(() => {
         if(search && search.length !== 0){    
-            makeQueue()
-            setPlaying(false)
+            makeQueue();
+            setPlaying(false);
         }     
-    }, [search])
+    }, [search]);
 
     useEffect(() => {
         if (music) {                                   
           const subscription = music.addEventListener('playbackStateDidChange', () => {
             if(music.isPlaying){
-                setPlaying(true)
+                setPlaying(true);
             }
             else{
-                setPlaying(false)
+                setPlaying(false);
             }
             
           });
@@ -56,10 +53,10 @@ function MusicPlayer(){
         const play = () => {    
             if(search && search.length !== 0){
                 if(!playing){
-                    music.play().catch(error => {console.log(error)})      
+                    music.play().catch(error => {console.log(error)});      
                 }
                 else{
-                    music.pause().catch(error => {console.log(error)})    
+                    music.pause().catch(error => {console.log(error)});    
                 }                                            
             }               
         }
@@ -68,7 +65,7 @@ function MusicPlayer(){
             <a href="#" className="player-button" onClick = {play}>
                 {playing ? <PauseIcon/> : <PlayIcon/>}
             </a>            
-        )
+        );
     }
     
     function NextButton(){
@@ -83,7 +80,7 @@ function MusicPlayer(){
             <a href="#" className="player-button" onClick = {next}>
                 <NextIcon/>
             </a>           
-        )
+        );
     }
 
     function BackButton(){
@@ -98,7 +95,7 @@ function MusicPlayer(){
             <a href="#" className="player-button" onClick = {back}>
                 <BackIcon/>
             </a>
-        )
+        );
     }
 
     return(
@@ -115,34 +112,30 @@ function MusicPlayer(){
             </div>
             
         </div>
-    )
+    );
 }
 
 function CurrentSong(){
-    const music = useContext(MusicKitContext)
-    const [song, setSong] = useState(null)
-    const [display, setDisplay] = useState(null)
+    const music = useContext(MusicKitContext);
+    const [song, setSong] = useState(null);
+    const [display, setDisplay] = useState(null);
 
         useEffect(() =>{
             if(music){
                 const subscription = music.addEventListener('queuePositionDidChange', () =>{
-                  
                     const currentSong = music.queue.currentItem;
                     console.log(currentSong);
                     const displayString = `${currentSong.attributes.artistName} - ${currentSong.attributes.name}`;
                     setSong(currentSong);
                     setDisplay(displayString);
-  
                 });
     
                 return () =>{
                     music.removeEventListener('queuePositionDidChange', subscription);
                 }
             }
-            
         }, [music]);
         
-   
     return(             
         <div>
             <div className="screen">
@@ -154,7 +147,7 @@ function CurrentSong(){
                 <apple-music-progress></apple-music-progress>
             </div>
         </div>
-    )
+    );
 }
 
 export {MusicPlayer};

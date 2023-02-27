@@ -21,7 +21,7 @@ function Main(){
         function GenreDropdownItem(props){
     
             function itemClick (){
-                setSelected(props)
+                setSelected(props);
             }
         
             return(
@@ -51,14 +51,13 @@ function Main(){
             function clickChange(){
                 
                 if (open && active != null){
-                    setActive(null)
-                    setOpen(!open)
+                    setActive(null);
+                    setOpen(!open);
                     
                 }
                 else{
-                    
-                    setActive(props.value)
-                    setOpen(!open)
+                    setActive(props.value);
+                    setOpen(!open);
                 }       
         
             };
@@ -66,7 +65,7 @@ function Main(){
             useEffect(()=> {
                 const pageClickEvent = (e) =>{ 
                     if(dropdownRef.current !== null && !dropdownRef.current.contains(e.target)){
-                        setOpen(false)
+                        setOpen(false);
                     }
                 };
         
@@ -121,10 +120,10 @@ function Main(){
                 },
                 body: selected.id
                   })
-                const data = await response.json()
-                const charts = [...data.songs[0].data]
-                shuffle(charts)
-                setSearchResult(charts)
+                const data = await response.json();
+                const charts = [...data.songs[0].data];
+                shuffle(charts);
+                setSearchResult(charts);
                 }
 
                 
@@ -183,25 +182,3 @@ function Main(){
 
 export { Main, SearchContext, LoadContext};
 
-// async function searchMusic(){    
-//     setLoading(true)
-//     try{
-//         // v3 search
-//         // const queryParameters = { term: selected.value, types: ['songs'], l: 'en-us', limit: 25};
-//         // const search = await music.api.music('/v1/catalog/{{storefrontId}}/search', queryParameters);
-//         // setSearchResult([...search.data.results.songs.data])
-        
-//         // v3 charts 
-//         const queryParameters = {types: ['songs'], l: 'en-us', limit: 100};
-//         const search = await music.api.music(`/v1/catalog/{{storefrontId}}/charts`, queryParameters);   // works 
-//         setSearchResult([...search.data.results.songs[0].data])  // works for charts 
-
-        
-//     }
-//     catch(err){
-//         console.log(err)        // add popup for when nothing is selected 
-//     }
-//     finally{
-//         setLoading(false)
-//     }
-// }
