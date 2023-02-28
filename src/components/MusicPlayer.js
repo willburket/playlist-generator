@@ -70,10 +70,13 @@ function MusicPlayer(){
     
     function NextButton(){
     
-        const next = () => {     
-            music.skipToNextItem().catch(error => {
-                console.log(error)
-            });          
+        const next = () => {
+            if(search && search.length !== 0){
+                music.skipToNextItem().catch(error => {
+                    console.log(error)
+                });    
+            }     
+                  
         }
 
         return (           
@@ -85,10 +88,13 @@ function MusicPlayer(){
 
     function BackButton(){
 
+
         const back = () =>{
-            music.skipToPreviousItem().catch(error => {
-                console.log(error)
-            });
+            if(search && search.length !== 0){
+                music.skipToPreviousItem().catch(error => {
+                    console.log(error)
+                });
+            }
         }
 
         return(           

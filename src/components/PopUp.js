@@ -4,14 +4,15 @@ import { MusicKitContext } from "../App";
 
 function PopUp(){
     const music = useContext(MusicKitContext); 
-    const [showPopup, setShowPopup] = useState(false)
+    const [showPopup, setShowPopup] = useState(false);
+    const [poppedUp, setPoppedUp] = useState(false);
 
     const handleCloseDiv = () => {
         setShowPopup(false)
     }
 
     useEffect(() =>{
-        if(music){
+        if(music && poppedUp !== true){
             const queue_sub = music.addEventListener('queuePositionDidChange', () =>{
                 if(music.isAuthorized){
                     console.log("apple music authorized");
@@ -20,8 +21,10 @@ function PopUp(){
                 else{
                     console.log("apple music not authorized");
                     setShowPopup(true);
+                    setPoppedUp(true);
                 }
             });
+
             const auth_sub = music.addEventListener('authorizationStatusDidChange', () =>{
                 if(music.isAuthorized){             //combine?
                     setShowPopup(false)
@@ -41,7 +44,7 @@ function PopUp(){
 
         return(
             <div>
-                <a href = "#" className="icon-button" onClick={handleCloseDiv}>
+                <a href = "#" className="icon-button"  id = "popup-button" onClick={handleCloseDiv}>
                     {props.text}
                 </a>
             </div>
@@ -53,7 +56,7 @@ function PopUp(){
             <div className="popup-container">
                 {showPopup && 
                 <div className="popup">
-                    <p>Not Signed In</p>
+                    <p>Log into Apple Music to listen to the full song</p>
                     <PopUpButton text = "Ok"/>
                 </div>}
             </div>
