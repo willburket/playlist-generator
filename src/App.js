@@ -11,9 +11,7 @@ class App extends React.Component{
   }
 
   componentDidMount(){  
-    window.addEventListener('musickitloaded', this.handleEvent);  
-    
-    // console.log("mounted")    
+    window.addEventListener('musickitloaded', this.handleEvent);   
   }
 
   componentWillUnmount(){
@@ -21,26 +19,26 @@ class App extends React.Component{
   }
 
   handleEvent = async () => {
-        try{
-          const response = await fetch('/jwt');
-          const data = await response.json() 
-          this.setState({data})  
-          await window.MusicKit.configure({
-            developerToken: data.token,
-            app: {
-              name: 'PlaylistGenerator',
-              build: '1',
-            },
-          });
-          const music = window.MusicKit.getInstance()
-          this.setState({music:music})
-          console.log("configuration success")
-        }
-        catch(err){
-          console.log(err)
-        }
-      }
-  
+    try{
+      const response = await fetch('/jwt');
+      const data = await response.json() 
+      this.setState({data})  
+      await window.MusicKit.configure({
+        developerToken: data.token,
+        app: {
+          name: 'PlaylistGenerator',
+          build: '1',
+        },
+      });
+      const music = window.MusicKit.getInstance()
+      this.setState({music:music})
+      console.log("configuration success")
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
   render(){
     return(
       <div>
@@ -54,21 +52,30 @@ class App extends React.Component{
 
 export {App, MusicKitContext};
 
+
+
 // handleEvent = async () => {
+//   const dev_token = localStorage.getItem('token');
 //   try{
+//   if(!dev_token){
 //     const response = await fetch('/jwt');
 //     const data = await response.json() 
-//     this.setState({data})  
-//     await window.MusicKit.configure({
-//       developerToken: data.token,
-//       app: {
-//         name: 'PlaylistGenerator',
-//         build: '1',
-//       },
-//     });
-//     const music = window.MusicKit.getInstance()
-//     this.setState({music:music})
-//     console.log("configuration success")
+//     localStorage.setItem('token', data.token);
+//     this.setState({data:data}) 
+//   }
+//   else{
+//     this.setState({data:dev_token})
+//   }
+//   await window.MusicKit.configure({
+//     developerToken: this.state.token,
+//     app: {
+//       name: 'PlaylistGenerator',
+//       build: '1',
+//     },
+//   });
+//   const music = window.MusicKit.getInstance()
+//   this.setState({music:music})
+//   console.log("configuration success");   
 //   }
 //   catch(err){
 //     console.log(err)

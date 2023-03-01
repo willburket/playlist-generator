@@ -6,7 +6,7 @@ import { ReactComponent as Account} from '../assets/images/account.svg'
 function PopUp(){
     const music = useContext(MusicKitContext); 
     const [showPopup, setShowPopup] = useState(false);
-    const [poppedUp, setPoppedUp] = useState(false);
+    
     
 
     const handleCloseDiv = () => {
@@ -14,20 +14,30 @@ function PopUp(){
     }
 
     useEffect(() =>{
-        if(music && poppedUp !== true){
-            const queue_sub = music.addEventListener('queuePositionDidChange', () =>{
-                if(music.isAuthorized){
-                    console.log("apple music authorized");
-                    setShowPopup(false);
-                }
-                else{
-                    console.log("apple music not authorized");
-                    setShowPopup(true);
-                    setPoppedUp(true);
-                }
-            });
+        if(music){
+            const isPopupDisplayed = localStorage.getItem('isPopupDisplayed');
+            
+                const queue_sub = music.addEventListener('queuePositionDidChange', () =>{
+                    if(isPopupDisplayed !== true){
+                        if(music.isAuthorized){
+                            console.log("apple music authorized");
+                            setShowPopup(false);
+                        }
+                        // else if(){
 
-            const auth_sub = music.addEventListener('authorizationStatusDidChange', () =>{
+                        // }
+                        else{
+                            console.log("apple music not authorized");
+                            setShowPopup(true);
+                            localStorage.setItem('isPopupDisplayed', true)
+                        }
+                   }
+                   else{
+                        setShowPopup(false)
+                      }
+                });
+
+                const auth_sub = music.addEventListener('authorizationStatusDidChange', () =>{
                 if(music.isAuthorized){             //combine?
                     setShowPopup(false)
                 }

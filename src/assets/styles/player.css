@@ -7,8 +7,8 @@
 }
 
 .display{
-  max-width: 480px;
-  min-width: 320px;
+  /* max-width: 480px;
+  min-width: 320px; */
   height: 4.5em;
   font-size: .75em;
   border-radius: 1em;
@@ -19,6 +19,31 @@
   display: flex;
   overflow: hidden;
   background-color: #8f939a;
+}
+
+@media (max-width: 369px) {
+
+  .display-container{
+    height: calc(var(--nav-size)*2);
+  }
+  .display{
+    max-width: 240px;
+    min-width: none;
+    padding: auto;
+    height: 90px;
+    flex-direction: column-reverse;
+  }
+  .display-left{
+    height: 40%;
+    left: 50%;
+    transform: translate(-30%, 0%);
+  }
+  .display-right{
+    height: 60%;
+  }
+  .progress{
+    bottom: 2em;
+  }
 }
 
 .display-left{
@@ -45,7 +70,7 @@
 .player-button{
   --button-size: calc(var(--nav-size) * 0.5);
   width: fit-content;
-  float: left;
+  /* float: left; */
   margin-right: 5px;
   white-space: nowrap;
   height: var(--button-size);
@@ -97,7 +122,7 @@
 .progress{
   position: sticky;
   height: 1em;
-  width: 100%;
+  width: 100;
   bottom: 0em;
   align-items: center;
   justify-content: center;
