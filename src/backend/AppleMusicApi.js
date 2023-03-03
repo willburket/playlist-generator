@@ -1,4 +1,4 @@
-const token = require("./TokenConfig")
+const token = require("./TokenConfig");
 
 
 const axios = require("axios").create({
@@ -16,8 +16,8 @@ async function fetchCharts(storefront, genre){
         limit: 200,      
         genre: genre,
       }
-    })
-    const songs = response.data.results 
+    });
+    const songs = response.data.results; 
 
   return songs
   

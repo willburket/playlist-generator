@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useRef, createContext } from "react";
 import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
 // import { ReactComponent as RecordIcon } from "../assets/images/record.svg"
-// import { MusicKitContext } from "../App";
 import { AuthButton } from "./AuthButton";
 import { MusicPlayer } from "./MusicPlayer";
 import PopUp from "./PopUp";
@@ -27,7 +26,7 @@ function Main(){
         
             return(
                 <a href="#" className = "menu-item" onClick = {itemClick}>
-                    <div className="dropdown-button" data-testid = "drop">
+                    <div className="dropdown-button">
                         {props.name} 
                     </div>
                 </a>
@@ -142,7 +141,7 @@ function Main(){
         // we can make this better 
         return(        
             <nav className= "navbar" >
-                <ul className= "navbar-nav">
+                <ul className= "navbar-nav" data-testid = "drop">
                     {/* <RecordIcon/> */}
                     <GenreNavItem icon= {<MusicIcon/>} value= "genre">
                         <DropdownMenu>

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { LoadContext, SearchContext } from "./Navbar";
 import {ReactComponent as MusicIcon} from "../assets/images/music.svg"
 
@@ -11,8 +11,8 @@ function Home(){
         <div className="prompt-cointainer">
 
         <div className="prompt">            
-                <p>Pick a Genre</p>
-                <MusicIcon/>    
+            <p>Pick a Genre</p>
+            <MusicIcon/>    
         </div>
         </div>
         )

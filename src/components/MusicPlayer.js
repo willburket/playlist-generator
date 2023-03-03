@@ -24,6 +24,33 @@ function MusicPlayer(){
         }   
     }
 
+    const play = () => {    
+        if(search && search.length !== 0){
+            if(!playing){
+                music.play().catch(error => {console.log(error)});      
+            }
+            else{
+                music.pause().catch(error => {console.log(error)});    
+            }                                            
+        }               
+    }
+
+    const next = () => {
+        if(search && search.length !== 0){
+            music.skipToNextItem().catch(error => {
+                console.log(error)
+            });    
+        }            
+    }
+
+    const back = () =>{
+        if(search && search.length !== 0){
+            music.skipToPreviousItem().catch(error => {
+                console.log(error)
+            });
+        }
+    }
+
     useEffect(() => {
         if(search && search.length !== 0){    
             makeQueue();
@@ -47,73 +74,17 @@ function MusicPlayer(){
           };
         }
       }, [music]);
-      
-    function PlayButton(){ 
-    
-        const play = () => {    
-            if(search && search.length !== 0){
-                if(!playing){
-                    music.play().catch(error => {console.log(error)});      
-                }
-                else{
-                    music.pause().catch(error => {console.log(error)});    
-                }                                            
-            }               
-        }
-    
-        return(           
-            <a href="#" className="player-button" onClick = {play}>
-                {playing ? <PauseIcon/> : <PlayIcon/>}
-            </a>            
-        );
-    }
-    
-    function NextButton(){
-    
-        const next = () => {
-            if(search && search.length !== 0){
-                music.skipToNextItem().catch(error => {
-                    console.log(error)
-                });    
-            }     
-                  
-        }
-
-        return (           
-            <a href="#" className="player-button" onClick = {next}>
-                <NextIcon/>
-            </a>           
-        );
-    }
-
-    function BackButton(){
-
-
-        const back = () =>{
-            if(search && search.length !== 0){
-                music.skipToPreviousItem().catch(error => {
-                    console.log(error)
-                });
-            }
-        }
-
-        return(           
-            <a href="#" className="player-button" onClick = {back}>
-                <BackIcon/>
-            </a>
-        );
-    }
 
     return(
         <div className="display-container" data-testid = "player">
             <div className="display">
                 <div className="display-left">
-                    <BackButton/>
-                    <PlayButton/>
-                    <NextButton/>
+                    <DisplayButton onClick = {back} icon = {<BackIcon/>}/>
+                    <PlayButton onClick = {play} status = {playing}/>
+                    <DisplayButton onClick = {next} icon = {<NextIcon/>}/>
                 </div>
                 <div className= "display-right">
-                    <CurrentSong/>
+                    <CurrentSong music = {music}/>
                 </div>
             </div>
             
@@ -121,8 +92,8 @@ function MusicPlayer(){
     );
 }
 
-function CurrentSong(){
-    const music = useContext(MusicKitContext);
+function CurrentSong(props){
+    const music = props.music
     const [song, setSong] = useState(null);
     const [display, setDisplay] = useState(null);
 
@@ -156,4 +127,27 @@ function CurrentSong(){
     );
 }
 
-export {MusicPlayer};
+function PlayButton(props){ 
+
+    const playing = props.status;
+    const onClick = props.onClick;
+
+    return(           
+        <a href="#" className="player-button" onClick = {onClick}>
+            {playing ? <PauseIcon/> : <PlayIcon/>}
+        </a>            
+    );
+}
+
+function DisplayButton(props){
+    
+    return (           
+        <a href="#" className="player-button" onClick = {props.onClick}>
+            {props.icon}
+        </a>           
+    );
+}
+
+
+
+export { MusicPlayer, PlayButton, DisplayButton };
