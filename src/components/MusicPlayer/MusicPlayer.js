@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../Navbar/Navbar";
+import { SearchContext } from "../Navbar/Nav";
 import { MusicKitContext } from "../../App";
-import { ReactComponent as PlayIcon } from "../../assets/images/play.svg"
-import { ReactComponent as PauseIcon } from "../../assets/images/pause.svg"
 import { ReactComponent as NextIcon } from "../../assets/images/next.svg"
 import { ReactComponent as BackIcon } from "../../assets/images/back.svg"
+import { PlayButton, DisplayButton } from "./PlayerButtons";
+import CurrentSong from "./CurrentSong";
 
 function MusicPlayer(){
     const search = useContext(SearchContext);
@@ -92,62 +92,10 @@ function MusicPlayer(){
     );
 }
 
-function CurrentSong(props){
-    const music = props.music
-    const [song, setSong] = useState(null);
-    const [display, setDisplay] = useState(null);
-
-        useEffect(() =>{
-            if(music){
-                const subscription = music.addEventListener('queuePositionDidChange', () =>{
-                    const currentSong = music.queue.currentItem;
-                    console.log(currentSong);
-                    const displayString = `${currentSong.attributes.artistName} - ${currentSong.attributes.name}`;
-                    setSong(currentSong);
-                    setDisplay(displayString);
-                });
-    
-                return () =>{
-                    music.removeEventListener('queuePositionDidChange', subscription);
-                }
-            }
-        }, [music]);
-        
-    return(             
-        <div>
-            <div className="screen">
-                <p className = "song">
-                    {song !== null ? display: ""}
-                </p>
-            </div>      
-            <div className="progress">
-                <apple-music-progress></apple-music-progress>
-            </div>
-        </div>
-    );
-}
-
-function PlayButton(props){ 
-
-    const playing = props.status;
-    const onClick = props.onClick;
-
-    return(           
-        <a href="#" className="player-button" onClick = {onClick}>
-            {playing ? <PauseIcon/> : <PlayIcon/>}
-        </a>            
-    );
-}
-
-function DisplayButton(props){
-    
-    return (           
-        <a href="#" className="player-button" onClick = {props.onClick}>
-            {props.icon}
-        </a>           
-    );
-}
 
 
 
-export { MusicPlayer, PlayButton, DisplayButton };
+
+
+
+export default MusicPlayer ;

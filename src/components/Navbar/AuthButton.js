@@ -38,4 +38,4 @@ function AuthButton(){
 
 }
 
-export { AuthButton };
+export default AuthButton;

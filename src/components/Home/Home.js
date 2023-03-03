@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { LoadContext, SearchContext } from "../Navbar/Navbar";
+import { LoadContext, SearchContext } from "../Navbar/Nav";
 import {ReactComponent as MusicIcon} from "../../assets/images/music.svg"
 
 function Home(){
