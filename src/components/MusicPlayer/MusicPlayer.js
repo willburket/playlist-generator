@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../Navbar/Nav";
+import { SearchContext } from "../Navbar/Navbar";
 import { MusicKitContext } from "../../App";
 import { ReactComponent as NextIcon } from "../../assets/images/next.svg"
 import { ReactComponent as BackIcon } from "../../assets/images/back.svg"
@@ -91,11 +91,5 @@ function MusicPlayer(){
         </div>
     );
 }
-
-
-
-
-
-
 
 export default MusicPlayer ;

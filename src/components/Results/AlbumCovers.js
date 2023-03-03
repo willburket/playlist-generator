@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../Navbar/Nav";
+import { SearchContext } from "../Navbar/Navbar";
 
 function AlbumCovers(){
     const search = useContext(SearchContext);

@@ -1,5 +1,5 @@
 import React, {createContext} from "react";
-import {Main} from "./components/Navbar/Nav";
+import {Main} from "./components/Navbar/Navbar";
 
 const MusicKitContext = createContext(null); 
 
@@ -19,7 +19,7 @@ class App extends React.Component{
   }
 
   handleEvent = async () => {
-    try{
+    try{                                    // wait for script tag in html to load
       const response = await fetch('/jwt');
       const data = await response.json() 
       this.setState({data})  

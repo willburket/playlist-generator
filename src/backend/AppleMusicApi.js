@@ -19,9 +19,9 @@ async function fetchCharts(storefront, genre){
     });
     const songs = response.data.results; 
 
-  return songs
+  return songs;
   
-}
+};
   
 
 
