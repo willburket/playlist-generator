@@ -18,14 +18,11 @@ function PopUp(){
             const isPopupDisplayed = localStorage.getItem('isPopupDisplayed');
             
                 const queue_sub = music.addEventListener('queuePositionDidChange', () =>{
-                    if(isPopupDisplayed !== true){
+                    if(!isPopupDisplayed){
                         if(music.isAuthorized){
                             console.log("apple music authorized");
                             setShowPopup(false);
                         }
-                        // else if(){
-
-                        // }
                         else{
                             console.log("apple music not authorized");
                             setShowPopup(true);

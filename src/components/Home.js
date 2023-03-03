@@ -8,9 +8,12 @@ function Home(){
 
     if(!load && search.length === 0){
         return (
+        <div className="prompt-cointainer">
+
         <div className="prompt">            
                 <p>Pick a Genre</p>
                 <MusicIcon/>    
+        </div>
         </div>
         )
     } 

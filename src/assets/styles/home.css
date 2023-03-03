@@ -1,0 +1,14 @@
+.prompt{
+    position: absolute;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+  }
+  
+  .prompt-container{
+    height: calc(100vh - 2*(--nav-size));
+    width: 100%;
+  }

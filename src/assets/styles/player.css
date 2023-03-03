@@ -32,6 +32,8 @@
     padding: auto;
     height: 90px;
     flex-direction: column-reverse;
+    padding-left: 0;
+    padding-right: 0;
   }
   .display-left{
     height: 40%;
