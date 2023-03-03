@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { SearchContext } from "./Navbar";
+import { SearchContext } from "../Navbar/Navbar";
 
 function AppleCovers(){
     const search = useContext(SearchContext)

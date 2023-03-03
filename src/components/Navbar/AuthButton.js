@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import {MusicKitContext} from "../App"
+import {MusicKitContext} from "../../App"
 
 function AuthButton(){             
     const music = useContext(MusicKitContext);

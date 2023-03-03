@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { MusicKitContext } from "../App";
-import { ReactComponent as Account} from '../assets/images/account.svg'
+import { MusicKitContext } from "../../App";
+import { ReactComponent as Account} from '../../assets/images/account.svg'
 
 
 function PopUp(){

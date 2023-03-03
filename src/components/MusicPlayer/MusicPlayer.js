@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "./Navbar";
-import { MusicKitContext } from "../App";
-import { ReactComponent as PlayIcon } from "../assets/images/play.svg"
-import { ReactComponent as PauseIcon } from "../assets/images/pause.svg"
-import { ReactComponent as NextIcon } from "../assets/images/next.svg"
-import { ReactComponent as BackIcon } from "../assets/images/back.svg"
+import { SearchContext } from "../Navbar/Navbar";
+import { MusicKitContext } from "../../App";
+import { ReactComponent as PlayIcon } from "../../assets/images/play.svg"
+import { ReactComponent as PauseIcon } from "../../assets/images/pause.svg"
+import { ReactComponent as NextIcon } from "../../assets/images/next.svg"
+import { ReactComponent as BackIcon } from "../../assets/images/back.svg"
 
 function MusicPlayer(){
     const search = useContext(SearchContext);

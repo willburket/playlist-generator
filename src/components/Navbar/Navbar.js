@@ -1,11 +1,11 @@
 import React, {useEffect, useState, useRef, createContext } from "react";
-import { ReactComponent as MusicIcon } from "../assets/images/music.svg"
+import { ReactComponent as MusicIcon } from "../../assets/images/music.svg"
 // import { ReactComponent as RecordIcon } from "../assets/images/record.svg"
 import { AuthButton } from "./AuthButton";
-import { MusicPlayer } from "./MusicPlayer";
-import PopUp from "./PopUp";
-import AlbumCovers from "./AlbumCovers";
-import Home from "./Home";
+import { MusicPlayer } from "../MusicPlayer/MusicPlayer";
+import PopUp from "../Error/PopUp";
+import AlbumCovers from "../Results/AlbumCovers";
+import Home from "../Home/Home";
 
 const SearchContext = createContext(null);  
 const LoadContext = createContext(null);

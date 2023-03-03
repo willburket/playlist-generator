@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, cleanup,fireEvent, queryByTestId, getByTestId } from '@testing-library/react'
-import { MusicPlayer, PlayButton, DisplayButton} from '../components/MusicPlayer';
+import { MusicPlayer, PlayButton, DisplayButton} from '../components/MusicPlayer/MusicPlayer';
 
 afterEach(() =>{
     cleanup();

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { SearchContext } from "./Main";
+import { SearchContext } from "./Main";         //fix this 
 
 function SearchItems(){
     const search = useContext(SearchContext)

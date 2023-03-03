@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { LoadContext, SearchContext } from "./Navbar";
-import {ReactComponent as MusicIcon} from "../assets/images/music.svg"
+import { LoadContext, SearchContext } from "../Navbar/Navbar";
+import {ReactComponent as MusicIcon} from "../../assets/images/music.svg"
 
 function Home(){
     const load = useContext(LoadContext);

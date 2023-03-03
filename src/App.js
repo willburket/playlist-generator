@@ -1,5 +1,5 @@
 import React, {createContext} from "react";
-import {Main} from "./components/Navbar";
+import {Main} from "./components/Navbar/Navbar";
 
 const MusicKitContext = createContext(null); 
 
