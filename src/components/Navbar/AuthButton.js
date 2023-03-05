@@ -1,41 +1,28 @@
-import React, { useState, useContext, useEffect } from 'react'
-import {MusicKitContext} from "../../App"
+import React, { useEffect } from 'react'
 
-function AuthButton(){             
-    const music = useContext(MusicKitContext);
-    const [isAuthorized, setIsAuthorized] = useState(false); 
+function AuthButton(props){             
+    const music = props.music;
+    const onClick = props.onClick;
+    let isAuthorized = props.auth;
     
     useEffect(() => {
         if(music){
-            setIsAuthorized(music.isAuthorized);
+            isAuthorized = music.isAuthorized;
         }
         
-    }, [music]);
+    }, [music]); 
         
-    async function handleStatusChange(){
-        try{
-            if (isAuthorized === false){               
-                await music.authorize();
-            }
-            else{
-                await music.unauthorize();
-            }
-            setIsAuthorized(!isAuthorized);
-            
-        }
-        catch(err){
-            console.log(err);
-        }
-    }
+
 
     return(
         <div className='nav-item'>
-            <a href="#" className="icon-button" onClick = {handleStatusChange}>
+            <a href="#" className="icon-button" onClick = {onClick} data-testid = "auth-button">
                 {isAuthorized ? 'Log Out' : 'Log In'}
             </a>
         </div>
     );
 
 }
+
 
 export default AuthButton;

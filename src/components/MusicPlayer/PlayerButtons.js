@@ -8,7 +8,7 @@ function PlayButton(props){
     const onClick = props.onClick;
 
     return(           
-        <a href="#" className="player-button" onClick = {onClick}>
+        <a href="#" className="player-button" onClick = {onClick} data-testid = "play-button">
             {playing ? <PauseIcon/> : <PlayIcon/>}
         </a>            
     );
@@ -17,7 +17,7 @@ function PlayButton(props){
 function DisplayButton(props){
     
     return (           
-        <a href="#" className="player-button" onClick = {props.onClick}>
+        <a href="#" className="player-button" onClick = {props.onClick} data-testid = "display-button">
             {props.icon}
         </a>           
     );

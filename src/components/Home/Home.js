@@ -8,7 +8,7 @@ function Home(){
 
     if(!load && search.length === 0){
         return (
-        <div className="prompt-cointainer">
+        <div className="center-container">
 
         <div className="prompt">            
             <p>Pick a Genre</p>

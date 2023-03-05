@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../Navbar/Navbar";
 import { MusicKitContext } from "../../App";
+// import { MusicKitContext } from "../../Application";
 import { ReactComponent as NextIcon } from "../../assets/images/next.svg"
 import { ReactComponent as BackIcon } from "../../assets/images/back.svg"
 import { PlayButton, DisplayButton } from "./PlayerButtons";
@@ -80,7 +81,7 @@ function MusicPlayer(){
             <div className="display">
                 <div className="display-left">
                     <DisplayButton onClick = {back} icon = {<BackIcon/>}/>
-                    <PlayButton onClick = {play} status = {playing}/>
+                    <PlayButton onClick = {play} status = {playing} data-testid = "play-button"/>
                     <DisplayButton onClick = {next} icon = {<NextIcon/>}/>
                 </div>
                 <div className= "display-right">

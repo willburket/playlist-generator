@@ -29,3 +29,8 @@ src/backend/AuthKey_PA6274NFYR.p8
 cert/CA/localhost.decrypted.key
 cert/CA/localhost.key
 cert/CA/myCA.key
+
+# experimental options - can change as needed
+src/Application.js
+src/components/Loaders
+src/components/Navbar/Auth.js

@@ -11,16 +11,23 @@ class App extends React.Component{
   }
 
   componentDidMount(){  
-    window.addEventListener('musickitloaded', this.handleEvent);   
+    window.addEventListener('musickitloaded', this.handleEvent);  
+    // const muskitElement = document.getElementById("musickit-element");
+    // document.addEventListener('musickitloaded', this.handleEvent);
+    // muskitElement.addEventListener('musickitloaded', this.handleEvent)
+
+    
   }
 
   componentWillUnmount(){
+    // document.addEventListener('musickitloaded', this.handleEvent);
     window.removeEventListener('musickitloaded', this.handleEvent);  
   }
 
   handleEvent = async () => {
-    try{                                    // wait for script tag in html to load
-      const response = await fetch('/jwt');
+    console.log("musickitloaded");
+    try{                                    // wait for script tag in html to load?
+      const response = await fetch('/jwt'); // should be loaded already since musickitloaded event occured
       const data = await response.json() 
       this.setState({data})  
       await window.MusicKit.configure({
@@ -45,6 +52,7 @@ class App extends React.Component{
       <MusicKitContext.Provider value={this.state.music}>
         <Main/>
       </MusicKitContext.Provider>
+      <div id = "musickit-element"></div>
       </div>
     )
   } 

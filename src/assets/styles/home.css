@@ -8,7 +8,10 @@
     transform: translate(-50%, -50%);
   }
   
-  .prompt-container{
-    height: calc(100vh - 2*(--nav-size));
-    width: 100%;
+  .center-container{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
   }

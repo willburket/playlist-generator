@@ -5,7 +5,7 @@ function SearchButton (props){
     
     return(
         <li className = "nav-item">
-            <a href="#" className="icon-button" onClick = {onClick}>
+            <a href="#" className="icon-button" onClick = {onClick} data-testid = "search-button">
                 Search
             </a>
         </li>
