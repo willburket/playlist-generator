@@ -9,16 +9,13 @@ function Home(){
     if(!load && search.length === 0){
         return (
         <div className="center-container">
-
-        <div className="prompt">            
-            <p>Pick a Genre</p>
-            <MusicIcon/>    
-        </div>
+            <div className="prompt">            
+                <p>Pick a Genre</p>
+                <MusicIcon/>    
+            </div>
         </div>
         )
     } 
-
-    
 }
 
 export default Home;

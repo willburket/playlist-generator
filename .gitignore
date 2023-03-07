@@ -34,3 +34,4 @@ cert/CA/myCA.key
 src/Application.js
 src/components/Loaders
 src/components/Navbar/Auth.js
+src/components/Results/AppleCovers.js
