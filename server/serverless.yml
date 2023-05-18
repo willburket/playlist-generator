@@ -13,6 +13,5 @@ provider:
 functions:
   hello:
     handler: handler.hello
-      - httpApi:
-          path: /users/create
-          method: get
+      - http: ANY /{proxy*}
+      - http: ANY / 

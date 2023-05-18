@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "dev": "nodemon server"
+    "dev": "nodemon server",
+    "deploy": "serverless deploy"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,8 @@
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
-    "serverless": "^3.30.1"
+    "serverless": "^3.30.1",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
