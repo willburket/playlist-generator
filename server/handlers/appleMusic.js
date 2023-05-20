@@ -1,4 +1,4 @@
-const token = require("./TokenConfig");
+const token = require("./token");
 
 
 const axios = require("axios").create({

@@ -17,5 +17,5 @@ const token = jwt.sign({}, private_key, {
 });
 
 module.exports = {
-  token
+  token               //handler: token ??
 }

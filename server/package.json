@@ -23,6 +23,7 @@
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "serverless-domain-manager": "^7.0.4"
   }
 }

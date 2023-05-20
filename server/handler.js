@@ -1,5 +1,14 @@
 'use strict';
-const app = require('./index');
-const serverless = require('serverless-http');
 
-module.exports.hello = serverless(app);
+const hello = () => {
+  response = {
+    "statusCode": 200,
+    "body": 'Hello World!'
+  }
+
+  return response;
+}
+
+module.exports = {
+  hello
+}
