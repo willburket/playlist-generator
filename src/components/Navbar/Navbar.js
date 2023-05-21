@@ -49,8 +49,8 @@ function Main(){
                 return search;
             }
             if(selected){
-                const response = await fetch('https://localhost:8080/music', {
-                method: 'POST',
+                const response = await fetch('https://localhost:8080/music', {      // needs to change when we switch to AWS
+                method: 'POST',                                                 // use API Gateway to invoke Lambda function on request?
                 headers: {
                     'Content-Type': 'text/plain'
             },

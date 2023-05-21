@@ -22,8 +22,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-#api key
-src/backend/AuthKey_PA6274NFYR.p8
+#api key -- wrong path
+server/AuthKey_PA6274NFYR.p8
 
 #CA keys 
 cert/CA/localhost.decrypted.key
