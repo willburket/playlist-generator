@@ -1,35 +1,27 @@
 self.__precacheManifest = [
   {
-    "revision": "e2372dbbbb37a90e3ea9",
-    "url": "/playlist-generator/static/css/main.6fddaad7.chunk.css"
+    "revision": "0af7b8d5712114572aa7",
+    "url": "/playlist-generator/static/css/main.a1a1844a.chunk.css"
   },
   {
-    "revision": "e2372dbbbb37a90e3ea9",
-    "url": "/playlist-generator/static/js/main.e2372dbb.chunk.js"
+    "revision": "0af7b8d5712114572aa7",
+    "url": "/playlist-generator/static/js/main.0af7b8d5.chunk.js"
   },
   {
-    "revision": "3bc8ac50b02e373cc067",
-    "url": "/playlist-generator/static/js/1.3bc8ac50.chunk.js"
+    "revision": "205849d973eaa941ab0f",
+    "url": "/playlist-generator/static/js/1.205849d9.chunk.js"
   },
   {
     "revision": "10e8ede3b02de20ea33b",
     "url": "/playlist-generator/static/js/2.10e8ede3.chunk.js"
   },
   {
-    "revision": "4ec008406c17f56c14fd",
-    "url": "/playlist-generator/static/js/runtime~main.4ec00840.js"
+    "revision": "2287bf7eccaa48639984",
+    "url": "/playlist-generator/static/js/runtime~main.2287bf7e.js"
   },
   {
     "revision": "2ae3b222bcb47d272fd8da67da472a85",
     "url": "/playlist-generator/static/media/music.2ae3b222.svg"
-  },
-  {
-    "revision": "e4cde6e22749c94b221746c79d87088c",
-    "url": "/playlist-generator/static/media/play.e4cde6e2.svg"
-  },
-  {
-    "revision": "a51b4521a5da072ebd9f87315b2729ed",
-    "url": "/playlist-generator/static/media/pause.a51b4521.svg"
   },
   {
     "revision": "5569e186aefd5ffc9a58b26dda2e8b03",
@@ -40,11 +32,19 @@ self.__precacheManifest = [
     "url": "/playlist-generator/static/media/back.8b66ea7c.svg"
   },
   {
+    "revision": "e4cde6e22749c94b221746c79d87088c",
+    "url": "/playlist-generator/static/media/play.e4cde6e2.svg"
+  },
+  {
+    "revision": "a51b4521a5da072ebd9f87315b2729ed",
+    "url": "/playlist-generator/static/media/pause.a51b4521.svg"
+  },
+  {
     "revision": "0249eac49a4522f371bde364000a4db4",
     "url": "/playlist-generator/static/media/account.0249eac4.svg"
   },
   {
-    "revision": "a0d0bafe2c9eb8c2e4577dd6927cca64",
+    "revision": "514079e16a0e2470aea455a986732373",
     "url": "/playlist-generator/index.html"
   }
 ];
