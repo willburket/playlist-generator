@@ -1,8 +1,8 @@
 
 service: server
 frameworkVersion: '3'
-plugins: 
-  - serverless-domain-manager
+# plugins: 
+#   - serverless-domain-manager
 
 provider:
   name: aws
@@ -10,19 +10,27 @@ provider:
   stage: dev
   timeout: 15
   region: us-east-1
-  runtime: nodejs12.x
+  runtime: nodejs16.x
 
-custom:
-  customDomain:
-    domainName: playlinq.io
-    certificateArn: arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef
-    basePath: ''
-    stage: ${self:provider.stage}
+# custom:
+#   customDomain:
+#     domainName: playlinq.io
+#     # certificateArn: arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef
+#     certificateName: 'arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef'
+#     basePath: ''
+#     stage: ${self:provider.stage}
 
 functions:
   hello:
-    handler: handler.hello
+    handler: handlers/hello.handler
     events:
       - http:
           path: /
+          method: get
+
+  token:
+    handler: handlers/token.handler
+    events:
+      - http:
+          path: /jwt
           method: get
