@@ -10,10 +10,10 @@ const hello = async (event) => {
       },
       null,
       2
-    ),
+    )
   };
 };
 
 module.exports = {
   handler: hello
-}
+};

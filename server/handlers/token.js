@@ -34,5 +34,5 @@ const tokenSign = async () => {
 
 
 module.exports = {
-  handler: tokenSign               //handler: token ??
+  handler: tokenSign               
 }

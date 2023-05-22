@@ -1,7 +1,10 @@
 
 service: server
 frameworkVersion: '3'
-# plugins: 
+plugins: 
+  - serverless-bundle
+  - serverless-offline
+  - serverless-dotenv-plugin
 #   - serverless-domain-manager
 
 provider:
@@ -34,3 +37,10 @@ functions:
       - http:
           path: /jwt
           method: get
+
+  genre:
+    handler: handlers/genre.handler
+    events:
+      - http:
+          path: /genre
+          method: post
