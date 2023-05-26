@@ -25,22 +25,22 @@ provider:
 
 functions:
   hello:
-    handler: handlers/hello.handler
+    handler: handlers/hello.hello
     events:
       - http:
           path: /
           method: get
 
   token:
-    handler: handlers/token.handler
+    handler: handlers/token.tokenSign
     events:
       - http:
           path: /jwt
           method: get
 
   genre:
-    handler: handlers/genre.handler
+    handler: handlers/genre.fetchGenre
     events:
       - http:
           path: /genre
-          method: post
+          method: get
