@@ -1,7 +1,7 @@
 {
   "main.css": "/playlist-generator/static/css/main.a1a1844a.chunk.css",
-  "main.js": "/playlist-generator/static/js/main.0af7b8d5.chunk.js",
-  "main.js.map": "/playlist-generator/static/js/main.0af7b8d5.chunk.js.map",
+  "main.js": "/playlist-generator/static/js/main.39b31c7a.chunk.js",
+  "main.js.map": "/playlist-generator/static/js/main.39b31c7a.chunk.js.map",
   "static/js/1.205849d9.chunk.js": "/playlist-generator/static/js/1.205849d9.chunk.js",
   "static/js/1.205849d9.chunk.js.map": "/playlist-generator/static/js/1.205849d9.chunk.js.map",
   "static/js/2.10e8ede3.chunk.js": "/playlist-generator/static/js/2.10e8ede3.chunk.js",
@@ -16,6 +16,6 @@
   "static/media/account.0249eac4.svg": "/playlist-generator/static/media/account.0249eac4.svg",
   "static/css/main.a1a1844a.chunk.css.map": "/playlist-generator/static/css/main.a1a1844a.chunk.css.map",
   "index.html": "/playlist-generator/index.html",
-  "precache-manifest.a7329f328205b100831b13f1cbcab6e4.js": "/playlist-generator/precache-manifest.a7329f328205b100831b13f1cbcab6e4.js",
+  "precache-manifest.5c52e70a42f4b9dc722ca187acfb4a5c.js": "/playlist-generator/precache-manifest.5c52e70a42f4b9dc722ca187acfb4a5c.js",
   "service-worker.js": "/playlist-generator/service-worker.js"
 }
