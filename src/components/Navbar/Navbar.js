@@ -50,14 +50,15 @@ function Main(){
             }
             if(selected){
                 const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/genre', {      // needs to change when we switch to AWS
-                method: 'GET',                                                 // use API Gateway to invoke Lambda function on request?
+                method: 'POST',                                                 // use API Gateway to invoke Lambda function on request?
                 headers: {
                     'Content-Type': 'text/plain'
             },
             body: selected.id
               })
             const data = await response.json();
-            const charts = [...data.songs[0].data];
+            console.log([...data.message.songs[0].data]);   // check
+            const charts = [...data.message.songs[0].data];
             shuffle(charts);
             setSearchResult(charts);
             }

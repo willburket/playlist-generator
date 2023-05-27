@@ -23,8 +23,9 @@ class App extends React.Component{
       const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/jwt'); 
       const data = await response.json() 
       this.setState({data})  
+      
       await window.MusicKit.configure({
-        developerToken: data.token,
+        developerToken: data.message.toString(),   //data.token
         app: {
           name: 'PlaylistGenerator',
           build: '1',
@@ -37,6 +38,7 @@ class App extends React.Component{
     catch(err){
       console.log(err)
     }
+    
   }
 
   render(){

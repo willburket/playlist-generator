@@ -43,4 +43,4 @@ functions:
     events:
       - http:
           path: /genre
-          method: get
+          method: post

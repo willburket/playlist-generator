@@ -22,6 +22,10 @@ export const fetchGenre = async (event) => {
     const songs = playlist.data.results;
     const response = {
       statusCode: 200,
+      headers:{
+        'Access-Control-Allow-Origin': 'https://willburket.github.io',
+        'Access-Control-Allow-Credentials': true,
+      },
       body: JSON.stringify(
         {
           message: songs
