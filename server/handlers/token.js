@@ -20,7 +20,8 @@ export const tokenSign = async () => {
     const response = {
       statusCode: 200,
       headers:{
-        'Access-Control-Allow-Origin': 'https://willburket.github.io',
+        // 'Access-Control-Allow-Origin': 'https://willburket.github.io',
+        'Access-Control-Allow-Origin': 'https://playlinq.io',
         'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify(
