@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "048994cc32446e08bcce",
+    "revision": "30b00fbbf3b62519780d",
     "url": "/playlist-generator/static/css/main.a1a1844a.chunk.css"
   },
   {
-    "revision": "048994cc32446e08bcce",
-    "url": "/playlist-generator/static/js/main.048994cc.chunk.js"
+    "revision": "30b00fbbf3b62519780d",
+    "url": "/playlist-generator/static/js/main.30b00fbb.chunk.js"
   },
   {
     "revision": "205849d973eaa941ab0f",
@@ -44,7 +44,7 @@ self.__precacheManifest = [
     "url": "/playlist-generator/static/media/account.0249eac4.svg"
   },
   {
-    "revision": "fda88a0ef42795f52d5a408840c4be43",
+    "revision": "674702b244dffdfdc1353a8af858b32f",
     "url": "/playlist-generator/index.html"
   }
 ];
