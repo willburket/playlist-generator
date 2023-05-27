@@ -9,14 +9,14 @@ const axios = require("axios").create({
 
 export const fetchGenre = async (event) => {
   const storefront = 'us';    // change later
-  // console.log(token.token.toString());
+  const requestBody = JSON.parse(event.body);
 
   try {
     const playlist = await axios.get(`/v1/catalog/${storefront}/charts`, {
       params: {
         types: 'songs',
         limit: 200,
-        genre: event,
+        genre: requestBody,
       }
     });
     const songs = playlist.data.results;
@@ -30,7 +30,7 @@ export const fetchGenre = async (event) => {
         {
           message: songs
         },
-        null,
+        null,           // lets figure out what all this means
         2
       )};
     return response;
