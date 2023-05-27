@@ -3,14 +3,13 @@ const token = require("./jwt");
 const axios = require("axios").create({
   baseURL: 'https://api.music.apple.com',
   headers:{
-      Authorization: `Bearer ${token.token}`,
+      Authorization: `Bearer ${token.token}`,   // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
 },
 });
 
 export const fetchGenre = async (event) => {
   const storefront = 'us';    // change later
-  // console.log(token.token);
-  console.log(token.token.toString());
+  // console.log(token.token.toString());
 
   try {
     const playlist = await axios.get(`/v1/catalog/${storefront}/charts`, {
@@ -31,7 +30,7 @@ export const fetchGenre = async (event) => {
         2
       )};
     return response;
-  }catch(error){
+  } catch(error){
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),

@@ -5,7 +5,7 @@ plugins:
   - serverless-bundle
   - serverless-offline
   - serverless-dotenv-plugin
-#   - serverless-domain-manager
+  - serverless-domain-manager
 
 provider:
   name: aws
@@ -15,20 +15,20 @@ provider:
   region: us-east-1
   runtime: nodejs16.x
 
-# custom:
-#   customDomain:
-#     domainName: playlinq.io
-#     # certificateArn: arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef
-#     certificateName: 'arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef'
-#     basePath: ''
-#     stage: ${self:provider.stage}
+custom:
+  customDomain:
+    domainName: playlinq.io
+    # certificateArn: arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef
+    certificateName: 'arn:aws:acm:us-east-1:630062971847:certificate/3f5a1b8c-9855-47ff-b038-89170d9699ef'
+    basePath: ''
+    stage: ${self:provider.stage}
 
 functions:
   hello:
     handler: handlers/hello.hello
     events:
       - http:
-          path: /
+          path: /hello
           method: get
 
   token:

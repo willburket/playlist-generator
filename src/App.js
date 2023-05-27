@@ -20,7 +20,7 @@ class App extends React.Component{
 
   handleEvent = async () => {
     try{                                    
-      const response = await fetch('/jwt'); 
+      const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/jwt'); 
       const data = await response.json() 
       this.setState({data})  
       await window.MusicKit.configure({

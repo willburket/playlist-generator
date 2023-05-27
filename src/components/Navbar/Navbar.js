@@ -49,8 +49,8 @@ function Main(){
                 return search;
             }
             if(selected){
-                const response = await fetch('https://localhost:8080/music', {      // needs to change when we switch to AWS
-                method: 'POST',                                                 // use API Gateway to invoke Lambda function on request?
+                const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/genre', {      // needs to change when we switch to AWS
+                method: 'GET',                                                 // use API Gateway to invoke Lambda function on request?
                 headers: {
                     'Content-Type': 'text/plain'
             },

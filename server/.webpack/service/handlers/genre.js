@@ -486,10 +486,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
-const fs = __webpack_require__(/*! fs */ "fs");
 const jwt = __webpack_require__(/*! jsonwebtoken */ "../../jsonwebtoken/index.js");
 (__webpack_require__(/*! dotenv */ "../../dotenv/lib/main.js").config)();
-const private_key = fs.readFileSync(process.env.API_KEY).toString(); // read your private key from your file system
+const base64P8FileContent = process.env.API_KEY;
+const private_key = Buffer.from(base64P8FileContent, 'base64');
 const team_id = process.env.TEAM_ID; // your 10 character apple team id, found in https://developer.apple.com/account/#/membership/
 const key_id = process.env.KEY_ID; // your 10 character generated music key id. more info https://help.apple.com/developer-account/#/dev646934554
 const token = jwt.sign({}, private_key, {
@@ -16452,13 +16452,14 @@ const token = __webpack_require__(/*! ./jwt */ "../../../handlers/jwt.js");
 const axios = (__webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs").create)({
   baseURL: 'https://api.music.apple.com',
   headers: {
-    Authorization: `Bearer ${token.token}`
+    Authorization: `Bearer ${token.token}` // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
   }
 });
+
 const fetchGenre = async event => {
   const storefront = 'us'; // change later
-  // console.log(token.token);
-  console.log(token.token.toString());
+  // console.log(token.token.toString());
+
   try {
     const playlist = await axios.get(`/v1/catalog/${storefront}/charts`, {
       params: {
