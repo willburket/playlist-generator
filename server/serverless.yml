@@ -44,3 +44,10 @@ functions:
       - http:
           path: /genre
           method: post
+
+  recent:
+    handler: handlers/recent.fetchRecentSongs
+    events:
+      - http:
+          path: /history
+          method: get

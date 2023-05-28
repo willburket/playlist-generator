@@ -7,25 +7,23 @@ const axios = require("axios").create({
 },
 });
 
-export const fetchGenre = async (event) => {
-  const storefront = 'us';    // change later
-  const requestBody = JSON.parse(event.body);
+export const fetchRecentSongs = async (event) => {
+
+//   const requestBody = JSON.parse(event.body);
 
   try {
-    const playlist = await axios.get(`/v1/catalog/${storefront}/charts`, {
+    const recent = await axios.get(`/v1/me/recent/played/tracks`, {
       params: {
         types: 'songs',
-        limit: 200,
-        genre: requestBody,
+        limit: 30,
+        // genre: requestBody,
       }
     });
-    const songs = playlist.data.results;
+    const songs = recent.data.results;
     const response = {
       statusCode: 200,
       headers:{
-        // 'Access-Control-Allow-Origin': 'https://willburket.github.io',
-        'Access-Control-Allow-Origin': 'https://playlinq.io',
-        'Access-Control-Allow-Origin': 'http://localhost:3001',
+        'Access-Control-Allow-Origin': 'https://playlinq.io',   // maybe set this as .env var?
         'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify(

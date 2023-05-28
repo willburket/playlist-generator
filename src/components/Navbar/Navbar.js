@@ -27,7 +27,7 @@ function Main(){
             if (music){
                 setIsAuthorized(music.isAuthorized)
             }
-        }, [music])
+        }, [music, loading]);
             
         
         async function genreSearch(){
@@ -49,18 +49,22 @@ function Main(){
                 return search;
             }
             if(selected){
-                const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/genre', {      // needs to change when we switch to AWS
-                method: 'POST',                                                 // use API Gateway to invoke Lambda function on request?
+                setLoading(true);
+                await new Promise((resolve) => setTimeout(resolve, 3000))
+                const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
+                method: 'POST',                                              
                 headers: {
                     'Content-Type': 'text/plain'
             },
             body: selected.id
               })
             const data = await response.json();
-            console.log([...data.message.songs[0].data]);   // check
+            
             const charts = [...data.message.songs[0].data];
             shuffle(charts);
-            setSearchResult(charts);
+            setSearchResult(charts)
+            console.log(loading);
+            setLoading(false);
             }
 
         }

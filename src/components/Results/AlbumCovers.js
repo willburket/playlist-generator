@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../Navbar/Navbar";
+import { SearchContext, LoadContext } from "../Navbar/Navbar";
 
 function AlbumCovers(){
     const search = useContext(SearchContext);
+    const loading = useContext(LoadContext);
     const images = [];
     const [covers, setCovers] = useState([]);
     const [hasSearched, sethasSearched] = useState(false)
@@ -27,7 +28,7 @@ function AlbumCovers(){
             }
             
     }, [search]);
-
+    if(loading) return (<div></div>);       //return nothing when loader is on screen
     return(
         <div>
             { hasSearched &&
