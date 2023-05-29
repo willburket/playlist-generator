@@ -1,5 +1,6 @@
 
 .grid-container {
+    top: var(--nav-size);
     width: 100%;
     align-items: center;
     justify-content: center;
@@ -12,6 +13,11 @@
     grid-template-rows: repeat(4, 1fr); 
     gap: 30px;
     max-width: 900px;
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -45%); */
+
 }
 
 @media (max-width: 900px) {
