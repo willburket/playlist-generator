@@ -20,7 +20,7 @@ function AlbumCovers(){
         }
         setCovers(images);
     }
-
+    
     useEffect(() => {
             if(search && search.length !== 0){
                 image_extract(search);
@@ -28,7 +28,8 @@ function AlbumCovers(){
             }
             
     }, [search]);
-    if(loading) return (<div></div>);       //return nothing when loader is on screen
+
+    if(loading) return (<div></div>);       
     return(
         <div>
             { hasSearched &&

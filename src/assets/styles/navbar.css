@@ -6,6 +6,7 @@
   background-color: var(--bg);
   padding-inline-start: 0 1rem;
   border-bottom: var(--border);
+  z-index: 500;
 }
 
 .navbar-nav{
