@@ -50,7 +50,7 @@ function Main(){
             }
             if(selected){
                 setLoading(true);
-                await new Promise((resolve) => setTimeout(resolve, 3000))
+                await new Promise((resolve) => setTimeout(resolve, 2000))
                 const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
                 method: 'POST',                                              
                 headers: {

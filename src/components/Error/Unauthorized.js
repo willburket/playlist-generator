@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MusicKitContext } from "../../App";
-// import { MusicKitContext } from "../../Application";
 import { ReactComponent as Account} from '../../assets/images/account.svg'
 import { SearchContext } from "../Navbar/Navbar";
 
@@ -45,7 +44,7 @@ function PopUp(){
                         <Account/>
                     </div>
                     <p>Log into Apple Music for full access</p>
-                    <PopUpButton text = "Ok" onClick = {handleCloseDiv}/>
+                    <PopUpButton text = "Ok"/>
                 </div>}
             </div>
             

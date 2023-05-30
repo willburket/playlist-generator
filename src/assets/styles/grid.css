@@ -1,10 +1,14 @@
 
-.grid-container {
-    top: var(--nav-size);
-    width: 100%;
+.grid-container{
+    position: fixed;
+    top: 60px; /* Adjust the top position to accommodate the navbar height */
+    left: 0; /* Align the grid container to the left edge */
+    width: 100%; /* Make the grid container span the full width */
+    height: calc(100% - 60px); 
     align-items: center;
     justify-content: center;
     display: flex;
+
 }
   
 .album-cover-grid{
@@ -13,11 +17,7 @@
     grid-template-rows: repeat(4, 1fr); 
     gap: 30px;
     max-width: 900px;
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -45%); */
-
+    
 }
 
 @media (max-width: 900px) {
