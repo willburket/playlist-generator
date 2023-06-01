@@ -9,6 +9,9 @@
     justify-content: center;
     display: flex;
     z-index: 1;
+    overflow-y: scroll;
+    padding: 10px;
+    height: max-content;
 }
   
 .album-cover-grid{
@@ -17,6 +20,7 @@
     grid-template-rows: repeat(4, 1fr); 
     gap: 30px;
     max-width: 900px;
+    grid-template-columns: repeat(auto-fit, minmax(152px, 1fr));
     
 }
 
@@ -34,6 +38,15 @@
     }
 }
 
+@media (max-width: 685px){
+    .grid-container{
+        top: 180px;
+        height: 100% - 180px;
+    }
+    .album-cover-grid{
+        top: 180px;
+    }
+}
  
 @media (max-width: 550px) {
     .album-cover-grid {

@@ -1,14 +1,4 @@
-/* .display-container{
-  position: fixed;
-  width: 600px;
-  left: 25%;
-  height: 60px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
-  z-index: 1;
-  
-} */
+
 .display-container{
   position: fixed;
   width: 500px;
@@ -37,39 +27,10 @@
   /* z-index: 1; */
 }
 
-@media (max-width: 685px) {
-
-  .display-container{
-    top: var(--nav-size);
-    /* width: 300px; */
-    width: 100%;
-    left: 0%;
-    height: calc(var(--nav-size)*2);
-  }
-  .display{
-    max-width: 300px;
-    min-width: none;
-    padding: auto;
-    height: 90px;
-    flex-direction: column-reverse;
-    padding-left: 0;
-    padding-right: 0;
-    
-  }
-  .display-left{
-    height: 40%;
-    left: 50%;
-    transform: translate(-30%, 0%);
-  }
-  .display-right{
-    height: 60%;
-  }
-  .progress{
-    bottom: 2em;
-  }
-}
-
 .display-left{
+  align-items: center;
+  justify-content: center;
+
   display: flex;
   width: 50%;
 }
@@ -83,12 +44,6 @@
   /* overflow-x: hidden; */
 }
 
-/* @media (max-width: 440px){     use to fix music player as screen gets small
-  .display{
-    flex-direction: column-reverse;
-    height: 9em
-  }
-} */
 
 .player-button{
   --button-size: calc(var(--nav-size) * 0.5);
@@ -143,12 +98,50 @@
 }
 
 .progress{
-  position: sticky;
+  /* position: sticky; */
   height: 1em;
   width: 100;
   bottom: 0em;
   align-items: center;
   justify-content: center;
   }
+
+
+@media (max-width: 685px) {
+
+  .display-container{
+    top: var(--nav-size);
+    width: 100%;
+    left: 0%;
+    height: calc(var(--nav-size)*2);
+  }
+  .display{
+    width: 300px;
+    padding: auto;
+    height: 90px;
+    flex-direction: column-reverse;
+    padding-left: 0;
+    padding-right: 0;
+    
+  }
+  .display-left{
+    height: 40%;
+    width: 100%;
+  }
+  .display-right{
+    height: 60%;
+    width: 300px;
+  }
+  .progress{
+    transform: translateX(6%);
+    bottom: 2em;
+    width: 90%;
+  }
+  .screen{
+    width: 260px;
+  }
+}
+
+
 
   
