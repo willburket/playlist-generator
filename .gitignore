@@ -38,3 +38,6 @@ src/components/Results/AppleCovers.js
 
 #env
 server/.env
+
+#localhost
+cert/CA
