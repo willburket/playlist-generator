@@ -116,7 +116,7 @@
     height: calc(var(--nav-size)*2);
   }
   .display{
-    width: 300px;
+    width: 290px;
     padding: auto;
     height: 90px;
     flex-direction: column-reverse;
