@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext, LoadContext } from "../Navbar/Navbar";
+import AddSong from "../MusicPlayer/AddtoLibrary";
 
 function AlbumCovers(){
     const search = useContext(SearchContext);
@@ -36,7 +37,10 @@ function AlbumCovers(){
             <div className="grid-container">
                 <div className= "album-cover-grid">
                 {covers.map(item => (
-                    <img src={item.image} key = {item.id} className = "album-cover" alt = {item.id}/>
+                    <div className="album-container" key = {item.id}>
+                    <img src={item.image} className = "album-cover" key = {item.id} alt = {item.id}/>
+                    <AddSong/>
+                    </div>
                 ))}
                 </div>
             </div>}
