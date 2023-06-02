@@ -3,7 +3,7 @@ import { ReactComponent as MusicIcon } from "../../assets/images/music.svg";
 import AuthButton from "./AuthButton";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import PopUp from "../Error/Unauthorized";
-import AlbumCovers from "../Results/AlbumCovers";
+import AlbumCovers from "../Results/Albums";
 import SearchButton from "./SearchButton";
 import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
