@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext, LoadContext } from "../Navbar/Navbar";
-import AddSong from "../MusicPlayer/AddtoLibrary";
 import Album from "./Cover";
 
 function AlbumCovers(){
@@ -8,7 +7,6 @@ function AlbumCovers(){
     const loading = useContext(LoadContext);
     const [hasSearched, sethasSearched] = useState(false);
     const [playlist,setPlaylist] = useState([]);
-    const [isHovered,setIsHovered] = useState(false);
 
     useEffect(() => {
         if(search && search.length !== 0){
@@ -24,9 +22,7 @@ function AlbumCovers(){
             <div className="grid-container">
                 <div className= "album-cover-grid">
                 {playlist.map(item => (
-                    
                     <Album song = {item} key = {item.id}/>
-                    
                 ))}
                 </div>
             </div>}

@@ -1,22 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext, LoadContext } from "../Navbar/Navbar";
+import { SearchContext } from "../Navbar/Navbar";
 import AddSong from "../MusicPlayer/AddtoLibrary";
 
 function Album(props){
     const search = useContext(SearchContext);
-    const loading = useContext(LoadContext);
     const [hasSearched, sethasSearched] = useState(false);
     const [imgLink, setImgLink] = useState(null);
     const [isHovered,setIsHovered] = useState(false);
 
-    const hover = () => {
+    // const hover = () => {
+    //     setIsHovered(true);
+    //     // console.log(isHovered);
+    // }
+    // const endHover = () => {
+    //     setIsHovered(false);
+    //     // console.log(isHovered);
+    // }    
+    const hoverOn = () => { 
         setIsHovered(true);
-        // console.log(isHovered);
     }
-    const endHover = () => {
+    const hoverOff = () => {
         setIsHovered(false);
-        // console.log(isHovered);
-    }    
+    }
 
     useEffect(() => {
         if(search && search.length !== 0){
@@ -25,18 +30,36 @@ function Album(props){
             setImgLink(link)
         }     
     }, [search]);
+    
+    // useEffect(() => {
+    //     let timeoutId;
+    
+    //     if (isHovered) {
+    //       timeoutId = setTimeout(() => {
+    //       }, 200); // Adjust the delay as needed
+    //     } else {
+    //       clearTimeout(timeoutId);
+    //     }
+    
+    //     return () => {
+    //       clearTimeout(timeoutId);
+    //     };
+    //   }, [isHovered]);   
+
+    // {`album-container ${isHovered ? "hovered": ""}`}
      
     return(
         <div>
-            { hasSearched &&
-                <div className="album-container">
-                    <img src={imgLink} className = "album-cover" key = {props.song.id} alt = {props.song.id} onMouseEnter= {hover} onMouseLeave = {endHover}/>
+            {hasSearched &&
+                <div className= "album-container">   
+                    <img src={imgLink} className = {`album-cover ${isHovered ? "hovered": ""}`}  
+                    key = {props.song.id} alt = {props.song.id} 
+                    onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}/> 
                     <AddSong song = {props.song.id}/>
-                    {isHovered && <div className="album-hover">
-                    {props.song.attributes.name}
-                    
-                    </div>}
-                    
+                    <div className={`album-hover ${isHovered ? "visible": ""}`} onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}>
+                        <p>{props.song.attributes.artistName}</p>
+                        <p>{props.song.attributes.name}</p>
+                    </div>
                 </div>
             }
         </div>

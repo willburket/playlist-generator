@@ -142,31 +142,5 @@
   }
 }
 
-.album-container{
-  justify-content: center;
-  align-items: center;
-  width: 152px;
-  height: 152px;
-  
-}
-
-.add-button{
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-}
-
-.add-container{
-  position: relative;
-  width: 36px;
-  height: 36px;
-  justify-content: center;
-  align-items: center;
-  left: 0%;
-  z-index: 2;
-  transform: translate(20%,-120%);
-}
 
   
