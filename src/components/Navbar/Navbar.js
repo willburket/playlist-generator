@@ -3,7 +3,7 @@ import { ReactComponent as MusicIcon } from "../../assets/images/music.svg";
 import AuthButton from "./AuthButton";
 import MusicPlayer from "../MusicPlayer/MusicPlayer";
 import PopUp from "../Error/Unauthorized";
-import AlbumCovers from "../Results/Albums";
+import AlbumCovers from "../Results/Grid";
 import SearchButton from "./SearchButton";
 import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
@@ -51,7 +51,7 @@ function Main(){
             if(selected){
                 setLoading(true);
                 await new Promise((resolve) => setTimeout(resolve, 2000))
-                const response = await fetch('http://localhost:3000/dev/genre ', {  //http://localhost:3000/dev/genre for dev
+                const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
                 method: 'POST',                                              
                 headers: {
                     'Content-Type': 'text/plain'

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext, LoadContext } from "../Navbar/Navbar";
 import AddSong from "../MusicPlayer/AddtoLibrary";
+import Album from "./Cover";
 
 function AlbumCovers(){
     const search = useContext(SearchContext);
@@ -8,15 +9,6 @@ function AlbumCovers(){
     const [hasSearched, sethasSearched] = useState(false);
     const [playlist,setPlaylist] = useState([]);
     const [isHovered,setIsHovered] = useState(false);
-
-    const hover = () => {
-        setIsHovered(true);
-        console.log(isHovered);
-    }
-    const endHover = () => {
-        setIsHovered(false);
-        console.log(isHovered);
-    }    
 
     useEffect(() => {
         if(search && search.length !== 0){
@@ -32,15 +24,9 @@ function AlbumCovers(){
             <div className="grid-container">
                 <div className= "album-cover-grid">
                 {playlist.map(item => (
-                    <div className="album-container" key = {item.id} >
-                    <img src={window.MusicKit.formatArtworkURL(item.attributes.artwork,200,200)} 
-                    className = "album-cover" key = {item.id} alt = {item.id} onMouseEnter= {hover} onMouseLeave = {endHover}/>
-                    <AddSong song = {item.id}/>
-                    {isHovered && <div className="album-hover">
-                        <p>I appear on hover</p>
                     
-                    </div>}
-                    </div>
+                    <Album song = {item} key = {item.id}/>
+                    
                 ))}
                 </div>
             </div>}

@@ -2,12 +2,13 @@ import React, {createContext} from "react";
 import {Main} from "./components/Navbar/Navbar";
 
 const MusicKitContext = createContext(null); 
+const TokenContext = createContext(null);
 
 class App extends React.Component{
 
   constructor (props){
     super(props);       
-    this.state = {data: null, music: null};
+    this.state = {data: null, music: null, token: null};
   }
 
   componentDidMount(){  
@@ -23,9 +24,10 @@ class App extends React.Component{
       const response = await fetch('http://localhost:3000/dev/jwt');  //http://localhost:3000/dev/jwt
       const data = await response.json() 
       this.setState({data})  
-      
+      const token = data.message.toString()
+
       await window.MusicKit.configure({
-        developerToken: data.message.toString(),   //data.token
+        developerToken: token,   //data.token
         app: {
           name: 'PlaylistGenerator',
           build: '1',
@@ -33,6 +35,7 @@ class App extends React.Component{
       });
       const music = window.MusicKit.getInstance()
       this.setState({music:music})
+      this.setState({token:token})
       console.log("configuration success")
     }
     catch(err){
@@ -44,13 +47,15 @@ class App extends React.Component{
   render(){
     return(
       <div data-testid = "app">
+      <TokenContext.Provider value={this.state.token}>
       <MusicKitContext.Provider value={this.state.music}>
         <Main/>
       </MusicKitContext.Provider>
+      </TokenContext.Provider>
       </div>
     )
   } 
 }
 
-export {App, MusicKitContext};
+export {App, MusicKitContext, TokenContext};
 

@@ -3,15 +3,21 @@
     position: absolute;
     top: 60px; /* Adjust the top position to accommodate the navbar height */
     left: 0; /* Align the grid container to the left edge */
+    /* height: calc(100vh - 60px);  */
+    /* right: 0;
+    bottom: 0; */
     width: 100%; /* Make the grid container span the full width */
-    height: calc(100% - 60px); 
-    align-items: center;
-    justify-content: center;
+    
+    /* background-color: #aaaaaa; */
     display: flex;
+    justify-content: center;
+    align-items: center;
+    
     z-index: 1;
-    /* overflow-y: scroll;
-    overflow-x: hidden; */
-    padding: 10px;
+    overflow-y: scroll;
+    /* overflow-x: hidden;       */
+    padding-top: 30px;  
+    padding-bottom: 30px;         
     height: max-content;
     
 }
@@ -43,7 +49,21 @@
 }
 
 .album-cover:hover{
-    filter: brightness(0.8);
+    filter: brightness(0.6);
+}
+
+.album-hover{
+    width: 100%;
+    height: 100%;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    position: relative;
+    transform: translate(20%, -75%);
+   
+
+
 }
 
 @media (max-width: 900px) {
@@ -63,7 +83,7 @@
 @media (max-width: 685px){
     .grid-container{
         top: 180px;
-        height: 100% - 180px;
+        /* height: calc(100vh - 180px);  */
     }
     .album-cover-grid{
         top: 180px;
