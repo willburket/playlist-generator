@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export async function addToLibrary(song, token, mediaType) {
+    
     try {
       await axios({
         method: 'post',

@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as AddIcon} from "../../assets/images/add.svg";
+import { ReactComponent as AddIcon} from "../../assets/images/add-icon.svg";
 import { useContext } from "react";
 import { MusicKitContext, TokenContext } from "../../App";
 import { addToLibrary } from "../../services/MusicApi";
@@ -10,21 +10,22 @@ function AddSong(props){
     const token = useContext(TokenContext);
 
     const onClick = async () => {
-        // adds song if its not already added 
-
-        const songId = props.song;
-        // const queryParameters = { ids: [songId]};
-        const mediaType = 'songs';
-
+      const songId = props.song;
+      const mediaType = 'songs';
+        // check if song is added?
+        
+      if (!music.isAuthorized){
+        console.log("please sign in");
+        return
+      }
+      else{
         try{
           addToLibrary(songId, token, mediaType)
         }
         catch(error){
           console.log(error);
         }
-
-        
-
+      }
     }
 
     // we want it to turn to a check mark svg if the song is already added 
@@ -40,22 +41,3 @@ function AddSong(props){
 }
 
 export default AddSong;
-
-// console.log(songId);
-//         fetch(`https://api.music.apple.com/v1/me/library?ids[songs]=[${songId}]`, {    //https://api.music.apple.com/v1/me/library/songs/${songId}
-//             method: 'POST',
-//             headers:{
-//                 Authorization: `Bearer ${token}`,
-//             }
-//         })
-//         .then((response) => {
-//             if (response.ok) {
-//               console.log('Song added to library!');
-//             } else {
-//               console.error('Error adding song to library:', response.status);
-//             }
-//           })
-//           .catch((error) => {
-//             console.error('Error adding song to library:', error);
-//           });
-//         // await music.api.music('/v1/me/library', queryParameters, { fetchOptions: { method: 'POST' } });

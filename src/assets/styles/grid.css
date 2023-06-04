@@ -98,7 +98,7 @@
     align-items: center;
     left: 0%;
     z-index: 3;
-    transform: translate(20%,-120%);
+    transform: translate(20%,-85%);
   }
   
 
@@ -127,14 +127,19 @@
 }
  
 @media (max-width: 550px) {
+    .album-container{
+        width: 200px;
+        height: 200px;
+    }
     .album-cover-grid {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(20, 1fr);
+    /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
     }
 
     .album-cover {
-        max-width: 200px;
-        max-height: 200px;
+        width: 200px;
+        height: 200px;
     }
 }
 
