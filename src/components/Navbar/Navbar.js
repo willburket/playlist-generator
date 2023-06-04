@@ -8,6 +8,7 @@ import SearchButton from "./SearchButton";
 import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
 import { MusicKitContext } from "../../App";
+import Player from "../MusicPlayer/Player";
 
 
 const SearchContext = createContext(null);  
@@ -51,7 +52,7 @@ function Main(){
             if(selected){
                 setLoading(true);
                 await new Promise((resolve) => setTimeout(resolve, 2000))
-                const response = await fetch('http://localhost:3000/dev/jwt', {  //http://localhost:3000/dev/genre for dev
+                const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
                 method: 'POST',                                              
                 headers: {
                     'Content-Type': 'text/plain'
@@ -179,7 +180,8 @@ function Main(){
         <div data-testid = "navbar">
             <Navbar/>
             <SearchContext.Provider value = {searchResult}>
-            <MusicPlayer/>
+            {/* <MusicPlayer/> */}
+            <Player/>
                     <LoadContext.Provider value = {loading}>
                         <Home/> 
                         <PopUp/>

@@ -1,18 +1,20 @@
 
 .display-container{
   position: fixed;
-  width: 500px;
+  width: 520px;
   left: 32%;
   height: 60px;
   justify-content: center;
   align-items: center;
   display: flex;
   z-index: 700;
+  transform: translateX(19%);
 }
 
 .display{
   /* max-width: 480px;
   min-width: 320px; */
+  width: 450px;
   height: 4.5em;
   font-size: .75em;
   border-radius: 1em;
@@ -30,9 +32,9 @@
 .display-left{
   align-items: center;
   justify-content: center;
-
   display: flex;
-  width: 50%;
+  width: 40%;
+  transform: translateX(-5%);
 }
 
 .display-right{
@@ -41,9 +43,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  transform: translate(1%, -6%);
   /* overflow-x: hidden; */
 }
 
+.display-center{
+  display: flex;
+  width: 15%;
+  align-items: center;
+  justify-content: center;
+  /* transform: translate(12%, -6%); */
+}
+
+.playing-container{
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  width: 60px;
+  height: 60px;
+}
+
+.playing-item{
+    width: 85%;
+    height: 85%;
+    border-radius: 5%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+    transform: translate(9%,9%);
+}
 
 .player-button{
   --button-size: calc(var(--nav-size) * 0.5);
@@ -69,7 +100,7 @@
 
 .screen{
   /* width: 90%; */
-  width: 160px;
+  width: 185px;
   height: 3em;
   font-size: .75em;
   white-space: nowrap;
@@ -81,6 +112,7 @@
   padding-right: 1em;
   display: flex;
   background-color: #c7ccd4;
+  transform: translateX(5%);
 }
 
 .song{
@@ -100,23 +132,47 @@
 .progress{
   /* position: sticky; */
   height: 1em;
-  width: 100;
+  width: 100%;
   bottom: 0em;
   align-items: center;
   justify-content: center;
+  transform: translateX(5%);
   }
 
+@media (max-width: 1500px){
+  .display-container{
+    transform: translateX(10%);
+  }
+}
 
-@media (max-width: 685px) {
+@media (max-width: 830px){
+  .display-container{
+    transform: translateX(7%);
+  }
+}
+
+@media (max-width: 800px){
+  .display-container{
+    top: var(--nav-size);
+    width: 100%;
+    left: 0%;
+    height: calc(var(--nav-size));
+    transform: translateY(10%);
+  }
+
+}
+
+@media (max-width: 500px) {
 
   .display-container{
     top: var(--nav-size);
     width: 100%;
     left: 0%;
     height: calc(var(--nav-size)*2);
+    transform: translateY(-5%);
   }
   .display{
-    width: 290px;
+    width: 375px;
     padding: auto;
     height: 90px;
     flex-direction: column-reverse;
@@ -126,21 +182,74 @@
   }
   .display-left{
     height: 40%;
-    width: 100%;
+    width: 50%;
+    justify-content: right;
+    transform: translate(24%,-125%);
   }
   .display-right{
-    height: 60%;
-    width: 300px;
+    position: relative;
+    height: 75%;
+    right: 0;
+    width: 65%;
+    transform: translate(19%,105%);
+  }
+
+  .display-center{
+    display: flex;
+    height: 100%;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-120%);
+  }
+
+  .playing-container{
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    width: 90px;
+    height: 90px;
+    transform: translate(5%, -7%);
+  }
+  
+  .playing-item{
+      width: 90%;
+      height: 90%;
+
+      
   }
   .progress{
-    transform: translateX(6%);
+    transform: translateX(5%);
     bottom: 2em;
-    width: 90%;
+    width: 100%;
   }
   .screen{
-    width: 260px;
+    /* width: 260px; */
+    width: 220px;
   }
+
 }
 
+@media (max-width: 380px){
+  .display{
+    width: 315px;
+  }
 
+  .screen{
+    width: 185px;
+  }
+
+  .display-left{
+    transform: translate(32%,-125%);
+  }
+
+  .display-center{
+    transform: translate(-110%, 2%);
+  }
+  .playing-container{
+    transform: translate(-3%, -9%);
+
+  }
+
+}
   

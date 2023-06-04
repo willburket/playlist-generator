@@ -7,7 +7,7 @@ function CurrentSong(props){
 
         useEffect(() =>{
             if(music){
-                const subscription = music.addEventListener('queuePositionDidChange', () =>{
+                const subscription = music.addEventListener('queuePositionDidChange', () =>{      
                     const currentSong = music.queue.currentItem;
                     console.log(currentSong);
                     const displayString = `${currentSong.attributes.artistName} - ${currentSong.attributes.name}`;
