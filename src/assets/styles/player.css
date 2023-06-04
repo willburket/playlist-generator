@@ -14,7 +14,7 @@
 .display{
   /* max-width: 480px;
   min-width: 320px; */
-  width: 450px;
+  width: 425px;
   height: 4.5em;
   font-size: .75em;
   border-radius: 1em;
@@ -24,7 +24,8 @@
   align-items: center;
   display: flex;
   overflow: hidden;
-  background-color: #8f939a;
+  /* background-color: #8f939a; */
+  background-color: #82807f;
   z-index: 9997;
   /* z-index: 1; */
 }
@@ -33,13 +34,13 @@
   align-items: center;
   justify-content: center;
   display: flex;
-  width: 40%;
+  width: 45%;
   transform: translateX(-5%);
 }
 
 .display-right{
   display: flex;
-  width: 50%;
+  width: 60%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -52,6 +53,7 @@
   width: 15%;
   align-items: center;
   justify-content: center;
+  
   /* transform: translate(12%, -6%); */
 }
 
@@ -59,13 +61,16 @@
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
+  border-radius: 5%;
+  background-color: #484a4d;
+  transform: translateX(5px);
 }
 
 .playing-item{
-    width: 85%;
-    height: 85%;
+    width: 44px;
+    height: 44px;
     border-radius: 5%;
     object-fit: cover;
     display: flex;
@@ -73,7 +78,7 @@
     justify-content: center;
     position: relative;
     z-index: 1;
-    transform: translate(9%,9%);
+    transform: translate(7%,7%);
 }
 
 .player-button{
@@ -100,18 +105,19 @@
 
 .screen{
   /* width: 90%; */
-  width: 185px;
+  width: 175px;
   height: 3em;
   font-size: .75em;
   white-space: nowrap;
   /* overflow-x: hidden;
   overflow-y: hidden; */
   overflow: hidden;
-  border-radius: 1em;
+  border-radius: .8em;
   padding-left: 1em;
   padding-right: 1em;
   display: flex;
-  background-color: #c7ccd4;
+  /* background-color: #c7ccd4; */
+  background-color: #adaaa8;
   transform: translateX(5%);
 }
 
@@ -132,7 +138,7 @@
 .progress{
   /* position: sticky; */
   height: 1em;
-  width: 100%;
+  width: 95%;
   bottom: 0em;
   align-items: center;
   justify-content: center;
@@ -184,19 +190,19 @@
     height: 40%;
     width: 50%;
     justify-content: right;
-    transform: translate(24%,-125%);
+    transform: translate(23%,-107%);
   }
   .display-right{
     position: relative;
     height: 75%;
     right: 0;
     width: 65%;
-    transform: translate(19%,105%);
+    transform: translate(19%,100%);
   }
 
   .display-center{
     display: flex;
-    height: 100%;
+    height: 90%;
     width: 30%;
     align-items: center;
     justify-content: center;
@@ -207,14 +213,20 @@
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    width: 90px;
-    height: 90px;
-    transform: translate(5%, -7%);
+    /* width: 95%;
+    height: 95%; */
+    width: 80px;
+    height: 80px;
+    /* transform: translate(8%, -3%); */
+    transform: translate(10px,-3px);
   }
   
   .playing-item{
-      width: 90%;
-      height: 90%;
+      /* width: 90%;
+      height: 90%; */
+      width: 73px;
+      height: 73px;
+      transform: translate(3px,3px);
 
       
   }
@@ -240,11 +252,11 @@
   }
 
   .display-left{
-    transform: translate(32%,-125%);
+    transform: translate(32%,-105%);
   }
 
   .display-center{
-    transform: translate(-110%, 2%);
+    transform: translate(-110%, 5%);
   }
   .playing-container{
     transform: translate(-3%, -9%);
