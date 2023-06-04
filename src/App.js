@@ -21,7 +21,7 @@ class App extends React.Component{
 
   handleEvent = async () => {
     try{                                    
-      const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/jwt');  //http://localhost:3000/dev/jwt
+      const response = await fetch('http://localhost:3000/dev/jwt');  //http://localhost:3000/dev/jwt
       const data = await response.json() 
       this.setState({data})  
       const token = data.message.toString()

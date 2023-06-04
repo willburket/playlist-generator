@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../Navbar/Navbar";
-import AddSong from "../MusicPlayer/AddtoLibrary";
+import AddSong from "./AddtoLibrary";
 
 function Album(props){
     const search = useContext(SearchContext);
@@ -8,14 +8,6 @@ function Album(props){
     const [imgLink, setImgLink] = useState(null);
     const [isHovered,setIsHovered] = useState(false);
 
-    // const hover = () => {
-    //     setIsHovered(true);
-    //     // console.log(isHovered);
-    // }
-    // const endHover = () => {
-    //     setIsHovered(false);
-    //     // console.log(isHovered);
-    // }    
     const hoverOn = () => { 
         setIsHovered(true);
     }
@@ -30,23 +22,6 @@ function Album(props){
             setImgLink(link)
         }     
     }, [search]);
-    
-    // useEffect(() => {
-    //     let timeoutId;
-    
-    //     if (isHovered) {
-    //       timeoutId = setTimeout(() => {
-    //       }, 200); // Adjust the delay as needed
-    //     } else {
-    //       clearTimeout(timeoutId);
-    //     }
-    
-    //     return () => {
-    //       clearTimeout(timeoutId);
-    //     };
-    //   }, [isHovered]);   
-
-    // {`album-container ${isHovered ? "hovered": ""}`}
      
     return(
         <div>

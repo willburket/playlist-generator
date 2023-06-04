@@ -51,7 +51,7 @@ function Main(){
             if(selected){
                 setLoading(true);
                 await new Promise((resolve) => setTimeout(resolve, 2000))
-                const response = await fetch('https://c4827fb67a.execute-api.us-east-1.amazonaws.com/dev/genre', {  //http://localhost:3000/dev/genre for dev
+                const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
                 method: 'POST',                                              
                 headers: {
                     'Content-Type': 'text/plain'

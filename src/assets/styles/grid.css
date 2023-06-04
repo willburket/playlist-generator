@@ -45,8 +45,9 @@
     position: absolute;
     visibility: hidden;
     transform: translate(6%, -205%);
-    /* opacity: 0; */
-    /* transition: opacity 0.3s ease; */
+    /* overflow: hidden; */
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .album-hover.visible {
@@ -69,7 +70,7 @@
 }
 
 .album-cover.hovered{
-    filter: brightness(0.6);
+    filter: brightness(0.5);
 }
 
 .album-container{
