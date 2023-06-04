@@ -32,8 +32,8 @@ function Album(props){
                     onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}/> 
                     <AddSong song = {props.song.id}/>
                     <div className={`album-hover ${isHovered ? "visible": ""}`} onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}>
-                        <p>{props.song.attributes.artistName}</p>
                         <p>{props.song.attributes.name}</p>
+                        <p>{props.song.attributes.artistName}</p>
                     </div>
                 </div>
             }

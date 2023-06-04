@@ -24,6 +24,25 @@
     height: 100%;
 }
 
+.alert-container{
+    position: fixed;
+    top: 60px; /* Adjust the top position to accommodate the navbar height */
+    left: 0; /* Align the grid container to the left edge */
+    width: 100vw; /* Make the grid container span the full width */
+    height: calc(100vh - 60px); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    z-index: 9000;
+    /* overflow-y: scroll;
+    overflow-x: hidden;      
+    padding-top: 30px;  
+    padding-bottom: 30px;         
+    height: max-content; */
+    
+}
+
 .account-container{
     align-items: center;
     justify-content: center;

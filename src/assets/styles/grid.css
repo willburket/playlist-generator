@@ -76,7 +76,7 @@
 .album-container{
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
     width: 152px;
     height: 152px;
     
@@ -89,6 +89,9 @@
     overflow: hidden;
     position: relative;
   }
+  .add-button:hover{
+    filter: brightness(1.2);
+  }
   
   .add-container{
     position: relative;
@@ -98,7 +101,7 @@
     align-items: center;
     left: 0%;
     z-index: 3;
-    transform: translate(20%,-85%);
+    transform: translate(20%,-100%);
   }
   
 
@@ -140,6 +143,10 @@
     .album-cover {
         width: 200px;
         height: 200px;
+    }
+
+    .album-hover{
+        transform: translate(24%, -237%);
     }
 }
 
