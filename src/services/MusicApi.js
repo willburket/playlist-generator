@@ -25,3 +25,9 @@ export function getHeaders(token) {
       'Music-User-Token': music.musicUserToken,
     };
   }
+
+  export async function playItem(song){
+    const item = song;
+    console.log(song);
+
+  }

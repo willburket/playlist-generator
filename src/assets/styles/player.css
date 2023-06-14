@@ -8,7 +8,7 @@
   align-items: center;
   display: flex;
   z-index: 700;
-  transform: translateX(19%);
+  transform: translateX(28px);
 }
 
 .display{
@@ -25,6 +25,7 @@
   display: flex;
   overflow: hidden;
   /* background-color: #8f939a; */
+  border: .5px solid black;
   background-color: #82807f;
   z-index: 9997;
   /* z-index: 1; */
@@ -35,7 +36,7 @@
   justify-content: center;
   display: flex;
   width: 45%;
-  transform: translateX(-5%);
+  transform: translateX(-3px);
 }
 
 .display-right{
@@ -65,6 +66,7 @@
   height: 50px;
   border-radius: 5%;
   background-color: #484a4d;
+  border: .5px solid black;
   transform: translateX(5px);
 }
 
@@ -79,6 +81,7 @@
     position: relative;
     z-index: 1;
     transform: translate(7%,7%);
+    border: .25px solid black;
 }
 
 .player-button{
@@ -97,6 +100,7 @@
   min-width: 50px;
   justify-content: center;
   transition: filter 300ms;
+  border: .5px solid black;
 }
 
 .player-button:hover{
@@ -119,6 +123,7 @@
   /* background-color: #c7ccd4; */
   background-color: #adaaa8;
   transform: translateX(5%);
+  border: .5px solid black;
 }
 
 .song{
@@ -190,7 +195,7 @@
     height: 40%;
     width: 50%;
     justify-content: right;
-    transform: translate(26%,-107%);
+    transform: translate(28%,-107%);
   }
   .display-right{
     position: relative;
@@ -233,7 +238,7 @@
       
   }
   .progress{
-    transform: translateX(5%);
+    transform: translate(5%, -35%);
     bottom: 2em;
     width: 100%;
   }
@@ -254,7 +259,7 @@
   }
 
   .display-left{
-    transform: translate(32%,-105%);
+    transform: translate(35%,-105%);
   }
 
   .display-center{

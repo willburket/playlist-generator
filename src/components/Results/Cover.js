@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../Navbar/Navbar";
 import AddSong from "./AddtoLibrary";
+import Play from "./Play";
 
 function Album(props){
     const search = useContext(SearchContext);
@@ -31,6 +32,7 @@ function Album(props){
                     key = {props.song.id} alt = {props.song.id} 
                     onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}/> 
                     <AddSong song = {props.song.id}/>
+                    <Play song = {props.song.id}/>
                     <div className={`album-hover ${isHovered ? "visible": ""}`} onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}>
                         <p>{props.song.attributes.name}</p>
                         <p>{props.song.attributes.artistName}</p>

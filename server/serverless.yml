@@ -51,10 +51,3 @@ functions:
       - http:
           path: /history
           method: get
-
-  add:
-    handler: handlers/addSong.addSong
-    events:
-      - http:
-          path: /add
-          method: post

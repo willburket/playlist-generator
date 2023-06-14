@@ -44,7 +44,7 @@
     z-index: 2;
     position: absolute;
     visibility: hidden;
-    transform: translate(6%, -205%);
+    transform: translate(6%, -250%);
     /* overflow: hidden; */
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -56,10 +56,10 @@
 }
 
 .album-cover{
-    width: 100%;
-    height: 100%;
-    /* width: 152px;
-    height: 152px; */
+    /* width: 100%;
+    height: 100%; */
+    width: 150px;
+    height: 150px;
     border-radius: 5%;
     object-fit: cover;
     display: flex;
@@ -67,6 +67,7 @@
     justify-content: center;
     position: relative;
     z-index: 1;
+    border: .75px solid black;
 }
 
 .album-cover.hovered{
@@ -82,14 +83,14 @@
     
   }
   
-  .add-button{
+  .grid-button{
     width: 36px;
     height: 36px;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
   }
-  .add-button:hover{
+  .grid-button:hover{
     filter: brightness(1.2);
   }
   
@@ -102,6 +103,17 @@
     left: 0%;
     z-index: 3;
     transform: translate(20%,-100%);
+  }
+
+  .play-container{
+    position: relative;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+    align-items: center;
+    left: 75%;
+    z-index: 3;
+    transform: translateY(-203%);
   }
   
 
@@ -144,20 +156,24 @@
     }
 
     .album-cover {
-        width: 200px;
-        height: 200px;
+        width: 198px;
+        height: 198px;
     }
 
     .album-hover{
         transform: translate(24%, -237%);
     }
+
+    .play-container{
+        left: 80%;
+    }
+
 }
 
 @media (max-width: 500px){
     .grid-container{
         top: 180px;
     }
-
 
 }
 

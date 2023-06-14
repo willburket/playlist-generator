@@ -5,7 +5,6 @@ import { MusicKitContext } from "../../App";
 import { ReactComponent as NextIcon } from "../../assets/images/next.svg"
 import { ReactComponent as BackIcon } from "../../assets/images/back.svg"
 import { PlayButton, DisplayButton } from "./PlayerButtons";
-import CurrentSong from "./CurrentSong";
 import Screen from "./Screen";
 import NowPlaying from "./NowPlaying";
 // import { makeQueue, play, next, back } from "../../services/MusicPlayer";
@@ -23,7 +22,8 @@ function Player(){
             const id_array = search.map(function(song){
                 return song.id;
             });
-            await music.setQueue({songs: id_array, startPlaying: false});    
+            await music.setQueue({songs: id_array, startPlaying: false});  
+            
            
         }
         catch(err){
@@ -109,7 +109,6 @@ function Player(){
                     <NowPlaying music = {music} song = {song}/>
                 </div>
                 <div className= "display-right">
-                    {/* <CurrentSong music = {music}/> */}
                     <Screen music = {music} song = {song}/>
                 </div>
             </div>
