@@ -62,8 +62,7 @@ function Main(){
             
             const charts = [...data.message.songs[0].data];
             shuffle(charts);
-            setSearchResult(charts)
-            console.log(loading);
+            setSearchResult(charts);  
             setLoading(false);
             }
 

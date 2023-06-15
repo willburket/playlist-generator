@@ -8,6 +8,7 @@ function Album(props){
     const [hasSearched, sethasSearched] = useState(false);
     const [imgLink, setImgLink] = useState(null);
     const [isHovered,setIsHovered] = useState(false);
+    const playlist = search.slice(0,20);
 
     const hoverOn = () => { 
         setIsHovered(true);
@@ -32,7 +33,7 @@ function Album(props){
                     key = {props.song.id} alt = {props.song.id} 
                     onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}/> 
                     <AddSong song = {props.song.id}/>
-                    <Play song = {props.song.id}/>
+                    <Play song = {props.song} index = {props.index} queue = {playlist}/>
                     <div className={`album-hover ${isHovered ? "visible": ""}`} onMouseEnter= {hoverOn} onMouseLeave = {hoverOff}>
                         <p>{props.song.attributes.name}</p>
                         <p>{props.song.attributes.artistName}</p>

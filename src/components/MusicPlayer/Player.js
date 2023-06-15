@@ -23,8 +23,7 @@ function Player(){
                 return song.id;
             });
             await music.setQueue({songs: id_array, startPlaying: false});  
-            
-           
+            //console.log(search);
         }
         catch(err){
             console.log(err);

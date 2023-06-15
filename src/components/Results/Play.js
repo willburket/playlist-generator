@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { ReactComponent as PlayIcon} from "../../assets/images/play-circle.svg";  
 import { playItem } from "../../services/MusicApi";
 
+
 function Play(props){
     const song = props.song;
+    const index = props.index;
+    const queue = props.queue;
+
+    const [playing,setPlaying] = useState(false);
+
+    // use listener for when track changes 
+    // check music isplaying, if our song is playing set playing to true 
+
+
+
+    
 
     const onClick = async () => {
-        playItem(song);
+        playItem(index, queue);
     }
 
     
-    // keep track of place in the queue with id array (enumerate?)
-
-    // slice the queue at our given index 
-    // use setQueue with array as input
-    // play queue 
-    // show pause button while playing?
+    
 
     return(
     <div className="play-container">

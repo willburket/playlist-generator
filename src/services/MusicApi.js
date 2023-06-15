@@ -26,8 +26,29 @@ export function getHeaders(token) {
     };
   }
 
-  export async function playItem(song){
-    const item = song;
-    console.log(song);
+export async function playItem(index, playlist){
+  const queue = playlist.slice(index,20);
+  const id_array = queue.map(function(song){
+    return song.id;
+  });
+  const music = window.MusicKit.getInstance();
+  await music.setQueue({songs: id_array, startPlaying: true});   
+}
 
+export function getPlayingItem() {
+  return window.MusicKit.getInstance().player.nowPlayingItem;
+}
+
+export function isCurrentTrack(song) {
+  const playing = getPlayingItem();
+
+  if (!playing) {
+    return false;
   }
+
+  return (song.id === playing.id);
+}
+
+export function isTrackPlaying(song) {
+  return window.MusicKit.getInstance().player.isPlaying && isCurrentTrack(song);
+}
