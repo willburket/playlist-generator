@@ -86,7 +86,7 @@ function Player(){
             if(music){
                 const subscription = music.addEventListener('queuePositionDidChange', () =>{      
                     const currentSong = music.queue.currentItem;
-                    console.log(currentSong);
+                    //console.log(currentSong);
                     setSong(currentSong);
                 });
     

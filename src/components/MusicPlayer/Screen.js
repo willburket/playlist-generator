@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 function Screen(props){
-    const music = props.music
     const song = props.song
     const [display, setDisplay] = useState(null);
 

@@ -15,10 +15,11 @@ function AddSong(props){
     const onClick = async () => {
       const songId = props.song;
       const mediaType = 'songs';
-        // check if song is added?
+      
         
       if (!music.isAuthorized){
-        console.log("please sign in");
+        // console.log("please sign in");
+        alert("Please sign into your Apple Music");
         return
       }
       else{

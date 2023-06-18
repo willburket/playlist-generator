@@ -9,9 +9,11 @@ export async function addToLibrary(song, token, mediaType) {
         url: `https://api.music.apple.com/v1/me/library?ids[${mediaType}]=${song}`,
         headers: getHeaders(token),
       });
-      console.log("Added tracks to your library, they'll show up in a few seconds. Hold tight!");
+      // console.log("Added tracks to your library, they'll show up in a few seconds. Hold tight!");
+      // alert("Added tracks to your library, they'll show up in a few seconds. Hold tight!");
     } catch (error) {
-      console.log("We're unable to add these tracks to your library.");
+      // console.log("We're unable to add these tracks to your library.");
+      alert("We're unable to add these tracks to your library.");
     }
   }
 

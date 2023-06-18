@@ -28,6 +28,7 @@
   border: .5px solid black;
   background-color: #82807f;
   z-index: 9997;
+  
   /* z-index: 1; */
 }
 
@@ -80,8 +81,9 @@
     justify-content: center;
     position: relative;
     z-index: 1;
-    transform: translate(7%,7%);
+    transform: translate(6%,6%);
     border: .25px solid black;
+    filter:brightness(0.8)
 }
 
 .player-button{
@@ -195,14 +197,14 @@
     height: 40%;
     width: 50%;
     justify-content: right;
-    transform: translate(28%,-107%);
+    transform: translate(20.5%,-107%);
   }
   .display-right{
     position: relative;
     height: 75%;
     right: 0;
-    width: 65%;
-    transform: translate(19%,100%);
+    width: 70%;
+    transform: translate(12.5%,100%);
   }
 
   .display-center{
@@ -224,8 +226,8 @@
     height: 95%; */
     width: 80px;
     height: 80px;
-    /* transform: translate(8%, -3%); */
-    transform: translate(10px,-3px);
+    /* transform: translate(10px,-3px); */
+    transform: translate(-3%,-3%);
   }
   
   .playing-item{
@@ -233,9 +235,7 @@
       height: 90%; */
       width: 73px;
       height: 73px;
-      transform: translate(3px,3px);
-
-      
+      transform: translate(3.5%,4%); 
   }
   .progress{
     transform: translate(5%, -35%);
@@ -244,7 +244,8 @@
   }
   .screen{
     /* width: 260px; */
-    width: 210px;
+    width: 240px;
+    transform: translate(5%,-10%);
   }
 
 }
@@ -255,11 +256,17 @@
   }
 
   .screen{
-    width: 185px;
+    width: 195px;
+    transform: translate(8.5%,-10%);
+  }
+
+  .progress{
+    transform: translate(8.5%,-40%);
+
   }
 
   .display-left{
-    transform: translate(35%,-105%);
+    transform: translate(31.5%,-105%);
   }
 
   .display-center{

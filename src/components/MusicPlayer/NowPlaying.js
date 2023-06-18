@@ -1,23 +1,22 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useEffect, useState} from "react";
 import {ReactComponent as Record} from "../../assets/images/record.svg"
 
 function NowPlaying(props){
     const song = props.song;
-    const music = props.music;
     const [imgLink, setImgLink] = useState(null);
     const [svgSize,setSvgSize] = useState(null)
 
-    const getSvgSize = () =>{
-        if (window.innerWidth >= 500) {
-            // Return the larger SVG size for screens larger than or equal to 768px
-            return 50;
-          } 
-        else {
-            // Return the smaller SVG size for screens smaller than 768px
-            return 80;
-          }
+    // const getSvgSize = () =>{
+    //     if (window.innerWidth >= 500) {
+    //         // Return the larger SVG size for screens larger than or equal to 768px
+    //         return 50;
+    //       } 
+    //     else {
+    //         // Return the smaller SVG size for screens smaller than 768px
+    //         return 80;
+    //       }
 
-    }
+    // }
 
     useEffect(() => {
         if (window.innerWidth >= 500) {
