@@ -1,10 +1,12 @@
 const token = require("./jwt");
+const userToken = require("./userToken");
 
 const axios = require("axios").create({
   baseURL: 'https://api.music.apple.com',
   headers:{
       Authorization: `Bearer ${token.token}`,   // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
-},
+      'Music-User-Token': userToken.userToken, 
+    },
 });
 
 export const fetchRecentSongs = async (event) => {
@@ -19,7 +21,7 @@ export const fetchRecentSongs = async (event) => {
         // genre: requestBody,
       }
     });
-    const songs = recent.data.results;
+    const songs = recent.data;
     const response = {
       statusCode: 200,
       headers:{

@@ -504,6 +504,24 @@ const token = jwt.sign({}, private_key, {
 
 /***/ }),
 
+/***/ "../../../handlers/userToken.js":
+/*!**************************************!*\
+  !*** ../../../handlers/userToken.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   userToken: () => (/* binding */ userToken)
+/* harmony export */ });
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
+
+const userToken = 'Ap2vfzEjyn4zh32Z9DsqI/mUEsTuXQ6rN7oVmSv5TPqah3kqjh8src4VIXb30u0Jx8v4H2aHlU1gfmr5vj4nhsB2iy3YM+UqA105LHW39mfgN0/JhfuA9zVKcCO3ixCeuHN0sdrOnzyN7UQMDoZ4zDXbHm4mDiMFfGXhFASYFIIaSQxK9v06sO8yTMD1UzptcFEqZYH1zqmANG8YRk0MCeX/W159qT5gpPkGZKUgmBCd/Qua4w==';
+
+/***/ }),
+
 /***/ "../../buffer-equal-constant-time/index.js":
 /*!*************************************************!*\
   !*** ../../buffer-equal-constant-time/index.js ***!
@@ -16449,13 +16467,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 const token = __webpack_require__(/*! ./jwt */ "../../../handlers/jwt.js");
+const userToken = __webpack_require__(/*! ./userToken */ "../../../handlers/userToken.js");
 const axios = (__webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs").create)({
   baseURL: 'https://api.music.apple.com',
   headers: {
-    Authorization: `Bearer ${token.token}` // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
+    Authorization: `Bearer ${token.token}`,
+    // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
+    'Music-User-Token': userToken.userToken
   }
 });
-
 const fetchRecentSongs = async event => {
   //   const requestBody = JSON.parse(event.body);
 
@@ -16468,7 +16488,7 @@ const fetchRecentSongs = async event => {
       }
     });
 
-    const songs = recent.data.results;
+    const songs = recent.data;
     const response = {
       statusCode: 200,
       headers: {
