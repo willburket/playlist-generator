@@ -6,8 +6,10 @@ import AlbumCovers from "../Results/Grid";
 import SearchButton from "./SearchButton";
 import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
-import { MusicKitContext } from "../../App";
+import { MusicKitContext, TokenContext } from "../../App";
 import Player from "../MusicPlayer/Player";
+import { fetchLibrary } from "../../services/MusicApi";
+
 
 
 const SearchContext = createContext(null);  
@@ -20,12 +22,16 @@ function Main(){
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(null);
     const [isAuthorized, setIsAuthorized] = useState(false); 
+    const token = useContext(TokenContext);
+
 
     function Navbar(props){   
 
         useEffect(() => {
             if (music){
                 setIsAuthorized(music.isAuthorized)
+                const userToken = window.MusicKit.getInstance().musicUserToken;
+                console.log(userToken);
             }
         }, [music, loading]);
             
@@ -58,8 +64,12 @@ function Main(){
             },
             body: selected.id
               })
-            const data = await response.json();
+            // const data = fetchLibrary(25, token);
             
+            // console.log(data)
+            // const charts = [...data]
+            
+            const data = await response.json();
             const charts = [...data.message.songs[0].data];
             shuffle(charts);
             setSearchResult(charts);  

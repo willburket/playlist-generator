@@ -51,3 +51,10 @@ functions:
       - http:
           path: /history
           method: get
+
+  library:
+    handler: handlers/library.fetchLibrary
+    events:
+      - http:
+          path: /library
+          method: get

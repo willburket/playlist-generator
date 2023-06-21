@@ -15,7 +15,27 @@ export async function addToLibrary(song, token, mediaType) {
       // console.log("We're unable to add these tracks to your library.");
       alert("We're unable to add these tracks to your library.");
     }
+}
+
+export async function fetchLibrary(limit, token) {
+    
+  try {
+    const response = await axios({
+      method: 'get',
+      // url: `${API_URL}/v1/me/library?ids[${mediaType}]=${song}`,
+      url: 'https://api.music.apple.com/v1/me/library/songs',
+      headers: getHeaders(token),
+      params: {
+        limit: limit,
+      }
+    });
+    return response.data
+  } catch (error) {
+    // console.log("We're unable to add these tracks to your library.");
+    alert("We're unable to fetch your library.");
   }
+   
+}
 
 export function getHeaders(token) {
     const music = window.MusicKit.getInstance();
@@ -37,6 +57,8 @@ export async function playItem(index, playlist){
   await music.setQueue({songs: id_array, startPlaying: true});   
 }
 
+
+// delete these?
 export function getPlayingItem() {
   return window.MusicKit.getInstance().player.nowPlayingItem;
 }
