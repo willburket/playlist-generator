@@ -504,6 +504,24 @@ const token = jwt.sign({}, private_key, {
 
 /***/ }),
 
+/***/ "../../../handlers/userToken.js":
+/*!**************************************!*\
+  !*** ../../../handlers/userToken.js ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   userToken: () => (/* binding */ userToken)
+/* harmony export */ });
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
+
+const userToken = 'AovbjechKVTjx5T95fuAtF5CK481DFbAEE8wiAZ5MwINGpbyZsREwu8MCTXMBRz/F476Tm+VfCokYzlHry76gQH1X5YMWR+yyZaUT9TNod7FNTXQHRWfreN3F13Ja2Y9jEPajlBuV/snjDwshye17FH5dasimF4BfgJSAnNbohm/eLdMiV013wZmsHwujR/r9brJ03XGmaXv5p5TE6ns71V7OobYgNYhtUo8sGmVImYoT+Kf+Q==';
+
+/***/ }),
+
 /***/ "../../buffer-equal-constant-time/index.js":
 /*!*************************************************!*\
   !*** ../../buffer-equal-constant-time/index.js ***!
@@ -16438,47 +16456,44 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************************!*\
-  !*** ../../../handlers/library.js ***!
-  \************************************/
+/*!********************************************!*\
+  !*** ../../../handlers/recommendations.js ***!
+  \********************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   fetchLibrary: () => (/* binding */ fetchLibrary)
+/* harmony export */   fetchRecommendations: () => (/* binding */ fetchRecommendations)
 /* harmony export */ });
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 const token = __webpack_require__(/*! ./jwt */ "../../../handlers/jwt.js");
-//const userToken = require("./userToken");
+const userToken = __webpack_require__(/*! ./userToken */ "../../../handlers/userToken.js");
+const axios = (__webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs").create)({
+  baseURL: 'https://api.music.apple.com',
+  headers: {
+    Authorization: `Bearer ${token.token}`,
+    // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
+    'Music-User-Token': userToken.userToken
+  }
+});
+const fetchRecommendations = async event => {
+  //   const requestBody = JSON.parse(event.body);
 
-const axios = __webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs");
-const fetchLibrary = async event => {
-  const storefront = 'us'; // change later
-  //   const userToken = JSON.parse(event.body);
-  const userToken = event.headers.Authorization.split(' ')[1];
-  console.log(userToken);
-  const axiosInstance = axios.create({
-    baseURL: 'https://api.music.apple.com',
-    headers: {
-      Authorization: `Bearer ${token.token}`,
-      // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
-      //   Accept: 'application/json',
-      //   'Content-Type': ',
-      'Music-User-Token': userToken
-    }
-  });
   try {
-    const playlist = await axiosInstance.get(`/v1/me/library/songs`, {
+    const recent = await axios.get(`/v1/me/recommendations`, {
       params: {
-        limit: 25
+        types: 'songs',
+        limit: 30
+        // genre: requestBody,
       }
     });
-    const songs = playlist.data;
+
+    const songs = recent.data;
     const response = {
       statusCode: 200,
       headers: {
         'Access-Control-Allow-Origin': 'https://playlinq.io',
-        'Access-Control-Allow-Origin': 'http://localhost:3001',
+        // maybe set this as .env var?
         'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify({
@@ -16489,7 +16504,6 @@ const fetchLibrary = async event => {
     };
     return response;
   } catch (error) {
-    console.log(error.message);
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -16506,4 +16520,4 @@ for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_expor
 if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });
 /******/ })()
 ;
-//# sourceMappingURL=library.js.map
+//# sourceMappingURL=recommendations.js.map

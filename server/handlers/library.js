@@ -1,26 +1,29 @@
 const token = require("./jwt");
-const userToken = require("./userToken");
+//const userToken = require("./userToken");
 
 
-const axios = require("axios").create({
-  baseURL: 'https://api.music.apple.com',
-  headers:{
-      Authorization: `Bearer ${token.token}`,   // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
-    //   Accept: 'application/json',
-    //   'Content-Type': 'application/json',
-      'Music-User-Token': userToken.userToken,  
-},
-});
+const axios = require("axios");
 
 export const fetchLibrary = async (event) => {
-  const storefront = 'us';    // change later
-  const requestBody = JSON.parse(event.body);
-   // include music user token in http request to apple music
+    const storefront = 'us';    // change later
+//   const userToken = JSON.parse(event.body);
+    const userToken = event.headers.Authorization.split(' ')[1];
+    console.log(userToken)
+
+  const axiosInstance = axios.create({
+    baseURL: 'https://api.music.apple.com',
+    headers:{
+        Authorization: `Bearer ${token.token}`,   // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
+      //   Accept: 'application/json',
+      //   'Content-Type': ',
+        'Music-User-Token': userToken,  
+  },
+  });
 
   try {
-    const playlist = await axios.get(`/v1/me/library/songs`, {
+    const playlist = await axiosInstance.get(`/v1/me/library/songs`, {
       params: {
-        limit: 200,
+        limit: 25,
       }
     });
     const songs = playlist.data;
@@ -40,6 +43,7 @@ export const fetchLibrary = async (event) => {
       )};
     return response;
   } catch(error){
+    console.log(error.message)
     return {
       statusCode: 500,
       body: JSON.stringify({

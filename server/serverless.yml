@@ -46,10 +46,10 @@ functions:
           method: post
 
   recent:
-    handler: handlers/recent.fetchRecentSongs
+    handler: handlers/recentSongs.fetchRecentSongs
     events:
       - http:
-          path: /history
+          path: /recent
           method: get
 
   library:
@@ -57,4 +57,18 @@ functions:
     events:
       - http:
           path: /library
+          method: get
+  
+  rotation:
+    handler: handlers/heavyRotation.fetchHeavyRotation
+    events:
+      - http:
+          path: /rotation
+          method: get
+  
+  recommendations:
+    handler: handlers/recommendations.fetchRecommendations
+    events:
+      - http:
+          path: /recommendations
           method: get

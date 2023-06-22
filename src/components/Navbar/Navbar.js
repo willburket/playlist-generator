@@ -8,7 +8,7 @@ import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
 import { MusicKitContext, TokenContext } from "../../App";
 import Player from "../MusicPlayer/Player";
-import { fetchLibrary } from "../../services/MusicApi";
+import { fetchLibrary, fetchRecent } from "../../services/MusicApi";
 
 
 
@@ -30,8 +30,7 @@ function Main(){
         useEffect(() => {
             if (music){
                 setIsAuthorized(music.isAuthorized)
-                const userToken = window.MusicKit.getInstance().musicUserToken;
-                console.log(userToken);
+                
             }
         }, [music, loading]);
             
@@ -64,10 +63,6 @@ function Main(){
             },
             body: selected.id
               })
-            // const data = fetchLibrary(25, token);
-            
-            // console.log(data)
-            // const charts = [...data]
             
             const data = await response.json();
             const charts = [...data.message.songs[0].data];
@@ -76,12 +71,16 @@ function Main(){
             setLoading(false);
             }
 
+            const recent = await fetchRecent();
+            console.log(recent.message.data)
+
         }
 
-        async function handleStatusChange(){
+        async function authStatusChange(){
             try{
                 if (isAuthorized === false){               
                     await music.authorize();
+
                 }
                 else{
                     await music.unauthorize();
@@ -177,7 +176,7 @@ function Main(){
                     </GenreNavItem>
                     <SearchButton onClick = {genreSearch}/>
                     {/* <Auth music = {music}/> */}
-                    <AuthButton music = {music} onClick = {handleStatusChange} auth = {isAuthorized}/>
+                    <AuthButton music = {music} onClick = {authStatusChange} auth = {isAuthorized}/>
                 </ul>
             </nav>  
         );

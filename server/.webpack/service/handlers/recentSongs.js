@@ -16438,23 +16438,21 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!************************************!*\
-  !*** ../../../handlers/library.js ***!
-  \************************************/
+/*!****************************************!*\
+  !*** ../../../handlers/recentSongs.js ***!
+  \****************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   fetchLibrary: () => (/* binding */ fetchLibrary)
+/* harmony export */   fetchRecentSongs: () => (/* binding */ fetchRecentSongs)
 /* harmony export */ });
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 const token = __webpack_require__(/*! ./jwt */ "../../../handlers/jwt.js");
-//const userToken = require("./userToken");
+// const userToken = require("./userToken");
 
 const axios = __webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs");
-const fetchLibrary = async event => {
-  const storefront = 'us'; // change later
-  //   const userToken = JSON.parse(event.body);
+const fetchRecentSongs = async event => {
   const userToken = event.headers.Authorization.split(' ')[1];
   console.log(userToken);
   const axiosInstance = axios.create({
@@ -16462,22 +16460,27 @@ const fetchLibrary = async event => {
     headers: {
       Authorization: `Bearer ${token.token}`,
       // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
-      //   Accept: 'application/json',
-      //   'Content-Type': ',
       'Music-User-Token': userToken
     }
   });
+
+  //   const requestBody = JSON.parse(event.body);
+
   try {
-    const playlist = await axiosInstance.get(`/v1/me/library/songs`, {
+    const recent = await axiosInstance.get(`/v1/me/recent/played/tracks`, {
       params: {
-        limit: 25
+        types: 'songs',
+        limit: 30
+        // genre: requestBody,
       }
     });
-    const songs = playlist.data;
+
+    const songs = recent.data;
     const response = {
       statusCode: 200,
       headers: {
         'Access-Control-Allow-Origin': 'https://playlinq.io',
+        // maybe set this as .env var?
         'Access-Control-Allow-Origin': 'http://localhost:3001',
         'Access-Control-Allow-Credentials': true
       },
@@ -16489,7 +16492,6 @@ const fetchLibrary = async event => {
     };
     return response;
   } catch (error) {
-    console.log(error.message);
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -16506,4 +16508,4 @@ for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_expor
 if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });
 /******/ })()
 ;
-//# sourceMappingURL=library.js.map
+//# sourceMappingURL=recentSongs.js.map

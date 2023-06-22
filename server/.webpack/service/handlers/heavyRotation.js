@@ -518,7 +518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
-const userToken = 'Ap2vfzEjyn4zh32Z9DsqI/mUEsTuXQ6rN7oVmSv5TPqah3kqjh8src4VIXb30u0Jx8v4H2aHlU1gfmr5vj4nhsB2iy3YM+UqA105LHW39mfgN0/JhfuA9zVKcCO3ixCeuHN0sdrOnzyN7UQMDoZ4zDXbHm4mDiMFfGXhFASYFIIaSQxK9v06sO8yTMD1UzptcFEqZYH1zqmANG8YRk0MCeX/W159qT5gpPkGZKUgmBCd/Qua4w==';
+const userToken = 'AovbjechKVTjx5T95fuAtF5CK481DFbAEE8wiAZ5MwINGpbyZsREwu8MCTXMBRz/F476Tm+VfCokYzlHry76gQH1X5YMWR+yyZaUT9TNod7FNTXQHRWfreN3F13Ja2Y9jEPajlBuV/snjDwshye17FH5dasimF4BfgJSAnNbohm/eLdMiV013wZmsHwujR/r9brJ03XGmaXv5p5TE6ns71V7OobYgNYhtUo8sGmVImYoT+Kf+Q==';
 
 /***/ }),
 
@@ -16456,12 +16456,12 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!***********************************!*\
-  !*** ../../../handlers/recent.js ***!
-  \***********************************/
+/*!******************************************!*\
+  !*** ../../../handlers/heavyRotation.js ***!
+  \******************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   fetchRecentSongs: () => (/* binding */ fetchRecentSongs)
+/* harmony export */   fetchHeavyRotation: () => (/* binding */ fetchHeavyRotation)
 /* harmony export */ });
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
@@ -16476,11 +16476,11 @@ const axios = (__webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs
     'Music-User-Token': userToken.userToken
   }
 });
-const fetchRecentSongs = async event => {
+const fetchHeavyRotation = async event => {
   //   const requestBody = JSON.parse(event.body);
 
   try {
-    const recent = await axios.get(`/v1/me/recent/played/tracks`, {
+    const recent = await axios.get(`/v1/me/history/heavy-rotation`, {
       params: {
         types: 'songs',
         limit: 30
@@ -16520,4 +16520,4 @@ for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_expor
 if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });
 /******/ })()
 ;
-//# sourceMappingURL=recent.js.map
+//# sourceMappingURL=heavyRotation.js.map

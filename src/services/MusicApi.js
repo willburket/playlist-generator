@@ -34,8 +34,22 @@ export async function fetchLibrary(limit, token) {
     // console.log("We're unable to add these tracks to your library.");
     alert("We're unable to fetch your library.");
   }
-   
 }
+export async function fetchRecent(){
+  const userToken = window.MusicKit.getInstance().musicUserToken;
+  const response = await fetch('http://localhost:3000/dev/recent', {  
+        method: 'GET',                                              
+        headers: {
+            'Authorization' : `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+        },
+        });
+
+    const data = await response.json();
+    return data;
+          
+}
+
 
 export function getHeaders(token) {
     const music = window.MusicKit.getInstance();
