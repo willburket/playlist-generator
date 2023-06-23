@@ -60,7 +60,7 @@ functions:
           method: get
   
   rotation:
-    handler: handlers/heavyRotation.fetchHeavyRotation
+    handler: handlers/rotation.fetchRotation
     events:
       - http:
           path: /rotation

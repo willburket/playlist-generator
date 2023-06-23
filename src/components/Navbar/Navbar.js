@@ -8,7 +8,7 @@ import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
 import { MusicKitContext, TokenContext } from "../../App";
 import Player from "../MusicPlayer/Player";
-import { fetchLibrary, fetchRecent } from "../../services/MusicApi";
+import { fetchLibrary, fetchRecent, fetchRotation, fetchRecommendations } from "../../services/MusicApi";
 
 
 
@@ -71,8 +71,17 @@ function Main(){
             setLoading(false);
             }
 
-            const recent = await fetchRecent();
-            console.log(recent.message.data)
+            // const recent = await fetchRecent();
+            // console.log(recent.message.data)
+
+            // const library = await fetchLibrary();
+            // console.log(library.message.data);
+
+            // const rotation = await fetchRotation();
+            // console.log(rotation.message.data);
+
+            const recs = await fetchRecommendations();
+            console.log(recs.message.data);
 
         }
 

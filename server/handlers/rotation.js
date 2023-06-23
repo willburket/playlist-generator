@@ -1,9 +1,7 @@
 const token = require("./jwt");
-
-
 const axios = require("axios");
 
-export const fetchRecommendations = async (event) => {
+export const fetchRotation = async (event) => {
 
     const userToken = event.headers.Authorization.split(' ')[1];
     console.log(userToken);
@@ -17,13 +15,13 @@ export const fetchRecommendations = async (event) => {
       });
 
   try {
-    const recommendations = await axiosInstance.get(`/v1/me/recommendations`, {
+    const rotation = await axiosInstance.get(`/v1/me/history/heavy-rotation`, {
       params: {
+        types: 'songs',
         limit: 30,
-        // genre: requestBody,
       }
     });
-    const songs = recommendations.data;
+    const songs = rotation.data;
     const response = {
       statusCode: 200,
       headers:{
