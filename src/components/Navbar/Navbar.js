@@ -71,12 +71,10 @@ function Main(){
             setLoading(false);
             }
 
-            // const artist = await fetchArtistSongs();
-            // console.log(artist.message.data)
-
             const profile = await fetchProfile();
-            const profileSongs = profile.message.data
-            console.log(profileSongs);
+            // const profileSongs = profile.message.data
+            const profileArtists = profile
+            console.log(profileArtists);
 
         }
 
@@ -179,7 +177,6 @@ function Main(){
                         </DropdownMenu>   
                     </GenreNavItem>
                     <SearchButton onClick = {genreSearch}/>
-                    {/* <Auth music = {music}/> */}
                     <AuthButton music = {music} onClick = {authStatusChange} auth = {isAuthorized}/>
                 </ul>
             </nav>  
@@ -191,7 +188,6 @@ function Main(){
         <div data-testid = "navbar">
             <Navbar/>
             <SearchContext.Provider value = {searchResult}>
-            {/* <MusicPlayer/> */}
             <Player/>
                     <LoadContext.Provider value = {loading}>
                         <Home/> 

@@ -20,6 +20,59 @@ export const fetchRecentSongs = async (event) => {
     };
 };
 
+export const fetchLibrary = async (event) => {
+
+    const userToken = event
+    const axiosInstance = getAxios(userToken);
+
+    try {
+        const recent = await axiosInstance.get(`/v1/me/library/songs`, {
+        params: {
+            limit: 30,
+        }
+        });
+        const songs = recent.data;
+        return songs;
+    } catch(error){
+        console.log(error);
+    };
+};
+
+export const fetchLibraryArtists = async (event) => {
+
+    const userToken = event
+    const axiosInstance = getAxios(userToken);
+
+    try {
+        const recent = await axiosInstance.get(`/v1/me/library/artists`, {
+        params: {
+            limit: 30,
+        }
+        });
+        const songs = recent.data;
+        return songs;
+    } catch(error){
+        console.log(error);
+    };
+};
+
+export const fetchArtistSongs = async (event) => {
+
+
+    const userToken = event
+    const axiosInstance = getAxios(userToken);
+    const storefront = 'us'
+    const id = 'r.QAsBnyy'
+
+    try {
+        const recent = await axiosInstance.get(`/v1/me/library/artists/${id}/tracks`);
+        const songs = recent.data;
+        return songs;
+    } catch(error){
+        console.log(error);
+    };
+};
+
 export const getAxios = (event) => {
     const userToken = event;
     const axiosInstance = axios.create({

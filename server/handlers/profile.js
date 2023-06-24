@@ -1,7 +1,5 @@
-const apple = require("../utils/musicApi")
-// const userToken = require("./userToken");
-
-const axios = require("axios");
+const apple = require("../utils/musicApi");
+const playlist = require("../utils/playlist")
 
 export const fetchProfile = async (event) => {
 
@@ -9,8 +7,18 @@ export const fetchProfile = async (event) => {
     console.log(userToken);
 
     try {
-        const songs = await apple.fetchRecentSongs(userToken);
-        console.log(songs);
+        const recentArtistsSet = await playlist.fetchRecentArtists(userToken);
+       
+        // const library = await apple.fetchLibrary(userToken);
+        // const artistSongs = await apple.fetchArtistSongs(userToken);
+        console.log(recentArtistsSet);
+        
+        // grab songs from artists in recent, library, recs, etc.
+        // filter out songs in recent, lib, recs, etc.
+        // create set?
+        // sort by genre 
+        // cache 
+
     const response = {
       statusCode: 200,
       headers:{
@@ -20,7 +28,7 @@ export const fetchProfile = async (event) => {
       },
       body: JSON.stringify(
         {
-          message: songs
+          message: recentArtistsSet
         },
         null,           // lets figure out what all this means
         2
@@ -32,5 +40,4 @@ export const fetchProfile = async (event) => {
       body: JSON.stringify({ error: error.message }),
     };
   };
-
 };
