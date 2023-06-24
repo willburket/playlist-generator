@@ -72,3 +72,17 @@ functions:
       - http:
           path: /recommendations
           method: get
+  
+  artist:
+    handler: handlers/artistSongs.fetchArtistSongs
+    events:
+      - http:
+          path: /artist
+          method: get
+  
+  profile:
+    handler: handlers/profile.fetchProfile
+    events:
+      - http:
+          path: /profile
+          method: get

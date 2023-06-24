@@ -71,6 +71,34 @@ export async function fetchRotation(){
     return data;
 }
 
+export async function fetchArtistSongs(){
+  const userToken = window.MusicKit.getInstance().musicUserToken;
+  const response = await fetch('http://localhost:3000/dev/artist', {  
+        method: 'GET',                                              
+        headers: {
+            'Authorization' : `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+        },
+        });
+
+    const data = await response.json();
+    return data;
+}
+
+export async function fetchProfile(){
+  const userToken = window.MusicKit.getInstance().musicUserToken;
+  const response = await fetch('http://localhost:3000/dev/profile', {  
+        method: 'GET',                                              
+        headers: {
+            'Authorization' : `Bearer ${userToken}`,
+            'Content-Type': 'application/json'
+        },
+        });
+
+    const data = await response.json();
+    return data;
+}
+
 export async function fetchRecommendations(){
   const userToken = window.MusicKit.getInstance().musicUserToken;
   const response = await fetch('http://localhost:3000/dev/recommendations', {  
