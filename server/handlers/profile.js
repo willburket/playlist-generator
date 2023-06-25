@@ -2,15 +2,22 @@ const apple = require("../utils/musicApi");
 const playlist = require("../utils/playlist")
 
 export const fetchProfile = async (event) => {
-
+    
+    const recentArtistsSongs = new Set();
     const userToken = event.headers.Authorization.split(' ')[1];
-    console.log(userToken);
+    const item = '1097177293'
+    // console.log(userToken);
 
     try {
-        const recentArtistsSongs = await apple.searchRecentArtists(userToken);
-        // console.log(recentArtistsSongs);
+        const recentArtists = await apple.searchRecentArtists(userToken);
+        // for (const item of recentArtists){
+        //     const songs = await apple.fetchArtistSongs(userToken, item);      
+        //     console.log(songs)
+        //     recentArtistsSongs.add(...songs)
+        // }
         
-        
+        const songs = await apple.fetchArtistSongs(userToken, item);      
+        console.log(songs.data);
         // grab songs from artists in recent, library, recs, etc.
         // filter out songs in recent, lib, recs, etc.
         // create set?

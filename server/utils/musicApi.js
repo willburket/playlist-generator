@@ -56,16 +56,13 @@ export const fetchLibraryArtists = async (event) => {
     };
 };
 
-export const fetchArtistSongs = async (event) => {
+export const fetchArtistSongs = async (userToken, id) => {
 
 
-    const userToken = event
     const axiosInstance = getAxios(userToken);
     const storefront = 'us'
-    const id = 'r.QAsBnyy'
-
     try {
-        const recent = await axiosInstance.get(`/v1/me/library/artists/${id}/tracks`);
+        const recent = await axiosInstance.get(`/v1/catalog/${storefront}/artists/${id}/songs`);
         const songs = recent.data;
         return songs;
     } catch(error){
@@ -107,10 +104,10 @@ export const searchRecentArtists = async (event) =>{
     
     try{
         const recentArtists = await fetchRecentArtists(userToken);
-        const recentArtistsSongs = processArtistSet(userToken, recentArtists);
-        console.log(recentArtistsSongs)
+        const recentArtistIds = await getArtistIds(userToken, recentArtists);
+
         
-        return recentArtistsSongs
+        return recentArtistIds
     }
     catch(error){
         console.log(error)
@@ -132,9 +129,8 @@ export const searchArtist = async (userToken, searchTerm) =>{
                 }
                 });
             
-            
             const songs = search.data.results.songs.data;
-            // console.log(songs)
+             
             return songs;
         } catch(error){
             console.log(error);
@@ -153,3 +149,41 @@ export const processArtistSet = async (userToken,artists) => {
     return recentArtistsSongs;
 
 }
+
+export const getArtistIds = async (userToken,artists) => {
+    const recentArtistIds = new Set();
+    
+
+    for (const item of artists){
+        const id = await searchArtistId(userToken, item);    
+        if(id !== undefined){
+            recentArtistIds.add(id);
+        }   
+    }
+    return recentArtistIds;
+
+}
+
+
+export const searchArtistId = async (userToken, searchTerm) =>{
+    const axiosInstance = getAxios(userToken);
+    const storefront = 'us';
+
+    try {
+       
+        const search = await axiosInstance.get(`/v1/catalog/${storefront}/search`, {
+            params: {
+                term: searchTerm,
+                limit: 1,
+                types: 'artists',
+            }
+        })
+
+        const artistId = search.data.results.artists.data[0].id
+            
+        return artistId;
+    } catch(error){
+        // console.log(error);
+    };
+}
+
