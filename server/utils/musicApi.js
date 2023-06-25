@@ -85,3 +85,71 @@ export const getAxios = (event) => {
 
     return axiosInstance;
 }
+
+export const fetchRecentArtists = async (event) => {
+
+    const userToken = event
+
+    try {
+        const recent = await fetchRecentSongs(userToken);
+        const recentArray = recent.data;
+        const recentArtists = recentArray.map( song => song.attributes.artistName);
+        const recentArtistsSet = new Set(recentArtists);
+        return recentArtistsSet;
+
+    } catch(error){
+        console.log(error);
+    };
+};
+
+export const searchRecentArtists = async (event) =>{
+    const userToken = event;
+    
+    try{
+        const recentArtists = await fetchRecentArtists(userToken);
+        const recentArtistsSongs = processArtistSet(userToken, recentArtists);
+        console.log(recentArtistsSongs)
+        
+        return recentArtistsSongs
+    }
+    catch(error){
+        console.log(error)
+    }
+    
+}
+
+export const searchArtist = async (userToken, searchTerm) =>{
+        const axiosInstance = getAxios(userToken);
+        const storefront = 'us'
+    
+        try {
+            // search terms doesn't guarantee results are from that artist
+            const search = await axiosInstance.get(`/v1/catalog/${storefront}/search`, {
+                params: {
+                    term: searchTerm,
+                    limit: 5,
+                    types: 'songs',
+                }
+                });
+            
+            
+            const songs = search.data.results.songs.data;
+            // console.log(songs)
+            return songs;
+        } catch(error){
+            console.log(error);
+        };
+}
+
+export const processArtistSet = async (userToken,artists) => {
+    const recentArtistsSongs = new Set();
+    
+
+    for (const item of artists){
+        const songs = await searchArtist(userToken, item);      
+        console.log(songs)
+        recentArtistsSongs.add(...songs)
+    }
+    return recentArtistsSongs;
+
+}

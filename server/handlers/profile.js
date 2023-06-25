@@ -7,11 +7,9 @@ export const fetchProfile = async (event) => {
     console.log(userToken);
 
     try {
-        const recentArtistsSet = await playlist.fetchRecentArtists(userToken);
-       
-        // const library = await apple.fetchLibrary(userToken);
-        // const artistSongs = await apple.fetchArtistSongs(userToken);
-        console.log(recentArtistsSet);
+        const recentArtistsSongs = await apple.searchRecentArtists(userToken);
+        // console.log(recentArtistsSongs);
+        
         
         // grab songs from artists in recent, library, recs, etc.
         // filter out songs in recent, lib, recs, etc.
@@ -28,7 +26,7 @@ export const fetchProfile = async (event) => {
       },
       body: JSON.stringify(
         {
-          message: recentArtistsSet
+          message: recentArtistsSongs
         },
         null,           // lets figure out what all this means
         2

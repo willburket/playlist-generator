@@ -5,18 +5,16 @@ const axios = require("axios");
 
 export const fetchLibrary = async (event) => {
 
-    const userToken = event.headers.Authorization.split(' ')[1];
-    console.log(userToken);
+  const userToken = event.headers.Authorization.split(' ')[1];
+  console.log(userToken);
 
-    const axiosInstance = axios.create({
-        baseURL: 'https://api.music.apple.com',
-        headers:{
-            Authorization: `Bearer ${token.token}`,   // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
-            'Music-User-Token': userToken, 
-          },
-      });
-
-
+  const axiosInstance = axios.create({
+    baseURL: 'https://api.music.apple.com',
+    headers:{
+      Authorization: `Bearer ${token.token}`,   // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
+      'Music-User-Token': userToken, 
+    },
+  });
 
   try {
     const recent = await axiosInstance.get(`/v1/me/library/songs`, {

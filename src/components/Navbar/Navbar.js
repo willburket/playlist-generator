@@ -73,7 +73,7 @@ function Main(){
 
             const profile = await fetchProfile();
             // const profileSongs = profile.message.data
-            const profileArtists = profile
+            const profileArtists = profile.message
             console.log(profileArtists);
 
         }

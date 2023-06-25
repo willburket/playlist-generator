@@ -516,8 +516,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   fetchArtistSongs: () => (/* binding */ fetchArtistSongs),
 /* harmony export */   fetchLibrary: () => (/* binding */ fetchLibrary),
 /* harmony export */   fetchLibraryArtists: () => (/* binding */ fetchLibraryArtists),
+/* harmony export */   fetchRecentArtists: () => (/* binding */ fetchRecentArtists),
 /* harmony export */   fetchRecentSongs: () => (/* binding */ fetchRecentSongs),
-/* harmony export */   getAxios: () => (/* binding */ getAxios)
+/* harmony export */   getAxios: () => (/* binding */ getAxios),
+/* harmony export */   processArtistSet: () => (/* binding */ processArtistSet),
+/* harmony export */   searchArtist: () => (/* binding */ searchArtist),
+/* harmony export */   searchRecentArtists: () => (/* binding */ searchRecentArtists)
 /* harmony export */ });
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
@@ -598,6 +602,59 @@ const getAxios = event => {
     }
   });
   return axiosInstance;
+};
+const fetchRecentArtists = async event => {
+  const userToken = event;
+  try {
+    const recent = await fetchRecentSongs(userToken);
+    const recentArray = recent.data;
+    const recentArtists = recentArray.map(song => song.attributes.artistName);
+    const recentArtistsSet = new Set(recentArtists);
+    return recentArtistsSet;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const searchRecentArtists = async event => {
+  const userToken = event;
+  try {
+    const recentArtists = await fetchRecentArtists(userToken);
+    const recentArtistsSongs = processArtistSet(userToken, recentArtists);
+    console.log(recentArtistsSongs);
+    return recentArtistsSongs;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const searchArtist = async (userToken, searchTerm) => {
+  const axiosInstance = getAxios(userToken);
+  const storefront = 'us';
+  try {
+    // search terms doesn't guarantee results are from that artist
+    const search = await axiosInstance.get(`/v1/catalog/${storefront}/search`, {
+      params: {
+        term: searchTerm,
+        limit: 5,
+        types: 'songs'
+      }
+    });
+    const songs = search.data.results.songs.data;
+    // console.log(songs)
+    return songs;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const processArtistSet = async (userToken, artists) => {
+  const recentArtistsSongs = new Set();
+  for (const item of artists) {
+    const songs = await searchArtist(userToken, item);
+    console.log(songs);
+    recentArtistsSongs.add(...songs);
+  }
+  return recentArtistsSongs;
 };
 
 /***/ }),
@@ -16583,11 +16640,8 @@ const fetchProfile = async event => {
   const userToken = event.headers.Authorization.split(' ')[1];
   console.log(userToken);
   try {
-    const recentArtistsSet = await playlist.fetchRecentArtists(userToken);
-
-    // const library = await apple.fetchLibrary(userToken);
-    // const artistSongs = await apple.fetchArtistSongs(userToken);
-    console.log(recentArtistsSet);
+    const recentArtistsSongs = await apple.searchRecentArtists(userToken);
+    // console.log(recentArtistsSongs);
 
     // grab songs from artists in recent, library, recs, etc.
     // filter out songs in recent, lib, recs, etc.
@@ -16604,7 +16658,7 @@ const fetchProfile = async event => {
         'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify({
-        message: recentArtistsSet
+        message: recentArtistsSongs
       }, null,
       // lets figure out what all this means
       2)

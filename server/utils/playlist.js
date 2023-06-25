@@ -15,3 +15,4 @@ export const fetchRecentArtists = async (event) => {
         console.log(error);
     };
 };
+
