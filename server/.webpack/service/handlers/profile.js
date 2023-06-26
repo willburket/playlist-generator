@@ -662,6 +662,7 @@ const getArtistIds = async (userToken, artists) => {
       recentArtistIds.add(id);
     }
   }
+  console.log(recentArtistIds);
   return recentArtistIds;
 };
 const searchArtistId = async (userToken, searchTerm) => {
@@ -679,37 +680,6 @@ const searchArtistId = async (userToken, searchTerm) => {
     return artistId;
   } catch (error) {
     // console.log(error);
-  }
-  ;
-};
-
-/***/ }),
-
-/***/ "../../../utils/playlist.js":
-/*!**********************************!*\
-  !*** ../../../utils/playlist.js ***!
-  \**********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   fetchRecentArtists: () => (/* binding */ fetchRecentArtists)
-/* harmony export */ });
-/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
-/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
-
-const apple = __webpack_require__(/*! ./musicApi */ "../../../utils/musicApi.js");
-const fetchRecentArtists = async event => {
-  const userToken = event;
-  try {
-    const recent = await apple.fetchRecentSongs(userToken);
-    const recentArray = recent.data;
-    const recentArtists = recentArray.map(song => song.attributes.artistName);
-    const recentArtistsSet = new Set(recentArtists);
-    return recentArtistsSet;
-  } catch (error) {
-    console.log(error);
   }
   ;
 };
@@ -16661,23 +16631,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 const apple = __webpack_require__(/*! ../utils/musicApi */ "../../../utils/musicApi.js");
-const playlist = __webpack_require__(/*! ../utils/playlist */ "../../../utils/playlist.js");
-const fetchProfile = async event => {
-  const recentArtistsSongs = new Set();
-  const userToken = event.headers.Authorization.split(' ')[1];
-  const item = '1097177293';
-  // console.log(userToken);
+//const playlist = require("../utils/playlist")
 
+const fetchProfile = async event => {
+  const recentArtistsSongs = [];
+  const userToken = event.headers.Authorization.split(' ')[1];
   try {
     const recentArtists = await apple.searchRecentArtists(userToken);
-    // for (const item of recentArtists){
-    //     const songs = await apple.fetchArtistSongs(userToken, item);      
-    //     console.log(songs)
-    //     recentArtistsSongs.add(...songs)
-    // }
+    for (const item of recentArtists) {
+      const songs = await apple.fetchArtistSongs(userToken, item);
+      recentArtistsSongs.push(...songs.data);
+    }
 
-    const songs = await apple.fetchArtistSongs(userToken, item);
-    console.log(songs.data);
     // grab songs from artists in recent, library, recs, etc.
     // filter out songs in recent, lib, recs, etc.
     // create set?
@@ -16700,6 +16665,7 @@ const fetchProfile = async event => {
     };
     return response;
   } catch (error) {
+    console.log(error);
     return {
       statusCode: 500,
       body: JSON.stringify({

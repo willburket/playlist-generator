@@ -160,6 +160,7 @@ export const getArtistIds = async (userToken,artists) => {
             recentArtistIds.add(id);
         }   
     }
+    console.log(recentArtistIds);
     return recentArtistIds;
 
 }
