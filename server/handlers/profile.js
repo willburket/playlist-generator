@@ -1,23 +1,20 @@
 const apple = require("../utils/musicApi");
-//const playlist = require("../utils/playlist")
 
 export const fetchProfile = async (event) => {
-    
     const recentArtistsSongs = [];
     const userToken = event.headers.Authorization.split(' ')[1];
-   
+
+    // get genre hash
     try {
         const recentArtists = await apple.searchRecentArtists(userToken);
         for (const item of recentArtists){
-            const songs = await apple.fetchArtistSongs(userToken, item);      
-            recentArtistsSongs.push(...songs.data)
+            const songs = await apple.fetchArtistSongs(userToken, item);
+            recentArtistsSongs.push(...songs.data);
         }
-
-        // grab songs from artists in recent, library, recs, etc.
-        // filter out songs in recent, lib, recs, etc.
-        // create set?
-        // sort by genre 
-        // cache 
+        const sortedSongs = apple.genreSort(recentArtistsSongs);
+        console.log(sortedSongs);
+    // put genre dict into redis cluster hash
+    // get item from hash
 
     const response = {
       statusCode: 200,
@@ -35,10 +32,16 @@ export const fetchProfile = async (event) => {
       )};
     return response;
   } catch(error){
-    console.log(error)
+    console.log(error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
     };
   };
 };
+
+// grab songs from artists in recent, library, recs, etc.
+// filter out songs in recent, lib, recs, etc.
+// create set?
+// sort by genre
+// cache

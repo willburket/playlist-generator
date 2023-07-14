@@ -11,7 +11,7 @@ provider:
   name: aws
   memorySize: 2048
   stage: dev
-  timeout: 20
+  timeout: 30
   region: us-east-1
   runtime: nodejs16.x
 
@@ -45,40 +45,40 @@ functions:
           path: /genre
           method: post
 
-  recent:
-    handler: handlers/recentSongs.fetchRecentSongs
-    events:
-      - http:
-          path: /recent
-          method: get
+  # recent:
+  #   handler: handlers/recentSongs.fetchRecentSongs
+  #   events:
+  #     - http:
+  #         path: /recent
+  #         method: get
 
-  library:
-    handler: handlers/library.fetchLibrary
-    events:
-      - http:
-          path: /library
-          method: get
+  # library:
+  #   handler: handlers/library.fetchLibrary
+  #   events:
+  #     - http:
+  #         path: /library
+  #         method: get
   
-  rotation:
-    handler: handlers/rotation.fetchRotation
-    events:
-      - http:
-          path: /rotation
-          method: get
+  # rotation:
+  #   handler: handlers/rotation.fetchRotation
+  #   events:
+  #     - http:
+  #         path: /rotation
+  #         method: get
   
-  recommendations:
-    handler: handlers/recommendations.fetchRecommendations
-    events:
-      - http:
-          path: /recommendations
-          method: get
+  # recommendations:
+  #   handler: handlers/recommendations.fetchRecommendations
+  #   events:
+  #     - http:
+  #         path: /recommendations
+  #         method: get
   
-  artist:
-    handler: handlers/artistSongs.fetchArtistSongs
-    events:
-      - http:
-          path: /artist
-          method: get
+  # artist:
+  #   handler: handlers/artistSongs.fetchArtistSongs
+  #   events:
+  #     - http:
+  #         path: /artist
+  #         method: get
   
   profile:
     handler: handlers/profile.fetchProfile

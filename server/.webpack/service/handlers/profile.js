@@ -518,6 +518,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   fetchLibraryArtists: () => (/* binding */ fetchLibraryArtists),
 /* harmony export */   fetchRecentArtists: () => (/* binding */ fetchRecentArtists),
 /* harmony export */   fetchRecentSongs: () => (/* binding */ fetchRecentSongs),
+/* harmony export */   genreSort: () => (/* binding */ genreSort),
 /* harmony export */   getArtistIds: () => (/* binding */ getArtistIds),
 /* harmony export */   getAxios: () => (/* binding */ getAxios),
 /* harmony export */   processArtistSet: () => (/* binding */ processArtistSet),
@@ -682,6 +683,27 @@ const searchArtistId = async (userToken, searchTerm) => {
     // console.log(error);
   }
   ;
+};
+const genreSort = songs => {
+  const genreDict = {
+    'hip-hop/rap': [],
+    'pop': [],
+    'rock': [],
+    'r&b/soul': [],
+    'alternative': [],
+    'dance': [],
+    'country': [],
+    'latin': [],
+    'raggae': [],
+    'classical': []
+  };
+  for (const item of songs) {
+    const genre = item.attributes.genreNames[0].toLowerCase();
+    if (genre in genreDict) {
+      genreDict[genre].push(item);
+    }
+  }
+  return genreDict;
 };
 
 /***/ }),
@@ -16631,23 +16653,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 const apple = __webpack_require__(/*! ../utils/musicApi */ "../../../utils/musicApi.js");
-//const playlist = require("../utils/playlist")
-
 const fetchProfile = async event => {
   const recentArtistsSongs = [];
   const userToken = event.headers.Authorization.split(' ')[1];
+
+  // get genre hash
   try {
     const recentArtists = await apple.searchRecentArtists(userToken);
     for (const item of recentArtists) {
       const songs = await apple.fetchArtistSongs(userToken, item);
       recentArtistsSongs.push(...songs.data);
     }
-
-    // grab songs from artists in recent, library, recs, etc.
-    // filter out songs in recent, lib, recs, etc.
-    // create set?
-    // sort by genre 
-    // cache 
+    const sortedSongs = apple.genreSort(recentArtistsSongs);
+    console.log(sortedSongs);
+    // put genre dict into redis cluster hash
+    // get item from hash
 
     const response = {
       statusCode: 200,
@@ -16675,6 +16695,12 @@ const fetchProfile = async event => {
   }
   ;
 };
+
+// grab songs from artists in recent, library, recs, etc.
+// filter out songs in recent, lib, recs, etc.
+// create set?
+// sort by genre
+// cache
 })();
 
 var __webpack_export_target__ = exports;
