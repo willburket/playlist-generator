@@ -106,7 +106,7 @@
   min-width: 50px;
   justify-content: center;
   transition: filter 300ms;
-  border: .5px solid black;
+  /* border: .5px solid black; */
 }
   
 .icon-button:hover{
