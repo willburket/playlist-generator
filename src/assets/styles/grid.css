@@ -67,7 +67,7 @@
     justify-content: center;
     position: relative;
     z-index: 1;
-    border: .75px solid black;
+    border: .25px solid black;
 }
 
 .album-cover.hovered{

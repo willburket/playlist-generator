@@ -8,7 +8,7 @@ import Home from "../Home/Home";
 import { DropdownMenu } from "./Dropdown";
 import { MusicKitContext, TokenContext } from "../../App";
 import Player from "../MusicPlayer/Player";
-import { fetchProfile, fetchLibrary, fetchRecent, fetchRotation, fetchRecommendations, fetchArtistSongs } from "../../services/MusicApi";
+import { fetchProfile } from "../../services/MusicApi";
 
 
 
@@ -71,10 +71,9 @@ function Main(){
             setLoading(false);
             }
 
-            const profile = await fetchProfile();
-            // const profileSongs = profile.message.data
-            const profileArtists = profile.message
-            console.log(profileArtists);
+            // const profile = await fetchProfile();
+            // const profileArtists = profile.message
+            // console.log(profileArtists);
 
         }
 

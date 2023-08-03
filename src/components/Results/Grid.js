@@ -8,9 +8,9 @@ function AlbumCovers(){
     const [hasSearched, sethasSearched] = useState(false);
     const [playlist,setPlaylist] = useState([]);
 
-    useEffect(() => {
+    useEffect(() => {                       
         if(search && search.length !== 0){
-            sethasSearched(true)
+            sethasSearched(true)            
             setPlaylist([...search.slice(0,20)]);
             
         }     
