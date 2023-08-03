@@ -45,10 +45,7 @@
     width: 200px;
   }
 }
-
-@media (max-width: 685px) {
-  
-
+@media (max-width: 800px){
   .navbar{
     z-index: 9997;
   }
