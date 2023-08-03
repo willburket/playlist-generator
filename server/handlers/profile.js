@@ -1,33 +1,36 @@
 const apple = require("../utils/musicApi");
+const redis = require("../utils/redis")
 
 export const fetchProfile = async (event) => {
     const recentArtistsSongs = [];
     const userToken = event.headers.Authorization.split(' ')[1];
 
-    // get genre hash
+    
     try {
         const recentArtists = await apple.searchRecentArtists(userToken);
         for (const item of recentArtists){
             const songs = await apple.fetchArtistSongs(userToken, item);
             recentArtistsSongs.push(...songs.data);
         }
-        const sortedSongs = apple.genreSort(recentArtistsSongs);
+        const sortedSongs = apple.genreSort(recentArtistsSongs);    // create hash of songs sorted by genre
         console.log(sortedSongs);
-    // put genre dict into redis cluster hash
-    // get item from hash
+        redis.addtoRedisCluster(sortedSongs)
+
+        // put genre dict into redis cluster hash
+        
 
     const response = {
       statusCode: 200,
       headers:{
-        'Access-Control-Allow-Origin': 'https://playlinq.io',   // maybe set this as .env var?
+        // 'Access-Control-Allow-Origin': 'https://playlinq.io',   // maybe set this as .env var?
         'Access-Control-Allow-Origin': 'http://localhost:3001',
         'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify(
         {
-          message: recentArtistsSongs
+          message: sessionId        // return session id or undef
         },
-        null,           // lets figure out what all this means
+        null,      
         2
       )};
     return response;

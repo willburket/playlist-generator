@@ -11,7 +11,7 @@ provider:
   name: aws
   memorySize: 2048
   stage: dev
-  timeout: 30
+  timeout: 45
   region: us-east-1
   runtime: nodejs16.x
 

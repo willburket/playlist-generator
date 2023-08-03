@@ -1,4 +1,5 @@
 const token = require("./jwt");
+const redis = require("../utils/redis")
 
 const axios = require("axios").create({
   baseURL: 'https://api.music.apple.com',
@@ -10,6 +11,7 @@ const axios = require("axios").create({
 export const fetchGenre = async (event) => {
   const storefront = 'us';    // change later
   const requestBody = JSON.parse(event.body);
+  console.log(redis.addToList());
 
   try {
     const playlist = await axios.get(`/v1/catalog/${storefront}/charts`, {
@@ -23,8 +25,7 @@ export const fetchGenre = async (event) => {
     const response = {
       statusCode: 200,
       headers:{
-        // 'Access-Control-Allow-Origin': 'https://willburket.github.io',
-        'Access-Control-Allow-Origin': 'https://playlinq.io',
+        // 'Access-Control-Allow-Origin': 'https://playlinq.io',
         'Access-Control-Allow-Origin': 'http://localhost:3001',
         'Access-Control-Allow-Credentials': true,
       },

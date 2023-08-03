@@ -1,6 +1,8 @@
 const token = require("../handlers/jwt");
 const axios = require("axios");
 
+// a lot of these don't need to be exported
+
 export const fetchRecentSongs = async (event) => {
 
     const userToken = event;

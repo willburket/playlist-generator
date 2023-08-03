@@ -1,6 +1,17520 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "../../@redis/bloom/dist/commands/bloom/ADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/ADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, item) {
+    return ['BF.ADD', key, item];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/CARD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/CARD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['BF.CARD', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/EXISTS.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/EXISTS.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, item) {
+    return ['BF.EXISTS', key, item];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/INFO.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/INFO.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['BF.INFO', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        capacity: reply[1],
+        size: reply[3],
+        numberOfFilters: reply[5],
+        numberOfInsertedItems: reply[7],
+        expansionRate: reply[9]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/INSERT.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/INSERT.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items, options) {
+    const args = ['BF.INSERT', key];
+    if (options?.CAPACITY) {
+        args.push('CAPACITY', options.CAPACITY.toString());
+    }
+    if (options?.ERROR) {
+        args.push('ERROR', options.ERROR.toString());
+    }
+    if (options?.EXPANSION) {
+        args.push('EXPANSION', options.EXPANSION.toString());
+    }
+    if (options?.NOCREATE) {
+        args.push('NOCREATE');
+    }
+    if (options?.NONSCALING) {
+        args.push('NONSCALING');
+    }
+    args.push('ITEMS');
+    return (0, generic_transformers_1.pushVerdictArguments)(args, items);
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/LOADCHUNK.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/LOADCHUNK.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, iteretor, chunk) {
+    return ['BF.LOADCHUNK', key, iteretor.toString(), chunk];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/MADD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/MADD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items) {
+    return ['BF.MADD', key, ...items];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/MEXISTS.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/MEXISTS.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, items) {
+    return ['BF.MEXISTS', key, ...items];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/RESERVE.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/RESERVE.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, errorRate, capacity, options) {
+    const args = ['BF.RESERVE', key, errorRate.toString(), capacity.toString()];
+    if (options?.EXPANSION) {
+        args.push('EXPANSION', options.EXPANSION.toString());
+    }
+    if (options?.NONSCALING) {
+        args.push('NONSCALING');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/SCANDUMP.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/SCANDUMP.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, iterator) {
+    return ['BF.SCANDUMP', key, iterator.toString()];
+}
+exports.transformArguments = transformArguments;
+function transformReply([iterator, chunk]) {
+    return {
+        iterator,
+        chunk
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/bloom/index.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/bloom/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const ADD = __webpack_require__(/*! ./ADD */ "../../@redis/bloom/dist/commands/bloom/ADD.js");
+const CARD = __webpack_require__(/*! ./CARD */ "../../@redis/bloom/dist/commands/bloom/CARD.js");
+const EXISTS = __webpack_require__(/*! ./EXISTS */ "../../@redis/bloom/dist/commands/bloom/EXISTS.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/bloom/dist/commands/bloom/INFO.js");
+const INSERT = __webpack_require__(/*! ./INSERT */ "../../@redis/bloom/dist/commands/bloom/INSERT.js");
+const LOADCHUNK = __webpack_require__(/*! ./LOADCHUNK */ "../../@redis/bloom/dist/commands/bloom/LOADCHUNK.js");
+const MADD = __webpack_require__(/*! ./MADD */ "../../@redis/bloom/dist/commands/bloom/MADD.js");
+const MEXISTS = __webpack_require__(/*! ./MEXISTS */ "../../@redis/bloom/dist/commands/bloom/MEXISTS.js");
+const RESERVE = __webpack_require__(/*! ./RESERVE */ "../../@redis/bloom/dist/commands/bloom/RESERVE.js");
+const SCANDUMP = __webpack_require__(/*! ./SCANDUMP */ "../../@redis/bloom/dist/commands/bloom/SCANDUMP.js");
+exports["default"] = {
+    ADD,
+    add: ADD,
+    CARD,
+    card: CARD,
+    EXISTS,
+    exists: EXISTS,
+    INFO,
+    info: INFO,
+    INSERT,
+    insert: INSERT,
+    LOADCHUNK,
+    loadChunk: LOADCHUNK,
+    MADD,
+    mAdd: MADD,
+    MEXISTS,
+    mExists: MEXISTS,
+    RESERVE,
+    reserve: RESERVE,
+    SCANDUMP,
+    scanDump: SCANDUMP
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/INCRBY.js":
+/*!*******************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/INCRBY.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items) {
+    const args = ['CMS.INCRBY', key];
+    if (Array.isArray(items)) {
+        for (const item of items) {
+            pushIncrByItem(args, item);
+        }
+    }
+    else {
+        pushIncrByItem(args, items);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function pushIncrByItem(args, { item, incrementBy }) {
+    args.push(item, incrementBy.toString());
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/INFO.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/INFO.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['CMS.INFO', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        width: reply[1],
+        depth: reply[3],
+        count: reply[5]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/INITBYDIM.js":
+/*!**********************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/INITBYDIM.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, width, depth) {
+    return ['CMS.INITBYDIM', key, width.toString(), depth.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/INITBYPROB.js":
+/*!***********************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/INITBYPROB.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, error, probability) {
+    return ['CMS.INITBYPROB', key, error.toString(), probability.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/MERGE.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/MERGE.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(dest, src) {
+    const args = [
+        'CMS.MERGE',
+        dest,
+        src.length.toString()
+    ];
+    if (isStringSketches(src)) {
+        args.push(...src);
+    }
+    else {
+        for (const sketch of src) {
+            args.push(sketch.name);
+        }
+        args.push('WEIGHTS');
+        for (const sketch of src) {
+            args.push(sketch.weight.toString());
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function isStringSketches(src) {
+    return typeof src[0] === 'string';
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/QUERY.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/QUERY.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, items) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['CMS.QUERY', key], items);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/count-min-sketch/index.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/count-min-sketch/index.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const INCRBY = __webpack_require__(/*! ./INCRBY */ "../../@redis/bloom/dist/commands/count-min-sketch/INCRBY.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/bloom/dist/commands/count-min-sketch/INFO.js");
+const INITBYDIM = __webpack_require__(/*! ./INITBYDIM */ "../../@redis/bloom/dist/commands/count-min-sketch/INITBYDIM.js");
+const INITBYPROB = __webpack_require__(/*! ./INITBYPROB */ "../../@redis/bloom/dist/commands/count-min-sketch/INITBYPROB.js");
+const MERGE = __webpack_require__(/*! ./MERGE */ "../../@redis/bloom/dist/commands/count-min-sketch/MERGE.js");
+const QUERY = __webpack_require__(/*! ./QUERY */ "../../@redis/bloom/dist/commands/count-min-sketch/QUERY.js");
+exports["default"] = {
+    INCRBY,
+    incrBy: INCRBY,
+    INFO,
+    info: INFO,
+    INITBYDIM,
+    initByDim: INITBYDIM,
+    INITBYPROB,
+    initByProb: INITBYPROB,
+    MERGE,
+    merge: MERGE,
+    QUERY,
+    query: QUERY
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/ADD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/ADD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, item) {
+    return ['CF.ADD', key, item];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/ADDNX.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/ADDNX.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, item) {
+    return ['CF.ADDNX', key, item];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/COUNT.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/COUNT.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, item) {
+    return ['CF.COUNT', key, item];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/DEL.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/DEL.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, item) {
+    return ['CF.DEL', key, item];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/EXISTS.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/EXISTS.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, item) {
+    return ['CF.EXISTS', key, item];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/INFO.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/INFO.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['CF.INFO', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        size: reply[1],
+        numberOfBuckets: reply[3],
+        numberOfFilters: reply[5],
+        numberOfInsertedItems: reply[7],
+        numberOfDeletedItems: reply[9],
+        bucketSize: reply[11],
+        expansionRate: reply[13],
+        maxIteration: reply[15]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/INSERT.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/INSERT.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/cuckoo/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items, options) {
+    return (0, _1.pushInsertOptions)(['CF.INSERT', key], items, options);
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/INSERTNX.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/INSERTNX.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/cuckoo/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items, options) {
+    return (0, _1.pushInsertOptions)(['CF.INSERTNX', key], items, options);
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/LOADCHUNK.js":
+/*!************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/LOADCHUNK.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, iterator, chunk) {
+    return ['CF.LOADCHUNK', key, iterator.toString(), chunk];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/RESERVE.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/RESERVE.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, capacity, options) {
+    const args = ['CF.RESERVE', key, capacity.toString()];
+    if (options?.BUCKETSIZE) {
+        args.push('BUCKETSIZE', options.BUCKETSIZE.toString());
+    }
+    if (options?.MAXITERATIONS) {
+        args.push('MAXITERATIONS', options.MAXITERATIONS.toString());
+    }
+    if (options?.EXPANSION) {
+        args.push('EXPANSION', options.EXPANSION.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/SCANDUMP.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/SCANDUMP.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, iterator) {
+    return ['CF.SCANDUMP', key, iterator.toString()];
+}
+exports.transformArguments = transformArguments;
+function transformReply([iterator, chunk]) {
+    return {
+        iterator,
+        chunk
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/cuckoo/index.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/cuckoo/index.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.pushInsertOptions = void 0;
+const ADD = __webpack_require__(/*! ./ADD */ "../../@redis/bloom/dist/commands/cuckoo/ADD.js");
+const ADDNX = __webpack_require__(/*! ./ADDNX */ "../../@redis/bloom/dist/commands/cuckoo/ADDNX.js");
+const COUNT = __webpack_require__(/*! ./COUNT */ "../../@redis/bloom/dist/commands/cuckoo/COUNT.js");
+const DEL = __webpack_require__(/*! ./DEL */ "../../@redis/bloom/dist/commands/cuckoo/DEL.js");
+const EXISTS = __webpack_require__(/*! ./EXISTS */ "../../@redis/bloom/dist/commands/cuckoo/EXISTS.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/bloom/dist/commands/cuckoo/INFO.js");
+const INSERT = __webpack_require__(/*! ./INSERT */ "../../@redis/bloom/dist/commands/cuckoo/INSERT.js");
+const INSERTNX = __webpack_require__(/*! ./INSERTNX */ "../../@redis/bloom/dist/commands/cuckoo/INSERTNX.js");
+const LOADCHUNK = __webpack_require__(/*! ./LOADCHUNK */ "../../@redis/bloom/dist/commands/cuckoo/LOADCHUNK.js");
+const RESERVE = __webpack_require__(/*! ./RESERVE */ "../../@redis/bloom/dist/commands/cuckoo/RESERVE.js");
+const SCANDUMP = __webpack_require__(/*! ./SCANDUMP */ "../../@redis/bloom/dist/commands/cuckoo/SCANDUMP.js");
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports["default"] = {
+    ADD,
+    add: ADD,
+    ADDNX,
+    addNX: ADDNX,
+    COUNT,
+    count: COUNT,
+    DEL,
+    del: DEL,
+    EXISTS,
+    exists: EXISTS,
+    INFO,
+    info: INFO,
+    INSERT,
+    insert: INSERT,
+    INSERTNX,
+    insertNX: INSERTNX,
+    LOADCHUNK,
+    loadChunk: LOADCHUNK,
+    RESERVE,
+    reserve: RESERVE,
+    SCANDUMP,
+    scanDump: SCANDUMP
+};
+function pushInsertOptions(args, items, options) {
+    if (options?.CAPACITY) {
+        args.push('CAPACITY');
+        args.push(options.CAPACITY.toString());
+    }
+    if (options?.NOCREATE) {
+        args.push('NOCREATE');
+    }
+    args.push('ITEMS');
+    return (0, generic_transformers_1.pushVerdictArguments)(args, items);
+}
+exports.pushInsertOptions = pushInsertOptions;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/index.js":
+/*!*************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/index.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const bloom_1 = __webpack_require__(/*! ./bloom */ "../../@redis/bloom/dist/commands/bloom/index.js");
+const count_min_sketch_1 = __webpack_require__(/*! ./count-min-sketch */ "../../@redis/bloom/dist/commands/count-min-sketch/index.js");
+const cuckoo_1 = __webpack_require__(/*! ./cuckoo */ "../../@redis/bloom/dist/commands/cuckoo/index.js");
+const t_digest_1 = __webpack_require__(/*! ./t-digest */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+const top_k_1 = __webpack_require__(/*! ./top-k */ "../../@redis/bloom/dist/commands/top-k/index.js");
+exports["default"] = {
+    bf: bloom_1.default,
+    cms: count_min_sketch_1.default,
+    cf: cuckoo_1.default,
+    tDigest: t_digest_1.default,
+    topK: top_k_1.default
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/ADD.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/ADD.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, values) {
+    const args = ['TDIGEST.ADD', key];
+    for (const item of values) {
+        args.push(item.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/BYRANK.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/BYRANK.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, ranks) {
+    const args = ['TDIGEST.BYRANK', key];
+    for (const rank of ranks) {
+        args.push(rank.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoublesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/BYREVRANK.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/BYREVRANK.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, ranks) {
+    const args = ['TDIGEST.BYREVRANK', key];
+    for (const rank of ranks) {
+        args.push(rank.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoublesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/CDF.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/CDF.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, values) {
+    const args = ['TDIGEST.CDF', key];
+    for (const item of values) {
+        args.push(item.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoublesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/CREATE.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/CREATE.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, options) {
+    return (0, _1.pushCompressionArgument)(['TDIGEST.CREATE', key], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/INFO.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/INFO.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return [
+        'TDIGEST.INFO',
+        key
+    ];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        comperssion: reply[1],
+        capacity: reply[3],
+        mergedNodes: reply[5],
+        unmergedNodes: reply[7],
+        mergedWeight: Number(reply[9]),
+        unmergedWeight: Number(reply[11]),
+        totalCompression: reply[13]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/MAX.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/MAX.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return [
+        'TDIGEST.MAX',
+        key
+    ];
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoubleReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/MERGE.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/MERGE.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+const _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destKey, srcKeys, options) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['TDIGEST.MERGE', destKey], srcKeys);
+    (0, _1.pushCompressionArgument)(args, options);
+    if (options?.OVERRIDE) {
+        args.push('OVERRIDE');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/MIN.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/MIN.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return [
+        'TDIGEST.MIN',
+        key
+    ];
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoubleReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/QUANTILE.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/QUANTILE.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, quantiles) {
+    const args = [
+        'TDIGEST.QUANTILE',
+        key
+    ];
+    for (const quantile of quantiles) {
+        args.push(quantile.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoublesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/RANK.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/RANK.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, values) {
+    const args = ['TDIGEST.RANK', key];
+    for (const item of values) {
+        args.push(item.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/RESET.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/RESET.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['TDIGEST.RESET', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/REVRANK.js":
+/*!************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/REVRANK.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, values) {
+    const args = ['TDIGEST.REVRANK', key];
+    for (const item of values) {
+        args.push(item.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/TRIMMED_MEAN.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/TRIMMED_MEAN.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, lowCutPercentile, highCutPercentile) {
+    return [
+        'TDIGEST.TRIMMED_MEAN',
+        key,
+        lowCutPercentile.toString(),
+        highCutPercentile.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/bloom/dist/commands/t-digest/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformDoubleReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/t-digest/index.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/t-digest/index.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformDoublesReply = exports.transformDoubleReply = exports.pushCompressionArgument = void 0;
+const ADD = __webpack_require__(/*! ./ADD */ "../../@redis/bloom/dist/commands/t-digest/ADD.js");
+const BYRANK = __webpack_require__(/*! ./BYRANK */ "../../@redis/bloom/dist/commands/t-digest/BYRANK.js");
+const BYREVRANK = __webpack_require__(/*! ./BYREVRANK */ "../../@redis/bloom/dist/commands/t-digest/BYREVRANK.js");
+const CDF = __webpack_require__(/*! ./CDF */ "../../@redis/bloom/dist/commands/t-digest/CDF.js");
+const CREATE = __webpack_require__(/*! ./CREATE */ "../../@redis/bloom/dist/commands/t-digest/CREATE.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/bloom/dist/commands/t-digest/INFO.js");
+const MAX = __webpack_require__(/*! ./MAX */ "../../@redis/bloom/dist/commands/t-digest/MAX.js");
+const MERGE = __webpack_require__(/*! ./MERGE */ "../../@redis/bloom/dist/commands/t-digest/MERGE.js");
+const MIN = __webpack_require__(/*! ./MIN */ "../../@redis/bloom/dist/commands/t-digest/MIN.js");
+const QUANTILE = __webpack_require__(/*! ./QUANTILE */ "../../@redis/bloom/dist/commands/t-digest/QUANTILE.js");
+const RANK = __webpack_require__(/*! ./RANK */ "../../@redis/bloom/dist/commands/t-digest/RANK.js");
+const RESET = __webpack_require__(/*! ./RESET */ "../../@redis/bloom/dist/commands/t-digest/RESET.js");
+const REVRANK = __webpack_require__(/*! ./REVRANK */ "../../@redis/bloom/dist/commands/t-digest/REVRANK.js");
+const TRIMMED_MEAN = __webpack_require__(/*! ./TRIMMED_MEAN */ "../../@redis/bloom/dist/commands/t-digest/TRIMMED_MEAN.js");
+exports["default"] = {
+    ADD,
+    add: ADD,
+    BYRANK,
+    byRank: BYRANK,
+    BYREVRANK,
+    byRevRank: BYREVRANK,
+    CDF,
+    cdf: CDF,
+    CREATE,
+    create: CREATE,
+    INFO,
+    info: INFO,
+    MAX,
+    max: MAX,
+    MERGE,
+    merge: MERGE,
+    MIN,
+    min: MIN,
+    QUANTILE,
+    quantile: QUANTILE,
+    RANK,
+    rank: RANK,
+    RESET,
+    reset: RESET,
+    REVRANK,
+    revRank: REVRANK,
+    TRIMMED_MEAN,
+    trimmedMean: TRIMMED_MEAN
+};
+function pushCompressionArgument(args, options) {
+    if (options?.COMPRESSION) {
+        args.push('COMPRESSION', options.COMPRESSION.toString());
+    }
+    return args;
+}
+exports.pushCompressionArgument = pushCompressionArgument;
+function transformDoubleReply(reply) {
+    switch (reply) {
+        case 'inf':
+            return Infinity;
+        case '-inf':
+            return -Infinity;
+        case 'nan':
+            return NaN;
+        default:
+            return parseFloat(reply);
+    }
+}
+exports.transformDoubleReply = transformDoubleReply;
+function transformDoublesReply(reply) {
+    return reply.map(transformDoubleReply);
+}
+exports.transformDoublesReply = transformDoublesReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/ADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/ADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['TOPK.ADD', key], items);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/COUNT.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/COUNT.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, items) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['TOPK.COUNT', key], items);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/INCRBY.js":
+/*!********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/INCRBY.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, items) {
+    const args = ['TOPK.INCRBY', key];
+    if (Array.isArray(items)) {
+        for (const item of items) {
+            pushIncrByItem(args, item);
+        }
+    }
+    else {
+        pushIncrByItem(args, items);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function pushIncrByItem(args, { item, incrementBy }) {
+    args.push(item, incrementBy.toString());
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/INFO.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/INFO.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['TOPK.INFO', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        k: reply[1],
+        width: reply[3],
+        depth: reply[5],
+        decay: Number(reply[7])
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/LIST.js":
+/*!******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/LIST.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['TOPK.LIST', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/LIST_WITHCOUNT.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/LIST_WITHCOUNT.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['TOPK.LIST', key, 'WITHCOUNT'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    const reply = [];
+    for (let i = 0; i < rawReply.length; i++) {
+        reply.push({
+            item: rawReply[i],
+            count: rawReply[++i]
+        });
+    }
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/QUERY.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/QUERY.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, items) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['TOPK.QUERY', key], items);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/RESERVE.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/RESERVE.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, topK, options) {
+    const args = ['TOPK.RESERVE', key, topK.toString()];
+    if (options) {
+        args.push(options.width.toString(), options.depth.toString(), options.decay.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/commands/top-k/index.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/bloom/dist/commands/top-k/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const ADD = __webpack_require__(/*! ./ADD */ "../../@redis/bloom/dist/commands/top-k/ADD.js");
+const COUNT = __webpack_require__(/*! ./COUNT */ "../../@redis/bloom/dist/commands/top-k/COUNT.js");
+const INCRBY = __webpack_require__(/*! ./INCRBY */ "../../@redis/bloom/dist/commands/top-k/INCRBY.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/bloom/dist/commands/top-k/INFO.js");
+const LIST_WITHCOUNT = __webpack_require__(/*! ./LIST_WITHCOUNT */ "../../@redis/bloom/dist/commands/top-k/LIST_WITHCOUNT.js");
+const LIST = __webpack_require__(/*! ./LIST */ "../../@redis/bloom/dist/commands/top-k/LIST.js");
+const QUERY = __webpack_require__(/*! ./QUERY */ "../../@redis/bloom/dist/commands/top-k/QUERY.js");
+const RESERVE = __webpack_require__(/*! ./RESERVE */ "../../@redis/bloom/dist/commands/top-k/RESERVE.js");
+exports["default"] = {
+    ADD,
+    add: ADD,
+    COUNT,
+    count: COUNT,
+    INCRBY,
+    incrBy: INCRBY,
+    INFO,
+    info: INFO,
+    LIST_WITHCOUNT,
+    listWithCount: LIST_WITHCOUNT,
+    LIST,
+    list: LIST,
+    QUERY,
+    query: QUERY,
+    RESERVE,
+    reserve: RESERVE
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/bloom/dist/index.js":
+/*!****************************************!*\
+  !*** ../../@redis/bloom/dist/index.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports["default"] = void 0;
+var commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/bloom/dist/commands/index.js");
+Object.defineProperty(exports, "default", ({ enumerable: true, get: function () { return commands_1.default; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/index.js":
+/*!*****************************************!*\
+  !*** ../../@redis/client/dist/index.js ***!
+  \*****************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RedisFlushModes = exports.GeoReplyWith = exports.defineScript = exports.createCluster = exports.commandOptions = exports.createClient = void 0;
+const client_1 = __webpack_require__(/*! ./lib/client */ "../../@redis/client/dist/lib/client/index.js");
+const cluster_1 = __webpack_require__(/*! ./lib/cluster */ "../../@redis/client/dist/lib/cluster/index.js");
+exports.createClient = client_1.default.create;
+exports.commandOptions = client_1.default.commandOptions;
+exports.createCluster = cluster_1.default.create;
+var lua_script_1 = __webpack_require__(/*! ./lib/lua-script */ "../../@redis/client/dist/lib/lua-script.js");
+Object.defineProperty(exports, "defineScript", ({ enumerable: true, get: function () { return lua_script_1.defineScript; } }));
+__exportStar(__webpack_require__(/*! ./lib/errors */ "../../@redis/client/dist/lib/errors.js"), exports);
+var generic_transformers_1 = __webpack_require__(/*! ./lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "GeoReplyWith", ({ enumerable: true, get: function () { return generic_transformers_1.GeoReplyWith; } }));
+var FLUSHALL_1 = __webpack_require__(/*! ./lib/commands/FLUSHALL */ "../../@redis/client/dist/lib/commands/FLUSHALL.js");
+Object.defineProperty(exports, "RedisFlushModes", ({ enumerable: true, get: function () { return FLUSHALL_1.RedisFlushModes; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/RESP2/composers/buffer.js":
+/*!*********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/RESP2/composers/buffer.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+class BufferComposer {
+    constructor() {
+        Object.defineProperty(this, "chunks", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: []
+        });
+    }
+    write(buffer) {
+        this.chunks.push(buffer);
+    }
+    end(buffer) {
+        this.write(buffer);
+        return Buffer.concat(this.chunks.splice(0));
+    }
+    reset() {
+        this.chunks = [];
+    }
+}
+exports["default"] = BufferComposer;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/RESP2/composers/string.js":
+/*!*********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/RESP2/composers/string.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const string_decoder_1 = __webpack_require__(/*! string_decoder */ "string_decoder");
+class StringComposer {
+    constructor() {
+        Object.defineProperty(this, "decoder", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new string_decoder_1.StringDecoder()
+        });
+        Object.defineProperty(this, "string", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: ''
+        });
+    }
+    write(buffer) {
+        this.string += this.decoder.write(buffer);
+    }
+    end(buffer) {
+        const string = this.string + this.decoder.end(buffer);
+        this.string = '';
+        return string;
+    }
+    reset() {
+        this.string = '';
+    }
+}
+exports["default"] = StringComposer;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/RESP2/decoder.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/RESP2/decoder.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const errors_1 = __webpack_require__(/*! ../../errors */ "../../@redis/client/dist/lib/errors.js");
+const buffer_1 = __webpack_require__(/*! ./composers/buffer */ "../../@redis/client/dist/lib/client/RESP2/composers/buffer.js");
+const string_1 = __webpack_require__(/*! ./composers/string */ "../../@redis/client/dist/lib/client/RESP2/composers/string.js");
+// RESP2 specification
+// https://redis.io/topics/protocol
+var Types;
+(function (Types) {
+    Types[Types["SIMPLE_STRING"] = 43] = "SIMPLE_STRING";
+    Types[Types["ERROR"] = 45] = "ERROR";
+    Types[Types["INTEGER"] = 58] = "INTEGER";
+    Types[Types["BULK_STRING"] = 36] = "BULK_STRING";
+    Types[Types["ARRAY"] = 42] = "ARRAY"; // *
+})(Types || (Types = {}));
+var ASCII;
+(function (ASCII) {
+    ASCII[ASCII["CR"] = 13] = "CR";
+    ASCII[ASCII["ZERO"] = 48] = "ZERO";
+    ASCII[ASCII["MINUS"] = 45] = "MINUS";
+})(ASCII || (ASCII = {}));
+// Using TypeScript `private` and not the build-in `#` to avoid __classPrivateFieldGet and __classPrivateFieldSet
+class RESP2Decoder {
+    constructor(options) {
+        Object.defineProperty(this, "options", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: options
+        });
+        Object.defineProperty(this, "cursor", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "type", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "bufferComposer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new buffer_1.default()
+        });
+        Object.defineProperty(this, "stringComposer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new string_1.default()
+        });
+        Object.defineProperty(this, "currentStringComposer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.stringComposer
+        });
+        Object.defineProperty(this, "integer", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: 0
+        });
+        Object.defineProperty(this, "isNegativeInteger", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "bulkStringRemainingLength", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "arraysInProcess", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: []
+        });
+        Object.defineProperty(this, "initializeArray", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: false
+        });
+        Object.defineProperty(this, "arrayItemType", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+    }
+    reset() {
+        this.cursor = 0;
+        this.type = undefined;
+        this.bufferComposer.reset();
+        this.stringComposer.reset();
+        this.currentStringComposer = this.stringComposer;
+    }
+    write(chunk) {
+        while (this.cursor < chunk.length) {
+            if (!this.type) {
+                this.currentStringComposer = this.options.returnStringsAsBuffers() ?
+                    this.bufferComposer :
+                    this.stringComposer;
+                this.type = chunk[this.cursor];
+                if (++this.cursor >= chunk.length)
+                    break;
+            }
+            const reply = this.parseType(chunk, this.type);
+            if (reply === undefined)
+                break;
+            this.type = undefined;
+            this.options.onReply(reply);
+        }
+        this.cursor -= chunk.length;
+    }
+    parseType(chunk, type, arraysToKeep) {
+        switch (type) {
+            case Types.SIMPLE_STRING:
+                return this.parseSimpleString(chunk);
+            case Types.ERROR:
+                return this.parseError(chunk);
+            case Types.INTEGER:
+                return this.parseInteger(chunk);
+            case Types.BULK_STRING:
+                return this.parseBulkString(chunk);
+            case Types.ARRAY:
+                return this.parseArray(chunk, arraysToKeep);
+        }
+    }
+    compose(chunk, composer) {
+        for (let i = this.cursor; i < chunk.length; i++) {
+            if (chunk[i] === ASCII.CR) {
+                const reply = composer.end(chunk.subarray(this.cursor, i));
+                this.cursor = i + 2;
+                return reply;
+            }
+        }
+        const toWrite = chunk.subarray(this.cursor);
+        composer.write(toWrite);
+        this.cursor = chunk.length;
+    }
+    parseSimpleString(chunk) {
+        return this.compose(chunk, this.currentStringComposer);
+    }
+    parseError(chunk) {
+        const message = this.compose(chunk, this.stringComposer);
+        if (message !== undefined) {
+            return new errors_1.ErrorReply(message);
+        }
+    }
+    parseInteger(chunk) {
+        if (this.isNegativeInteger === undefined) {
+            this.isNegativeInteger = chunk[this.cursor] === ASCII.MINUS;
+            if (this.isNegativeInteger && ++this.cursor === chunk.length)
+                return;
+        }
+        do {
+            const byte = chunk[this.cursor];
+            if (byte === ASCII.CR) {
+                const integer = this.isNegativeInteger ? -this.integer : this.integer;
+                this.integer = 0;
+                this.isNegativeInteger = undefined;
+                this.cursor += 2;
+                return integer;
+            }
+            this.integer = this.integer * 10 + byte - ASCII.ZERO;
+        } while (++this.cursor < chunk.length);
+    }
+    parseBulkString(chunk) {
+        if (this.bulkStringRemainingLength === undefined) {
+            const length = this.parseInteger(chunk);
+            if (length === undefined)
+                return;
+            if (length === -1)
+                return null;
+            this.bulkStringRemainingLength = length;
+            if (this.cursor >= chunk.length)
+                return;
+        }
+        const end = this.cursor + this.bulkStringRemainingLength;
+        if (chunk.length >= end) {
+            const reply = this.currentStringComposer.end(chunk.subarray(this.cursor, end));
+            this.bulkStringRemainingLength = undefined;
+            this.cursor = end + 2;
+            return reply;
+        }
+        const toWrite = chunk.subarray(this.cursor);
+        this.currentStringComposer.write(toWrite);
+        this.bulkStringRemainingLength -= toWrite.length;
+        this.cursor = chunk.length;
+    }
+    parseArray(chunk, arraysToKeep = 0) {
+        if (this.initializeArray || this.arraysInProcess.length === arraysToKeep) {
+            const length = this.parseInteger(chunk);
+            if (length === undefined) {
+                this.initializeArray = true;
+                return undefined;
+            }
+            this.initializeArray = false;
+            this.arrayItemType = undefined;
+            if (length === -1) {
+                return this.returnArrayReply(null, arraysToKeep, chunk);
+            }
+            else if (length === 0) {
+                return this.returnArrayReply([], arraysToKeep, chunk);
+            }
+            this.arraysInProcess.push({
+                array: new Array(length),
+                pushCounter: 0
+            });
+        }
+        while (this.cursor < chunk.length) {
+            if (!this.arrayItemType) {
+                this.arrayItemType = chunk[this.cursor];
+                if (++this.cursor >= chunk.length)
+                    break;
+            }
+            const item = this.parseType(chunk, this.arrayItemType, arraysToKeep + 1);
+            if (item === undefined)
+                break;
+            this.arrayItemType = undefined;
+            const reply = this.pushArrayItem(item, arraysToKeep);
+            if (reply !== undefined)
+                return reply;
+        }
+    }
+    returnArrayReply(reply, arraysToKeep, chunk) {
+        if (this.arraysInProcess.length <= arraysToKeep)
+            return reply;
+        return this.pushArrayItem(reply, arraysToKeep, chunk);
+    }
+    pushArrayItem(item, arraysToKeep, chunk) {
+        const to = this.arraysInProcess[this.arraysInProcess.length - 1];
+        to.array[to.pushCounter] = item;
+        if (++to.pushCounter === to.array.length) {
+            return this.returnArrayReply(this.arraysInProcess.pop().array, arraysToKeep, chunk);
+        }
+        else if (chunk && chunk.length > this.cursor) {
+            return this.parseArray(chunk, arraysToKeep);
+        }
+    }
+}
+exports["default"] = RESP2Decoder;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/RESP2/encoder.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/RESP2/encoder.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const CRLF = '\r\n';
+function encodeCommand(args) {
+    const toWrite = [];
+    let strings = '*' + args.length + CRLF;
+    for (let i = 0; i < args.length; i++) {
+        const arg = args[i];
+        if (typeof arg === 'string') {
+            strings += '$' + Buffer.byteLength(arg) + CRLF + arg + CRLF;
+        }
+        else if (arg instanceof Buffer) {
+            toWrite.push(strings + '$' + arg.length.toString() + CRLF, arg);
+            strings = CRLF;
+        }
+        else {
+            throw new TypeError('Invalid argument type');
+        }
+    }
+    toWrite.push(strings);
+    return toWrite;
+}
+exports["default"] = encodeCommand;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/commands-queue.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/commands-queue.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _RedisCommandsQueue_instances, _a, _RedisCommandsQueue_flushQueue, _RedisCommandsQueue_maxLength, _RedisCommandsQueue_waitingToBeSent, _RedisCommandsQueue_waitingForReply, _RedisCommandsQueue_onShardedChannelMoved, _RedisCommandsQueue_pubSub, _RedisCommandsQueue_chainInExecution, _RedisCommandsQueue_decoder, _RedisCommandsQueue_pushPubSubCommand;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const LinkedList = __webpack_require__(/*! yallist */ "../../yallist/yallist.js");
+const errors_1 = __webpack_require__(/*! ../errors */ "../../@redis/client/dist/lib/errors.js");
+const decoder_1 = __webpack_require__(/*! ./RESP2/decoder */ "../../@redis/client/dist/lib/client/RESP2/decoder.js");
+const encoder_1 = __webpack_require__(/*! ./RESP2/encoder */ "../../@redis/client/dist/lib/client/RESP2/encoder.js");
+const pub_sub_1 = __webpack_require__(/*! ./pub-sub */ "../../@redis/client/dist/lib/client/pub-sub.js");
+const PONG = Buffer.from('pong');
+class RedisCommandsQueue {
+    get isPubSubActive() {
+        return __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").isActive;
+    }
+    constructor(maxLength, onShardedChannelMoved) {
+        _RedisCommandsQueue_instances.add(this);
+        _RedisCommandsQueue_maxLength.set(this, void 0);
+        _RedisCommandsQueue_waitingToBeSent.set(this, new LinkedList());
+        _RedisCommandsQueue_waitingForReply.set(this, new LinkedList());
+        _RedisCommandsQueue_onShardedChannelMoved.set(this, void 0);
+        _RedisCommandsQueue_pubSub.set(this, new pub_sub_1.PubSub());
+        _RedisCommandsQueue_chainInExecution.set(this, void 0);
+        _RedisCommandsQueue_decoder.set(this, new decoder_1.default({
+            returnStringsAsBuffers: () => {
+                return !!__classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").head?.value.returnBuffers ||
+                    __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").isActive;
+            },
+            onReply: reply => {
+                if (__classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").isActive && Array.isArray(reply)) {
+                    if (__classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").handleMessageReply(reply))
+                        return;
+                    const isShardedUnsubscribe = pub_sub_1.PubSub.isShardedUnsubscribe(reply);
+                    if (isShardedUnsubscribe && !__classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").length) {
+                        const channel = reply[1].toString();
+                        __classPrivateFieldGet(this, _RedisCommandsQueue_onShardedChannelMoved, "f").call(this, channel, __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").removeShardedListeners(channel));
+                        return;
+                    }
+                    else if (isShardedUnsubscribe || pub_sub_1.PubSub.isStatusReply(reply)) {
+                        const head = __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").head.value;
+                        if ((Number.isNaN(head.channelsCounter) && reply[2] === 0) ||
+                            --head.channelsCounter === 0) {
+                            __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").shift().resolve();
+                        }
+                        return;
+                    }
+                    if (PONG.equals(reply[0])) {
+                        const { resolve, returnBuffers } = __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").shift(), buffer = (reply[1].length === 0 ? reply[0] : reply[1]);
+                        resolve(returnBuffers ? buffer : buffer.toString());
+                        return;
+                    }
+                }
+                const { resolve, reject } = __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").shift();
+                if (reply instanceof errors_1.ErrorReply) {
+                    reject(reply);
+                }
+                else {
+                    resolve(reply);
+                }
+            }
+        }));
+        __classPrivateFieldSet(this, _RedisCommandsQueue_maxLength, maxLength, "f");
+        __classPrivateFieldSet(this, _RedisCommandsQueue_onShardedChannelMoved, onShardedChannelMoved, "f");
+    }
+    addCommand(args, options) {
+        if (__classPrivateFieldGet(this, _RedisCommandsQueue_maxLength, "f") && __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").length + __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").length >= __classPrivateFieldGet(this, _RedisCommandsQueue_maxLength, "f")) {
+            return Promise.reject(new Error('The queue is full'));
+        }
+        else if (options?.signal?.aborted) {
+            return Promise.reject(new errors_1.AbortError());
+        }
+        return new Promise((resolve, reject) => {
+            const node = new LinkedList.Node({
+                args,
+                chainId: options?.chainId,
+                returnBuffers: options?.returnBuffers,
+                resolve,
+                reject
+            });
+            if (options?.signal) {
+                const listener = () => {
+                    __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").removeNode(node);
+                    node.value.reject(new errors_1.AbortError());
+                };
+                node.value.abort = {
+                    signal: options.signal,
+                    listener
+                };
+                // AbortSignal type is incorrent
+                options.signal.addEventListener('abort', listener, {
+                    once: true
+                });
+            }
+            if (options?.asap) {
+                __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").unshiftNode(node);
+            }
+            else {
+                __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").pushNode(node);
+            }
+        });
+    }
+    subscribe(type, channels, listener, returnBuffers) {
+        return __classPrivateFieldGet(this, _RedisCommandsQueue_instances, "m", _RedisCommandsQueue_pushPubSubCommand).call(this, __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").subscribe(type, channels, listener, returnBuffers));
+    }
+    unsubscribe(type, channels, listener, returnBuffers) {
+        return __classPrivateFieldGet(this, _RedisCommandsQueue_instances, "m", _RedisCommandsQueue_pushPubSubCommand).call(this, __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").unsubscribe(type, channels, listener, returnBuffers));
+    }
+    resubscribe() {
+        const commands = __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").resubscribe();
+        if (!commands.length)
+            return;
+        return Promise.all(commands.map(command => __classPrivateFieldGet(this, _RedisCommandsQueue_instances, "m", _RedisCommandsQueue_pushPubSubCommand).call(this, command)));
+    }
+    extendPubSubChannelListeners(type, channel, listeners) {
+        return __classPrivateFieldGet(this, _RedisCommandsQueue_instances, "m", _RedisCommandsQueue_pushPubSubCommand).call(this, __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").extendChannelListeners(type, channel, listeners));
+    }
+    extendPubSubListeners(type, listeners) {
+        return __classPrivateFieldGet(this, _RedisCommandsQueue_instances, "m", _RedisCommandsQueue_pushPubSubCommand).call(this, __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").extendTypeListeners(type, listeners));
+    }
+    getPubSubListeners(type) {
+        return __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").getTypeListeners(type);
+    }
+    getCommandToSend() {
+        const toSend = __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").shift();
+        if (!toSend)
+            return;
+        let encoded;
+        try {
+            encoded = (0, encoder_1.default)(toSend.args);
+        }
+        catch (err) {
+            toSend.reject(err);
+            return;
+        }
+        __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f").push({
+            resolve: toSend.resolve,
+            reject: toSend.reject,
+            channelsCounter: toSend.channelsCounter,
+            returnBuffers: toSend.returnBuffers
+        });
+        __classPrivateFieldSet(this, _RedisCommandsQueue_chainInExecution, toSend.chainId, "f");
+        return encoded;
+    }
+    onReplyChunk(chunk) {
+        __classPrivateFieldGet(this, _RedisCommandsQueue_decoder, "f").write(chunk);
+    }
+    flushWaitingForReply(err) {
+        __classPrivateFieldGet(this, _RedisCommandsQueue_decoder, "f").reset();
+        __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").reset();
+        __classPrivateFieldGet(RedisCommandsQueue, _a, "m", _RedisCommandsQueue_flushQueue).call(RedisCommandsQueue, __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f"), err);
+        if (!__classPrivateFieldGet(this, _RedisCommandsQueue_chainInExecution, "f"))
+            return;
+        while (__classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").head?.value.chainId === __classPrivateFieldGet(this, _RedisCommandsQueue_chainInExecution, "f")) {
+            __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").shift();
+        }
+        __classPrivateFieldSet(this, _RedisCommandsQueue_chainInExecution, undefined, "f");
+    }
+    flushAll(err) {
+        __classPrivateFieldGet(this, _RedisCommandsQueue_decoder, "f").reset();
+        __classPrivateFieldGet(this, _RedisCommandsQueue_pubSub, "f").reset();
+        __classPrivateFieldGet(RedisCommandsQueue, _a, "m", _RedisCommandsQueue_flushQueue).call(RedisCommandsQueue, __classPrivateFieldGet(this, _RedisCommandsQueue_waitingForReply, "f"), err);
+        __classPrivateFieldGet(RedisCommandsQueue, _a, "m", _RedisCommandsQueue_flushQueue).call(RedisCommandsQueue, __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f"), err);
+    }
+}
+exports["default"] = RedisCommandsQueue;
+_a = RedisCommandsQueue, _RedisCommandsQueue_maxLength = new WeakMap(), _RedisCommandsQueue_waitingToBeSent = new WeakMap(), _RedisCommandsQueue_waitingForReply = new WeakMap(), _RedisCommandsQueue_onShardedChannelMoved = new WeakMap(), _RedisCommandsQueue_pubSub = new WeakMap(), _RedisCommandsQueue_chainInExecution = new WeakMap(), _RedisCommandsQueue_decoder = new WeakMap(), _RedisCommandsQueue_instances = new WeakSet(), _RedisCommandsQueue_flushQueue = function _RedisCommandsQueue_flushQueue(queue, err) {
+    while (queue.length) {
+        queue.shift().reject(err);
+    }
+}, _RedisCommandsQueue_pushPubSubCommand = function _RedisCommandsQueue_pushPubSubCommand(command) {
+    if (command === undefined)
+        return;
+    return new Promise((resolve, reject) => {
+        __classPrivateFieldGet(this, _RedisCommandsQueue_waitingToBeSent, "f").push({
+            args: command.args,
+            channelsCounter: command.channelsCounter,
+            returnBuffers: true,
+            resolve: () => {
+                command.resolve();
+                resolve();
+            },
+            reject: err => {
+                command.reject?.();
+                reject(err);
+            }
+        });
+    });
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/commands.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/commands.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commands_1 = __webpack_require__(/*! ../cluster/commands */ "../../@redis/client/dist/lib/cluster/commands.js");
+const ACL_CAT = __webpack_require__(/*! ../commands/ACL_CAT */ "../../@redis/client/dist/lib/commands/ACL_CAT.js");
+const ACL_DELUSER = __webpack_require__(/*! ../commands/ACL_DELUSER */ "../../@redis/client/dist/lib/commands/ACL_DELUSER.js");
+const ACL_DRYRUN = __webpack_require__(/*! ../commands/ACL_DRYRUN */ "../../@redis/client/dist/lib/commands/ACL_DRYRUN.js");
+const ACL_GENPASS = __webpack_require__(/*! ../commands/ACL_GENPASS */ "../../@redis/client/dist/lib/commands/ACL_GENPASS.js");
+const ACL_GETUSER = __webpack_require__(/*! ../commands/ACL_GETUSER */ "../../@redis/client/dist/lib/commands/ACL_GETUSER.js");
+const ACL_LIST = __webpack_require__(/*! ../commands/ACL_LIST */ "../../@redis/client/dist/lib/commands/ACL_LIST.js");
+const ACL_LOAD = __webpack_require__(/*! ../commands/ACL_LOAD */ "../../@redis/client/dist/lib/commands/ACL_LOAD.js");
+const ACL_LOG_RESET = __webpack_require__(/*! ../commands/ACL_LOG_RESET */ "../../@redis/client/dist/lib/commands/ACL_LOG_RESET.js");
+const ACL_LOG = __webpack_require__(/*! ../commands/ACL_LOG */ "../../@redis/client/dist/lib/commands/ACL_LOG.js");
+const ACL_SAVE = __webpack_require__(/*! ../commands/ACL_SAVE */ "../../@redis/client/dist/lib/commands/ACL_SAVE.js");
+const ACL_SETUSER = __webpack_require__(/*! ../commands/ACL_SETUSER */ "../../@redis/client/dist/lib/commands/ACL_SETUSER.js");
+const ACL_USERS = __webpack_require__(/*! ../commands/ACL_USERS */ "../../@redis/client/dist/lib/commands/ACL_USERS.js");
+const ACL_WHOAMI = __webpack_require__(/*! ../commands/ACL_WHOAMI */ "../../@redis/client/dist/lib/commands/ACL_WHOAMI.js");
+const ASKING = __webpack_require__(/*! ../commands/ASKING */ "../../@redis/client/dist/lib/commands/ASKING.js");
+const AUTH = __webpack_require__(/*! ../commands/AUTH */ "../../@redis/client/dist/lib/commands/AUTH.js");
+const BGREWRITEAOF = __webpack_require__(/*! ../commands/BGREWRITEAOF */ "../../@redis/client/dist/lib/commands/BGREWRITEAOF.js");
+const BGSAVE = __webpack_require__(/*! ../commands/BGSAVE */ "../../@redis/client/dist/lib/commands/BGSAVE.js");
+const CLIENT_CACHING = __webpack_require__(/*! ../commands/CLIENT_CACHING */ "../../@redis/client/dist/lib/commands/CLIENT_CACHING.js");
+const CLIENT_GETNAME = __webpack_require__(/*! ../commands/CLIENT_GETNAME */ "../../@redis/client/dist/lib/commands/CLIENT_GETNAME.js");
+const CLIENT_GETREDIR = __webpack_require__(/*! ../commands/CLIENT_GETREDIR */ "../../@redis/client/dist/lib/commands/CLIENT_GETREDIR.js");
+const CLIENT_ID = __webpack_require__(/*! ../commands/CLIENT_ID */ "../../@redis/client/dist/lib/commands/CLIENT_ID.js");
+const CLIENT_KILL = __webpack_require__(/*! ../commands/CLIENT_KILL */ "../../@redis/client/dist/lib/commands/CLIENT_KILL.js");
+const CLIENT_LIST = __webpack_require__(/*! ../commands/CLIENT_LIST */ "../../@redis/client/dist/lib/commands/CLIENT_LIST.js");
+const CLIENT_NO_EVICT = __webpack_require__(/*! ../commands/CLIENT_NO-EVICT */ "../../@redis/client/dist/lib/commands/CLIENT_NO-EVICT.js");
+const CLIENT_PAUSE = __webpack_require__(/*! ../commands/CLIENT_PAUSE */ "../../@redis/client/dist/lib/commands/CLIENT_PAUSE.js");
+const CLIENT_SETNAME = __webpack_require__(/*! ../commands/CLIENT_SETNAME */ "../../@redis/client/dist/lib/commands/CLIENT_SETNAME.js");
+const CLIENT_TRACKING = __webpack_require__(/*! ../commands/CLIENT_TRACKING */ "../../@redis/client/dist/lib/commands/CLIENT_TRACKING.js");
+const CLIENT_TRACKINGINFO = __webpack_require__(/*! ../commands/CLIENT_TRACKINGINFO */ "../../@redis/client/dist/lib/commands/CLIENT_TRACKINGINFO.js");
+const CLIENT_UNPAUSE = __webpack_require__(/*! ../commands/CLIENT_UNPAUSE */ "../../@redis/client/dist/lib/commands/CLIENT_UNPAUSE.js");
+const CLIENT_INFO = __webpack_require__(/*! ../commands/CLIENT_INFO */ "../../@redis/client/dist/lib/commands/CLIENT_INFO.js");
+const CLUSTER_ADDSLOTS = __webpack_require__(/*! ../commands/CLUSTER_ADDSLOTS */ "../../@redis/client/dist/lib/commands/CLUSTER_ADDSLOTS.js");
+const CLUSTER_ADDSLOTSRANGE = __webpack_require__(/*! ../commands/CLUSTER_ADDSLOTSRANGE */ "../../@redis/client/dist/lib/commands/CLUSTER_ADDSLOTSRANGE.js");
+const CLUSTER_BUMPEPOCH = __webpack_require__(/*! ../commands/CLUSTER_BUMPEPOCH */ "../../@redis/client/dist/lib/commands/CLUSTER_BUMPEPOCH.js");
+const CLUSTER_COUNT_FAILURE_REPORTS = __webpack_require__(/*! ../commands/CLUSTER_COUNT-FAILURE-REPORTS */ "../../@redis/client/dist/lib/commands/CLUSTER_COUNT-FAILURE-REPORTS.js");
+const CLUSTER_COUNTKEYSINSLOT = __webpack_require__(/*! ../commands/CLUSTER_COUNTKEYSINSLOT */ "../../@redis/client/dist/lib/commands/CLUSTER_COUNTKEYSINSLOT.js");
+const CLUSTER_DELSLOTS = __webpack_require__(/*! ../commands/CLUSTER_DELSLOTS */ "../../@redis/client/dist/lib/commands/CLUSTER_DELSLOTS.js");
+const CLUSTER_DELSLOTSRANGE = __webpack_require__(/*! ../commands/CLUSTER_DELSLOTSRANGE */ "../../@redis/client/dist/lib/commands/CLUSTER_DELSLOTSRANGE.js");
+const CLUSTER_FAILOVER = __webpack_require__(/*! ../commands/CLUSTER_FAILOVER */ "../../@redis/client/dist/lib/commands/CLUSTER_FAILOVER.js");
+const CLUSTER_FLUSHSLOTS = __webpack_require__(/*! ../commands/CLUSTER_FLUSHSLOTS */ "../../@redis/client/dist/lib/commands/CLUSTER_FLUSHSLOTS.js");
+const CLUSTER_FORGET = __webpack_require__(/*! ../commands/CLUSTER_FORGET */ "../../@redis/client/dist/lib/commands/CLUSTER_FORGET.js");
+const CLUSTER_GETKEYSINSLOT = __webpack_require__(/*! ../commands/CLUSTER_GETKEYSINSLOT */ "../../@redis/client/dist/lib/commands/CLUSTER_GETKEYSINSLOT.js");
+const CLUSTER_INFO = __webpack_require__(/*! ../commands/CLUSTER_INFO */ "../../@redis/client/dist/lib/commands/CLUSTER_INFO.js");
+const CLUSTER_KEYSLOT = __webpack_require__(/*! ../commands/CLUSTER_KEYSLOT */ "../../@redis/client/dist/lib/commands/CLUSTER_KEYSLOT.js");
+const CLUSTER_LINKS = __webpack_require__(/*! ../commands/CLUSTER_LINKS */ "../../@redis/client/dist/lib/commands/CLUSTER_LINKS.js");
+const CLUSTER_MEET = __webpack_require__(/*! ../commands/CLUSTER_MEET */ "../../@redis/client/dist/lib/commands/CLUSTER_MEET.js");
+const CLUSTER_MYID = __webpack_require__(/*! ../commands/CLUSTER_MYID */ "../../@redis/client/dist/lib/commands/CLUSTER_MYID.js");
+const CLUSTER_NODES = __webpack_require__(/*! ../commands/CLUSTER_NODES */ "../../@redis/client/dist/lib/commands/CLUSTER_NODES.js");
+const CLUSTER_REPLICAS = __webpack_require__(/*! ../commands/CLUSTER_REPLICAS */ "../../@redis/client/dist/lib/commands/CLUSTER_REPLICAS.js");
+const CLUSTER_REPLICATE = __webpack_require__(/*! ../commands/CLUSTER_REPLICATE */ "../../@redis/client/dist/lib/commands/CLUSTER_REPLICATE.js");
+const CLUSTER_RESET = __webpack_require__(/*! ../commands/CLUSTER_RESET */ "../../@redis/client/dist/lib/commands/CLUSTER_RESET.js");
+const CLUSTER_SAVECONFIG = __webpack_require__(/*! ../commands/CLUSTER_SAVECONFIG */ "../../@redis/client/dist/lib/commands/CLUSTER_SAVECONFIG.js");
+const CLUSTER_SET_CONFIG_EPOCH = __webpack_require__(/*! ../commands/CLUSTER_SET-CONFIG-EPOCH */ "../../@redis/client/dist/lib/commands/CLUSTER_SET-CONFIG-EPOCH.js");
+const CLUSTER_SETSLOT = __webpack_require__(/*! ../commands/CLUSTER_SETSLOT */ "../../@redis/client/dist/lib/commands/CLUSTER_SETSLOT.js");
+const CLUSTER_SLOTS = __webpack_require__(/*! ../commands/CLUSTER_SLOTS */ "../../@redis/client/dist/lib/commands/CLUSTER_SLOTS.js");
+const COMMAND_COUNT = __webpack_require__(/*! ../commands/COMMAND_COUNT */ "../../@redis/client/dist/lib/commands/COMMAND_COUNT.js");
+const COMMAND_GETKEYS = __webpack_require__(/*! ../commands/COMMAND_GETKEYS */ "../../@redis/client/dist/lib/commands/COMMAND_GETKEYS.js");
+const COMMAND_GETKEYSANDFLAGS = __webpack_require__(/*! ../commands/COMMAND_GETKEYSANDFLAGS */ "../../@redis/client/dist/lib/commands/COMMAND_GETKEYSANDFLAGS.js");
+const COMMAND_INFO = __webpack_require__(/*! ../commands/COMMAND_INFO */ "../../@redis/client/dist/lib/commands/COMMAND_INFO.js");
+const COMMAND_LIST = __webpack_require__(/*! ../commands/COMMAND_LIST */ "../../@redis/client/dist/lib/commands/COMMAND_LIST.js");
+const COMMAND = __webpack_require__(/*! ../commands/COMMAND */ "../../@redis/client/dist/lib/commands/COMMAND.js");
+const CONFIG_GET = __webpack_require__(/*! ../commands/CONFIG_GET */ "../../@redis/client/dist/lib/commands/CONFIG_GET.js");
+const CONFIG_RESETASTAT = __webpack_require__(/*! ../commands/CONFIG_RESETSTAT */ "../../@redis/client/dist/lib/commands/CONFIG_RESETSTAT.js");
+const CONFIG_REWRITE = __webpack_require__(/*! ../commands/CONFIG_REWRITE */ "../../@redis/client/dist/lib/commands/CONFIG_REWRITE.js");
+const CONFIG_SET = __webpack_require__(/*! ../commands/CONFIG_SET */ "../../@redis/client/dist/lib/commands/CONFIG_SET.js");
+const DBSIZE = __webpack_require__(/*! ../commands/DBSIZE */ "../../@redis/client/dist/lib/commands/DBSIZE.js");
+const DISCARD = __webpack_require__(/*! ../commands/DISCARD */ "../../@redis/client/dist/lib/commands/DISCARD.js");
+const ECHO = __webpack_require__(/*! ../commands/ECHO */ "../../@redis/client/dist/lib/commands/ECHO.js");
+const FAILOVER = __webpack_require__(/*! ../commands/FAILOVER */ "../../@redis/client/dist/lib/commands/FAILOVER.js");
+const FLUSHALL = __webpack_require__(/*! ../commands/FLUSHALL */ "../../@redis/client/dist/lib/commands/FLUSHALL.js");
+const FLUSHDB = __webpack_require__(/*! ../commands/FLUSHDB */ "../../@redis/client/dist/lib/commands/FLUSHDB.js");
+const FUNCTION_DELETE = __webpack_require__(/*! ../commands/FUNCTION_DELETE */ "../../@redis/client/dist/lib/commands/FUNCTION_DELETE.js");
+const FUNCTION_DUMP = __webpack_require__(/*! ../commands/FUNCTION_DUMP */ "../../@redis/client/dist/lib/commands/FUNCTION_DUMP.js");
+const FUNCTION_FLUSH = __webpack_require__(/*! ../commands/FUNCTION_FLUSH */ "../../@redis/client/dist/lib/commands/FUNCTION_FLUSH.js");
+const FUNCTION_KILL = __webpack_require__(/*! ../commands/FUNCTION_KILL */ "../../@redis/client/dist/lib/commands/FUNCTION_KILL.js");
+const FUNCTION_LIST_WITHCODE = __webpack_require__(/*! ../commands/FUNCTION_LIST_WITHCODE */ "../../@redis/client/dist/lib/commands/FUNCTION_LIST_WITHCODE.js");
+const FUNCTION_LIST = __webpack_require__(/*! ../commands/FUNCTION_LIST */ "../../@redis/client/dist/lib/commands/FUNCTION_LIST.js");
+const FUNCTION_LOAD = __webpack_require__(/*! ../commands/FUNCTION_LOAD */ "../../@redis/client/dist/lib/commands/FUNCTION_LOAD.js");
+const FUNCTION_RESTORE = __webpack_require__(/*! ../commands/FUNCTION_RESTORE */ "../../@redis/client/dist/lib/commands/FUNCTION_RESTORE.js");
+const FUNCTION_STATS = __webpack_require__(/*! ../commands/FUNCTION_STATS */ "../../@redis/client/dist/lib/commands/FUNCTION_STATS.js");
+const HELLO = __webpack_require__(/*! ../commands/HELLO */ "../../@redis/client/dist/lib/commands/HELLO.js");
+const INFO = __webpack_require__(/*! ../commands/INFO */ "../../@redis/client/dist/lib/commands/INFO.js");
+const KEYS = __webpack_require__(/*! ../commands/KEYS */ "../../@redis/client/dist/lib/commands/KEYS.js");
+const LASTSAVE = __webpack_require__(/*! ../commands/LASTSAVE */ "../../@redis/client/dist/lib/commands/LASTSAVE.js");
+const LATENCY_DOCTOR = __webpack_require__(/*! ../commands/LATENCY_DOCTOR */ "../../@redis/client/dist/lib/commands/LATENCY_DOCTOR.js");
+const LATENCY_GRAPH = __webpack_require__(/*! ../commands/LATENCY_GRAPH */ "../../@redis/client/dist/lib/commands/LATENCY_GRAPH.js");
+const LATENCY_LATEST = __webpack_require__(/*! ../commands/LATENCY_LATEST */ "../../@redis/client/dist/lib/commands/LATENCY_LATEST.js");
+const LOLWUT = __webpack_require__(/*! ../commands/LOLWUT */ "../../@redis/client/dist/lib/commands/LOLWUT.js");
+const MEMORY_DOCTOR = __webpack_require__(/*! ../commands/MEMORY_DOCTOR */ "../../@redis/client/dist/lib/commands/MEMORY_DOCTOR.js");
+const MEMORY_MALLOC_STATS = __webpack_require__(/*! ../commands/MEMORY_MALLOC-STATS */ "../../@redis/client/dist/lib/commands/MEMORY_MALLOC-STATS.js");
+const MEMORY_PURGE = __webpack_require__(/*! ../commands/MEMORY_PURGE */ "../../@redis/client/dist/lib/commands/MEMORY_PURGE.js");
+const MEMORY_STATS = __webpack_require__(/*! ../commands/MEMORY_STATS */ "../../@redis/client/dist/lib/commands/MEMORY_STATS.js");
+const MEMORY_USAGE = __webpack_require__(/*! ../commands/MEMORY_USAGE */ "../../@redis/client/dist/lib/commands/MEMORY_USAGE.js");
+const MODULE_LIST = __webpack_require__(/*! ../commands/MODULE_LIST */ "../../@redis/client/dist/lib/commands/MODULE_LIST.js");
+const MODULE_LOAD = __webpack_require__(/*! ../commands/MODULE_LOAD */ "../../@redis/client/dist/lib/commands/MODULE_LOAD.js");
+const MODULE_UNLOAD = __webpack_require__(/*! ../commands/MODULE_UNLOAD */ "../../@redis/client/dist/lib/commands/MODULE_UNLOAD.js");
+const MOVE = __webpack_require__(/*! ../commands/MOVE */ "../../@redis/client/dist/lib/commands/MOVE.js");
+const PING = __webpack_require__(/*! ../commands/PING */ "../../@redis/client/dist/lib/commands/PING.js");
+const PUBSUB_CHANNELS = __webpack_require__(/*! ../commands/PUBSUB_CHANNELS */ "../../@redis/client/dist/lib/commands/PUBSUB_CHANNELS.js");
+const PUBSUB_NUMPAT = __webpack_require__(/*! ../commands/PUBSUB_NUMPAT */ "../../@redis/client/dist/lib/commands/PUBSUB_NUMPAT.js");
+const PUBSUB_NUMSUB = __webpack_require__(/*! ../commands/PUBSUB_NUMSUB */ "../../@redis/client/dist/lib/commands/PUBSUB_NUMSUB.js");
+const PUBSUB_SHARDCHANNELS = __webpack_require__(/*! ../commands/PUBSUB_SHARDCHANNELS */ "../../@redis/client/dist/lib/commands/PUBSUB_SHARDCHANNELS.js");
+const RANDOMKEY = __webpack_require__(/*! ../commands/RANDOMKEY */ "../../@redis/client/dist/lib/commands/RANDOMKEY.js");
+const READONLY = __webpack_require__(/*! ../commands/READONLY */ "../../@redis/client/dist/lib/commands/READONLY.js");
+const READWRITE = __webpack_require__(/*! ../commands/READWRITE */ "../../@redis/client/dist/lib/commands/READWRITE.js");
+const REPLICAOF = __webpack_require__(/*! ../commands/REPLICAOF */ "../../@redis/client/dist/lib/commands/REPLICAOF.js");
+const RESTORE_ASKING = __webpack_require__(/*! ../commands/RESTORE-ASKING */ "../../@redis/client/dist/lib/commands/RESTORE-ASKING.js");
+const ROLE = __webpack_require__(/*! ../commands/ROLE */ "../../@redis/client/dist/lib/commands/ROLE.js");
+const SAVE = __webpack_require__(/*! ../commands/SAVE */ "../../@redis/client/dist/lib/commands/SAVE.js");
+const SCAN = __webpack_require__(/*! ../commands/SCAN */ "../../@redis/client/dist/lib/commands/SCAN.js");
+const SCRIPT_DEBUG = __webpack_require__(/*! ../commands/SCRIPT_DEBUG */ "../../@redis/client/dist/lib/commands/SCRIPT_DEBUG.js");
+const SCRIPT_EXISTS = __webpack_require__(/*! ../commands/SCRIPT_EXISTS */ "../../@redis/client/dist/lib/commands/SCRIPT_EXISTS.js");
+const SCRIPT_FLUSH = __webpack_require__(/*! ../commands/SCRIPT_FLUSH */ "../../@redis/client/dist/lib/commands/SCRIPT_FLUSH.js");
+const SCRIPT_KILL = __webpack_require__(/*! ../commands/SCRIPT_KILL */ "../../@redis/client/dist/lib/commands/SCRIPT_KILL.js");
+const SCRIPT_LOAD = __webpack_require__(/*! ../commands/SCRIPT_LOAD */ "../../@redis/client/dist/lib/commands/SCRIPT_LOAD.js");
+const SHUTDOWN = __webpack_require__(/*! ../commands/SHUTDOWN */ "../../@redis/client/dist/lib/commands/SHUTDOWN.js");
+const SWAPDB = __webpack_require__(/*! ../commands/SWAPDB */ "../../@redis/client/dist/lib/commands/SWAPDB.js");
+const TIME = __webpack_require__(/*! ../commands/TIME */ "../../@redis/client/dist/lib/commands/TIME.js");
+const UNWATCH = __webpack_require__(/*! ../commands/UNWATCH */ "../../@redis/client/dist/lib/commands/UNWATCH.js");
+const WAIT = __webpack_require__(/*! ../commands/WAIT */ "../../@redis/client/dist/lib/commands/WAIT.js");
+exports["default"] = {
+    ...commands_1.default,
+    ACL_CAT,
+    aclCat: ACL_CAT,
+    ACL_DELUSER,
+    aclDelUser: ACL_DELUSER,
+    ACL_DRYRUN,
+    aclDryRun: ACL_DRYRUN,
+    ACL_GENPASS,
+    aclGenPass: ACL_GENPASS,
+    ACL_GETUSER,
+    aclGetUser: ACL_GETUSER,
+    ACL_LIST,
+    aclList: ACL_LIST,
+    ACL_LOAD,
+    aclLoad: ACL_LOAD,
+    ACL_LOG_RESET,
+    aclLogReset: ACL_LOG_RESET,
+    ACL_LOG,
+    aclLog: ACL_LOG,
+    ACL_SAVE,
+    aclSave: ACL_SAVE,
+    ACL_SETUSER,
+    aclSetUser: ACL_SETUSER,
+    ACL_USERS,
+    aclUsers: ACL_USERS,
+    ACL_WHOAMI,
+    aclWhoAmI: ACL_WHOAMI,
+    ASKING,
+    asking: ASKING,
+    AUTH,
+    auth: AUTH,
+    BGREWRITEAOF,
+    bgRewriteAof: BGREWRITEAOF,
+    BGSAVE,
+    bgSave: BGSAVE,
+    CLIENT_CACHING,
+    clientCaching: CLIENT_CACHING,
+    CLIENT_GETNAME,
+    clientGetName: CLIENT_GETNAME,
+    CLIENT_GETREDIR,
+    clientGetRedir: CLIENT_GETREDIR,
+    CLIENT_ID,
+    clientId: CLIENT_ID,
+    CLIENT_KILL,
+    clientKill: CLIENT_KILL,
+    'CLIENT_NO-EVICT': CLIENT_NO_EVICT,
+    clientNoEvict: CLIENT_NO_EVICT,
+    CLIENT_LIST,
+    clientList: CLIENT_LIST,
+    CLIENT_PAUSE,
+    clientPause: CLIENT_PAUSE,
+    CLIENT_SETNAME,
+    clientSetName: CLIENT_SETNAME,
+    CLIENT_TRACKING,
+    clientTracking: CLIENT_TRACKING,
+    CLIENT_TRACKINGINFO,
+    clientTrackingInfo: CLIENT_TRACKINGINFO,
+    CLIENT_UNPAUSE,
+    clientUnpause: CLIENT_UNPAUSE,
+    CLIENT_INFO,
+    clientInfo: CLIENT_INFO,
+    CLUSTER_ADDSLOTS,
+    clusterAddSlots: CLUSTER_ADDSLOTS,
+    CLUSTER_ADDSLOTSRANGE,
+    clusterAddSlotsRange: CLUSTER_ADDSLOTSRANGE,
+    CLUSTER_BUMPEPOCH,
+    clusterBumpEpoch: CLUSTER_BUMPEPOCH,
+    CLUSTER_COUNT_FAILURE_REPORTS,
+    clusterCountFailureReports: CLUSTER_COUNT_FAILURE_REPORTS,
+    CLUSTER_COUNTKEYSINSLOT,
+    clusterCountKeysInSlot: CLUSTER_COUNTKEYSINSLOT,
+    CLUSTER_DELSLOTS,
+    clusterDelSlots: CLUSTER_DELSLOTS,
+    CLUSTER_DELSLOTSRANGE,
+    clusterDelSlotsRange: CLUSTER_DELSLOTSRANGE,
+    CLUSTER_FAILOVER,
+    clusterFailover: CLUSTER_FAILOVER,
+    CLUSTER_FLUSHSLOTS,
+    clusterFlushSlots: CLUSTER_FLUSHSLOTS,
+    CLUSTER_FORGET,
+    clusterForget: CLUSTER_FORGET,
+    CLUSTER_GETKEYSINSLOT,
+    clusterGetKeysInSlot: CLUSTER_GETKEYSINSLOT,
+    CLUSTER_INFO,
+    clusterInfo: CLUSTER_INFO,
+    CLUSTER_KEYSLOT,
+    clusterKeySlot: CLUSTER_KEYSLOT,
+    CLUSTER_LINKS,
+    clusterLinks: CLUSTER_LINKS,
+    CLUSTER_MEET,
+    clusterMeet: CLUSTER_MEET,
+    CLUSTER_MYID,
+    clusterMyId: CLUSTER_MYID,
+    CLUSTER_NODES,
+    clusterNodes: CLUSTER_NODES,
+    CLUSTER_REPLICAS,
+    clusterReplicas: CLUSTER_REPLICAS,
+    CLUSTER_REPLICATE,
+    clusterReplicate: CLUSTER_REPLICATE,
+    CLUSTER_RESET,
+    clusterReset: CLUSTER_RESET,
+    CLUSTER_SAVECONFIG,
+    clusterSaveConfig: CLUSTER_SAVECONFIG,
+    CLUSTER_SET_CONFIG_EPOCH,
+    clusterSetConfigEpoch: CLUSTER_SET_CONFIG_EPOCH,
+    CLUSTER_SETSLOT,
+    clusterSetSlot: CLUSTER_SETSLOT,
+    CLUSTER_SLOTS,
+    clusterSlots: CLUSTER_SLOTS,
+    COMMAND_COUNT,
+    commandCount: COMMAND_COUNT,
+    COMMAND_GETKEYS,
+    commandGetKeys: COMMAND_GETKEYS,
+    COMMAND_GETKEYSANDFLAGS,
+    commandGetKeysAndFlags: COMMAND_GETKEYSANDFLAGS,
+    COMMAND_INFO,
+    commandInfo: COMMAND_INFO,
+    COMMAND_LIST,
+    commandList: COMMAND_LIST,
+    COMMAND,
+    command: COMMAND,
+    CONFIG_GET,
+    configGet: CONFIG_GET,
+    CONFIG_RESETASTAT,
+    configResetStat: CONFIG_RESETASTAT,
+    CONFIG_REWRITE,
+    configRewrite: CONFIG_REWRITE,
+    CONFIG_SET,
+    configSet: CONFIG_SET,
+    DBSIZE,
+    dbSize: DBSIZE,
+    DISCARD,
+    discard: DISCARD,
+    ECHO,
+    echo: ECHO,
+    FAILOVER,
+    failover: FAILOVER,
+    FLUSHALL,
+    flushAll: FLUSHALL,
+    FLUSHDB,
+    flushDb: FLUSHDB,
+    FUNCTION_DELETE,
+    functionDelete: FUNCTION_DELETE,
+    FUNCTION_DUMP,
+    functionDump: FUNCTION_DUMP,
+    FUNCTION_FLUSH,
+    functionFlush: FUNCTION_FLUSH,
+    FUNCTION_KILL,
+    functionKill: FUNCTION_KILL,
+    FUNCTION_LIST_WITHCODE,
+    functionListWithCode: FUNCTION_LIST_WITHCODE,
+    FUNCTION_LIST,
+    functionList: FUNCTION_LIST,
+    FUNCTION_LOAD,
+    functionLoad: FUNCTION_LOAD,
+    FUNCTION_RESTORE,
+    functionRestore: FUNCTION_RESTORE,
+    FUNCTION_STATS,
+    functionStats: FUNCTION_STATS,
+    HELLO,
+    hello: HELLO,
+    INFO,
+    info: INFO,
+    KEYS,
+    keys: KEYS,
+    LASTSAVE,
+    lastSave: LASTSAVE,
+    LATENCY_DOCTOR,
+    latencyDoctor: LATENCY_DOCTOR,
+    LATENCY_GRAPH,
+    latencyGraph: LATENCY_GRAPH,
+    LATENCY_LATEST,
+    latencyLatest: LATENCY_LATEST,
+    LOLWUT,
+    lolwut: LOLWUT,
+    MEMORY_DOCTOR,
+    memoryDoctor: MEMORY_DOCTOR,
+    'MEMORY_MALLOC-STATS': MEMORY_MALLOC_STATS,
+    memoryMallocStats: MEMORY_MALLOC_STATS,
+    MEMORY_PURGE,
+    memoryPurge: MEMORY_PURGE,
+    MEMORY_STATS,
+    memoryStats: MEMORY_STATS,
+    MEMORY_USAGE,
+    memoryUsage: MEMORY_USAGE,
+    MODULE_LIST,
+    moduleList: MODULE_LIST,
+    MODULE_LOAD,
+    moduleLoad: MODULE_LOAD,
+    MODULE_UNLOAD,
+    moduleUnload: MODULE_UNLOAD,
+    MOVE,
+    move: MOVE,
+    PING,
+    ping: PING,
+    PUBSUB_CHANNELS,
+    pubSubChannels: PUBSUB_CHANNELS,
+    PUBSUB_NUMPAT,
+    pubSubNumPat: PUBSUB_NUMPAT,
+    PUBSUB_NUMSUB,
+    pubSubNumSub: PUBSUB_NUMSUB,
+    PUBSUB_SHARDCHANNELS,
+    pubSubShardChannels: PUBSUB_SHARDCHANNELS,
+    RANDOMKEY,
+    randomKey: RANDOMKEY,
+    READONLY,
+    readonly: READONLY,
+    READWRITE,
+    readwrite: READWRITE,
+    REPLICAOF,
+    replicaOf: REPLICAOF,
+    'RESTORE-ASKING': RESTORE_ASKING,
+    restoreAsking: RESTORE_ASKING,
+    ROLE,
+    role: ROLE,
+    SAVE,
+    save: SAVE,
+    SCAN,
+    scan: SCAN,
+    SCRIPT_DEBUG,
+    scriptDebug: SCRIPT_DEBUG,
+    SCRIPT_EXISTS,
+    scriptExists: SCRIPT_EXISTS,
+    SCRIPT_FLUSH,
+    scriptFlush: SCRIPT_FLUSH,
+    SCRIPT_KILL,
+    scriptKill: SCRIPT_KILL,
+    SCRIPT_LOAD,
+    scriptLoad: SCRIPT_LOAD,
+    SHUTDOWN,
+    shutdown: SHUTDOWN,
+    SWAPDB,
+    swapDb: SWAPDB,
+    TIME,
+    time: TIME,
+    UNWATCH,
+    unwatch: UNWATCH,
+    WAIT,
+    wait: WAIT
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/index.js":
+/*!****************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/index.js ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _RedisClient_instances, _RedisClient_options, _RedisClient_socket, _RedisClient_queue, _RedisClient_isolationPool, _RedisClient_v4, _RedisClient_selectedDB, _RedisClient_initiateOptions, _RedisClient_initiateQueue, _RedisClient_initiateSocket, _RedisClient_initiateIsolationPool, _RedisClient_legacyMode, _RedisClient_legacySendCommand, _RedisClient_defineLegacyCommand, _RedisClient_pingTimer, _RedisClient_setPingTimer, _RedisClient_sendCommand, _RedisClient_pubSubCommand, _RedisClient_tick, _RedisClient_addMultiCommands, _RedisClient_destroyIsolationPool;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/client/dist/lib/client/commands.js");
+const socket_1 = __webpack_require__(/*! ./socket */ "../../@redis/client/dist/lib/client/socket.js");
+const commands_queue_1 = __webpack_require__(/*! ./commands-queue */ "../../@redis/client/dist/lib/client/commands-queue.js");
+const multi_command_1 = __webpack_require__(/*! ./multi-command */ "../../@redis/client/dist/lib/client/multi-command.js");
+const events_1 = __webpack_require__(/*! events */ "events");
+const command_options_1 = __webpack_require__(/*! ../command-options */ "../../@redis/client/dist/lib/command-options.js");
+const commander_1 = __webpack_require__(/*! ../commander */ "../../@redis/client/dist/lib/commander.js");
+const generic_pool_1 = __webpack_require__(/*! generic-pool */ "../../generic-pool/index.js");
+const errors_1 = __webpack_require__(/*! ../errors */ "../../@redis/client/dist/lib/errors.js");
+const url_1 = __webpack_require__(/*! url */ "url");
+const pub_sub_1 = __webpack_require__(/*! ./pub-sub */ "../../@redis/client/dist/lib/client/pub-sub.js");
+class RedisClient extends events_1.EventEmitter {
+    static commandOptions(options) {
+        return (0, command_options_1.commandOptions)(options);
+    }
+    static extend(extensions) {
+        const Client = (0, commander_1.attachExtensions)({
+            BaseClass: RedisClient,
+            modulesExecutor: RedisClient.prototype.commandsExecutor,
+            modules: extensions?.modules,
+            functionsExecutor: RedisClient.prototype.functionsExecuter,
+            functions: extensions?.functions,
+            scriptsExecutor: RedisClient.prototype.scriptsExecuter,
+            scripts: extensions?.scripts
+        });
+        if (Client !== RedisClient) {
+            Client.prototype.Multi = multi_command_1.default.extend(extensions);
+        }
+        return Client;
+    }
+    static create(options) {
+        return new (RedisClient.extend(options))(options);
+    }
+    static parseURL(url) {
+        // https://www.iana.org/assignments/uri-schemes/prov/redis
+        const { hostname, port, protocol, username, password, pathname } = new url_1.URL(url), parsed = {
+            socket: {
+                host: hostname
+            }
+        };
+        if (protocol === 'rediss:') {
+            parsed.socket.tls = true;
+        }
+        else if (protocol !== 'redis:') {
+            throw new TypeError('Invalid protocol');
+        }
+        if (port) {
+            parsed.socket.port = Number(port);
+        }
+        if (username) {
+            parsed.username = decodeURIComponent(username);
+        }
+        if (password) {
+            parsed.password = decodeURIComponent(password);
+        }
+        if (pathname.length > 1) {
+            const database = Number(pathname.substring(1));
+            if (isNaN(database)) {
+                throw new TypeError('Invalid pathname');
+            }
+            parsed.database = database;
+        }
+        return parsed;
+    }
+    get options() {
+        return __classPrivateFieldGet(this, _RedisClient_options, "f");
+    }
+    get isOpen() {
+        return __classPrivateFieldGet(this, _RedisClient_socket, "f").isOpen;
+    }
+    get isReady() {
+        return __classPrivateFieldGet(this, _RedisClient_socket, "f").isReady;
+    }
+    get isPubSubActive() {
+        return __classPrivateFieldGet(this, _RedisClient_queue, "f").isPubSubActive;
+    }
+    get v4() {
+        if (!__classPrivateFieldGet(this, _RedisClient_options, "f")?.legacyMode) {
+            throw new Error('the client is not in "legacy mode"');
+        }
+        return __classPrivateFieldGet(this, _RedisClient_v4, "f");
+    }
+    constructor(options) {
+        super();
+        _RedisClient_instances.add(this);
+        Object.defineProperty(this, "commandOptions", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: RedisClient.commandOptions
+        });
+        _RedisClient_options.set(this, void 0);
+        _RedisClient_socket.set(this, void 0);
+        _RedisClient_queue.set(this, void 0);
+        _RedisClient_isolationPool.set(this, void 0);
+        _RedisClient_v4.set(this, {});
+        _RedisClient_selectedDB.set(this, 0);
+        _RedisClient_pingTimer.set(this, void 0);
+        Object.defineProperty(this, "select", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SELECT
+        });
+        Object.defineProperty(this, "subscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SUBSCRIBE
+        });
+        Object.defineProperty(this, "unsubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.UNSUBSCRIBE
+        });
+        Object.defineProperty(this, "pSubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.PSUBSCRIBE
+        });
+        Object.defineProperty(this, "pUnsubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.PUNSUBSCRIBE
+        });
+        Object.defineProperty(this, "sSubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SSUBSCRIBE
+        });
+        Object.defineProperty(this, "sUnsubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SUNSUBSCRIBE
+        });
+        Object.defineProperty(this, "quit", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.QUIT
+        });
+        Object.defineProperty(this, "multi", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.MULTI
+        });
+        __classPrivateFieldSet(this, _RedisClient_options, __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_initiateOptions).call(this, options), "f");
+        __classPrivateFieldSet(this, _RedisClient_queue, __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_initiateQueue).call(this), "f");
+        __classPrivateFieldSet(this, _RedisClient_socket, __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_initiateSocket).call(this), "f");
+        // should be initiated in connect, not here
+        // TODO: consider breaking in v5
+        __classPrivateFieldSet(this, _RedisClient_isolationPool, __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_initiateIsolationPool).call(this), "f");
+        __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_legacyMode).call(this);
+    }
+    duplicate(overrides) {
+        return new (Object.getPrototypeOf(this).constructor)({
+            ...__classPrivateFieldGet(this, _RedisClient_options, "f"),
+            ...overrides
+        });
+    }
+    connect() {
+        // see comment in constructor
+        __classPrivateFieldSet(this, _RedisClient_isolationPool, __classPrivateFieldGet(this, _RedisClient_isolationPool, "f") ?? __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_initiateIsolationPool).call(this), "f");
+        return __classPrivateFieldGet(this, _RedisClient_socket, "f").connect();
+    }
+    async commandsExecutor(command, args) {
+        const { args: redisArgs, options } = (0, commander_1.transformCommandArguments)(command, args);
+        return (0, commander_1.transformCommandReply)(command, await __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, redisArgs, options), redisArgs.preserve);
+    }
+    sendCommand(args, options) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, args, options);
+    }
+    async functionsExecuter(fn, args, name) {
+        const { args: redisArgs, options } = (0, commander_1.transformCommandArguments)(fn, args);
+        return (0, commander_1.transformCommandReply)(fn, await this.executeFunction(name, fn, redisArgs, options), redisArgs.preserve);
+    }
+    executeFunction(name, fn, args, options) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, (0, commander_1.fCallArguments)(name, fn, args), options);
+    }
+    async scriptsExecuter(script, args) {
+        const { args: redisArgs, options } = (0, commander_1.transformCommandArguments)(script, args);
+        return (0, commander_1.transformCommandReply)(script, await this.executeScript(script, redisArgs, options), redisArgs.preserve);
+    }
+    async executeScript(script, args, options) {
+        const redisArgs = ['EVALSHA', script.SHA1];
+        if (script.NUMBER_OF_KEYS !== undefined) {
+            redisArgs.push(script.NUMBER_OF_KEYS.toString());
+        }
+        redisArgs.push(...args);
+        try {
+            return await __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, redisArgs, options);
+        }
+        catch (err) {
+            if (!err?.message?.startsWith?.('NOSCRIPT')) {
+                throw err;
+            }
+            redisArgs[0] = 'EVAL';
+            redisArgs[1] = script.SCRIPT;
+            return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, redisArgs, options);
+        }
+    }
+    async SELECT(options, db) {
+        if (!(0, command_options_1.isCommandOptions)(options)) {
+            db = options;
+            options = null;
+        }
+        await __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, ['SELECT', db.toString()], options);
+        __classPrivateFieldSet(this, _RedisClient_selectedDB, db, "f");
+    }
+    SUBSCRIBE(channels, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").subscribe(pub_sub_1.PubSubType.CHANNELS, channels, listener, bufferMode));
+    }
+    UNSUBSCRIBE(channels, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").unsubscribe(pub_sub_1.PubSubType.CHANNELS, channels, listener, bufferMode));
+    }
+    PSUBSCRIBE(patterns, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").subscribe(pub_sub_1.PubSubType.PATTERNS, patterns, listener, bufferMode));
+    }
+    PUNSUBSCRIBE(patterns, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").unsubscribe(pub_sub_1.PubSubType.PATTERNS, patterns, listener, bufferMode));
+    }
+    SSUBSCRIBE(channels, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").subscribe(pub_sub_1.PubSubType.SHARDED, channels, listener, bufferMode));
+    }
+    SUNSUBSCRIBE(channels, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").unsubscribe(pub_sub_1.PubSubType.SHARDED, channels, listener, bufferMode));
+    }
+    getPubSubListeners(type) {
+        return __classPrivateFieldGet(this, _RedisClient_queue, "f").getPubSubListeners(type);
+    }
+    extendPubSubChannelListeners(type, channel, listeners) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").extendPubSubChannelListeners(type, channel, listeners));
+    }
+    extendPubSubListeners(type, listeners) {
+        return __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_pubSubCommand).call(this, __classPrivateFieldGet(this, _RedisClient_queue, "f").extendPubSubListeners(type, listeners));
+    }
+    QUIT() {
+        return __classPrivateFieldGet(this, _RedisClient_socket, "f").quit(async () => {
+            const quitPromise = __classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(['QUIT']);
+            __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this);
+            const [reply] = await Promise.all([
+                quitPromise,
+                __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_destroyIsolationPool).call(this)
+            ]);
+            return reply;
+        });
+    }
+    executeIsolated(fn) {
+        if (!__classPrivateFieldGet(this, _RedisClient_isolationPool, "f"))
+            return Promise.reject(new errors_1.ClientClosedError());
+        return __classPrivateFieldGet(this, _RedisClient_isolationPool, "f").use(fn);
+    }
+    MULTI() {
+        return new this.Multi(this.multiExecutor.bind(this), __classPrivateFieldGet(this, _RedisClient_options, "f")?.legacyMode);
+    }
+    async multiExecutor(commands, selectedDB, chainId) {
+        if (!__classPrivateFieldGet(this, _RedisClient_socket, "f").isOpen) {
+            return Promise.reject(new errors_1.ClientClosedError());
+        }
+        const promise = chainId ?
+            // if `chainId` has a value, it's a `MULTI` (and not "pipeline") - need to add the `MULTI` and `EXEC` commands
+            Promise.all([
+                __classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(['MULTI'], { chainId }),
+                __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_addMultiCommands).call(this, commands, chainId),
+                __classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(['EXEC'], { chainId })
+            ]) :
+            __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_addMultiCommands).call(this, commands);
+        __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this);
+        const results = await promise;
+        if (selectedDB !== undefined) {
+            __classPrivateFieldSet(this, _RedisClient_selectedDB, selectedDB, "f");
+        }
+        return results;
+    }
+    async *scanIterator(options) {
+        let cursor = 0;
+        do {
+            const reply = await this.scan(cursor, options);
+            cursor = reply.cursor;
+            for (const key of reply.keys) {
+                yield key;
+            }
+        } while (cursor !== 0);
+    }
+    async *hScanIterator(key, options) {
+        let cursor = 0;
+        do {
+            const reply = await this.hScan(key, cursor, options);
+            cursor = reply.cursor;
+            for (const tuple of reply.tuples) {
+                yield tuple;
+            }
+        } while (cursor !== 0);
+    }
+    async *sScanIterator(key, options) {
+        let cursor = 0;
+        do {
+            const reply = await this.sScan(key, cursor, options);
+            cursor = reply.cursor;
+            for (const member of reply.members) {
+                yield member;
+            }
+        } while (cursor !== 0);
+    }
+    async *zScanIterator(key, options) {
+        let cursor = 0;
+        do {
+            const reply = await this.zScan(key, cursor, options);
+            cursor = reply.cursor;
+            for (const member of reply.members) {
+                yield member;
+            }
+        } while (cursor !== 0);
+    }
+    async disconnect() {
+        __classPrivateFieldGet(this, _RedisClient_queue, "f").flushAll(new errors_1.DisconnectsClientError());
+        __classPrivateFieldGet(this, _RedisClient_socket, "f").disconnect();
+        await __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_destroyIsolationPool).call(this);
+    }
+    ref() {
+        __classPrivateFieldGet(this, _RedisClient_socket, "f").ref();
+    }
+    unref() {
+        __classPrivateFieldGet(this, _RedisClient_socket, "f").unref();
+    }
+}
+exports["default"] = RedisClient;
+_RedisClient_options = new WeakMap(), _RedisClient_socket = new WeakMap(), _RedisClient_queue = new WeakMap(), _RedisClient_isolationPool = new WeakMap(), _RedisClient_v4 = new WeakMap(), _RedisClient_selectedDB = new WeakMap(), _RedisClient_pingTimer = new WeakMap(), _RedisClient_instances = new WeakSet(), _RedisClient_initiateOptions = function _RedisClient_initiateOptions(options) {
+    if (options?.url) {
+        const parsed = RedisClient.parseURL(options.url);
+        if (options.socket) {
+            parsed.socket = Object.assign(options.socket, parsed.socket);
+        }
+        Object.assign(options, parsed);
+    }
+    if (options?.database) {
+        __classPrivateFieldSet(this, _RedisClient_selectedDB, options.database, "f");
+    }
+    return options;
+}, _RedisClient_initiateQueue = function _RedisClient_initiateQueue() {
+    return new commands_queue_1.default(__classPrivateFieldGet(this, _RedisClient_options, "f")?.commandsQueueMaxLength, (channel, listeners) => this.emit('sharded-channel-moved', channel, listeners));
+}, _RedisClient_initiateSocket = function _RedisClient_initiateSocket() {
+    const socketInitiator = async () => {
+        const promises = [];
+        if (__classPrivateFieldGet(this, _RedisClient_selectedDB, "f") !== 0) {
+            promises.push(__classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(['SELECT', __classPrivateFieldGet(this, _RedisClient_selectedDB, "f").toString()], { asap: true }));
+        }
+        if (__classPrivateFieldGet(this, _RedisClient_options, "f")?.readonly) {
+            promises.push(__classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(commands_1.default.READONLY.transformArguments(), { asap: true }));
+        }
+        if (__classPrivateFieldGet(this, _RedisClient_options, "f")?.name) {
+            promises.push(__classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(commands_1.default.CLIENT_SETNAME.transformArguments(__classPrivateFieldGet(this, _RedisClient_options, "f").name), { asap: true }));
+        }
+        if (__classPrivateFieldGet(this, _RedisClient_options, "f")?.username || __classPrivateFieldGet(this, _RedisClient_options, "f")?.password) {
+            promises.push(__classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(commands_1.default.AUTH.transformArguments({
+                username: __classPrivateFieldGet(this, _RedisClient_options, "f").username,
+                password: __classPrivateFieldGet(this, _RedisClient_options, "f").password ?? ''
+            }), { asap: true }));
+        }
+        const resubscribePromise = __classPrivateFieldGet(this, _RedisClient_queue, "f").resubscribe();
+        if (resubscribePromise) {
+            promises.push(resubscribePromise);
+        }
+        if (promises.length) {
+            __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this, true);
+            await Promise.all(promises);
+        }
+    };
+    return new socket_1.default(socketInitiator, __classPrivateFieldGet(this, _RedisClient_options, "f")?.socket)
+        .on('data', chunk => __classPrivateFieldGet(this, _RedisClient_queue, "f").onReplyChunk(chunk))
+        .on('error', err => {
+        this.emit('error', err);
+        if (__classPrivateFieldGet(this, _RedisClient_socket, "f").isOpen && !__classPrivateFieldGet(this, _RedisClient_options, "f")?.disableOfflineQueue) {
+            __classPrivateFieldGet(this, _RedisClient_queue, "f").flushWaitingForReply(err);
+        }
+        else {
+            __classPrivateFieldGet(this, _RedisClient_queue, "f").flushAll(err);
+        }
+    })
+        .on('connect', () => {
+        this.emit('connect');
+    })
+        .on('ready', () => {
+        this.emit('ready');
+        __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_setPingTimer).call(this);
+        __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this);
+    })
+        .on('reconnecting', () => this.emit('reconnecting'))
+        .on('drain', () => __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this))
+        .on('end', () => this.emit('end'));
+}, _RedisClient_initiateIsolationPool = function _RedisClient_initiateIsolationPool() {
+    return (0, generic_pool_1.createPool)({
+        create: async () => {
+            const duplicate = this.duplicate({
+                isolationPoolOptions: undefined
+            }).on('error', err => this.emit('error', err));
+            await duplicate.connect();
+            return duplicate;
+        },
+        destroy: client => client.disconnect()
+    }, __classPrivateFieldGet(this, _RedisClient_options, "f")?.isolationPoolOptions);
+}, _RedisClient_legacyMode = function _RedisClient_legacyMode() {
+    var _a, _b;
+    if (!__classPrivateFieldGet(this, _RedisClient_options, "f")?.legacyMode)
+        return;
+    __classPrivateFieldGet(this, _RedisClient_v4, "f").sendCommand = __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).bind(this);
+    this.sendCommand = (...args) => {
+        const result = __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_legacySendCommand).call(this, ...args);
+        if (result) {
+            result.promise
+                .then(reply => result.callback(null, reply))
+                .catch(err => result.callback(err));
+        }
+    };
+    for (const [name, command] of Object.entries(commands_1.default)) {
+        __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, name, command);
+        (_a = this)[_b = name.toLowerCase()] ?? (_a[_b] = this[name]);
+    }
+    // hard coded commands
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'SELECT');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'select');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'SUBSCRIBE');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'subscribe');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'PSUBSCRIBE');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'pSubscribe');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'UNSUBSCRIBE');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'unsubscribe');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'PUNSUBSCRIBE');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'pUnsubscribe');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'QUIT');
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_defineLegacyCommand).call(this, 'quit');
+}, _RedisClient_legacySendCommand = function _RedisClient_legacySendCommand(...args) {
+    const callback = typeof args[args.length - 1] === 'function' ?
+        args.pop() :
+        undefined;
+    const promise = __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, (0, commander_1.transformLegacyCommandArguments)(args));
+    if (callback)
+        return {
+            promise,
+            callback
+        };
+    promise.catch(err => this.emit('error', err));
+}, _RedisClient_defineLegacyCommand = function _RedisClient_defineLegacyCommand(name, command) {
+    __classPrivateFieldGet(this, _RedisClient_v4, "f")[name] = this[name].bind(this);
+    this[name] = command && command.TRANSFORM_LEGACY_REPLY && command.transformReply ?
+        (...args) => {
+            const result = __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_legacySendCommand).call(this, name, ...args);
+            if (result) {
+                result.promise
+                    .then(reply => result.callback(null, command.transformReply(reply)))
+                    .catch(err => result.callback(err));
+            }
+        } :
+        (...args) => this.sendCommand(name, ...args);
+}, _RedisClient_setPingTimer = function _RedisClient_setPingTimer() {
+    if (!__classPrivateFieldGet(this, _RedisClient_options, "f")?.pingInterval || !__classPrivateFieldGet(this, _RedisClient_socket, "f").isReady)
+        return;
+    clearTimeout(__classPrivateFieldGet(this, _RedisClient_pingTimer, "f"));
+    __classPrivateFieldSet(this, _RedisClient_pingTimer, setTimeout(() => {
+        if (!__classPrivateFieldGet(this, _RedisClient_socket, "f").isReady)
+            return;
+        // using #sendCommand to support legacy mode
+        __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_sendCommand).call(this, ['PING'])
+            .then(reply => this.emit('ping-interval', reply))
+            .catch(err => this.emit('error', err))
+            .finally(() => __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_setPingTimer).call(this));
+    }, __classPrivateFieldGet(this, _RedisClient_options, "f").pingInterval), "f");
+}, _RedisClient_sendCommand = function _RedisClient_sendCommand(args, options) {
+    if (!__classPrivateFieldGet(this, _RedisClient_socket, "f").isOpen) {
+        return Promise.reject(new errors_1.ClientClosedError());
+    }
+    else if (options?.isolated) {
+        return this.executeIsolated(isolatedClient => isolatedClient.sendCommand(args, {
+            ...options,
+            isolated: false
+        }));
+    }
+    else if (!__classPrivateFieldGet(this, _RedisClient_socket, "f").isReady && __classPrivateFieldGet(this, _RedisClient_options, "f")?.disableOfflineQueue) {
+        return Promise.reject(new errors_1.ClientOfflineError());
+    }
+    const promise = __classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(args, options);
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this);
+    return promise;
+}, _RedisClient_pubSubCommand = function _RedisClient_pubSubCommand(promise) {
+    if (promise === undefined)
+        return Promise.resolve();
+    __classPrivateFieldGet(this, _RedisClient_instances, "m", _RedisClient_tick).call(this);
+    return promise;
+}, _RedisClient_tick = function _RedisClient_tick(force = false) {
+    if (__classPrivateFieldGet(this, _RedisClient_socket, "f").writableNeedDrain || (!force && !__classPrivateFieldGet(this, _RedisClient_socket, "f").isReady)) {
+        return;
+    }
+    __classPrivateFieldGet(this, _RedisClient_socket, "f").cork();
+    while (!__classPrivateFieldGet(this, _RedisClient_socket, "f").writableNeedDrain) {
+        const args = __classPrivateFieldGet(this, _RedisClient_queue, "f").getCommandToSend();
+        if (args === undefined)
+            break;
+        __classPrivateFieldGet(this, _RedisClient_socket, "f").writeCommand(args);
+    }
+}, _RedisClient_addMultiCommands = function _RedisClient_addMultiCommands(commands, chainId) {
+    return Promise.all(commands.map(({ args }) => __classPrivateFieldGet(this, _RedisClient_queue, "f").addCommand(args, { chainId })));
+}, _RedisClient_destroyIsolationPool = async function _RedisClient_destroyIsolationPool() {
+    await __classPrivateFieldGet(this, _RedisClient_isolationPool, "f").drain();
+    await __classPrivateFieldGet(this, _RedisClient_isolationPool, "f").clear();
+    __classPrivateFieldSet(this, _RedisClient_isolationPool, undefined, "f");
+};
+(0, commander_1.attachCommands)({
+    BaseClass: RedisClient,
+    commands: commands_1.default,
+    executor: RedisClient.prototype.commandsExecutor
+});
+RedisClient.prototype.Multi = multi_command_1.default;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/multi-command.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/multi-command.js ***!
+  \************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _RedisClientMultiCommand_instances, _RedisClientMultiCommand_multi, _RedisClientMultiCommand_executor, _RedisClientMultiCommand_selectedDB, _RedisClientMultiCommand_legacyMode, _RedisClientMultiCommand_defineLegacyCommand;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/client/dist/lib/client/commands.js");
+const multi_command_1 = __webpack_require__(/*! ../multi-command */ "../../@redis/client/dist/lib/multi-command.js");
+const commander_1 = __webpack_require__(/*! ../commander */ "../../@redis/client/dist/lib/commander.js");
+class RedisClientMultiCommand {
+    static extend(extensions) {
+        return (0, commander_1.attachExtensions)({
+            BaseClass: RedisClientMultiCommand,
+            modulesExecutor: RedisClientMultiCommand.prototype.commandsExecutor,
+            modules: extensions?.modules,
+            functionsExecutor: RedisClientMultiCommand.prototype.functionsExecutor,
+            functions: extensions?.functions,
+            scriptsExecutor: RedisClientMultiCommand.prototype.scriptsExecutor,
+            scripts: extensions?.scripts
+        });
+    }
+    constructor(executor, legacyMode = false) {
+        _RedisClientMultiCommand_instances.add(this);
+        _RedisClientMultiCommand_multi.set(this, new multi_command_1.default());
+        _RedisClientMultiCommand_executor.set(this, void 0);
+        Object.defineProperty(this, "v4", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: {}
+        });
+        _RedisClientMultiCommand_selectedDB.set(this, void 0);
+        Object.defineProperty(this, "select", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SELECT
+        });
+        Object.defineProperty(this, "EXEC", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.exec
+        });
+        __classPrivateFieldSet(this, _RedisClientMultiCommand_executor, executor, "f");
+        if (legacyMode) {
+            __classPrivateFieldGet(this, _RedisClientMultiCommand_instances, "m", _RedisClientMultiCommand_legacyMode).call(this);
+        }
+    }
+    commandsExecutor(command, args) {
+        return this.addCommand(command.transformArguments(...args), command.transformReply);
+    }
+    SELECT(db, transformReply) {
+        __classPrivateFieldSet(this, _RedisClientMultiCommand_selectedDB, db, "f");
+        return this.addCommand(['SELECT', db.toString()], transformReply);
+    }
+    addCommand(args, transformReply) {
+        __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").addCommand(args, transformReply);
+        return this;
+    }
+    functionsExecutor(fn, args, name) {
+        __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").addFunction(name, fn, args);
+        return this;
+    }
+    scriptsExecutor(script, args) {
+        __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").addScript(script, args);
+        return this;
+    }
+    async exec(execAsPipeline = false) {
+        if (execAsPipeline) {
+            return this.execAsPipeline();
+        }
+        return __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").handleExecReplies(await __classPrivateFieldGet(this, _RedisClientMultiCommand_executor, "f").call(this, __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").queue, __classPrivateFieldGet(this, _RedisClientMultiCommand_selectedDB, "f"), multi_command_1.default.generateChainId()));
+    }
+    async execAsPipeline() {
+        if (__classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").queue.length === 0)
+            return [];
+        return __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").transformReplies(await __classPrivateFieldGet(this, _RedisClientMultiCommand_executor, "f").call(this, __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").queue, __classPrivateFieldGet(this, _RedisClientMultiCommand_selectedDB, "f")));
+    }
+}
+exports["default"] = RedisClientMultiCommand;
+_RedisClientMultiCommand_multi = new WeakMap(), _RedisClientMultiCommand_executor = new WeakMap(), _RedisClientMultiCommand_selectedDB = new WeakMap(), _RedisClientMultiCommand_instances = new WeakSet(), _RedisClientMultiCommand_legacyMode = function _RedisClientMultiCommand_legacyMode() {
+    var _a, _b;
+    this.v4.addCommand = this.addCommand.bind(this);
+    this.addCommand = (...args) => {
+        __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").addCommand((0, commander_1.transformLegacyCommandArguments)(args));
+        return this;
+    };
+    this.v4.exec = this.exec.bind(this);
+    this.exec = (callback) => {
+        this.v4.exec()
+            .then((reply) => {
+            if (!callback)
+                return;
+            callback(null, reply);
+        })
+            .catch((err) => {
+            if (!callback) {
+                // this.emit('error', err);
+                return;
+            }
+            callback(err);
+        });
+    };
+    for (const [name, command] of Object.entries(commands_1.default)) {
+        __classPrivateFieldGet(this, _RedisClientMultiCommand_instances, "m", _RedisClientMultiCommand_defineLegacyCommand).call(this, name, command);
+        (_a = this)[_b = name.toLowerCase()] ?? (_a[_b] = this[name]);
+    }
+}, _RedisClientMultiCommand_defineLegacyCommand = function _RedisClientMultiCommand_defineLegacyCommand(name, command) {
+    this.v4[name] = this[name].bind(this.v4);
+    this[name] = command && command.TRANSFORM_LEGACY_REPLY && command.transformReply ?
+        (...args) => {
+            __classPrivateFieldGet(this, _RedisClientMultiCommand_multi, "f").addCommand([name, ...(0, commander_1.transformLegacyCommandArguments)(args)], command.transformReply);
+            return this;
+        } :
+        (...args) => this.addCommand(name, ...args);
+};
+(0, commander_1.attachCommands)({
+    BaseClass: RedisClientMultiCommand,
+    commands: commands_1.default,
+    executor: RedisClientMultiCommand.prototype.commandsExecutor
+});
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/pub-sub.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/pub-sub.js ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _PubSub_instances, _a, _PubSub_channelsArray, _PubSub_listenersSet, _PubSub_subscribing, _PubSub_isActive, _PubSub_listeners, _PubSub_extendChannelListeners, _PubSub_unsubscribeCommand, _PubSub_updateIsActive, _PubSub_emitPubSubMessage;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PubSub = exports.PubSubType = void 0;
+var PubSubType;
+(function (PubSubType) {
+    PubSubType["CHANNELS"] = "CHANNELS";
+    PubSubType["PATTERNS"] = "PATTERNS";
+    PubSubType["SHARDED"] = "SHARDED";
+})(PubSubType = exports.PubSubType || (exports.PubSubType = {}));
+const COMMANDS = {
+    [PubSubType.CHANNELS]: {
+        subscribe: Buffer.from('subscribe'),
+        unsubscribe: Buffer.from('unsubscribe'),
+        message: Buffer.from('message')
+    },
+    [PubSubType.PATTERNS]: {
+        subscribe: Buffer.from('psubscribe'),
+        unsubscribe: Buffer.from('punsubscribe'),
+        message: Buffer.from('pmessage')
+    },
+    [PubSubType.SHARDED]: {
+        subscribe: Buffer.from('ssubscribe'),
+        unsubscribe: Buffer.from('sunsubscribe'),
+        message: Buffer.from('smessage')
+    }
+};
+class PubSub {
+    constructor() {
+        _PubSub_instances.add(this);
+        _PubSub_subscribing.set(this, 0);
+        _PubSub_isActive.set(this, false);
+        _PubSub_listeners.set(this, {
+            [PubSubType.CHANNELS]: new Map(),
+            [PubSubType.PATTERNS]: new Map(),
+            [PubSubType.SHARDED]: new Map()
+        });
+    }
+    static isStatusReply(reply) {
+        return (COMMANDS[PubSubType.CHANNELS].subscribe.equals(reply[0]) ||
+            COMMANDS[PubSubType.CHANNELS].unsubscribe.equals(reply[0]) ||
+            COMMANDS[PubSubType.PATTERNS].subscribe.equals(reply[0]) ||
+            COMMANDS[PubSubType.PATTERNS].unsubscribe.equals(reply[0]) ||
+            COMMANDS[PubSubType.SHARDED].subscribe.equals(reply[0]));
+    }
+    static isShardedUnsubscribe(reply) {
+        return COMMANDS[PubSubType.SHARDED].unsubscribe.equals(reply[0]);
+    }
+    get isActive() {
+        return __classPrivateFieldGet(this, _PubSub_isActive, "f");
+    }
+    subscribe(type, channels, listener, returnBuffers) {
+        var _b;
+        const args = [COMMANDS[type].subscribe], channelsArray = __classPrivateFieldGet(PubSub, _a, "m", _PubSub_channelsArray).call(PubSub, channels);
+        for (const channel of channelsArray) {
+            let channelListeners = __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].get(channel);
+            if (!channelListeners || channelListeners.unsubscribing) {
+                args.push(channel);
+            }
+        }
+        if (args.length === 1) {
+            // all channels are already subscribed, add listeners without issuing a command
+            for (const channel of channelsArray) {
+                __classPrivateFieldGet(PubSub, _a, "m", _PubSub_listenersSet).call(PubSub, __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].get(channel), returnBuffers).add(listener);
+            }
+            return;
+        }
+        __classPrivateFieldSet(this, _PubSub_isActive, true, "f");
+        __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b++, _b), "f");
+        return {
+            args,
+            channelsCounter: args.length - 1,
+            resolve: () => {
+                var _b;
+                __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b--, _b), "f");
+                for (const channel of channelsArray) {
+                    let listeners = __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].get(channel);
+                    if (!listeners) {
+                        listeners = {
+                            unsubscribing: false,
+                            buffers: new Set(),
+                            strings: new Set()
+                        };
+                        __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].set(channel, listeners);
+                    }
+                    __classPrivateFieldGet(PubSub, _a, "m", _PubSub_listenersSet).call(PubSub, listeners, returnBuffers).add(listener);
+                }
+            },
+            reject: () => {
+                var _b;
+                __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b--, _b), "f");
+                __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_updateIsActive).call(this);
+            }
+        };
+    }
+    extendChannelListeners(type, channel, listeners) {
+        var _b;
+        if (!__classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_extendChannelListeners).call(this, type, channel, listeners))
+            return;
+        __classPrivateFieldSet(this, _PubSub_isActive, true, "f");
+        __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b++, _b), "f");
+        return {
+            args: [
+                COMMANDS[type].subscribe,
+                channel
+            ],
+            channelsCounter: 1,
+            resolve: () => { var _b, _c; return __classPrivateFieldSet(this, _PubSub_subscribing, (_c = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b = _c--, _c), "f"), _b; },
+            reject: () => {
+                var _b;
+                __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b--, _b), "f");
+                __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_updateIsActive).call(this);
+            }
+        };
+    }
+    extendTypeListeners(type, listeners) {
+        var _b;
+        const args = [COMMANDS[type].subscribe];
+        for (const [channel, channelListeners] of listeners) {
+            if (__classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_extendChannelListeners).call(this, type, channel, channelListeners)) {
+                args.push(channel);
+            }
+        }
+        if (args.length === 1)
+            return;
+        __classPrivateFieldSet(this, _PubSub_isActive, true, "f");
+        __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b++, _b), "f");
+        return {
+            args,
+            channelsCounter: args.length - 1,
+            resolve: () => { var _b, _c; return __classPrivateFieldSet(this, _PubSub_subscribing, (_c = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b = _c--, _c), "f"), _b; },
+            reject: () => {
+                var _b;
+                __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b--, _b), "f");
+                __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_updateIsActive).call(this);
+            }
+        };
+    }
+    unsubscribe(type, channels, listener, returnBuffers) {
+        const listeners = __classPrivateFieldGet(this, _PubSub_listeners, "f")[type];
+        if (!channels) {
+            return __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_unsubscribeCommand).call(this, [COMMANDS[type].unsubscribe], 
+            // cannot use `this.#subscribed` because there might be some `SUBSCRIBE` commands in the queue
+            // cannot use `this.#subscribed + this.#subscribing` because some `SUBSCRIBE` commands might fail
+            NaN, () => listeners.clear());
+        }
+        const channelsArray = __classPrivateFieldGet(PubSub, _a, "m", _PubSub_channelsArray).call(PubSub, channels);
+        if (!listener) {
+            return __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_unsubscribeCommand).call(this, [COMMANDS[type].unsubscribe, ...channelsArray], channelsArray.length, () => {
+                for (const channel of channelsArray) {
+                    listeners.delete(channel);
+                }
+            });
+        }
+        const args = [COMMANDS[type].unsubscribe];
+        for (const channel of channelsArray) {
+            const sets = listeners.get(channel);
+            if (sets) {
+                let current, other;
+                if (returnBuffers) {
+                    current = sets.buffers;
+                    other = sets.strings;
+                }
+                else {
+                    current = sets.strings;
+                    other = sets.buffers;
+                }
+                const currentSize = current.has(listener) ? current.size - 1 : current.size;
+                if (currentSize !== 0 || other.size !== 0)
+                    continue;
+                sets.unsubscribing = true;
+            }
+            args.push(channel);
+        }
+        if (args.length === 1) {
+            // all channels has other listeners,
+            // delete the listeners without issuing a command
+            for (const channel of channelsArray) {
+                __classPrivateFieldGet(PubSub, _a, "m", _PubSub_listenersSet).call(PubSub, listeners.get(channel), returnBuffers).delete(listener);
+            }
+            return;
+        }
+        return __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_unsubscribeCommand).call(this, args, args.length - 1, () => {
+            for (const channel of channelsArray) {
+                const sets = listeners.get(channel);
+                if (!sets)
+                    continue;
+                (returnBuffers ? sets.buffers : sets.strings).delete(listener);
+                if (sets.buffers.size === 0 && sets.strings.size === 0) {
+                    listeners.delete(channel);
+                }
+            }
+        });
+    }
+    reset() {
+        __classPrivateFieldSet(this, _PubSub_isActive, false, "f");
+        __classPrivateFieldSet(this, _PubSub_subscribing, 0, "f");
+    }
+    resubscribe() {
+        var _b;
+        const commands = [];
+        for (const [type, listeners] of Object.entries(__classPrivateFieldGet(this, _PubSub_listeners, "f"))) {
+            if (!listeners.size)
+                continue;
+            __classPrivateFieldSet(this, _PubSub_isActive, true, "f");
+            __classPrivateFieldSet(this, _PubSub_subscribing, (_b = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b++, _b), "f");
+            const callback = () => { var _b, _c; return __classPrivateFieldSet(this, _PubSub_subscribing, (_c = __classPrivateFieldGet(this, _PubSub_subscribing, "f"), _b = _c--, _c), "f"), _b; };
+            commands.push({
+                args: [
+                    COMMANDS[type].subscribe,
+                    ...listeners.keys()
+                ],
+                channelsCounter: listeners.size,
+                resolve: callback,
+                reject: callback
+            });
+        }
+        return commands;
+    }
+    handleMessageReply(reply) {
+        if (COMMANDS[PubSubType.CHANNELS].message.equals(reply[0])) {
+            __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_emitPubSubMessage).call(this, PubSubType.CHANNELS, reply[2], reply[1]);
+            return true;
+        }
+        else if (COMMANDS[PubSubType.PATTERNS].message.equals(reply[0])) {
+            __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_emitPubSubMessage).call(this, PubSubType.PATTERNS, reply[3], reply[2], reply[1]);
+            return true;
+        }
+        else if (COMMANDS[PubSubType.SHARDED].message.equals(reply[0])) {
+            __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_emitPubSubMessage).call(this, PubSubType.SHARDED, reply[2], reply[1]);
+            return true;
+        }
+        return false;
+    }
+    removeShardedListeners(channel) {
+        const listeners = __classPrivateFieldGet(this, _PubSub_listeners, "f")[PubSubType.SHARDED].get(channel);
+        __classPrivateFieldGet(this, _PubSub_listeners, "f")[PubSubType.SHARDED].delete(channel);
+        __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_updateIsActive).call(this);
+        return listeners;
+    }
+    getTypeListeners(type) {
+        return __classPrivateFieldGet(this, _PubSub_listeners, "f")[type];
+    }
+}
+exports.PubSub = PubSub;
+_a = PubSub, _PubSub_subscribing = new WeakMap(), _PubSub_isActive = new WeakMap(), _PubSub_listeners = new WeakMap(), _PubSub_instances = new WeakSet(), _PubSub_channelsArray = function _PubSub_channelsArray(channels) {
+    return (Array.isArray(channels) ? channels : [channels]);
+}, _PubSub_listenersSet = function _PubSub_listenersSet(listeners, returnBuffers) {
+    return (returnBuffers ? listeners.buffers : listeners.strings);
+}, _PubSub_extendChannelListeners = function _PubSub_extendChannelListeners(type, channel, listeners) {
+    const existingListeners = __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].get(channel);
+    if (!existingListeners) {
+        __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].set(channel, listeners);
+        return true;
+    }
+    for (const listener of listeners.buffers) {
+        existingListeners.buffers.add(listener);
+    }
+    for (const listener of listeners.strings) {
+        existingListeners.strings.add(listener);
+    }
+    return false;
+}, _PubSub_unsubscribeCommand = function _PubSub_unsubscribeCommand(args, channelsCounter, removeListeners) {
+    return {
+        args,
+        channelsCounter,
+        resolve: () => {
+            removeListeners();
+            __classPrivateFieldGet(this, _PubSub_instances, "m", _PubSub_updateIsActive).call(this);
+        },
+        reject: undefined // use the same structure as `subscribe`
+    };
+}, _PubSub_updateIsActive = function _PubSub_updateIsActive() {
+    __classPrivateFieldSet(this, _PubSub_isActive, (__classPrivateFieldGet(this, _PubSub_listeners, "f")[PubSubType.CHANNELS].size !== 0 ||
+        __classPrivateFieldGet(this, _PubSub_listeners, "f")[PubSubType.PATTERNS].size !== 0 ||
+        __classPrivateFieldGet(this, _PubSub_listeners, "f")[PubSubType.SHARDED].size !== 0 ||
+        __classPrivateFieldGet(this, _PubSub_subscribing, "f") !== 0), "f");
+}, _PubSub_emitPubSubMessage = function _PubSub_emitPubSubMessage(type, message, channel, pattern) {
+    const keyString = (pattern ?? channel).toString(), listeners = __classPrivateFieldGet(this, _PubSub_listeners, "f")[type].get(keyString);
+    if (!listeners)
+        return;
+    for (const listener of listeners.buffers) {
+        listener(message, channel);
+    }
+    if (!listeners.strings.size)
+        return;
+    const channelString = pattern ? channel.toString() : keyString, messageString = channelString === '__redis__:invalidate' ?
+        // https://github.com/redis/redis/pull/7469
+        // https://github.com/redis/redis/issues/7463
+        (message === null ? null : message.map(x => x.toString())) :
+        message.toString();
+    for (const listener of listeners.strings) {
+        listener(messageString, channelString);
+    }
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/client/socket.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/client/socket.js ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _RedisSocket_instances, _a, _RedisSocket_initiateOptions, _RedisSocket_isTlsSocket, _RedisSocket_initiator, _RedisSocket_options, _RedisSocket_socket, _RedisSocket_isOpen, _RedisSocket_isReady, _RedisSocket_writableNeedDrain, _RedisSocket_isSocketUnrefed, _RedisSocket_reconnectStrategy, _RedisSocket_shouldReconnect, _RedisSocket_connect, _RedisSocket_createSocket, _RedisSocket_createNetSocket, _RedisSocket_createTlsSocket, _RedisSocket_onSocketError, _RedisSocket_disconnect, _RedisSocket_isCorked;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const events_1 = __webpack_require__(/*! events */ "events");
+const net = __webpack_require__(/*! net */ "net");
+const tls = __webpack_require__(/*! tls */ "tls");
+const errors_1 = __webpack_require__(/*! ../errors */ "../../@redis/client/dist/lib/errors.js");
+const utils_1 = __webpack_require__(/*! ../utils */ "../../@redis/client/dist/lib/utils.js");
+class RedisSocket extends events_1.EventEmitter {
+    get isOpen() {
+        return __classPrivateFieldGet(this, _RedisSocket_isOpen, "f");
+    }
+    get isReady() {
+        return __classPrivateFieldGet(this, _RedisSocket_isReady, "f");
+    }
+    get writableNeedDrain() {
+        return __classPrivateFieldGet(this, _RedisSocket_writableNeedDrain, "f");
+    }
+    constructor(initiator, options) {
+        super();
+        _RedisSocket_instances.add(this);
+        _RedisSocket_initiator.set(this, void 0);
+        _RedisSocket_options.set(this, void 0);
+        _RedisSocket_socket.set(this, void 0);
+        _RedisSocket_isOpen.set(this, false);
+        _RedisSocket_isReady.set(this, false);
+        // `writable.writableNeedDrain` was added in v15.2.0 and therefore can't be used
+        // https://nodejs.org/api/stream.html#stream_writable_writableneeddrain
+        _RedisSocket_writableNeedDrain.set(this, false);
+        _RedisSocket_isSocketUnrefed.set(this, false);
+        _RedisSocket_isCorked.set(this, false);
+        __classPrivateFieldSet(this, _RedisSocket_initiator, initiator, "f");
+        __classPrivateFieldSet(this, _RedisSocket_options, __classPrivateFieldGet(RedisSocket, _a, "m", _RedisSocket_initiateOptions).call(RedisSocket, options), "f");
+    }
+    async connect() {
+        if (__classPrivateFieldGet(this, _RedisSocket_isOpen, "f")) {
+            throw new Error('Socket already opened');
+        }
+        __classPrivateFieldSet(this, _RedisSocket_isOpen, true, "f");
+        return __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_connect).call(this);
+    }
+    writeCommand(args) {
+        if (!__classPrivateFieldGet(this, _RedisSocket_socket, "f")) {
+            throw new errors_1.ClientClosedError();
+        }
+        for (const toWrite of args) {
+            __classPrivateFieldSet(this, _RedisSocket_writableNeedDrain, !__classPrivateFieldGet(this, _RedisSocket_socket, "f").write(toWrite), "f");
+        }
+    }
+    disconnect() {
+        if (!__classPrivateFieldGet(this, _RedisSocket_isOpen, "f")) {
+            throw new errors_1.ClientClosedError();
+        }
+        __classPrivateFieldSet(this, _RedisSocket_isOpen, false, "f");
+        __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_disconnect).call(this);
+    }
+    async quit(fn) {
+        if (!__classPrivateFieldGet(this, _RedisSocket_isOpen, "f")) {
+            throw new errors_1.ClientClosedError();
+        }
+        __classPrivateFieldSet(this, _RedisSocket_isOpen, false, "f");
+        const reply = await fn();
+        __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_disconnect).call(this);
+        return reply;
+    }
+    cork() {
+        if (!__classPrivateFieldGet(this, _RedisSocket_socket, "f") || __classPrivateFieldGet(this, _RedisSocket_isCorked, "f")) {
+            return;
+        }
+        __classPrivateFieldGet(this, _RedisSocket_socket, "f").cork();
+        __classPrivateFieldSet(this, _RedisSocket_isCorked, true, "f");
+        setImmediate(() => {
+            __classPrivateFieldGet(this, _RedisSocket_socket, "f")?.uncork();
+            __classPrivateFieldSet(this, _RedisSocket_isCorked, false, "f");
+        });
+    }
+    ref() {
+        __classPrivateFieldSet(this, _RedisSocket_isSocketUnrefed, false, "f");
+        __classPrivateFieldGet(this, _RedisSocket_socket, "f")?.ref();
+    }
+    unref() {
+        __classPrivateFieldSet(this, _RedisSocket_isSocketUnrefed, true, "f");
+        __classPrivateFieldGet(this, _RedisSocket_socket, "f")?.unref();
+    }
+}
+exports["default"] = RedisSocket;
+_a = RedisSocket, _RedisSocket_initiator = new WeakMap(), _RedisSocket_options = new WeakMap(), _RedisSocket_socket = new WeakMap(), _RedisSocket_isOpen = new WeakMap(), _RedisSocket_isReady = new WeakMap(), _RedisSocket_writableNeedDrain = new WeakMap(), _RedisSocket_isSocketUnrefed = new WeakMap(), _RedisSocket_isCorked = new WeakMap(), _RedisSocket_instances = new WeakSet(), _RedisSocket_initiateOptions = function _RedisSocket_initiateOptions(options) {
+    var _b, _c;
+    options ?? (options = {});
+    if (!options.path) {
+        (_b = options).port ?? (_b.port = 6379);
+        (_c = options).host ?? (_c.host = 'localhost');
+    }
+    options.connectTimeout ?? (options.connectTimeout = 5000);
+    options.keepAlive ?? (options.keepAlive = 5000);
+    options.noDelay ?? (options.noDelay = true);
+    return options;
+}, _RedisSocket_isTlsSocket = function _RedisSocket_isTlsSocket(options) {
+    return options.tls === true;
+}, _RedisSocket_reconnectStrategy = function _RedisSocket_reconnectStrategy(retries, cause) {
+    if (__classPrivateFieldGet(this, _RedisSocket_options, "f").reconnectStrategy === false) {
+        return false;
+    }
+    else if (typeof __classPrivateFieldGet(this, _RedisSocket_options, "f").reconnectStrategy === 'number') {
+        return __classPrivateFieldGet(this, _RedisSocket_options, "f").reconnectStrategy;
+    }
+    else if (__classPrivateFieldGet(this, _RedisSocket_options, "f").reconnectStrategy) {
+        try {
+            const retryIn = __classPrivateFieldGet(this, _RedisSocket_options, "f").reconnectStrategy(retries, cause);
+            if (retryIn !== false && !(retryIn instanceof Error) && typeof retryIn !== 'number') {
+                throw new TypeError(`Reconnect strategy should return \`false | Error | number\`, got ${retryIn} instead`);
+            }
+            return retryIn;
+        }
+        catch (err) {
+            this.emit('error', err);
+        }
+    }
+    return Math.min(retries * 50, 500);
+}, _RedisSocket_shouldReconnect = function _RedisSocket_shouldReconnect(retries, cause) {
+    const retryIn = __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_reconnectStrategy).call(this, retries, cause);
+    if (retryIn === false) {
+        __classPrivateFieldSet(this, _RedisSocket_isOpen, false, "f");
+        this.emit('error', cause);
+        return cause;
+    }
+    else if (retryIn instanceof Error) {
+        __classPrivateFieldSet(this, _RedisSocket_isOpen, false, "f");
+        this.emit('error', cause);
+        return new errors_1.ReconnectStrategyError(retryIn, cause);
+    }
+    return retryIn;
+}, _RedisSocket_connect = async function _RedisSocket_connect() {
+    let retries = 0;
+    do {
+        try {
+            __classPrivateFieldSet(this, _RedisSocket_socket, await __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_createSocket).call(this), "f");
+            __classPrivateFieldSet(this, _RedisSocket_writableNeedDrain, false, "f");
+            this.emit('connect');
+            try {
+                await __classPrivateFieldGet(this, _RedisSocket_initiator, "f").call(this);
+            }
+            catch (err) {
+                __classPrivateFieldGet(this, _RedisSocket_socket, "f").destroy();
+                __classPrivateFieldSet(this, _RedisSocket_socket, undefined, "f");
+                throw err;
+            }
+            __classPrivateFieldSet(this, _RedisSocket_isReady, true, "f");
+            this.emit('ready');
+        }
+        catch (err) {
+            const retryIn = __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_shouldReconnect).call(this, retries++, err);
+            if (typeof retryIn !== 'number') {
+                throw retryIn;
+            }
+            this.emit('error', err);
+            await (0, utils_1.promiseTimeout)(retryIn);
+            this.emit('reconnecting');
+        }
+    } while (__classPrivateFieldGet(this, _RedisSocket_isOpen, "f") && !__classPrivateFieldGet(this, _RedisSocket_isReady, "f"));
+}, _RedisSocket_createSocket = function _RedisSocket_createSocket() {
+    return new Promise((resolve, reject) => {
+        const { connectEvent, socket } = __classPrivateFieldGet(RedisSocket, _a, "m", _RedisSocket_isTlsSocket).call(RedisSocket, __classPrivateFieldGet(this, _RedisSocket_options, "f")) ?
+            __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_createTlsSocket).call(this) :
+            __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_createNetSocket).call(this);
+        if (__classPrivateFieldGet(this, _RedisSocket_options, "f").connectTimeout) {
+            socket.setTimeout(__classPrivateFieldGet(this, _RedisSocket_options, "f").connectTimeout, () => socket.destroy(new errors_1.ConnectionTimeoutError()));
+        }
+        if (__classPrivateFieldGet(this, _RedisSocket_isSocketUnrefed, "f")) {
+            socket.unref();
+        }
+        socket
+            .setNoDelay(__classPrivateFieldGet(this, _RedisSocket_options, "f").noDelay)
+            .once('error', reject)
+            .once(connectEvent, () => {
+            socket
+                .setTimeout(0)
+                // https://github.com/nodejs/node/issues/31663
+                .setKeepAlive(__classPrivateFieldGet(this, _RedisSocket_options, "f").keepAlive !== false, __classPrivateFieldGet(this, _RedisSocket_options, "f").keepAlive || 0)
+                .off('error', reject)
+                .once('error', (err) => __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_onSocketError).call(this, err))
+                .once('close', hadError => {
+                if (!hadError && __classPrivateFieldGet(this, _RedisSocket_isReady, "f") && __classPrivateFieldGet(this, _RedisSocket_socket, "f") === socket) {
+                    __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_onSocketError).call(this, new errors_1.SocketClosedUnexpectedlyError());
+                }
+            })
+                .on('drain', () => {
+                __classPrivateFieldSet(this, _RedisSocket_writableNeedDrain, false, "f");
+                this.emit('drain');
+            })
+                .on('data', data => this.emit('data', data));
+            resolve(socket);
+        });
+    });
+}, _RedisSocket_createNetSocket = function _RedisSocket_createNetSocket() {
+    return {
+        connectEvent: 'connect',
+        socket: net.connect(__classPrivateFieldGet(this, _RedisSocket_options, "f")) // TODO
+    };
+}, _RedisSocket_createTlsSocket = function _RedisSocket_createTlsSocket() {
+    return {
+        connectEvent: 'secureConnect',
+        socket: tls.connect(__classPrivateFieldGet(this, _RedisSocket_options, "f")) // TODO
+    };
+}, _RedisSocket_onSocketError = function _RedisSocket_onSocketError(err) {
+    __classPrivateFieldSet(this, _RedisSocket_isReady, false, "f");
+    this.emit('error', err);
+    if (!__classPrivateFieldGet(this, _RedisSocket_isOpen, "f") || typeof __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_shouldReconnect).call(this, 0, err) !== 'number')
+        return;
+    this.emit('reconnecting');
+    __classPrivateFieldGet(this, _RedisSocket_instances, "m", _RedisSocket_connect).call(this).catch(() => {
+        // the error was already emitted, silently ignore it
+    });
+}, _RedisSocket_disconnect = function _RedisSocket_disconnect() {
+    __classPrivateFieldSet(this, _RedisSocket_isReady, false, "f");
+    if (__classPrivateFieldGet(this, _RedisSocket_socket, "f")) {
+        __classPrivateFieldGet(this, _RedisSocket_socket, "f").destroy();
+        __classPrivateFieldSet(this, _RedisSocket_socket, undefined, "f");
+    }
+    this.emit('end');
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/cluster/cluster-slots.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/cluster/cluster-slots.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _RedisClusterSlots_instances, _a, _RedisClusterSlots_SLOTS, _RedisClusterSlots_options, _RedisClusterSlots_Client, _RedisClusterSlots_emit, _RedisClusterSlots_isOpen, _RedisClusterSlots_discoverWithRootNodes, _RedisClusterSlots_resetSlots, _RedisClusterSlots_discover, _RedisClusterSlots_getShards, _RedisClusterSlots_getNodeAddress, _RedisClusterSlots_clientOptionsDefaults, _RedisClusterSlots_initiateSlotNode, _RedisClusterSlots_createClient, _RedisClusterSlots_createNodeClient, _RedisClusterSlots_runningRediscoverPromise, _RedisClusterSlots_rediscover, _RedisClusterSlots_destroy, _RedisClusterSlots_execOnNodeClient, _RedisClusterSlots_iterateAllNodes, _RedisClusterSlots_randomNodeIterator, _RedisClusterSlots_slotNodesIterator, _RedisClusterSlots_initiatePubSubClient, _RedisClusterSlots_initiateShardedPubSubClient;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const client_1 = __webpack_require__(/*! ../client */ "../../@redis/client/dist/lib/client/index.js");
+const errors_1 = __webpack_require__(/*! ../errors */ "../../@redis/client/dist/lib/errors.js");
+const util_1 = __webpack_require__(/*! util */ "util");
+const pub_sub_1 = __webpack_require__(/*! ../client/pub-sub */ "../../@redis/client/dist/lib/client/pub-sub.js");
+// We need to use 'require', because it's not possible with Typescript to import
+// function that are exported as 'module.exports = function`, without esModuleInterop
+// set to true.
+const calculateSlot = __webpack_require__(/*! cluster-key-slot */ "../../cluster-key-slot/lib/index.js");
+class RedisClusterSlots {
+    get isOpen() {
+        return __classPrivateFieldGet(this, _RedisClusterSlots_isOpen, "f");
+    }
+    constructor(options, emit) {
+        _RedisClusterSlots_instances.add(this);
+        _RedisClusterSlots_options.set(this, void 0);
+        _RedisClusterSlots_Client.set(this, void 0);
+        _RedisClusterSlots_emit.set(this, void 0);
+        Object.defineProperty(this, "slots", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new Array(__classPrivateFieldGet(RedisClusterSlots, _a, "f", _RedisClusterSlots_SLOTS))
+        });
+        Object.defineProperty(this, "shards", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new Array()
+        });
+        Object.defineProperty(this, "masters", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new Array()
+        });
+        Object.defineProperty(this, "replicas", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new Array()
+        });
+        Object.defineProperty(this, "nodeByAddress", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new Map()
+        });
+        Object.defineProperty(this, "pubSubNode", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        _RedisClusterSlots_isOpen.set(this, false);
+        _RedisClusterSlots_runningRediscoverPromise.set(this, void 0);
+        _RedisClusterSlots_randomNodeIterator.set(this, void 0);
+        __classPrivateFieldSet(this, _RedisClusterSlots_options, options, "f");
+        __classPrivateFieldSet(this, _RedisClusterSlots_Client, client_1.default.extend(options), "f");
+        __classPrivateFieldSet(this, _RedisClusterSlots_emit, emit, "f");
+    }
+    async connect() {
+        if (__classPrivateFieldGet(this, _RedisClusterSlots_isOpen, "f")) {
+            throw new Error('Cluster already open');
+        }
+        __classPrivateFieldSet(this, _RedisClusterSlots_isOpen, true, "f");
+        try {
+            await __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_discoverWithRootNodes).call(this);
+        }
+        catch (err) {
+            __classPrivateFieldSet(this, _RedisClusterSlots_isOpen, false, "f");
+            throw err;
+        }
+    }
+    nodeClient(node) {
+        return node.client ?? __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_createNodeClient).call(this, node);
+    }
+    async rediscover(startWith) {
+        __classPrivateFieldSet(this, _RedisClusterSlots_runningRediscoverPromise, __classPrivateFieldGet(this, _RedisClusterSlots_runningRediscoverPromise, "f") ?? __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_rediscover).call(this, startWith)
+            .finally(() => __classPrivateFieldSet(this, _RedisClusterSlots_runningRediscoverPromise, undefined, "f")), "f");
+        return __classPrivateFieldGet(this, _RedisClusterSlots_runningRediscoverPromise, "f");
+    }
+    quit() {
+        return __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_destroy).call(this, client => client.quit());
+    }
+    disconnect() {
+        return __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_destroy).call(this, client => client.disconnect());
+    }
+    getClient(firstKey, isReadonly) {
+        if (!firstKey) {
+            return this.nodeClient(this.getRandomNode());
+        }
+        const slotNumber = calculateSlot(firstKey);
+        if (!isReadonly) {
+            return this.nodeClient(this.slots[slotNumber].master);
+        }
+        return this.nodeClient(this.getSlotRandomNode(slotNumber));
+    }
+    getRandomNode() {
+        __classPrivateFieldSet(this, _RedisClusterSlots_randomNodeIterator, __classPrivateFieldGet(this, _RedisClusterSlots_randomNodeIterator, "f") ?? __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_iterateAllNodes).call(this), "f");
+        return __classPrivateFieldGet(this, _RedisClusterSlots_randomNodeIterator, "f").next().value;
+    }
+    getSlotRandomNode(slotNumber) {
+        const slot = this.slots[slotNumber];
+        if (!slot.replicas?.length) {
+            return slot.master;
+        }
+        slot.nodesIterator ?? (slot.nodesIterator = __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_slotNodesIterator).call(this, slot));
+        return slot.nodesIterator.next().value;
+    }
+    getMasterByAddress(address) {
+        const master = this.nodeByAddress.get(address);
+        if (!master)
+            return;
+        return this.nodeClient(master);
+    }
+    getPubSubClient() {
+        return this.pubSubNode ?
+            this.pubSubNode.client :
+            __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_initiatePubSubClient).call(this);
+    }
+    async executeUnsubscribeCommand(unsubscribe) {
+        const client = await this.getPubSubClient();
+        await unsubscribe(client);
+        if (!client.isPubSubActive) {
+            await client.disconnect();
+            this.pubSubNode = undefined;
+        }
+    }
+    getShardedPubSubClient(channel) {
+        const { master } = this.slots[calculateSlot(channel)];
+        return master.pubSubClient ?? __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_initiateShardedPubSubClient).call(this, master);
+    }
+    async executeShardedUnsubscribeCommand(channel, unsubscribe) {
+        const { master } = this.slots[calculateSlot(channel)];
+        if (!master.pubSubClient)
+            return Promise.resolve();
+        const client = await master.pubSubClient;
+        await unsubscribe(client);
+        if (!client.isPubSubActive) {
+            await client.disconnect();
+            master.pubSubClient = undefined;
+        }
+    }
+}
+_a = RedisClusterSlots, _RedisClusterSlots_options = new WeakMap(), _RedisClusterSlots_Client = new WeakMap(), _RedisClusterSlots_emit = new WeakMap(), _RedisClusterSlots_isOpen = new WeakMap(), _RedisClusterSlots_runningRediscoverPromise = new WeakMap(), _RedisClusterSlots_randomNodeIterator = new WeakMap(), _RedisClusterSlots_instances = new WeakSet(), _RedisClusterSlots_discoverWithRootNodes = async function _RedisClusterSlots_discoverWithRootNodes() {
+    let start = Math.floor(Math.random() * __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").rootNodes.length);
+    for (let i = start; i < __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").rootNodes.length; i++) {
+        if (await __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_discover).call(this, __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").rootNodes[i]))
+            return;
+    }
+    for (let i = 0; i < start; i++) {
+        if (await __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_discover).call(this, __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").rootNodes[i]))
+            return;
+    }
+    throw new errors_1.RootNodesUnavailableError();
+}, _RedisClusterSlots_resetSlots = function _RedisClusterSlots_resetSlots() {
+    this.slots = new Array(__classPrivateFieldGet(RedisClusterSlots, _a, "f", _RedisClusterSlots_SLOTS));
+    this.shards = [];
+    this.masters = [];
+    this.replicas = [];
+    __classPrivateFieldSet(this, _RedisClusterSlots_randomNodeIterator, undefined, "f");
+}, _RedisClusterSlots_discover = async function _RedisClusterSlots_discover(rootNode) {
+    __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_resetSlots).call(this);
+    const addressesInUse = new Set();
+    try {
+        const shards = await __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_getShards).call(this, rootNode), promises = [], eagerConnect = __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").minimizeConnections !== true;
+        for (const { from, to, master, replicas } of shards) {
+            const shard = {
+                master: __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_initiateSlotNode).call(this, master, false, eagerConnect, addressesInUse, promises)
+            };
+            if (__classPrivateFieldGet(this, _RedisClusterSlots_options, "f").useReplicas) {
+                shard.replicas = replicas.map(replica => __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_initiateSlotNode).call(this, replica, true, eagerConnect, addressesInUse, promises));
+            }
+            this.shards.push(shard);
+            for (let i = from; i <= to; i++) {
+                this.slots[i] = shard;
+            }
+        }
+        if (this.pubSubNode && !addressesInUse.has(this.pubSubNode.address)) {
+            if (util_1.types.isPromise(this.pubSubNode.client)) {
+                promises.push(this.pubSubNode.client.then(client => client.disconnect()));
+                this.pubSubNode = undefined;
+            }
+            else {
+                promises.push(this.pubSubNode.client.disconnect());
+                const channelsListeners = this.pubSubNode.client.getPubSubListeners(pub_sub_1.PubSubType.CHANNELS), patternsListeners = this.pubSubNode.client.getPubSubListeners(pub_sub_1.PubSubType.PATTERNS);
+                if (channelsListeners.size || patternsListeners.size) {
+                    promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_initiatePubSubClient).call(this, {
+                        [pub_sub_1.PubSubType.CHANNELS]: channelsListeners,
+                        [pub_sub_1.PubSubType.PATTERNS]: patternsListeners
+                    }));
+                }
+            }
+        }
+        for (const [address, node] of this.nodeByAddress.entries()) {
+            if (addressesInUse.has(address))
+                continue;
+            if (node.client) {
+                promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_execOnNodeClient).call(this, node.client, client => client.disconnect()));
+            }
+            const { pubSubClient } = node;
+            if (pubSubClient) {
+                promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_execOnNodeClient).call(this, pubSubClient, client => client.disconnect()));
+            }
+            this.nodeByAddress.delete(address);
+        }
+        await Promise.all(promises);
+        return true;
+    }
+    catch (err) {
+        __classPrivateFieldGet(this, _RedisClusterSlots_emit, "f").call(this, 'error', err);
+        return false;
+    }
+}, _RedisClusterSlots_getShards = async function _RedisClusterSlots_getShards(rootNode) {
+    const client = new (__classPrivateFieldGet(this, _RedisClusterSlots_Client, "f"))(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_clientOptionsDefaults).call(this, rootNode, true));
+    client.on('error', err => __classPrivateFieldGet(this, _RedisClusterSlots_emit, "f").call(this, 'error', err));
+    await client.connect();
+    try {
+        // using `CLUSTER SLOTS` and not `CLUSTER SHARDS` to support older versions
+        return await client.clusterSlots();
+    }
+    finally {
+        await client.disconnect();
+    }
+}, _RedisClusterSlots_getNodeAddress = function _RedisClusterSlots_getNodeAddress(address) {
+    switch (typeof __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").nodeAddressMap) {
+        case 'object':
+            return __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").nodeAddressMap[address];
+        case 'function':
+            return __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").nodeAddressMap(address);
+    }
+}, _RedisClusterSlots_clientOptionsDefaults = function _RedisClusterSlots_clientOptionsDefaults(options, disableReconnect) {
+    let result;
+    if (__classPrivateFieldGet(this, _RedisClusterSlots_options, "f").defaults) {
+        let socket;
+        if (__classPrivateFieldGet(this, _RedisClusterSlots_options, "f").defaults.socket) {
+            socket = options?.socket ? {
+                ...__classPrivateFieldGet(this, _RedisClusterSlots_options, "f").defaults.socket,
+                ...options.socket
+            } : __classPrivateFieldGet(this, _RedisClusterSlots_options, "f").defaults.socket;
+        }
+        else {
+            socket = options?.socket;
+        }
+        result = {
+            ...__classPrivateFieldGet(this, _RedisClusterSlots_options, "f").defaults,
+            ...options,
+            socket
+        };
+    }
+    else {
+        result = options;
+    }
+    if (disableReconnect) {
+        result ?? (result = {});
+        result.socket ?? (result.socket = {});
+        result.socket.reconnectStrategy = false;
+    }
+    return result;
+}, _RedisClusterSlots_initiateSlotNode = function _RedisClusterSlots_initiateSlotNode({ id, ip, port }, readonly, eagerConnent, addressesInUse, promises) {
+    const address = `${ip}:${port}`;
+    addressesInUse.add(address);
+    let node = this.nodeByAddress.get(address);
+    if (!node) {
+        node = {
+            id,
+            host: ip,
+            port,
+            address,
+            readonly,
+            client: undefined
+        };
+        if (eagerConnent) {
+            promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_createNodeClient).call(this, node));
+        }
+        this.nodeByAddress.set(address, node);
+    }
+    (readonly ? this.replicas : this.masters).push(node);
+    return node;
+}, _RedisClusterSlots_createClient = async function _RedisClusterSlots_createClient(node, readonly = node.readonly) {
+    const client = new (__classPrivateFieldGet(this, _RedisClusterSlots_Client, "f"))(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_clientOptionsDefaults).call(this, {
+        socket: __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_getNodeAddress).call(this, node.address) ?? {
+            host: node.host,
+            port: node.port
+        },
+        readonly
+    }));
+    client.on('error', err => __classPrivateFieldGet(this, _RedisClusterSlots_emit, "f").call(this, 'error', err));
+    await client.connect();
+    return client;
+}, _RedisClusterSlots_createNodeClient = function _RedisClusterSlots_createNodeClient(node) {
+    const promise = __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_createClient).call(this, node)
+        .then(client => {
+        node.client = client;
+        return client;
+    })
+        .catch(err => {
+        node.client = undefined;
+        throw err;
+    });
+    node.client = promise;
+    return promise;
+}, _RedisClusterSlots_rediscover = async function _RedisClusterSlots_rediscover(startWith) {
+    if (await __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_discover).call(this, startWith.options))
+        return;
+    return __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_discoverWithRootNodes).call(this);
+}, _RedisClusterSlots_destroy = async function _RedisClusterSlots_destroy(fn) {
+    __classPrivateFieldSet(this, _RedisClusterSlots_isOpen, false, "f");
+    const promises = [];
+    for (const { master, replicas } of this.shards) {
+        if (master.client) {
+            promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_execOnNodeClient).call(this, master.client, fn));
+        }
+        if (master.pubSubClient) {
+            promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_execOnNodeClient).call(this, master.pubSubClient, fn));
+        }
+        if (replicas) {
+            for (const { client } of replicas) {
+                if (client) {
+                    promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_execOnNodeClient).call(this, client, fn));
+                }
+            }
+        }
+    }
+    if (this.pubSubNode) {
+        promises.push(__classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_execOnNodeClient).call(this, this.pubSubNode.client, fn));
+        this.pubSubNode = undefined;
+    }
+    __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_resetSlots).call(this);
+    this.nodeByAddress.clear();
+    await Promise.allSettled(promises);
+}, _RedisClusterSlots_execOnNodeClient = function _RedisClusterSlots_execOnNodeClient(client, fn) {
+    return util_1.types.isPromise(client) ?
+        client.then(fn) :
+        fn(client);
+}, _RedisClusterSlots_iterateAllNodes = function* _RedisClusterSlots_iterateAllNodes() {
+    let i = Math.floor(Math.random() * (this.masters.length + this.replicas.length));
+    if (i < this.masters.length) {
+        do {
+            yield this.masters[i];
+        } while (++i < this.masters.length);
+        for (const replica of this.replicas) {
+            yield replica;
+        }
+    }
+    else {
+        i -= this.masters.length;
+        do {
+            yield this.replicas[i];
+        } while (++i < this.replicas.length);
+    }
+    while (true) {
+        for (const master of this.masters) {
+            yield master;
+        }
+        for (const replica of this.replicas) {
+            yield replica;
+        }
+    }
+}, _RedisClusterSlots_slotNodesIterator = function* _RedisClusterSlots_slotNodesIterator(slot) {
+    let i = Math.floor(Math.random() * (1 + slot.replicas.length));
+    if (i < slot.replicas.length) {
+        do {
+            yield slot.replicas[i];
+        } while (++i < slot.replicas.length);
+    }
+    while (true) {
+        yield slot.master;
+        for (const replica of slot.replicas) {
+            yield replica;
+        }
+    }
+}, _RedisClusterSlots_initiatePubSubClient = async function _RedisClusterSlots_initiatePubSubClient(toResubscribe) {
+    const index = Math.floor(Math.random() * (this.masters.length + this.replicas.length)), node = index < this.masters.length ?
+        this.masters[index] :
+        this.replicas[index - this.masters.length];
+    this.pubSubNode = {
+        address: node.address,
+        client: __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_createClient).call(this, node, true)
+            .then(async (client) => {
+            if (toResubscribe) {
+                await Promise.all([
+                    client.extendPubSubListeners(pub_sub_1.PubSubType.CHANNELS, toResubscribe[pub_sub_1.PubSubType.CHANNELS]),
+                    client.extendPubSubListeners(pub_sub_1.PubSubType.PATTERNS, toResubscribe[pub_sub_1.PubSubType.PATTERNS])
+                ]);
+            }
+            this.pubSubNode.client = client;
+            return client;
+        })
+            .catch(err => {
+            this.pubSubNode = undefined;
+            throw err;
+        })
+    };
+    return this.pubSubNode.client;
+}, _RedisClusterSlots_initiateShardedPubSubClient = function _RedisClusterSlots_initiateShardedPubSubClient(master) {
+    const promise = __classPrivateFieldGet(this, _RedisClusterSlots_instances, "m", _RedisClusterSlots_createClient).call(this, master, true)
+        .then(client => {
+        client.on('server-sunsubscribe', async (channel, listeners) => {
+            try {
+                await this.rediscover(client);
+                const redirectTo = await this.getShardedPubSubClient(channel);
+                redirectTo.extendPubSubChannelListeners(pub_sub_1.PubSubType.SHARDED, channel, listeners);
+            }
+            catch (err) {
+                __classPrivateFieldGet(this, _RedisClusterSlots_emit, "f").call(this, 'sharded-shannel-moved-error', err, channel, listeners);
+            }
+        });
+        master.pubSubClient = client;
+        return client;
+    })
+        .catch(err => {
+        master.pubSubClient = undefined;
+        throw err;
+    });
+    master.pubSubClient = promise;
+    return promise;
+};
+_RedisClusterSlots_SLOTS = { value: 16384 };
+exports["default"] = RedisClusterSlots;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/cluster/commands.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/cluster/commands.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const APPEND = __webpack_require__(/*! ../commands/APPEND */ "../../@redis/client/dist/lib/commands/APPEND.js");
+const BITCOUNT = __webpack_require__(/*! ../commands/BITCOUNT */ "../../@redis/client/dist/lib/commands/BITCOUNT.js");
+const BITFIELD_RO = __webpack_require__(/*! ../commands/BITFIELD_RO */ "../../@redis/client/dist/lib/commands/BITFIELD_RO.js");
+const BITFIELD = __webpack_require__(/*! ../commands/BITFIELD */ "../../@redis/client/dist/lib/commands/BITFIELD.js");
+const BITOP = __webpack_require__(/*! ../commands/BITOP */ "../../@redis/client/dist/lib/commands/BITOP.js");
+const BITPOS = __webpack_require__(/*! ../commands/BITPOS */ "../../@redis/client/dist/lib/commands/BITPOS.js");
+const BLMOVE = __webpack_require__(/*! ../commands/BLMOVE */ "../../@redis/client/dist/lib/commands/BLMOVE.js");
+const BLMPOP = __webpack_require__(/*! ../commands/BLMPOP */ "../../@redis/client/dist/lib/commands/BLMPOP.js");
+const BLPOP = __webpack_require__(/*! ../commands/BLPOP */ "../../@redis/client/dist/lib/commands/BLPOP.js");
+const BRPOP = __webpack_require__(/*! ../commands/BRPOP */ "../../@redis/client/dist/lib/commands/BRPOP.js");
+const BRPOPLPUSH = __webpack_require__(/*! ../commands/BRPOPLPUSH */ "../../@redis/client/dist/lib/commands/BRPOPLPUSH.js");
+const BZMPOP = __webpack_require__(/*! ../commands/BZMPOP */ "../../@redis/client/dist/lib/commands/BZMPOP.js");
+const BZPOPMAX = __webpack_require__(/*! ../commands/BZPOPMAX */ "../../@redis/client/dist/lib/commands/BZPOPMAX.js");
+const BZPOPMIN = __webpack_require__(/*! ../commands/BZPOPMIN */ "../../@redis/client/dist/lib/commands/BZPOPMIN.js");
+const COPY = __webpack_require__(/*! ../commands/COPY */ "../../@redis/client/dist/lib/commands/COPY.js");
+const DECR = __webpack_require__(/*! ../commands/DECR */ "../../@redis/client/dist/lib/commands/DECR.js");
+const DECRBY = __webpack_require__(/*! ../commands/DECRBY */ "../../@redis/client/dist/lib/commands/DECRBY.js");
+const DEL = __webpack_require__(/*! ../commands/DEL */ "../../@redis/client/dist/lib/commands/DEL.js");
+const DUMP = __webpack_require__(/*! ../commands/DUMP */ "../../@redis/client/dist/lib/commands/DUMP.js");
+const EVAL_RO = __webpack_require__(/*! ../commands/EVAL_RO */ "../../@redis/client/dist/lib/commands/EVAL_RO.js");
+const EVAL = __webpack_require__(/*! ../commands/EVAL */ "../../@redis/client/dist/lib/commands/EVAL.js");
+const EVALSHA_RO = __webpack_require__(/*! ../commands/EVALSHA_RO */ "../../@redis/client/dist/lib/commands/EVALSHA_RO.js");
+const EVALSHA = __webpack_require__(/*! ../commands/EVALSHA */ "../../@redis/client/dist/lib/commands/EVALSHA.js");
+const EXISTS = __webpack_require__(/*! ../commands/EXISTS */ "../../@redis/client/dist/lib/commands/EXISTS.js");
+const EXPIRE = __webpack_require__(/*! ../commands/EXPIRE */ "../../@redis/client/dist/lib/commands/EXPIRE.js");
+const EXPIREAT = __webpack_require__(/*! ../commands/EXPIREAT */ "../../@redis/client/dist/lib/commands/EXPIREAT.js");
+const EXPIRETIME = __webpack_require__(/*! ../commands/EXPIRETIME */ "../../@redis/client/dist/lib/commands/EXPIRETIME.js");
+const FCALL_RO = __webpack_require__(/*! ../commands/FCALL_RO */ "../../@redis/client/dist/lib/commands/FCALL_RO.js");
+const FCALL = __webpack_require__(/*! ../commands/FCALL */ "../../@redis/client/dist/lib/commands/FCALL.js");
+const GEOADD = __webpack_require__(/*! ../commands/GEOADD */ "../../@redis/client/dist/lib/commands/GEOADD.js");
+const GEODIST = __webpack_require__(/*! ../commands/GEODIST */ "../../@redis/client/dist/lib/commands/GEODIST.js");
+const GEOHASH = __webpack_require__(/*! ../commands/GEOHASH */ "../../@redis/client/dist/lib/commands/GEOHASH.js");
+const GEOPOS = __webpack_require__(/*! ../commands/GEOPOS */ "../../@redis/client/dist/lib/commands/GEOPOS.js");
+const GEORADIUS_RO_WITH = __webpack_require__(/*! ../commands/GEORADIUS_RO_WITH */ "../../@redis/client/dist/lib/commands/GEORADIUS_RO_WITH.js");
+const GEORADIUS_RO = __webpack_require__(/*! ../commands/GEORADIUS_RO */ "../../@redis/client/dist/lib/commands/GEORADIUS_RO.js");
+const GEORADIUS_WITH = __webpack_require__(/*! ../commands/GEORADIUS_WITH */ "../../@redis/client/dist/lib/commands/GEORADIUS_WITH.js");
+const GEORADIUS = __webpack_require__(/*! ../commands/GEORADIUS */ "../../@redis/client/dist/lib/commands/GEORADIUS.js");
+const GEORADIUSBYMEMBER_RO_WITH = __webpack_require__(/*! ../commands/GEORADIUSBYMEMBER_RO_WITH */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO_WITH.js");
+const GEORADIUSBYMEMBER_RO = __webpack_require__(/*! ../commands/GEORADIUSBYMEMBER_RO */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO.js");
+const GEORADIUSBYMEMBER_WITH = __webpack_require__(/*! ../commands/GEORADIUSBYMEMBER_WITH */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_WITH.js");
+const GEORADIUSBYMEMBER = __webpack_require__(/*! ../commands/GEORADIUSBYMEMBER */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER.js");
+const GEORADIUSBYMEMBERSTORE = __webpack_require__(/*! ../commands/GEORADIUSBYMEMBERSTORE */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBERSTORE.js");
+const GEORADIUSSTORE = __webpack_require__(/*! ../commands/GEORADIUSSTORE */ "../../@redis/client/dist/lib/commands/GEORADIUSSTORE.js");
+const GEOSEARCH_WITH = __webpack_require__(/*! ../commands/GEOSEARCH_WITH */ "../../@redis/client/dist/lib/commands/GEOSEARCH_WITH.js");
+const GEOSEARCH = __webpack_require__(/*! ../commands/GEOSEARCH */ "../../@redis/client/dist/lib/commands/GEOSEARCH.js");
+const GEOSEARCHSTORE = __webpack_require__(/*! ../commands/GEOSEARCHSTORE */ "../../@redis/client/dist/lib/commands/GEOSEARCHSTORE.js");
+const GET = __webpack_require__(/*! ../commands/GET */ "../../@redis/client/dist/lib/commands/GET.js");
+const GETBIT = __webpack_require__(/*! ../commands/GETBIT */ "../../@redis/client/dist/lib/commands/GETBIT.js");
+const GETDEL = __webpack_require__(/*! ../commands/GETDEL */ "../../@redis/client/dist/lib/commands/GETDEL.js");
+const GETEX = __webpack_require__(/*! ../commands/GETEX */ "../../@redis/client/dist/lib/commands/GETEX.js");
+const GETRANGE = __webpack_require__(/*! ../commands/GETRANGE */ "../../@redis/client/dist/lib/commands/GETRANGE.js");
+const GETSET = __webpack_require__(/*! ../commands/GETSET */ "../../@redis/client/dist/lib/commands/GETSET.js");
+const HDEL = __webpack_require__(/*! ../commands/HDEL */ "../../@redis/client/dist/lib/commands/HDEL.js");
+const HEXISTS = __webpack_require__(/*! ../commands/HEXISTS */ "../../@redis/client/dist/lib/commands/HEXISTS.js");
+const HGET = __webpack_require__(/*! ../commands/HGET */ "../../@redis/client/dist/lib/commands/HGET.js");
+const HGETALL = __webpack_require__(/*! ../commands/HGETALL */ "../../@redis/client/dist/lib/commands/HGETALL.js");
+const HINCRBY = __webpack_require__(/*! ../commands/HINCRBY */ "../../@redis/client/dist/lib/commands/HINCRBY.js");
+const HINCRBYFLOAT = __webpack_require__(/*! ../commands/HINCRBYFLOAT */ "../../@redis/client/dist/lib/commands/HINCRBYFLOAT.js");
+const HKEYS = __webpack_require__(/*! ../commands/HKEYS */ "../../@redis/client/dist/lib/commands/HKEYS.js");
+const HLEN = __webpack_require__(/*! ../commands/HLEN */ "../../@redis/client/dist/lib/commands/HLEN.js");
+const HMGET = __webpack_require__(/*! ../commands/HMGET */ "../../@redis/client/dist/lib/commands/HMGET.js");
+const HRANDFIELD_COUNT_WITHVALUES = __webpack_require__(/*! ../commands/HRANDFIELD_COUNT_WITHVALUES */ "../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT_WITHVALUES.js");
+const HRANDFIELD_COUNT = __webpack_require__(/*! ../commands/HRANDFIELD_COUNT */ "../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT.js");
+const HRANDFIELD = __webpack_require__(/*! ../commands/HRANDFIELD */ "../../@redis/client/dist/lib/commands/HRANDFIELD.js");
+const HSCAN = __webpack_require__(/*! ../commands/HSCAN */ "../../@redis/client/dist/lib/commands/HSCAN.js");
+const HSET = __webpack_require__(/*! ../commands/HSET */ "../../@redis/client/dist/lib/commands/HSET.js");
+const HSETNX = __webpack_require__(/*! ../commands/HSETNX */ "../../@redis/client/dist/lib/commands/HSETNX.js");
+const HSTRLEN = __webpack_require__(/*! ../commands/HSTRLEN */ "../../@redis/client/dist/lib/commands/HSTRLEN.js");
+const HVALS = __webpack_require__(/*! ../commands/HVALS */ "../../@redis/client/dist/lib/commands/HVALS.js");
+const INCR = __webpack_require__(/*! ../commands/INCR */ "../../@redis/client/dist/lib/commands/INCR.js");
+const INCRBY = __webpack_require__(/*! ../commands/INCRBY */ "../../@redis/client/dist/lib/commands/INCRBY.js");
+const INCRBYFLOAT = __webpack_require__(/*! ../commands/INCRBYFLOAT */ "../../@redis/client/dist/lib/commands/INCRBYFLOAT.js");
+const LCS_IDX_WITHMATCHLEN = __webpack_require__(/*! ../commands/LCS_IDX_WITHMATCHLEN */ "../../@redis/client/dist/lib/commands/LCS_IDX_WITHMATCHLEN.js");
+const LCS_IDX = __webpack_require__(/*! ../commands/LCS_IDX */ "../../@redis/client/dist/lib/commands/LCS_IDX.js");
+const LCS_LEN = __webpack_require__(/*! ../commands/LCS_LEN */ "../../@redis/client/dist/lib/commands/LCS_LEN.js");
+const LCS = __webpack_require__(/*! ../commands/LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+const LINDEX = __webpack_require__(/*! ../commands/LINDEX */ "../../@redis/client/dist/lib/commands/LINDEX.js");
+const LINSERT = __webpack_require__(/*! ../commands/LINSERT */ "../../@redis/client/dist/lib/commands/LINSERT.js");
+const LLEN = __webpack_require__(/*! ../commands/LLEN */ "../../@redis/client/dist/lib/commands/LLEN.js");
+const LMOVE = __webpack_require__(/*! ../commands/LMOVE */ "../../@redis/client/dist/lib/commands/LMOVE.js");
+const LMPOP = __webpack_require__(/*! ../commands/LMPOP */ "../../@redis/client/dist/lib/commands/LMPOP.js");
+const LPOP_COUNT = __webpack_require__(/*! ../commands/LPOP_COUNT */ "../../@redis/client/dist/lib/commands/LPOP_COUNT.js");
+const LPOP = __webpack_require__(/*! ../commands/LPOP */ "../../@redis/client/dist/lib/commands/LPOP.js");
+const LPOS_COUNT = __webpack_require__(/*! ../commands/LPOS_COUNT */ "../../@redis/client/dist/lib/commands/LPOS_COUNT.js");
+const LPOS = __webpack_require__(/*! ../commands/LPOS */ "../../@redis/client/dist/lib/commands/LPOS.js");
+const LPUSH = __webpack_require__(/*! ../commands/LPUSH */ "../../@redis/client/dist/lib/commands/LPUSH.js");
+const LPUSHX = __webpack_require__(/*! ../commands/LPUSHX */ "../../@redis/client/dist/lib/commands/LPUSHX.js");
+const LRANGE = __webpack_require__(/*! ../commands/LRANGE */ "../../@redis/client/dist/lib/commands/LRANGE.js");
+const LREM = __webpack_require__(/*! ../commands/LREM */ "../../@redis/client/dist/lib/commands/LREM.js");
+const LSET = __webpack_require__(/*! ../commands/LSET */ "../../@redis/client/dist/lib/commands/LSET.js");
+const LTRIM = __webpack_require__(/*! ../commands/LTRIM */ "../../@redis/client/dist/lib/commands/LTRIM.js");
+const MGET = __webpack_require__(/*! ../commands/MGET */ "../../@redis/client/dist/lib/commands/MGET.js");
+const MIGRATE = __webpack_require__(/*! ../commands/MIGRATE */ "../../@redis/client/dist/lib/commands/MIGRATE.js");
+const MSET = __webpack_require__(/*! ../commands/MSET */ "../../@redis/client/dist/lib/commands/MSET.js");
+const MSETNX = __webpack_require__(/*! ../commands/MSETNX */ "../../@redis/client/dist/lib/commands/MSETNX.js");
+const OBJECT_ENCODING = __webpack_require__(/*! ../commands/OBJECT_ENCODING */ "../../@redis/client/dist/lib/commands/OBJECT_ENCODING.js");
+const OBJECT_FREQ = __webpack_require__(/*! ../commands/OBJECT_FREQ */ "../../@redis/client/dist/lib/commands/OBJECT_FREQ.js");
+const OBJECT_IDLETIME = __webpack_require__(/*! ../commands/OBJECT_IDLETIME */ "../../@redis/client/dist/lib/commands/OBJECT_IDLETIME.js");
+const OBJECT_REFCOUNT = __webpack_require__(/*! ../commands/OBJECT_REFCOUNT */ "../../@redis/client/dist/lib/commands/OBJECT_REFCOUNT.js");
+const PERSIST = __webpack_require__(/*! ../commands/PERSIST */ "../../@redis/client/dist/lib/commands/PERSIST.js");
+const PEXPIRE = __webpack_require__(/*! ../commands/PEXPIRE */ "../../@redis/client/dist/lib/commands/PEXPIRE.js");
+const PEXPIREAT = __webpack_require__(/*! ../commands/PEXPIREAT */ "../../@redis/client/dist/lib/commands/PEXPIREAT.js");
+const PEXPIRETIME = __webpack_require__(/*! ../commands/PEXPIRETIME */ "../../@redis/client/dist/lib/commands/PEXPIRETIME.js");
+const PFADD = __webpack_require__(/*! ../commands/PFADD */ "../../@redis/client/dist/lib/commands/PFADD.js");
+const PFCOUNT = __webpack_require__(/*! ../commands/PFCOUNT */ "../../@redis/client/dist/lib/commands/PFCOUNT.js");
+const PFMERGE = __webpack_require__(/*! ../commands/PFMERGE */ "../../@redis/client/dist/lib/commands/PFMERGE.js");
+const PSETEX = __webpack_require__(/*! ../commands/PSETEX */ "../../@redis/client/dist/lib/commands/PSETEX.js");
+const PTTL = __webpack_require__(/*! ../commands/PTTL */ "../../@redis/client/dist/lib/commands/PTTL.js");
+const PUBLISH = __webpack_require__(/*! ../commands/PUBLISH */ "../../@redis/client/dist/lib/commands/PUBLISH.js");
+const RENAME = __webpack_require__(/*! ../commands/RENAME */ "../../@redis/client/dist/lib/commands/RENAME.js");
+const RENAMENX = __webpack_require__(/*! ../commands/RENAMENX */ "../../@redis/client/dist/lib/commands/RENAMENX.js");
+const RPOP_COUNT = __webpack_require__(/*! ../commands/RPOP_COUNT */ "../../@redis/client/dist/lib/commands/RPOP_COUNT.js");
+const RPOP = __webpack_require__(/*! ../commands/RPOP */ "../../@redis/client/dist/lib/commands/RPOP.js");
+const RPOPLPUSH = __webpack_require__(/*! ../commands/RPOPLPUSH */ "../../@redis/client/dist/lib/commands/RPOPLPUSH.js");
+const RPUSH = __webpack_require__(/*! ../commands/RPUSH */ "../../@redis/client/dist/lib/commands/RPUSH.js");
+const RPUSHX = __webpack_require__(/*! ../commands/RPUSHX */ "../../@redis/client/dist/lib/commands/RPUSHX.js");
+const SADD = __webpack_require__(/*! ../commands/SADD */ "../../@redis/client/dist/lib/commands/SADD.js");
+const SCARD = __webpack_require__(/*! ../commands/SCARD */ "../../@redis/client/dist/lib/commands/SCARD.js");
+const SDIFF = __webpack_require__(/*! ../commands/SDIFF */ "../../@redis/client/dist/lib/commands/SDIFF.js");
+const SDIFFSTORE = __webpack_require__(/*! ../commands/SDIFFSTORE */ "../../@redis/client/dist/lib/commands/SDIFFSTORE.js");
+const SET = __webpack_require__(/*! ../commands/SET */ "../../@redis/client/dist/lib/commands/SET.js");
+const SETBIT = __webpack_require__(/*! ../commands/SETBIT */ "../../@redis/client/dist/lib/commands/SETBIT.js");
+const SETEX = __webpack_require__(/*! ../commands/SETEX */ "../../@redis/client/dist/lib/commands/SETEX.js");
+const SETNX = __webpack_require__(/*! ../commands/SETNX */ "../../@redis/client/dist/lib/commands/SETNX.js");
+const SETRANGE = __webpack_require__(/*! ../commands/SETRANGE */ "../../@redis/client/dist/lib/commands/SETRANGE.js");
+const SINTER = __webpack_require__(/*! ../commands/SINTER */ "../../@redis/client/dist/lib/commands/SINTER.js");
+const SINTERCARD = __webpack_require__(/*! ../commands/SINTERCARD */ "../../@redis/client/dist/lib/commands/SINTERCARD.js");
+const SINTERSTORE = __webpack_require__(/*! ../commands/SINTERSTORE */ "../../@redis/client/dist/lib/commands/SINTERSTORE.js");
+const SISMEMBER = __webpack_require__(/*! ../commands/SISMEMBER */ "../../@redis/client/dist/lib/commands/SISMEMBER.js");
+const SMEMBERS = __webpack_require__(/*! ../commands/SMEMBERS */ "../../@redis/client/dist/lib/commands/SMEMBERS.js");
+const SMISMEMBER = __webpack_require__(/*! ../commands/SMISMEMBER */ "../../@redis/client/dist/lib/commands/SMISMEMBER.js");
+const SMOVE = __webpack_require__(/*! ../commands/SMOVE */ "../../@redis/client/dist/lib/commands/SMOVE.js");
+const SORT_RO = __webpack_require__(/*! ../commands/SORT_RO */ "../../@redis/client/dist/lib/commands/SORT_RO.js");
+const SORT_STORE = __webpack_require__(/*! ../commands/SORT_STORE */ "../../@redis/client/dist/lib/commands/SORT_STORE.js");
+const SORT = __webpack_require__(/*! ../commands/SORT */ "../../@redis/client/dist/lib/commands/SORT.js");
+const SPOP = __webpack_require__(/*! ../commands/SPOP */ "../../@redis/client/dist/lib/commands/SPOP.js");
+const SPUBLISH = __webpack_require__(/*! ../commands/SPUBLISH */ "../../@redis/client/dist/lib/commands/SPUBLISH.js");
+const SRANDMEMBER_COUNT = __webpack_require__(/*! ../commands/SRANDMEMBER_COUNT */ "../../@redis/client/dist/lib/commands/SRANDMEMBER_COUNT.js");
+const SRANDMEMBER = __webpack_require__(/*! ../commands/SRANDMEMBER */ "../../@redis/client/dist/lib/commands/SRANDMEMBER.js");
+const SREM = __webpack_require__(/*! ../commands/SREM */ "../../@redis/client/dist/lib/commands/SREM.js");
+const SSCAN = __webpack_require__(/*! ../commands/SSCAN */ "../../@redis/client/dist/lib/commands/SSCAN.js");
+const STRLEN = __webpack_require__(/*! ../commands/STRLEN */ "../../@redis/client/dist/lib/commands/STRLEN.js");
+const SUNION = __webpack_require__(/*! ../commands/SUNION */ "../../@redis/client/dist/lib/commands/SUNION.js");
+const SUNIONSTORE = __webpack_require__(/*! ../commands/SUNIONSTORE */ "../../@redis/client/dist/lib/commands/SUNIONSTORE.js");
+const TOUCH = __webpack_require__(/*! ../commands/TOUCH */ "../../@redis/client/dist/lib/commands/TOUCH.js");
+const TTL = __webpack_require__(/*! ../commands/TTL */ "../../@redis/client/dist/lib/commands/TTL.js");
+const TYPE = __webpack_require__(/*! ../commands/TYPE */ "../../@redis/client/dist/lib/commands/TYPE.js");
+const UNLINK = __webpack_require__(/*! ../commands/UNLINK */ "../../@redis/client/dist/lib/commands/UNLINK.js");
+const WATCH = __webpack_require__(/*! ../commands/WATCH */ "../../@redis/client/dist/lib/commands/WATCH.js");
+const XACK = __webpack_require__(/*! ../commands/XACK */ "../../@redis/client/dist/lib/commands/XACK.js");
+const XADD = __webpack_require__(/*! ../commands/XADD */ "../../@redis/client/dist/lib/commands/XADD.js");
+const XAUTOCLAIM_JUSTID = __webpack_require__(/*! ../commands/XAUTOCLAIM_JUSTID */ "../../@redis/client/dist/lib/commands/XAUTOCLAIM_JUSTID.js");
+const XAUTOCLAIM = __webpack_require__(/*! ../commands/XAUTOCLAIM */ "../../@redis/client/dist/lib/commands/XAUTOCLAIM.js");
+const XCLAIM_JUSTID = __webpack_require__(/*! ../commands/XCLAIM_JUSTID */ "../../@redis/client/dist/lib/commands/XCLAIM_JUSTID.js");
+const XCLAIM = __webpack_require__(/*! ../commands/XCLAIM */ "../../@redis/client/dist/lib/commands/XCLAIM.js");
+const XDEL = __webpack_require__(/*! ../commands/XDEL */ "../../@redis/client/dist/lib/commands/XDEL.js");
+const XGROUP_CREATE = __webpack_require__(/*! ../commands/XGROUP_CREATE */ "../../@redis/client/dist/lib/commands/XGROUP_CREATE.js");
+const XGROUP_CREATECONSUMER = __webpack_require__(/*! ../commands/XGROUP_CREATECONSUMER */ "../../@redis/client/dist/lib/commands/XGROUP_CREATECONSUMER.js");
+const XGROUP_DELCONSUMER = __webpack_require__(/*! ../commands/XGROUP_DELCONSUMER */ "../../@redis/client/dist/lib/commands/XGROUP_DELCONSUMER.js");
+const XGROUP_DESTROY = __webpack_require__(/*! ../commands/XGROUP_DESTROY */ "../../@redis/client/dist/lib/commands/XGROUP_DESTROY.js");
+const XGROUP_SETID = __webpack_require__(/*! ../commands/XGROUP_SETID */ "../../@redis/client/dist/lib/commands/XGROUP_SETID.js");
+const XINFO_CONSUMERS = __webpack_require__(/*! ../commands/XINFO_CONSUMERS */ "../../@redis/client/dist/lib/commands/XINFO_CONSUMERS.js");
+const XINFO_GROUPS = __webpack_require__(/*! ../commands/XINFO_GROUPS */ "../../@redis/client/dist/lib/commands/XINFO_GROUPS.js");
+const XINFO_STREAM = __webpack_require__(/*! ../commands/XINFO_STREAM */ "../../@redis/client/dist/lib/commands/XINFO_STREAM.js");
+const XLEN = __webpack_require__(/*! ../commands/XLEN */ "../../@redis/client/dist/lib/commands/XLEN.js");
+const XPENDING_RANGE = __webpack_require__(/*! ../commands/XPENDING_RANGE */ "../../@redis/client/dist/lib/commands/XPENDING_RANGE.js");
+const XPENDING = __webpack_require__(/*! ../commands/XPENDING */ "../../@redis/client/dist/lib/commands/XPENDING.js");
+const XRANGE = __webpack_require__(/*! ../commands/XRANGE */ "../../@redis/client/dist/lib/commands/XRANGE.js");
+const XREAD = __webpack_require__(/*! ../commands/XREAD */ "../../@redis/client/dist/lib/commands/XREAD.js");
+const XREADGROUP = __webpack_require__(/*! ../commands/XREADGROUP */ "../../@redis/client/dist/lib/commands/XREADGROUP.js");
+const XREVRANGE = __webpack_require__(/*! ../commands/XREVRANGE */ "../../@redis/client/dist/lib/commands/XREVRANGE.js");
+const XSETID = __webpack_require__(/*! ../commands/XSETID */ "../../@redis/client/dist/lib/commands/XSETID.js");
+const XTRIM = __webpack_require__(/*! ../commands/XTRIM */ "../../@redis/client/dist/lib/commands/XTRIM.js");
+const ZADD = __webpack_require__(/*! ../commands/ZADD */ "../../@redis/client/dist/lib/commands/ZADD.js");
+const ZCARD = __webpack_require__(/*! ../commands/ZCARD */ "../../@redis/client/dist/lib/commands/ZCARD.js");
+const ZCOUNT = __webpack_require__(/*! ../commands/ZCOUNT */ "../../@redis/client/dist/lib/commands/ZCOUNT.js");
+const ZDIFF_WITHSCORES = __webpack_require__(/*! ../commands/ZDIFF_WITHSCORES */ "../../@redis/client/dist/lib/commands/ZDIFF_WITHSCORES.js");
+const ZDIFF = __webpack_require__(/*! ../commands/ZDIFF */ "../../@redis/client/dist/lib/commands/ZDIFF.js");
+const ZDIFFSTORE = __webpack_require__(/*! ../commands/ZDIFFSTORE */ "../../@redis/client/dist/lib/commands/ZDIFFSTORE.js");
+const ZINCRBY = __webpack_require__(/*! ../commands/ZINCRBY */ "../../@redis/client/dist/lib/commands/ZINCRBY.js");
+const ZINTER_WITHSCORES = __webpack_require__(/*! ../commands/ZINTER_WITHSCORES */ "../../@redis/client/dist/lib/commands/ZINTER_WITHSCORES.js");
+const ZINTER = __webpack_require__(/*! ../commands/ZINTER */ "../../@redis/client/dist/lib/commands/ZINTER.js");
+const ZINTERCARD = __webpack_require__(/*! ../commands/ZINTERCARD */ "../../@redis/client/dist/lib/commands/ZINTERCARD.js");
+const ZINTERSTORE = __webpack_require__(/*! ../commands/ZINTERSTORE */ "../../@redis/client/dist/lib/commands/ZINTERSTORE.js");
+const ZLEXCOUNT = __webpack_require__(/*! ../commands/ZLEXCOUNT */ "../../@redis/client/dist/lib/commands/ZLEXCOUNT.js");
+const ZMPOP = __webpack_require__(/*! ../commands/ZMPOP */ "../../@redis/client/dist/lib/commands/ZMPOP.js");
+const ZMSCORE = __webpack_require__(/*! ../commands/ZMSCORE */ "../../@redis/client/dist/lib/commands/ZMSCORE.js");
+const ZPOPMAX_COUNT = __webpack_require__(/*! ../commands/ZPOPMAX_COUNT */ "../../@redis/client/dist/lib/commands/ZPOPMAX_COUNT.js");
+const ZPOPMAX = __webpack_require__(/*! ../commands/ZPOPMAX */ "../../@redis/client/dist/lib/commands/ZPOPMAX.js");
+const ZPOPMIN_COUNT = __webpack_require__(/*! ../commands/ZPOPMIN_COUNT */ "../../@redis/client/dist/lib/commands/ZPOPMIN_COUNT.js");
+const ZPOPMIN = __webpack_require__(/*! ../commands/ZPOPMIN */ "../../@redis/client/dist/lib/commands/ZPOPMIN.js");
+const ZRANDMEMBER_COUNT_WITHSCORES = __webpack_require__(/*! ../commands/ZRANDMEMBER_COUNT_WITHSCORES */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT_WITHSCORES.js");
+const ZRANDMEMBER_COUNT = __webpack_require__(/*! ../commands/ZRANDMEMBER_COUNT */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT.js");
+const ZRANDMEMBER = __webpack_require__(/*! ../commands/ZRANDMEMBER */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER.js");
+const ZRANGE_WITHSCORES = __webpack_require__(/*! ../commands/ZRANGE_WITHSCORES */ "../../@redis/client/dist/lib/commands/ZRANGE_WITHSCORES.js");
+const ZRANGE = __webpack_require__(/*! ../commands/ZRANGE */ "../../@redis/client/dist/lib/commands/ZRANGE.js");
+const ZRANGEBYLEX = __webpack_require__(/*! ../commands/ZRANGEBYLEX */ "../../@redis/client/dist/lib/commands/ZRANGEBYLEX.js");
+const ZRANGEBYSCORE_WITHSCORES = __webpack_require__(/*! ../commands/ZRANGEBYSCORE_WITHSCORES */ "../../@redis/client/dist/lib/commands/ZRANGEBYSCORE_WITHSCORES.js");
+const ZRANGEBYSCORE = __webpack_require__(/*! ../commands/ZRANGEBYSCORE */ "../../@redis/client/dist/lib/commands/ZRANGEBYSCORE.js");
+const ZRANGESTORE = __webpack_require__(/*! ../commands/ZRANGESTORE */ "../../@redis/client/dist/lib/commands/ZRANGESTORE.js");
+const ZRANK = __webpack_require__(/*! ../commands/ZRANK */ "../../@redis/client/dist/lib/commands/ZRANK.js");
+const ZREM = __webpack_require__(/*! ../commands/ZREM */ "../../@redis/client/dist/lib/commands/ZREM.js");
+const ZREMRANGEBYLEX = __webpack_require__(/*! ../commands/ZREMRANGEBYLEX */ "../../@redis/client/dist/lib/commands/ZREMRANGEBYLEX.js");
+const ZREMRANGEBYRANK = __webpack_require__(/*! ../commands/ZREMRANGEBYRANK */ "../../@redis/client/dist/lib/commands/ZREMRANGEBYRANK.js");
+const ZREMRANGEBYSCORE = __webpack_require__(/*! ../commands/ZREMRANGEBYSCORE */ "../../@redis/client/dist/lib/commands/ZREMRANGEBYSCORE.js");
+const ZREVRANK = __webpack_require__(/*! ../commands/ZREVRANK */ "../../@redis/client/dist/lib/commands/ZREVRANK.js");
+const ZSCAN = __webpack_require__(/*! ../commands/ZSCAN */ "../../@redis/client/dist/lib/commands/ZSCAN.js");
+const ZSCORE = __webpack_require__(/*! ../commands/ZSCORE */ "../../@redis/client/dist/lib/commands/ZSCORE.js");
+const ZUNION_WITHSCORES = __webpack_require__(/*! ../commands/ZUNION_WITHSCORES */ "../../@redis/client/dist/lib/commands/ZUNION_WITHSCORES.js");
+const ZUNION = __webpack_require__(/*! ../commands/ZUNION */ "../../@redis/client/dist/lib/commands/ZUNION.js");
+const ZUNIONSTORE = __webpack_require__(/*! ../commands/ZUNIONSTORE */ "../../@redis/client/dist/lib/commands/ZUNIONSTORE.js");
+exports["default"] = {
+    APPEND,
+    append: APPEND,
+    BITCOUNT,
+    bitCount: BITCOUNT,
+    BITFIELD_RO,
+    bitFieldRo: BITFIELD_RO,
+    BITFIELD,
+    bitField: BITFIELD,
+    BITOP,
+    bitOp: BITOP,
+    BITPOS,
+    bitPos: BITPOS,
+    BLMOVE,
+    blMove: BLMOVE,
+    BLMPOP,
+    blmPop: BLMPOP,
+    BLPOP,
+    blPop: BLPOP,
+    BRPOP,
+    brPop: BRPOP,
+    BRPOPLPUSH,
+    brPopLPush: BRPOPLPUSH,
+    BZMPOP,
+    bzmPop: BZMPOP,
+    BZPOPMAX,
+    bzPopMax: BZPOPMAX,
+    BZPOPMIN,
+    bzPopMin: BZPOPMIN,
+    COPY,
+    copy: COPY,
+    DECR,
+    decr: DECR,
+    DECRBY,
+    decrBy: DECRBY,
+    DEL,
+    del: DEL,
+    DUMP,
+    dump: DUMP,
+    EVAL_RO,
+    evalRo: EVAL_RO,
+    EVAL,
+    eval: EVAL,
+    EVALSHA,
+    evalSha: EVALSHA,
+    EVALSHA_RO,
+    evalShaRo: EVALSHA_RO,
+    EXISTS,
+    exists: EXISTS,
+    EXPIRE,
+    expire: EXPIRE,
+    EXPIREAT,
+    expireAt: EXPIREAT,
+    EXPIRETIME,
+    expireTime: EXPIRETIME,
+    FCALL_RO,
+    fCallRo: FCALL_RO,
+    FCALL,
+    fCall: FCALL,
+    GEOADD,
+    geoAdd: GEOADD,
+    GEODIST,
+    geoDist: GEODIST,
+    GEOHASH,
+    geoHash: GEOHASH,
+    GEOPOS,
+    geoPos: GEOPOS,
+    GEORADIUS_RO_WITH,
+    geoRadiusRoWith: GEORADIUS_RO_WITH,
+    GEORADIUS_RO,
+    geoRadiusRo: GEORADIUS_RO,
+    GEORADIUS_WITH,
+    geoRadiusWith: GEORADIUS_WITH,
+    GEORADIUS,
+    geoRadius: GEORADIUS,
+    GEORADIUSBYMEMBER_RO_WITH,
+    geoRadiusByMemberRoWith: GEORADIUSBYMEMBER_RO_WITH,
+    GEORADIUSBYMEMBER_RO,
+    geoRadiusByMemberRo: GEORADIUSBYMEMBER_RO,
+    GEORADIUSBYMEMBER_WITH,
+    geoRadiusByMemberWith: GEORADIUSBYMEMBER_WITH,
+    GEORADIUSBYMEMBER,
+    geoRadiusByMember: GEORADIUSBYMEMBER,
+    GEORADIUSBYMEMBERSTORE,
+    geoRadiusByMemberStore: GEORADIUSBYMEMBERSTORE,
+    GEORADIUSSTORE,
+    geoRadiusStore: GEORADIUSSTORE,
+    GEOSEARCH_WITH,
+    geoSearchWith: GEOSEARCH_WITH,
+    GEOSEARCH,
+    geoSearch: GEOSEARCH,
+    GEOSEARCHSTORE,
+    geoSearchStore: GEOSEARCHSTORE,
+    GET,
+    get: GET,
+    GETBIT,
+    getBit: GETBIT,
+    GETDEL,
+    getDel: GETDEL,
+    GETEX,
+    getEx: GETEX,
+    GETRANGE,
+    getRange: GETRANGE,
+    GETSET,
+    getSet: GETSET,
+    HDEL,
+    hDel: HDEL,
+    HEXISTS,
+    hExists: HEXISTS,
+    HGET,
+    hGet: HGET,
+    HGETALL,
+    hGetAll: HGETALL,
+    HINCRBY,
+    hIncrBy: HINCRBY,
+    HINCRBYFLOAT,
+    hIncrByFloat: HINCRBYFLOAT,
+    HKEYS,
+    hKeys: HKEYS,
+    HLEN,
+    hLen: HLEN,
+    HMGET,
+    hmGet: HMGET,
+    HRANDFIELD_COUNT_WITHVALUES,
+    hRandFieldCountWithValues: HRANDFIELD_COUNT_WITHVALUES,
+    HRANDFIELD_COUNT,
+    hRandFieldCount: HRANDFIELD_COUNT,
+    HRANDFIELD,
+    hRandField: HRANDFIELD,
+    HSCAN,
+    hScan: HSCAN,
+    HSET,
+    hSet: HSET,
+    HSETNX,
+    hSetNX: HSETNX,
+    HSTRLEN,
+    hStrLen: HSTRLEN,
+    HVALS,
+    hVals: HVALS,
+    INCR,
+    incr: INCR,
+    INCRBY,
+    incrBy: INCRBY,
+    INCRBYFLOAT,
+    incrByFloat: INCRBYFLOAT,
+    LCS_IDX_WITHMATCHLEN,
+    lcsIdxWithMatchLen: LCS_IDX_WITHMATCHLEN,
+    LCS_IDX,
+    lcsIdx: LCS_IDX,
+    LCS_LEN,
+    lcsLen: LCS_LEN,
+    LCS,
+    lcs: LCS,
+    LINDEX,
+    lIndex: LINDEX,
+    LINSERT,
+    lInsert: LINSERT,
+    LLEN,
+    lLen: LLEN,
+    LMOVE,
+    lMove: LMOVE,
+    LMPOP,
+    lmPop: LMPOP,
+    LPOP_COUNT,
+    lPopCount: LPOP_COUNT,
+    LPOP,
+    lPop: LPOP,
+    LPOS_COUNT,
+    lPosCount: LPOS_COUNT,
+    LPOS,
+    lPos: LPOS,
+    LPUSH,
+    lPush: LPUSH,
+    LPUSHX,
+    lPushX: LPUSHX,
+    LRANGE,
+    lRange: LRANGE,
+    LREM,
+    lRem: LREM,
+    LSET,
+    lSet: LSET,
+    LTRIM,
+    lTrim: LTRIM,
+    MGET,
+    mGet: MGET,
+    MIGRATE,
+    migrate: MIGRATE,
+    MSET,
+    mSet: MSET,
+    MSETNX,
+    mSetNX: MSETNX,
+    OBJECT_ENCODING,
+    objectEncoding: OBJECT_ENCODING,
+    OBJECT_FREQ,
+    objectFreq: OBJECT_FREQ,
+    OBJECT_IDLETIME,
+    objectIdleTime: OBJECT_IDLETIME,
+    OBJECT_REFCOUNT,
+    objectRefCount: OBJECT_REFCOUNT,
+    PERSIST,
+    persist: PERSIST,
+    PEXPIRE,
+    pExpire: PEXPIRE,
+    PEXPIREAT,
+    pExpireAt: PEXPIREAT,
+    PEXPIRETIME,
+    pExpireTime: PEXPIRETIME,
+    PFADD,
+    pfAdd: PFADD,
+    PFCOUNT,
+    pfCount: PFCOUNT,
+    PFMERGE,
+    pfMerge: PFMERGE,
+    PSETEX,
+    pSetEx: PSETEX,
+    PTTL,
+    pTTL: PTTL,
+    PUBLISH,
+    publish: PUBLISH,
+    RENAME,
+    rename: RENAME,
+    RENAMENX,
+    renameNX: RENAMENX,
+    RPOP_COUNT,
+    rPopCount: RPOP_COUNT,
+    RPOP,
+    rPop: RPOP,
+    RPOPLPUSH,
+    rPopLPush: RPOPLPUSH,
+    RPUSH,
+    rPush: RPUSH,
+    RPUSHX,
+    rPushX: RPUSHX,
+    SADD,
+    sAdd: SADD,
+    SCARD,
+    sCard: SCARD,
+    SDIFF,
+    sDiff: SDIFF,
+    SDIFFSTORE,
+    sDiffStore: SDIFFSTORE,
+    SINTER,
+    sInter: SINTER,
+    SINTERCARD,
+    sInterCard: SINTERCARD,
+    SINTERSTORE,
+    sInterStore: SINTERSTORE,
+    SET,
+    set: SET,
+    SETBIT,
+    setBit: SETBIT,
+    SETEX,
+    setEx: SETEX,
+    SETNX,
+    setNX: SETNX,
+    SETRANGE,
+    setRange: SETRANGE,
+    SISMEMBER,
+    sIsMember: SISMEMBER,
+    SMEMBERS,
+    sMembers: SMEMBERS,
+    SMISMEMBER,
+    smIsMember: SMISMEMBER,
+    SMOVE,
+    sMove: SMOVE,
+    SORT_RO,
+    sortRo: SORT_RO,
+    SORT_STORE,
+    sortStore: SORT_STORE,
+    SORT,
+    sort: SORT,
+    SPOP,
+    sPop: SPOP,
+    SPUBLISH,
+    sPublish: SPUBLISH,
+    SRANDMEMBER_COUNT,
+    sRandMemberCount: SRANDMEMBER_COUNT,
+    SRANDMEMBER,
+    sRandMember: SRANDMEMBER,
+    SREM,
+    sRem: SREM,
+    SSCAN,
+    sScan: SSCAN,
+    STRLEN,
+    strLen: STRLEN,
+    SUNION,
+    sUnion: SUNION,
+    SUNIONSTORE,
+    sUnionStore: SUNIONSTORE,
+    TOUCH,
+    touch: TOUCH,
+    TTL,
+    ttl: TTL,
+    TYPE,
+    type: TYPE,
+    UNLINK,
+    unlink: UNLINK,
+    WATCH,
+    watch: WATCH,
+    XACK,
+    xAck: XACK,
+    XADD,
+    xAdd: XADD,
+    XAUTOCLAIM_JUSTID,
+    xAutoClaimJustId: XAUTOCLAIM_JUSTID,
+    XAUTOCLAIM,
+    xAutoClaim: XAUTOCLAIM,
+    XCLAIM,
+    xClaim: XCLAIM,
+    XCLAIM_JUSTID,
+    xClaimJustId: XCLAIM_JUSTID,
+    XDEL,
+    xDel: XDEL,
+    XGROUP_CREATE,
+    xGroupCreate: XGROUP_CREATE,
+    XGROUP_CREATECONSUMER,
+    xGroupCreateConsumer: XGROUP_CREATECONSUMER,
+    XGROUP_DELCONSUMER,
+    xGroupDelConsumer: XGROUP_DELCONSUMER,
+    XGROUP_DESTROY,
+    xGroupDestroy: XGROUP_DESTROY,
+    XGROUP_SETID,
+    xGroupSetId: XGROUP_SETID,
+    XINFO_CONSUMERS,
+    xInfoConsumers: XINFO_CONSUMERS,
+    XINFO_GROUPS,
+    xInfoGroups: XINFO_GROUPS,
+    XINFO_STREAM,
+    xInfoStream: XINFO_STREAM,
+    XLEN,
+    xLen: XLEN,
+    XPENDING_RANGE,
+    xPendingRange: XPENDING_RANGE,
+    XPENDING,
+    xPending: XPENDING,
+    XRANGE,
+    xRange: XRANGE,
+    XREAD,
+    xRead: XREAD,
+    XREADGROUP,
+    xReadGroup: XREADGROUP,
+    XREVRANGE,
+    xRevRange: XREVRANGE,
+    XSETID,
+    xSetId: XSETID,
+    XTRIM,
+    xTrim: XTRIM,
+    ZADD,
+    zAdd: ZADD,
+    ZCARD,
+    zCard: ZCARD,
+    ZCOUNT,
+    zCount: ZCOUNT,
+    ZDIFF_WITHSCORES,
+    zDiffWithScores: ZDIFF_WITHSCORES,
+    ZDIFF,
+    zDiff: ZDIFF,
+    ZDIFFSTORE,
+    zDiffStore: ZDIFFSTORE,
+    ZINCRBY,
+    zIncrBy: ZINCRBY,
+    ZINTER_WITHSCORES,
+    zInterWithScores: ZINTER_WITHSCORES,
+    ZINTER,
+    zInter: ZINTER,
+    ZINTERCARD,
+    zInterCard: ZINTERCARD,
+    ZINTERSTORE,
+    zInterStore: ZINTERSTORE,
+    ZLEXCOUNT,
+    zLexCount: ZLEXCOUNT,
+    ZMPOP,
+    zmPop: ZMPOP,
+    ZMSCORE,
+    zmScore: ZMSCORE,
+    ZPOPMAX_COUNT,
+    zPopMaxCount: ZPOPMAX_COUNT,
+    ZPOPMAX,
+    zPopMax: ZPOPMAX,
+    ZPOPMIN_COUNT,
+    zPopMinCount: ZPOPMIN_COUNT,
+    ZPOPMIN,
+    zPopMin: ZPOPMIN,
+    ZRANDMEMBER_COUNT_WITHSCORES,
+    zRandMemberCountWithScores: ZRANDMEMBER_COUNT_WITHSCORES,
+    ZRANDMEMBER_COUNT,
+    zRandMemberCount: ZRANDMEMBER_COUNT,
+    ZRANDMEMBER,
+    zRandMember: ZRANDMEMBER,
+    ZRANGE_WITHSCORES,
+    zRangeWithScores: ZRANGE_WITHSCORES,
+    ZRANGE,
+    zRange: ZRANGE,
+    ZRANGEBYLEX,
+    zRangeByLex: ZRANGEBYLEX,
+    ZRANGEBYSCORE_WITHSCORES,
+    zRangeByScoreWithScores: ZRANGEBYSCORE_WITHSCORES,
+    ZRANGEBYSCORE,
+    zRangeByScore: ZRANGEBYSCORE,
+    ZRANGESTORE,
+    zRangeStore: ZRANGESTORE,
+    ZRANK,
+    zRank: ZRANK,
+    ZREM,
+    zRem: ZREM,
+    ZREMRANGEBYLEX,
+    zRemRangeByLex: ZREMRANGEBYLEX,
+    ZREMRANGEBYRANK,
+    zRemRangeByRank: ZREMRANGEBYRANK,
+    ZREMRANGEBYSCORE,
+    zRemRangeByScore: ZREMRANGEBYSCORE,
+    ZREVRANK,
+    zRevRank: ZREVRANK,
+    ZSCAN,
+    zScan: ZSCAN,
+    ZSCORE,
+    zScore: ZSCORE,
+    ZUNION_WITHSCORES,
+    zUnionWithScores: ZUNION_WITHSCORES,
+    ZUNION,
+    zUnion: ZUNION,
+    ZUNIONSTORE,
+    zUnionStore: ZUNIONSTORE
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/cluster/index.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/cluster/index.js ***!
+  \*****************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var _RedisCluster_instances, _RedisCluster_options, _RedisCluster_slots, _RedisCluster_Multi, _RedisCluster_execute;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/client/dist/lib/cluster/commands.js");
+const cluster_slots_1 = __webpack_require__(/*! ./cluster-slots */ "../../@redis/client/dist/lib/cluster/cluster-slots.js");
+const commander_1 = __webpack_require__(/*! ../commander */ "../../@redis/client/dist/lib/commander.js");
+const events_1 = __webpack_require__(/*! events */ "events");
+const multi_command_1 = __webpack_require__(/*! ./multi-command */ "../../@redis/client/dist/lib/cluster/multi-command.js");
+const errors_1 = __webpack_require__(/*! ../errors */ "../../@redis/client/dist/lib/errors.js");
+class RedisCluster extends events_1.EventEmitter {
+    static extractFirstKey(command, originalArgs, redisArgs) {
+        if (command.FIRST_KEY_INDEX === undefined) {
+            return undefined;
+        }
+        else if (typeof command.FIRST_KEY_INDEX === 'number') {
+            return redisArgs[command.FIRST_KEY_INDEX];
+        }
+        return command.FIRST_KEY_INDEX(...originalArgs);
+    }
+    static create(options) {
+        return new ((0, commander_1.attachExtensions)({
+            BaseClass: RedisCluster,
+            modulesExecutor: RedisCluster.prototype.commandsExecutor,
+            modules: options?.modules,
+            functionsExecutor: RedisCluster.prototype.functionsExecutor,
+            functions: options?.functions,
+            scriptsExecutor: RedisCluster.prototype.scriptsExecutor,
+            scripts: options?.scripts
+        }))(options);
+    }
+    get slots() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").slots;
+    }
+    get shards() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").shards;
+    }
+    get masters() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").masters;
+    }
+    get replicas() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").replicas;
+    }
+    get nodeByAddress() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").nodeByAddress;
+    }
+    get pubSubNode() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").pubSubNode;
+    }
+    get isOpen() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").isOpen;
+    }
+    constructor(options) {
+        super();
+        _RedisCluster_instances.add(this);
+        _RedisCluster_options.set(this, void 0);
+        _RedisCluster_slots.set(this, void 0);
+        _RedisCluster_Multi.set(this, void 0);
+        Object.defineProperty(this, "multi", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.MULTI
+        });
+        Object.defineProperty(this, "subscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SUBSCRIBE
+        });
+        Object.defineProperty(this, "unsubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.UNSUBSCRIBE
+        });
+        Object.defineProperty(this, "pSubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.PSUBSCRIBE
+        });
+        Object.defineProperty(this, "pUnsubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.PUNSUBSCRIBE
+        });
+        Object.defineProperty(this, "sSubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SSUBSCRIBE
+        });
+        Object.defineProperty(this, "sUnsubscribe", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.SUNSUBSCRIBE
+        });
+        __classPrivateFieldSet(this, _RedisCluster_options, options, "f");
+        __classPrivateFieldSet(this, _RedisCluster_slots, new cluster_slots_1.default(options, this.emit.bind(this)), "f");
+        __classPrivateFieldSet(this, _RedisCluster_Multi, multi_command_1.default.extend(options), "f");
+    }
+    duplicate(overrides) {
+        return new (Object.getPrototypeOf(this).constructor)({
+            ...__classPrivateFieldGet(this, _RedisCluster_options, "f"),
+            ...overrides
+        });
+    }
+    connect() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").connect();
+    }
+    async commandsExecutor(command, args) {
+        const { jsArgs, args: redisArgs, options } = (0, commander_1.transformCommandArguments)(command, args);
+        return (0, commander_1.transformCommandReply)(command, await this.sendCommand(RedisCluster.extractFirstKey(command, jsArgs, redisArgs), command.IS_READ_ONLY, redisArgs, options), redisArgs.preserve);
+    }
+    async sendCommand(firstKey, isReadonly, args, options) {
+        return __classPrivateFieldGet(this, _RedisCluster_instances, "m", _RedisCluster_execute).call(this, firstKey, isReadonly, client => client.sendCommand(args, options));
+    }
+    async functionsExecutor(fn, args, name) {
+        const { args: redisArgs, options } = (0, commander_1.transformCommandArguments)(fn, args);
+        return (0, commander_1.transformCommandReply)(fn, await this.executeFunction(name, fn, args, redisArgs, options), redisArgs.preserve);
+    }
+    async executeFunction(name, fn, originalArgs, redisArgs, options) {
+        return __classPrivateFieldGet(this, _RedisCluster_instances, "m", _RedisCluster_execute).call(this, RedisCluster.extractFirstKey(fn, originalArgs, redisArgs), fn.IS_READ_ONLY, client => client.executeFunction(name, fn, redisArgs, options));
+    }
+    async scriptsExecutor(script, args) {
+        const { args: redisArgs, options } = (0, commander_1.transformCommandArguments)(script, args);
+        return (0, commander_1.transformCommandReply)(script, await this.executeScript(script, args, redisArgs, options), redisArgs.preserve);
+    }
+    async executeScript(script, originalArgs, redisArgs, options) {
+        return __classPrivateFieldGet(this, _RedisCluster_instances, "m", _RedisCluster_execute).call(this, RedisCluster.extractFirstKey(script, originalArgs, redisArgs), script.IS_READ_ONLY, client => client.executeScript(script, redisArgs, options));
+    }
+    MULTI(routing) {
+        return new (__classPrivateFieldGet(this, _RedisCluster_Multi, "f"))((commands, firstKey, chainId) => {
+            return __classPrivateFieldGet(this, _RedisCluster_instances, "m", _RedisCluster_execute).call(this, firstKey, false, client => client.multiExecutor(commands, undefined, chainId));
+        }, routing);
+    }
+    async SUBSCRIBE(channels, listener, bufferMode) {
+        return (await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getPubSubClient())
+            .SUBSCRIBE(channels, listener, bufferMode);
+    }
+    async UNSUBSCRIBE(channels, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").executeUnsubscribeCommand(client => client.UNSUBSCRIBE(channels, listener, bufferMode));
+    }
+    async PSUBSCRIBE(patterns, listener, bufferMode) {
+        return (await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getPubSubClient())
+            .PSUBSCRIBE(patterns, listener, bufferMode);
+    }
+    async PUNSUBSCRIBE(patterns, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").executeUnsubscribeCommand(client => client.PUNSUBSCRIBE(patterns, listener, bufferMode));
+    }
+    async SSUBSCRIBE(channels, listener, bufferMode) {
+        const maxCommandRedirections = __classPrivateFieldGet(this, _RedisCluster_options, "f").maxCommandRedirections ?? 16, firstChannel = Array.isArray(channels) ? channels[0] : channels;
+        let client = await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getShardedPubSubClient(firstChannel);
+        for (let i = 0;; i++) {
+            try {
+                return await client.SSUBSCRIBE(channels, listener, bufferMode);
+            }
+            catch (err) {
+                if (++i > maxCommandRedirections || !(err instanceof errors_1.ErrorReply)) {
+                    throw err;
+                }
+                if (err.message.startsWith('MOVED')) {
+                    await __classPrivateFieldGet(this, _RedisCluster_slots, "f").rediscover(client);
+                    client = await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getShardedPubSubClient(firstChannel);
+                    continue;
+                }
+                throw err;
+            }
+        }
+    }
+    SUNSUBSCRIBE(channels, listener, bufferMode) {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").executeShardedUnsubscribeCommand(Array.isArray(channels) ? channels[0] : channels, client => client.SUNSUBSCRIBE(channels, listener, bufferMode));
+    }
+    quit() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").quit();
+    }
+    disconnect() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").disconnect();
+    }
+    nodeClient(node) {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").nodeClient(node);
+    }
+    getRandomNode() {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").getRandomNode();
+    }
+    getSlotRandomNode(slot) {
+        return __classPrivateFieldGet(this, _RedisCluster_slots, "f").getSlotRandomNode(slot);
+    }
+    /**
+     * @deprecated use `.masters` instead
+     */
+    getMasters() {
+        return this.masters;
+    }
+    /**
+     * @deprecated use `.slots[<SLOT>]` instead
+     */
+    getSlotMaster(slot) {
+        return this.slots[slot].master;
+    }
+}
+exports["default"] = RedisCluster;
+_RedisCluster_options = new WeakMap(), _RedisCluster_slots = new WeakMap(), _RedisCluster_Multi = new WeakMap(), _RedisCluster_instances = new WeakSet(), _RedisCluster_execute = async function _RedisCluster_execute(firstKey, isReadonly, executor) {
+    const maxCommandRedirections = __classPrivateFieldGet(this, _RedisCluster_options, "f").maxCommandRedirections ?? 16;
+    let client = await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getClient(firstKey, isReadonly);
+    for (let i = 0;; i++) {
+        try {
+            return await executor(client);
+        }
+        catch (err) {
+            if (++i > maxCommandRedirections || !(err instanceof errors_1.ErrorReply)) {
+                throw err;
+            }
+            if (err.message.startsWith('ASK')) {
+                const address = err.message.substring(err.message.lastIndexOf(' ') + 1);
+                let redirectTo = await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getMasterByAddress(address);
+                if (!redirectTo) {
+                    await __classPrivateFieldGet(this, _RedisCluster_slots, "f").rediscover(client);
+                    redirectTo = await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getMasterByAddress(address);
+                }
+                if (!redirectTo) {
+                    throw new Error(`Cannot find node ${address}`);
+                }
+                await redirectTo.asking();
+                client = redirectTo;
+                continue;
+            }
+            else if (err.message.startsWith('MOVED')) {
+                await __classPrivateFieldGet(this, _RedisCluster_slots, "f").rediscover(client);
+                client = await __classPrivateFieldGet(this, _RedisCluster_slots, "f").getClient(firstKey, isReadonly);
+                continue;
+            }
+            throw err;
+        }
+    }
+};
+(0, commander_1.attachCommands)({
+    BaseClass: RedisCluster,
+    commands: commands_1.default,
+    executor: RedisCluster.prototype.commandsExecutor
+});
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/cluster/multi-command.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/cluster/multi-command.js ***!
+  \*************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _RedisClusterMultiCommand_multi, _RedisClusterMultiCommand_executor, _RedisClusterMultiCommand_firstKey;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/client/dist/lib/cluster/commands.js");
+const multi_command_1 = __webpack_require__(/*! ../multi-command */ "../../@redis/client/dist/lib/multi-command.js");
+const commander_1 = __webpack_require__(/*! ../commander */ "../../@redis/client/dist/lib/commander.js");
+const _1 = __webpack_require__(/*! . */ "../../@redis/client/dist/lib/cluster/index.js");
+class RedisClusterMultiCommand {
+    static extend(extensions) {
+        return (0, commander_1.attachExtensions)({
+            BaseClass: RedisClusterMultiCommand,
+            modulesExecutor: RedisClusterMultiCommand.prototype.commandsExecutor,
+            modules: extensions?.modules,
+            functionsExecutor: RedisClusterMultiCommand.prototype.functionsExecutor,
+            functions: extensions?.functions,
+            scriptsExecutor: RedisClusterMultiCommand.prototype.scriptsExecutor,
+            scripts: extensions?.scripts
+        });
+    }
+    constructor(executor, firstKey) {
+        _RedisClusterMultiCommand_multi.set(this, new multi_command_1.default());
+        _RedisClusterMultiCommand_executor.set(this, void 0);
+        _RedisClusterMultiCommand_firstKey.set(this, void 0);
+        Object.defineProperty(this, "EXEC", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: this.exec
+        });
+        __classPrivateFieldSet(this, _RedisClusterMultiCommand_executor, executor, "f");
+        __classPrivateFieldSet(this, _RedisClusterMultiCommand_firstKey, firstKey, "f");
+    }
+    commandsExecutor(command, args) {
+        const transformedArguments = command.transformArguments(...args);
+        __classPrivateFieldSet(this, _RedisClusterMultiCommand_firstKey, __classPrivateFieldGet(this, _RedisClusterMultiCommand_firstKey, "f") ?? _1.default.extractFirstKey(command, args, transformedArguments), "f");
+        return this.addCommand(undefined, transformedArguments, command.transformReply);
+    }
+    addCommand(firstKey, args, transformReply) {
+        __classPrivateFieldSet(this, _RedisClusterMultiCommand_firstKey, __classPrivateFieldGet(this, _RedisClusterMultiCommand_firstKey, "f") ?? firstKey, "f");
+        __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").addCommand(args, transformReply);
+        return this;
+    }
+    functionsExecutor(fn, args, name) {
+        const transformedArguments = __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").addFunction(name, fn, args);
+        __classPrivateFieldSet(this, _RedisClusterMultiCommand_firstKey, __classPrivateFieldGet(this, _RedisClusterMultiCommand_firstKey, "f") ?? _1.default.extractFirstKey(fn, args, transformedArguments), "f");
+        return this;
+    }
+    scriptsExecutor(script, args) {
+        const transformedArguments = __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").addScript(script, args);
+        __classPrivateFieldSet(this, _RedisClusterMultiCommand_firstKey, __classPrivateFieldGet(this, _RedisClusterMultiCommand_firstKey, "f") ?? _1.default.extractFirstKey(script, args, transformedArguments), "f");
+        return this;
+    }
+    async exec(execAsPipeline = false) {
+        if (execAsPipeline) {
+            return this.execAsPipeline();
+        }
+        return __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").handleExecReplies(await __classPrivateFieldGet(this, _RedisClusterMultiCommand_executor, "f").call(this, __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").queue, __classPrivateFieldGet(this, _RedisClusterMultiCommand_firstKey, "f"), multi_command_1.default.generateChainId()));
+    }
+    async execAsPipeline() {
+        return __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").transformReplies(await __classPrivateFieldGet(this, _RedisClusterMultiCommand_executor, "f").call(this, __classPrivateFieldGet(this, _RedisClusterMultiCommand_multi, "f").queue, __classPrivateFieldGet(this, _RedisClusterMultiCommand_firstKey, "f")));
+    }
+}
+exports["default"] = RedisClusterMultiCommand;
+_RedisClusterMultiCommand_multi = new WeakMap(), _RedisClusterMultiCommand_executor = new WeakMap(), _RedisClusterMultiCommand_firstKey = new WeakMap();
+(0, commander_1.attachCommands)({
+    BaseClass: RedisClusterMultiCommand,
+    commands: commands_1.default,
+    executor: RedisClusterMultiCommand.prototype.commandsExecutor
+});
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/command-options.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/command-options.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.isCommandOptions = exports.commandOptions = void 0;
+const symbol = Symbol('Command Options');
+function commandOptions(options) {
+    options[symbol] = true;
+    return options;
+}
+exports.commandOptions = commandOptions;
+function isCommandOptions(options) {
+    return options?.[symbol] === true;
+}
+exports.isCommandOptions = isCommandOptions;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commander.js":
+/*!*************************************************!*\
+  !*** ../../@redis/client/dist/lib/commander.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.fCallArguments = exports.transformCommandReply = exports.transformLegacyCommandArguments = exports.transformCommandArguments = exports.attachExtensions = exports.attachCommands = void 0;
+const command_options_1 = __webpack_require__(/*! ./command-options */ "../../@redis/client/dist/lib/command-options.js");
+function attachCommands({ BaseClass, commands, executor }) {
+    for (const [name, command] of Object.entries(commands)) {
+        BaseClass.prototype[name] = function (...args) {
+            return executor.call(this, command, args, name);
+        };
+    }
+}
+exports.attachCommands = attachCommands;
+function attachExtensions(config) {
+    let Commander;
+    if (config.modules) {
+        Commander = attachWithNamespaces({
+            BaseClass: config.BaseClass,
+            namespaces: config.modules,
+            executor: config.modulesExecutor
+        });
+    }
+    if (config.functions) {
+        Commander = attachWithNamespaces({
+            BaseClass: Commander ?? config.BaseClass,
+            namespaces: config.functions,
+            executor: config.functionsExecutor
+        });
+    }
+    if (config.scripts) {
+        Commander ?? (Commander = class extends config.BaseClass {
+        });
+        attachCommands({
+            BaseClass: Commander,
+            commands: config.scripts,
+            executor: config.scriptsExecutor
+        });
+    }
+    return Commander ?? config.BaseClass;
+}
+exports.attachExtensions = attachExtensions;
+function attachWithNamespaces({ BaseClass, namespaces, executor }) {
+    const Commander = class extends BaseClass {
+        constructor(...args) {
+            super(...args);
+            for (const namespace of Object.keys(namespaces)) {
+                this[namespace] = Object.create(this[namespace], {
+                    self: {
+                        value: this
+                    }
+                });
+            }
+        }
+    };
+    for (const [namespace, commands] of Object.entries(namespaces)) {
+        Commander.prototype[namespace] = {};
+        for (const [name, command] of Object.entries(commands)) {
+            Commander.prototype[namespace][name] = function (...args) {
+                return executor.call(this.self, command, args, name);
+            };
+        }
+    }
+    return Commander;
+}
+function transformCommandArguments(command, args) {
+    let options;
+    if ((0, command_options_1.isCommandOptions)(args[0])) {
+        options = args[0];
+        args = args.slice(1);
+    }
+    return {
+        jsArgs: args,
+        args: command.transformArguments(...args),
+        options
+    };
+}
+exports.transformCommandArguments = transformCommandArguments;
+function transformLegacyCommandArguments(args) {
+    return args.flat().map(arg => {
+        return typeof arg === 'number' || arg instanceof Date ?
+            arg.toString() :
+            arg;
+    });
+}
+exports.transformLegacyCommandArguments = transformLegacyCommandArguments;
+function transformCommandReply(command, rawReply, preserved) {
+    if (!command.transformReply) {
+        return rawReply;
+    }
+    return command.transformReply(rawReply, preserved);
+}
+exports.transformCommandReply = transformCommandReply;
+function fCallArguments(name, fn, args) {
+    const actualArgs = [
+        fn.IS_READ_ONLY ? 'FCALL_RO' : 'FCALL',
+        name
+    ];
+    if (fn.NUMBER_OF_KEYS !== undefined) {
+        actualArgs.push(fn.NUMBER_OF_KEYS.toString());
+    }
+    actualArgs.push(...args);
+    return actualArgs;
+}
+exports.fCallArguments = fCallArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_CAT.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_CAT.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(categoryName) {
+    const args = ['ACL', 'CAT'];
+    if (categoryName) {
+        args.push(categoryName);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_DELUSER.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_DELUSER.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(username) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['ACL', 'DELUSER'], username);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_DRYRUN.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_DRYRUN.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(username, command) {
+    return [
+        'ACL',
+        'DRYRUN',
+        username,
+        ...command
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_GENPASS.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_GENPASS.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(bits) {
+    const args = ['ACL', 'GENPASS'];
+    if (bits) {
+        args.push(bits.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_GETUSER.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_GETUSER.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(username) {
+    return ['ACL', 'GETUSER', username];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        flags: reply[1],
+        passwords: reply[3],
+        commands: reply[5],
+        keys: reply[7],
+        channels: reply[9],
+        selectors: reply[11]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_LIST.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_LIST.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ACL', 'LIST'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_LOAD.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_LOAD.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ACL', 'LOAD'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_LOG.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_LOG.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(count) {
+    const args = ['ACL', 'LOG'];
+    if (count) {
+        args.push(count.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(log => ({
+        count: log[1],
+        reason: log[3],
+        context: log[5],
+        object: log[7],
+        username: log[9],
+        ageSeconds: Number(log[11]),
+        clientInfo: log[13]
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_LOG_RESET.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_LOG_RESET.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ACL', 'LOG', 'RESET'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_SAVE.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_SAVE.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ACL', 'SAVE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_SETUSER.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_SETUSER.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(username, rule) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['ACL', 'SETUSER', username], rule);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_USERS.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_USERS.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ACL', 'USERS'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ACL_WHOAMI.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ACL_WHOAMI.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ACL', 'WHOAMI'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/APPEND.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/APPEND.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, value) {
+    return ['APPEND', key, value];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ASKING.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ASKING.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['ASKING'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/AUTH.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/AUTH.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments({ username, password }) {
+    if (!username) {
+        return ['AUTH', password];
+    }
+    return ['AUTH', username, password];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BGREWRITEAOF.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BGREWRITEAOF.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['BGREWRITEAOF'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BGSAVE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BGSAVE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(options) {
+    const args = ['BGSAVE'];
+    if (options?.SCHEDULE) {
+        args.push('SCHEDULE');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BITCOUNT.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BITCOUNT.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, range) {
+    const args = ['BITCOUNT', key];
+    if (range) {
+        args.push(range.start.toString(), range.end.toString());
+        if (range.mode) {
+            args.push(range.mode);
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BITFIELD.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BITFIELD.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, operations) {
+    const args = ['BITFIELD', key];
+    for (const options of operations) {
+        switch (options.operation) {
+            case 'GET':
+                args.push('GET', options.encoding, options.offset.toString());
+                break;
+            case 'SET':
+                args.push('SET', options.encoding, options.offset.toString(), options.value.toString());
+                break;
+            case 'INCRBY':
+                args.push('INCRBY', options.encoding, options.offset.toString(), options.increment.toString());
+                break;
+            case 'OVERFLOW':
+                args.push('OVERFLOW', options.behavior);
+                break;
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BITFIELD_RO.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BITFIELD_RO.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, operations) {
+    const args = ['BITFIELD_RO', key];
+    for (const operation of operations) {
+        args.push('GET', operation.encoding, operation.offset.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BITOP.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BITOP.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(operation, destKey, key) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['BITOP', operation, destKey], key);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BITPOS.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BITPOS.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, bit, start, end, mode) {
+    const args = ['BITPOS', key, bit.toString()];
+    if (typeof start === 'number') {
+        args.push(start.toString());
+    }
+    if (typeof end === 'number') {
+        args.push(end.toString());
+    }
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BLMOVE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BLMOVE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination, sourceDirection, destinationDirection, timeout) {
+    return [
+        'BLMOVE',
+        source,
+        destination,
+        sourceDirection,
+        destinationDirection,
+        timeout.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BLMPOP.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BLMPOP.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 3;
+function transformArguments(timeout, keys, side, options) {
+    return (0, generic_transformers_1.transformLMPopArguments)(['BLMPOP', timeout.toString()], keys, side, options);
+}
+exports.transformArguments = transformArguments;
+var LMPOP_1 = __webpack_require__(/*! ./LMPOP */ "../../@redis/client/dist/lib/commands/LMPOP.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return LMPOP_1.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BLPOP.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BLPOP.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(keys, timeout) {
+    const args = (0, generic_transformers_1.pushVerdictArguments)(['BLPOP'], keys);
+    args.push(timeout.toString());
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    if (reply === null)
+        return null;
+    return {
+        key: reply[0],
+        element: reply[1]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BRPOP.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BRPOP.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, timeout) {
+    const args = (0, generic_transformers_1.pushVerdictArguments)(['BRPOP'], key);
+    args.push(timeout.toString());
+    return args;
+}
+exports.transformArguments = transformArguments;
+var BLPOP_1 = __webpack_require__(/*! ./BLPOP */ "../../@redis/client/dist/lib/commands/BLPOP.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return BLPOP_1.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BRPOPLPUSH.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BRPOPLPUSH.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination, timeout) {
+    return ['BRPOPLPUSH', source, destination, timeout.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BZMPOP.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BZMPOP.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 3;
+function transformArguments(timeout, keys, side, options) {
+    return (0, generic_transformers_1.transformZMPopArguments)(['BZMPOP', timeout.toString()], keys, side, options);
+}
+exports.transformArguments = transformArguments;
+var ZMPOP_1 = __webpack_require__(/*! ./ZMPOP */ "../../@redis/client/dist/lib/commands/ZMPOP.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return ZMPOP_1.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BZPOPMAX.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BZPOPMAX.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, timeout) {
+    const args = (0, generic_transformers_1.pushVerdictArguments)(['BZPOPMAX'], key);
+    args.push(timeout.toString());
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    if (!reply)
+        return null;
+    return {
+        key: reply[0],
+        value: reply[1],
+        score: (0, generic_transformers_1.transformNumberInfinityReply)(reply[2])
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/BZPOPMIN.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/BZPOPMIN.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, timeout) {
+    const args = (0, generic_transformers_1.pushVerdictArguments)(['BZPOPMIN'], key);
+    args.push(timeout.toString());
+    return args;
+}
+exports.transformArguments = transformArguments;
+var BZPOPMAX_1 = __webpack_require__(/*! ./BZPOPMAX */ "../../@redis/client/dist/lib/commands/BZPOPMAX.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return BZPOPMAX_1.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_CACHING.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_CACHING.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(value) {
+    return [
+        'CLIENT',
+        'CACHING',
+        value ? 'YES' : 'NO'
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_GETNAME.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_GETNAME.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLIENT', 'GETNAME'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_GETREDIR.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_GETREDIR.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLIENT', 'GETREDIR'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_ID.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_ID.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['CLIENT', 'ID'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_INFO.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_INFO.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['CLIENT', 'INFO'];
+}
+exports.transformArguments = transformArguments;
+const CLIENT_INFO_REGEX = /([^\s=]+)=([^\s]*)/g;
+function transformReply(rawReply) {
+    const map = {};
+    for (const item of rawReply.matchAll(CLIENT_INFO_REGEX)) {
+        map[item[1]] = item[2];
+    }
+    const reply = {
+        id: Number(map.id),
+        addr: map.addr,
+        fd: Number(map.fd),
+        name: map.name,
+        age: Number(map.age),
+        idle: Number(map.idle),
+        flags: map.flags,
+        db: Number(map.db),
+        sub: Number(map.sub),
+        psub: Number(map.psub),
+        multi: Number(map.multi),
+        qbuf: Number(map.qbuf),
+        qbufFree: Number(map['qbuf-free']),
+        argvMem: Number(map['argv-mem']),
+        obl: Number(map.obl),
+        oll: Number(map.oll),
+        omem: Number(map.omem),
+        totMem: Number(map['tot-mem']),
+        events: map.events,
+        cmd: map.cmd,
+        user: map.user
+    };
+    if (map.laddr !== undefined) {
+        reply.laddr = map.laddr;
+    }
+    if (map.redir !== undefined) {
+        reply.redir = Number(map.redir);
+    }
+    if (map.ssub !== undefined) {
+        reply.ssub = Number(map.ssub);
+    }
+    if (map['multi-mem'] !== undefined) {
+        reply.multiMem = Number(map['multi-mem']);
+    }
+    if (map.resp !== undefined) {
+        reply.resp = Number(map.resp);
+    }
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_KILL.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_KILL.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.ClientKillFilters = void 0;
+var ClientKillFilters;
+(function (ClientKillFilters) {
+    ClientKillFilters["ADDRESS"] = "ADDR";
+    ClientKillFilters["LOCAL_ADDRESS"] = "LADDR";
+    ClientKillFilters["ID"] = "ID";
+    ClientKillFilters["TYPE"] = "TYPE";
+    ClientKillFilters["USER"] = "USER";
+    ClientKillFilters["SKIP_ME"] = "SKIPME";
+})(ClientKillFilters = exports.ClientKillFilters || (exports.ClientKillFilters = {}));
+function transformArguments(filters) {
+    const args = ['CLIENT', 'KILL'];
+    if (Array.isArray(filters)) {
+        for (const filter of filters) {
+            pushFilter(args, filter);
+        }
+    }
+    else {
+        pushFilter(args, filters);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function pushFilter(args, filter) {
+    if (filter === ClientKillFilters.SKIP_ME) {
+        args.push('SKIPME');
+        return;
+    }
+    args.push(filter.filter);
+    switch (filter.filter) {
+        case ClientKillFilters.ADDRESS:
+            args.push(filter.address);
+            break;
+        case ClientKillFilters.LOCAL_ADDRESS:
+            args.push(filter.localAddress);
+            break;
+        case ClientKillFilters.ID:
+            args.push(typeof filter.id === 'number' ?
+                filter.id.toString() :
+                filter.id);
+            break;
+        case ClientKillFilters.TYPE:
+            args.push(filter.type);
+            break;
+        case ClientKillFilters.USER:
+            args.push(filter.username);
+            break;
+        case ClientKillFilters.SKIP_ME:
+            args.push(filter.skipMe ? 'yes' : 'no');
+            break;
+    }
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_LIST.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_LIST.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+const CLIENT_INFO_1 = __webpack_require__(/*! ./CLIENT_INFO */ "../../@redis/client/dist/lib/commands/CLIENT_INFO.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(filter) {
+    let args = ['CLIENT', 'LIST'];
+    if (filter) {
+        if (filter.TYPE !== undefined) {
+            args.push('TYPE', filter.TYPE);
+        }
+        else {
+            args.push('ID');
+            args = (0, generic_transformers_1.pushVerdictArguments)(args, filter.ID);
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    const split = rawReply.split('\n'), length = split.length - 1, reply = [];
+    for (let i = 0; i < length; i++) {
+        reply.push((0, CLIENT_INFO_1.transformReply)(split[i]));
+    }
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_NO-EVICT.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_NO-EVICT.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(value) {
+    return [
+        'CLIENT',
+        'NO-EVICT',
+        value ? 'ON' : 'OFF'
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_PAUSE.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_PAUSE.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(timeout, mode) {
+    const args = [
+        'CLIENT',
+        'PAUSE',
+        timeout.toString()
+    ];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_SETNAME.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_SETNAME.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(name) {
+    return ['CLIENT', 'SETNAME', name];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_TRACKING.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_TRACKING.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode, options) {
+    const args = [
+        'CLIENT',
+        'TRACKING',
+        mode ? 'ON' : 'OFF'
+    ];
+    if (mode) {
+        if (options?.REDIRECT) {
+            args.push('REDIRECT', options.REDIRECT.toString());
+        }
+        if (isBroadcast(options)) {
+            args.push('BCAST');
+            if (options?.PREFIX) {
+                if (Array.isArray(options.PREFIX)) {
+                    for (const prefix of options.PREFIX) {
+                        args.push('PREFIX', prefix);
+                    }
+                }
+                else {
+                    args.push('PREFIX', options.PREFIX);
+                }
+            }
+        }
+        else if (isOptIn(options)) {
+            args.push('OPTIN');
+        }
+        else if (isOptOut(options)) {
+            args.push('OPTOUT');
+        }
+        if (options?.NOLOOP) {
+            args.push('NOLOOP');
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function isBroadcast(options) {
+    return options?.BCAST === true;
+}
+function isOptIn(options) {
+    return options?.OPTIN === true;
+}
+function isOptOut(options) {
+    return options?.OPTOUT === true;
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_TRACKINGINFO.js":
+/*!********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_TRACKINGINFO.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLIENT', 'TRACKINGINFO'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        flags: new Set(reply[1]),
+        redirect: reply[3],
+        prefixes: reply[5]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLIENT_UNPAUSE.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLIENT_UNPAUSE.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLIENT', 'UNPAUSE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_ADDSLOTS.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_ADDSLOTS.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(slots) {
+    return (0, generic_transformers_1.pushVerdictNumberArguments)(['CLUSTER', 'ADDSLOTS'], slots);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_ADDSLOTSRANGE.js":
+/*!**********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_ADDSLOTSRANGE.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(ranges) {
+    return (0, generic_transformers_1.pushSlotRangesArguments)(['CLUSTER', 'ADDSLOTSRANGE'], ranges);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_BUMPEPOCH.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_BUMPEPOCH.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'BUMPEPOCH'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_COUNT-FAILURE-REPORTS.js":
+/*!******************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_COUNT-FAILURE-REPORTS.js ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(nodeId) {
+    return ['CLUSTER', 'COUNT-FAILURE-REPORTS', nodeId];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_COUNTKEYSINSLOT.js":
+/*!************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_COUNTKEYSINSLOT.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(slot) {
+    return ['CLUSTER', 'COUNTKEYSINSLOT', slot.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_DELSLOTS.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_DELSLOTS.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(slots) {
+    return (0, generic_transformers_1.pushVerdictNumberArguments)(['CLUSTER', 'DELSLOTS'], slots);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_DELSLOTSRANGE.js":
+/*!**********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_DELSLOTSRANGE.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(ranges) {
+    return (0, generic_transformers_1.pushSlotRangesArguments)(['CLUSTER', 'DELSLOTSRANGE'], ranges);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_FAILOVER.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_FAILOVER.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FailoverModes = void 0;
+var FailoverModes;
+(function (FailoverModes) {
+    FailoverModes["FORCE"] = "FORCE";
+    FailoverModes["TAKEOVER"] = "TAKEOVER";
+})(FailoverModes = exports.FailoverModes || (exports.FailoverModes = {}));
+function transformArguments(mode) {
+    const args = ['CLUSTER', 'FAILOVER'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_FLUSHSLOTS.js":
+/*!*******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_FLUSHSLOTS.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'FLUSHSLOTS'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_FORGET.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_FORGET.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(nodeId) {
+    return ['CLUSTER', 'FORGET', nodeId];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_GETKEYSINSLOT.js":
+/*!**********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_GETKEYSINSLOT.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(slot, count) {
+    return ['CLUSTER', 'GETKEYSINSLOT', slot.toString(), count.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_INFO.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_INFO.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.extractLineValue = exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'INFO'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    const lines = reply.split('\r\n');
+    return {
+        state: extractLineValue(lines[0]),
+        slots: {
+            assigned: Number(extractLineValue(lines[1])),
+            ok: Number(extractLineValue(lines[2])),
+            pfail: Number(extractLineValue(lines[3])),
+            fail: Number(extractLineValue(lines[4]))
+        },
+        knownNodes: Number(extractLineValue(lines[5])),
+        size: Number(extractLineValue(lines[6])),
+        currentEpoch: Number(extractLineValue(lines[7])),
+        myEpoch: Number(extractLineValue(lines[8])),
+        stats: {
+            messagesSent: Number(extractLineValue(lines[9])),
+            messagesReceived: Number(extractLineValue(lines[10]))
+        }
+    };
+}
+exports.transformReply = transformReply;
+function extractLineValue(line) {
+    return line.substring(line.indexOf(':') + 1);
+}
+exports.extractLineValue = extractLineValue;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_KEYSLOT.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_KEYSLOT.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(key) {
+    return ['CLUSTER', 'KEYSLOT', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_LINKS.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_LINKS.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'LINKS'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(peerLink => ({
+        direction: peerLink[1],
+        node: peerLink[3],
+        createTime: Number(peerLink[5]),
+        events: peerLink[7],
+        sendBufferAllocated: Number(peerLink[9]),
+        sendBufferUsed: Number(peerLink[11])
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_MEET.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_MEET.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(ip, port) {
+    return ['CLUSTER', 'MEET', ip, port.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_MYID.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_MYID.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'MYID'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_NODES.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_NODES.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.RedisClusterNodeLinkStates = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'NODES'];
+}
+exports.transformArguments = transformArguments;
+var RedisClusterNodeLinkStates;
+(function (RedisClusterNodeLinkStates) {
+    RedisClusterNodeLinkStates["CONNECTED"] = "connected";
+    RedisClusterNodeLinkStates["DISCONNECTED"] = "disconnected";
+})(RedisClusterNodeLinkStates = exports.RedisClusterNodeLinkStates || (exports.RedisClusterNodeLinkStates = {}));
+function transformReply(reply) {
+    const lines = reply.split('\n');
+    lines.pop(); // last line is empty
+    const mastersMap = new Map(), replicasMap = new Map();
+    for (const line of lines) {
+        const [id, address, flags, masterId, pingSent, pongRecv, configEpoch, linkState, ...slots] = line.split(' '), node = {
+            id,
+            address,
+            ...transformNodeAddress(address),
+            flags: flags.split(','),
+            pingSent: Number(pingSent),
+            pongRecv: Number(pongRecv),
+            configEpoch: Number(configEpoch),
+            linkState: linkState
+        };
+        if (masterId === '-') {
+            let replicas = replicasMap.get(id);
+            if (!replicas) {
+                replicas = [];
+                replicasMap.set(id, replicas);
+            }
+            mastersMap.set(id, {
+                ...node,
+                slots: slots.map(slot => {
+                    // TODO: importing & exporting (https://redis.io/commands/cluster-nodes#special-slot-entries)
+                    const [fromString, toString] = slot.split('-', 2), from = Number(fromString);
+                    return {
+                        from,
+                        to: toString ? Number(toString) : from
+                    };
+                }),
+                replicas
+            });
+        }
+        else {
+            const replicas = replicasMap.get(masterId);
+            if (!replicas) {
+                replicasMap.set(masterId, [node]);
+            }
+            else {
+                replicas.push(node);
+            }
+        }
+    }
+    return [...mastersMap.values()];
+}
+exports.transformReply = transformReply;
+function transformNodeAddress(address) {
+    const indexOfColon = address.lastIndexOf(':'), indexOfAt = address.indexOf('@', indexOfColon), host = address.substring(0, indexOfColon);
+    if (indexOfAt === -1) {
+        return {
+            host,
+            port: Number(address.substring(indexOfColon + 1)),
+            cport: null
+        };
+    }
+    return {
+        host: address.substring(0, indexOfColon),
+        port: Number(address.substring(indexOfColon + 1, indexOfAt)),
+        cport: Number(address.substring(indexOfAt + 1))
+    };
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_REPLICAS.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_REPLICAS.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(nodeId) {
+    return ['CLUSTER', 'REPLICAS', nodeId];
+}
+exports.transformArguments = transformArguments;
+var CLUSTER_NODES_1 = __webpack_require__(/*! ./CLUSTER_NODES */ "../../@redis/client/dist/lib/commands/CLUSTER_NODES.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return CLUSTER_NODES_1.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_REPLICATE.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_REPLICATE.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(nodeId) {
+    return ['CLUSTER', 'REPLICATE', nodeId];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_RESET.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_RESET.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode) {
+    const args = ['CLUSTER', 'RESET'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_SAVECONFIG.js":
+/*!*******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_SAVECONFIG.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'SAVECONFIG'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_SET-CONFIG-EPOCH.js":
+/*!*************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_SET-CONFIG-EPOCH.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(configEpoch) {
+    return ['CLUSTER', 'SET-CONFIG-EPOCH', configEpoch.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_SETSLOT.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_SETSLOT.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.ClusterSlotStates = void 0;
+var ClusterSlotStates;
+(function (ClusterSlotStates) {
+    ClusterSlotStates["IMPORTING"] = "IMPORTING";
+    ClusterSlotStates["MIGRATING"] = "MIGRATING";
+    ClusterSlotStates["STABLE"] = "STABLE";
+    ClusterSlotStates["NODE"] = "NODE";
+})(ClusterSlotStates = exports.ClusterSlotStates || (exports.ClusterSlotStates = {}));
+function transformArguments(slot, state, nodeId) {
+    const args = ['CLUSTER', 'SETSLOT', slot.toString(), state];
+    if (nodeId) {
+        args.push(nodeId);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CLUSTER_SLOTS.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CLUSTER_SLOTS.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CLUSTER', 'SLOTS'];
+}
+exports.transformArguments = transformArguments;
+;
+function transformReply(reply) {
+    return reply.map(([from, to, master, ...replicas]) => {
+        return {
+            from,
+            to,
+            master: transformNode(master),
+            replicas: replicas.map(transformNode)
+        };
+    });
+}
+exports.transformReply = transformReply;
+function transformNode([ip, port, id]) {
+    return {
+        ip,
+        port,
+        id
+    };
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COMMAND.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COMMAND.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['COMMAND'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(generic_transformers_1.transformCommandReply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COMMAND_COUNT.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COMMAND_COUNT.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['COMMAND', 'COUNT'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COMMAND_GETKEYS.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COMMAND_GETKEYS.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(args) {
+    return ['COMMAND', 'GETKEYS', ...args];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COMMAND_GETKEYSANDFLAGS.js":
+/*!************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COMMAND_GETKEYSANDFLAGS.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(args) {
+    return ['COMMAND', 'GETKEYSANDFLAGS', ...args];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(([key, flags]) => ({
+        key,
+        flags
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COMMAND_INFO.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COMMAND_INFO.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(commands) {
+    return ['COMMAND', 'INFO', ...commands];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(command => command ? (0, generic_transformers_1.transformCommandReply)(command) : null);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COMMAND_LIST.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COMMAND_LIST.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FilterBy = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+var FilterBy;
+(function (FilterBy) {
+    FilterBy["MODULE"] = "MODULE";
+    FilterBy["ACLCAT"] = "ACLCAT";
+    FilterBy["PATTERN"] = "PATTERN";
+})(FilterBy = exports.FilterBy || (exports.FilterBy = {}));
+function transformArguments(filter) {
+    const args = ['COMMAND', 'LIST'];
+    if (filter) {
+        args.push('FILTERBY', filter.filterBy, filter.value);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CONFIG_GET.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CONFIG_GET.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(parameter) {
+    return ['CONFIG', 'GET', parameter];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformTuplesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CONFIG_RESETSTAT.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CONFIG_RESETSTAT.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CONFIG', 'RESETSTAT'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CONFIG_REWRITE.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CONFIG_REWRITE.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['CONFIG', 'REWRITE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/CONFIG_SET.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/CONFIG_SET.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(...[parameterOrConfig, value]) {
+    const args = ['CONFIG', 'SET'];
+    if (typeof parameterOrConfig === 'string') {
+        args.push(parameterOrConfig, value);
+    }
+    else {
+        for (const [key, value] of Object.entries(parameterOrConfig)) {
+            args.push(key, value);
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/COPY.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/COPY.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination, options) {
+    const args = ['COPY', source, destination];
+    if (options?.destinationDb) {
+        args.push('DB', options.destinationDb.toString());
+    }
+    if (options?.replace) {
+        args.push('REPLACE');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/DBSIZE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/DBSIZE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['DBSIZE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/DECR.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/DECR.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['DECR', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/DECRBY.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/DECRBY.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, decrement) {
+    return ['DECRBY', key, decrement.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/DEL.js":
+/*!****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/DEL.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['DEL'], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/DISCARD.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/DISCARD.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['DISCARD'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/DUMP.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/DUMP.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['DUMP', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ECHO.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ECHO.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(message) {
+    return ['ECHO', message];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EVAL.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EVAL.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = generic_transformers_1.evalFirstKeyIndex;
+function transformArguments(script, options) {
+    return (0, generic_transformers_1.pushEvalArguments)(['EVAL', script], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EVALSHA.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EVALSHA.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = generic_transformers_1.evalFirstKeyIndex;
+function transformArguments(sha1, options) {
+    return (0, generic_transformers_1.pushEvalArguments)(['EVALSHA', sha1], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EVALSHA_RO.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EVALSHA_RO.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = generic_transformers_1.evalFirstKeyIndex;
+exports.IS_READ_ONLY = true;
+function transformArguments(sha1, options) {
+    return (0, generic_transformers_1.pushEvalArguments)(['EVALSHA_RO', sha1], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EVAL_RO.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EVAL_RO.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = generic_transformers_1.evalFirstKeyIndex;
+exports.IS_READ_ONLY = true;
+function transformArguments(script, options) {
+    return (0, generic_transformers_1.pushEvalArguments)(['EVAL_RO', script], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EXISTS.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EXISTS.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['EXISTS'], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EXPIRE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EXPIRE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, seconds, mode) {
+    const args = ['EXPIRE', key, seconds.toString()];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EXPIREAT.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EXPIREAT.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, timestamp, mode) {
+    const args = [
+        'EXPIREAT',
+        key,
+        (0, generic_transformers_1.transformEXAT)(timestamp)
+    ];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/EXPIRETIME.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/EXPIRETIME.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['EXPIRETIME', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FAILOVER.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FAILOVER.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(options) {
+    const args = ['FAILOVER'];
+    if (options?.TO) {
+        args.push('TO', options.TO.host, options.TO.port.toString());
+        if (options.TO.FORCE) {
+            args.push('FORCE');
+        }
+    }
+    if (options?.ABORT) {
+        args.push('ABORT');
+    }
+    if (options?.TIMEOUT) {
+        args.push('TIMEOUT', options.TIMEOUT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FCALL.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FCALL.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = generic_transformers_1.evalFirstKeyIndex;
+function transformArguments(fn, options) {
+    return (0, generic_transformers_1.pushEvalArguments)(['FCALL', fn], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FCALL_RO.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FCALL_RO.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = generic_transformers_1.evalFirstKeyIndex;
+exports.IS_READ_ONLY = true;
+function transformArguments(fn, options) {
+    return (0, generic_transformers_1.pushEvalArguments)(['FCALL_RO', fn], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FLUSHALL.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FLUSHALL.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.RedisFlushModes = void 0;
+var RedisFlushModes;
+(function (RedisFlushModes) {
+    RedisFlushModes["ASYNC"] = "ASYNC";
+    RedisFlushModes["SYNC"] = "SYNC";
+})(RedisFlushModes = exports.RedisFlushModes || (exports.RedisFlushModes = {}));
+function transformArguments(mode) {
+    const args = ['FLUSHALL'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FLUSHDB.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FLUSHDB.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode) {
+    const args = ['FLUSHDB'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_DELETE.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_DELETE.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(library) {
+    return ['FUNCTION', 'DELETE', library];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_DUMP.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_DUMP.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['FUNCTION', 'DUMP'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_FLUSH.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_FLUSH.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode) {
+    const args = ['FUNCTION', 'FLUSH'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_KILL.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_KILL.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['FUNCTION', 'KILL'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_LIST.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_LIST.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(pattern) {
+    const args = ['FUNCTION', 'LIST'];
+    if (pattern) {
+        args.push(pattern);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(generic_transformers_1.transformFunctionListItemReply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_LIST_WITHCODE.js":
+/*!***********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_LIST_WITHCODE.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+const FUNCTION_LIST_1 = __webpack_require__(/*! ./FUNCTION_LIST */ "../../@redis/client/dist/lib/commands/FUNCTION_LIST.js");
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(pattern) {
+    const args = (0, FUNCTION_LIST_1.transformArguments)(pattern);
+    args.push('WITHCODE');
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(library => ({
+        ...(0, generic_transformers_1.transformFunctionListItemReply)(library),
+        libraryCode: library[7]
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_LOAD.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_LOAD.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(code, options) {
+    const args = ['FUNCTION', 'LOAD'];
+    if (options?.REPLACE) {
+        args.push('REPLACE');
+    }
+    args.push(code);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_RESTORE.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_RESTORE.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(dump, mode) {
+    const args = ['FUNCTION', 'RESTORE', dump];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/FUNCTION_STATS.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/FUNCTION_STATS.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['FUNCTION', 'STATS'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    const engines = Object.create(null);
+    for (let i = 0; i < reply[3].length; i++) {
+        engines[reply[3][i]] = {
+            librariesCount: reply[3][++i][1],
+            functionsCount: reply[3][i][3]
+        };
+    }
+    return {
+        runningScript: reply[1] === null ? null : {
+            name: reply[1][1],
+            command: reply[1][3],
+            durationMs: reply[1][5]
+        },
+        engines
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEOADD.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEOADD.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, toAdd, options) {
+    const args = ['GEOADD', key];
+    if (options?.NX) {
+        args.push('NX');
+    }
+    else if (options?.XX) {
+        args.push('XX');
+    }
+    if (options?.CH) {
+        args.push('CH');
+    }
+    for (const { longitude, latitude, member } of (Array.isArray(toAdd) ? toAdd : [toAdd])) {
+        args.push(longitude.toString(), latitude.toString(), member);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEODIST.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEODIST.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member1, member2, unit) {
+    const args = ['GEODIST', key, member1, member2];
+    if (unit) {
+        args.push(unit);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply === null ? null : Number(reply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEOHASH.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEOHASH.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['GEOHASH', key], member);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEOPOS.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEOPOS.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['GEOPOS', key], member);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(coordinates => coordinates === null ? null : {
+        longitude: coordinates[0],
+        latitude: coordinates[1]
+    });
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUS.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUS.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, coordinates, radius, unit, options) {
+    return (0, generic_transformers_1.pushGeoRadiusArguments)(['GEORADIUS'], key, coordinates, radius, unit, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member, radius, unit, options) {
+    return (0, generic_transformers_1.pushGeoRadiusArguments)(['GEORADIUSBYMEMBER'], key, member, radius, unit, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBERSTORE.js":
+/*!***********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBERSTORE.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+var GEORADIUSBYMEMBER_1 = __webpack_require__(/*! ./GEORADIUSBYMEMBER */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEORADIUSBYMEMBER_1.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEORADIUSBYMEMBER_1.IS_READ_ONLY; } }));
+function transformArguments(key, member, radius, unit, destination, options) {
+    return (0, generic_transformers_1.pushGeoRadiusStoreArguments)(['GEORADIUSBYMEMBER'], key, member, radius, unit, destination, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO.js":
+/*!*********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member, radius, unit, options) {
+    return (0, generic_transformers_1.pushGeoRadiusArguments)(['GEORADIUSBYMEMBER_RO'], key, member, radius, unit, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO_WITH.js":
+/*!**************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO_WITH.js ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const GEORADIUSBYMEMBER_RO_1 = __webpack_require__(/*! ./GEORADIUSBYMEMBER_RO */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO.js");
+var GEORADIUSBYMEMBER_RO_2 = __webpack_require__(/*! ./GEORADIUSBYMEMBER_RO */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_RO.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEORADIUSBYMEMBER_RO_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEORADIUSBYMEMBER_RO_2.IS_READ_ONLY; } }));
+function transformArguments(key, member, radius, unit, replyWith, options) {
+    const args = (0, GEORADIUSBYMEMBER_RO_1.transformArguments)(key, member, radius, unit, options);
+    args.push(...replyWith);
+    args.preserve = replyWith;
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformGeoMembersWithReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_WITH.js":
+/*!***********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER_WITH.js ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const GEORADIUSBYMEMBER_1 = __webpack_require__(/*! ./GEORADIUSBYMEMBER */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER.js");
+var GEORADIUSBYMEMBER_2 = __webpack_require__(/*! ./GEORADIUSBYMEMBER */ "../../@redis/client/dist/lib/commands/GEORADIUSBYMEMBER.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEORADIUSBYMEMBER_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEORADIUSBYMEMBER_2.IS_READ_ONLY; } }));
+function transformArguments(key, member, radius, unit, replyWith, options) {
+    const args = (0, GEORADIUSBYMEMBER_1.transformArguments)(key, member, radius, unit, options);
+    args.push(...replyWith);
+    args.preserve = replyWith;
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformGeoMembersWithReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUSSTORE.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUSSTORE.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+var GEORADIUS_1 = __webpack_require__(/*! ./GEORADIUS */ "../../@redis/client/dist/lib/commands/GEORADIUS.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEORADIUS_1.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEORADIUS_1.IS_READ_ONLY; } }));
+function transformArguments(key, coordinates, radius, unit, destination, options) {
+    return (0, generic_transformers_1.pushGeoRadiusStoreArguments)(['GEORADIUS'], key, coordinates, radius, unit, destination, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUS_RO.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUS_RO.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, coordinates, radius, unit, options) {
+    return (0, generic_transformers_1.pushGeoRadiusArguments)(['GEORADIUS_RO'], key, coordinates, radius, unit, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUS_RO_WITH.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUS_RO_WITH.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const GEORADIUS_RO_1 = __webpack_require__(/*! ./GEORADIUS_RO */ "../../@redis/client/dist/lib/commands/GEORADIUS_RO.js");
+var GEORADIUS_RO_2 = __webpack_require__(/*! ./GEORADIUS_RO */ "../../@redis/client/dist/lib/commands/GEORADIUS_RO.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEORADIUS_RO_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEORADIUS_RO_2.IS_READ_ONLY; } }));
+function transformArguments(key, coordinates, radius, unit, replyWith, options) {
+    const args = (0, GEORADIUS_RO_1.transformArguments)(key, coordinates, radius, unit, options);
+    args.push(...replyWith);
+    args.preserve = replyWith;
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformGeoMembersWithReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEORADIUS_WITH.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEORADIUS_WITH.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const GEORADIUS_1 = __webpack_require__(/*! ./GEORADIUS */ "../../@redis/client/dist/lib/commands/GEORADIUS.js");
+var GEORADIUS_2 = __webpack_require__(/*! ./GEORADIUS */ "../../@redis/client/dist/lib/commands/GEORADIUS.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEORADIUS_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEORADIUS_2.IS_READ_ONLY; } }));
+function transformArguments(key, coordinates, radius, unit, replyWith, options) {
+    const args = (0, GEORADIUS_1.transformArguments)(key, coordinates, radius, unit, options);
+    args.push(...replyWith);
+    args.preserve = replyWith;
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformGeoMembersWithReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEOSEARCH.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEOSEARCH.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, from, by, options) {
+    return (0, generic_transformers_1.pushGeoSearchArguments)(['GEOSEARCH'], key, from, by, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEOSEARCHSTORE.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEOSEARCHSTORE.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+var GEOSEARCH_1 = __webpack_require__(/*! ./GEOSEARCH */ "../../@redis/client/dist/lib/commands/GEOSEARCH.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEOSEARCH_1.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEOSEARCH_1.IS_READ_ONLY; } }));
+function transformArguments(destination, source, from, by, options) {
+    const args = (0, generic_transformers_1.pushGeoSearchArguments)(['GEOSEARCHSTORE', destination], source, from, by, options);
+    if (options?.STOREDIST) {
+        args.push('STOREDIST');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    if (typeof reply !== 'number') {
+        throw new TypeError(`https://github.com/redis/redis/issues/9261`);
+    }
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GEOSEARCH_WITH.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GEOSEARCH_WITH.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const GEOSEARCH_1 = __webpack_require__(/*! ./GEOSEARCH */ "../../@redis/client/dist/lib/commands/GEOSEARCH.js");
+var GEOSEARCH_2 = __webpack_require__(/*! ./GEOSEARCH */ "../../@redis/client/dist/lib/commands/GEOSEARCH.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return GEOSEARCH_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return GEOSEARCH_2.IS_READ_ONLY; } }));
+function transformArguments(key, from, by, replyWith, options) {
+    const args = (0, GEOSEARCH_1.transformArguments)(key, from, by, options);
+    args.push(...replyWith);
+    args.preserve = replyWith;
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformGeoMembersWithReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GET.js":
+/*!****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GET.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['GET', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GETBIT.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GETBIT.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, offset) {
+    return ['GETBIT', key, offset.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GETDEL.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GETDEL.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['GETDEL', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GETEX.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GETEX.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, mode) {
+    const args = ['GETEX', key];
+    if ('EX' in mode) {
+        args.push('EX', mode.EX.toString());
+    }
+    else if ('PX' in mode) {
+        args.push('PX', mode.PX.toString());
+    }
+    else if ('EXAT' in mode) {
+        args.push('EXAT', (0, generic_transformers_1.transformEXAT)(mode.EXAT));
+    }
+    else if ('PXAT' in mode) {
+        args.push('PXAT', (0, generic_transformers_1.transformPXAT)(mode.PXAT));
+    }
+    else { // PERSIST
+        args.push('PERSIST');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GETRANGE.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GETRANGE.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, start, end) {
+    return ['GETRANGE', key, start.toString(), end.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/GETSET.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/GETSET.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, value) {
+    return ['GETSET', key, value];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HDEL.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HDEL.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, field) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['HDEL', key], field);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HELLO.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HELLO.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(options) {
+    const args = ['HELLO'];
+    if (options) {
+        args.push(options.protover.toString());
+        if (options.auth) {
+            args.push('AUTH', options.auth.username, options.auth.password);
+        }
+        if (options.clientName) {
+            args.push('SETNAME', options.clientName);
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        server: reply[1],
+        version: reply[3],
+        proto: reply[5],
+        id: reply[7],
+        mode: reply[9],
+        role: reply[11],
+        modules: reply[13]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HEXISTS.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HEXISTS.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, field) {
+    return ['HEXISTS', key, field];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HGET.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HGET.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, field) {
+    return ['HGET', key, field];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HGETALL.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HGETALL.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.TRANSFORM_LEGACY_REPLY = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+exports.TRANSFORM_LEGACY_REPLY = true;
+function transformArguments(key) {
+    return ['HGETALL', key];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformTuplesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HINCRBY.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HINCRBY.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, field, increment) {
+    return ['HINCRBY', key, field, increment.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HINCRBYFLOAT.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HINCRBYFLOAT.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, field, increment) {
+    return ['HINCRBYFLOAT', key, field, increment.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HKEYS.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HKEYS.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['HKEYS', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HLEN.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HLEN.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['HLEN', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HMGET.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HMGET.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, fields) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['HMGET', key], fields);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HRANDFIELD.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HRANDFIELD.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['HRANDFIELD', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const HRANDFIELD_1 = __webpack_require__(/*! ./HRANDFIELD */ "../../@redis/client/dist/lib/commands/HRANDFIELD.js");
+var HRANDFIELD_2 = __webpack_require__(/*! ./HRANDFIELD */ "../../@redis/client/dist/lib/commands/HRANDFIELD.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return HRANDFIELD_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return HRANDFIELD_2.IS_READ_ONLY; } }));
+function transformArguments(key, count) {
+    return [
+        ...(0, HRANDFIELD_1.transformArguments)(key),
+        count.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT_WITHVALUES.js":
+/*!****************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT_WITHVALUES.js ***!
+  \****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const HRANDFIELD_COUNT_1 = __webpack_require__(/*! ./HRANDFIELD_COUNT */ "../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT.js");
+var HRANDFIELD_COUNT_2 = __webpack_require__(/*! ./HRANDFIELD_COUNT */ "../../@redis/client/dist/lib/commands/HRANDFIELD_COUNT.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return HRANDFIELD_COUNT_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return HRANDFIELD_COUNT_2.IS_READ_ONLY; } }));
+function transformArguments(key, count) {
+    return [
+        ...(0, HRANDFIELD_COUNT_1.transformArguments)(key, count),
+        'WITHVALUES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformTuplesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HSCAN.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HSCAN.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, cursor, options) {
+    return (0, generic_transformers_1.pushScanArguments)([
+        'HSCAN',
+        key
+    ], cursor, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply([cursor, rawTuples]) {
+    const parsedTuples = [];
+    for (let i = 0; i < rawTuples.length; i += 2) {
+        parsedTuples.push({
+            field: rawTuples[i],
+            value: rawTuples[i + 1]
+        });
+    }
+    return {
+        cursor: Number(cursor),
+        tuples: parsedTuples
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HSET.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HSET.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(...[key, value, fieldValue]) {
+    const args = ['HSET', key];
+    if (typeof value === 'string' || typeof value === 'number' || Buffer.isBuffer(value)) {
+        args.push(convertValue(value), convertValue(fieldValue));
+    }
+    else if (value instanceof Map) {
+        pushMap(args, value);
+    }
+    else if (Array.isArray(value)) {
+        pushTuples(args, value);
+    }
+    else {
+        pushObject(args, value);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function pushMap(args, map) {
+    for (const [key, value] of map.entries()) {
+        args.push(convertValue(key), convertValue(value));
+    }
+}
+function pushTuples(args, tuples) {
+    for (const tuple of tuples) {
+        if (Array.isArray(tuple)) {
+            pushTuples(args, tuple);
+            continue;
+        }
+        args.push(convertValue(tuple));
+    }
+}
+function pushObject(args, object) {
+    for (const key of Object.keys(object)) {
+        args.push(convertValue(key), convertValue(object[key]));
+    }
+}
+function convertValue(value) {
+    return typeof value === 'number' ?
+        value.toString() :
+        value;
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HSETNX.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HSETNX.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, field, value) {
+    return ['HSETNX', key, field, value];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HSTRLEN.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HSTRLEN.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, field) {
+    return ['HSTRLEN', key, field];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/HVALS.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/HVALS.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['HVALS', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/INCR.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/INCR.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['INCR', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/INCRBY.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/INCRBY.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, increment) {
+    return ['INCRBY', key, increment.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/INCRBYFLOAT.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/INCRBYFLOAT.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, increment) {
+    return ['INCRBYFLOAT', key, increment.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/INFO.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/INFO.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(section) {
+    const args = ['INFO'];
+    if (section) {
+        args.push(section);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/KEYS.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/KEYS.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(pattern) {
+    return ['KEYS', pattern];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LASTSAVE.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LASTSAVE.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['LASTSAVE'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return new Date(reply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LATENCY_DOCTOR.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LATENCY_DOCTOR.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['LATENCY', 'DOCTOR'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LATENCY_GRAPH.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LATENCY_GRAPH.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(event) {
+    return ['LATENCY', 'GRAPH', event];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LATENCY_LATEST.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LATENCY_LATEST.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['LATENCY', 'LATEST'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LCS.js":
+/*!****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LCS.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key1, key2) {
+    return [
+        'LCS',
+        key1,
+        key2
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LCS_IDX.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LCS_IDX.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+const LCS_1 = __webpack_require__(/*! ./LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+var LCS_2 = __webpack_require__(/*! ./LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return LCS_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return LCS_2.IS_READ_ONLY; } }));
+function transformArguments(key1, key2) {
+    const args = (0, LCS_1.transformArguments)(key1, key2);
+    args.push('IDX');
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        matches: reply[1].map(([key1, key2]) => ({
+            key1: (0, generic_transformers_1.transformRangeReply)(key1),
+            key2: (0, generic_transformers_1.transformRangeReply)(key2)
+        })),
+        length: reply[3]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LCS_IDX_WITHMATCHLEN.js":
+/*!*********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LCS_IDX_WITHMATCHLEN.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+const LCS_1 = __webpack_require__(/*! ./LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+var LCS_2 = __webpack_require__(/*! ./LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return LCS_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return LCS_2.IS_READ_ONLY; } }));
+function transformArguments(key1, key2) {
+    const args = (0, LCS_1.transformArguments)(key1, key2);
+    args.push('IDX', 'WITHMATCHLEN');
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        matches: reply[1].map(([key1, key2, length]) => ({
+            key1: (0, generic_transformers_1.transformRangeReply)(key1),
+            key2: (0, generic_transformers_1.transformRangeReply)(key2),
+            length
+        })),
+        length: reply[3]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LCS_LEN.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LCS_LEN.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const LCS_1 = __webpack_require__(/*! ./LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+var LCS_2 = __webpack_require__(/*! ./LCS */ "../../@redis/client/dist/lib/commands/LCS.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return LCS_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return LCS_2.IS_READ_ONLY; } }));
+function transformArguments(key1, key2) {
+    const args = (0, LCS_1.transformArguments)(key1, key2);
+    args.push('LEN');
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LINDEX.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LINDEX.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, index) {
+    return ['LINDEX', key, index.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LINSERT.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LINSERT.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, position, pivot, element) {
+    return [
+        'LINSERT',
+        key,
+        position,
+        pivot,
+        element
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LLEN.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LLEN.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['LLEN', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LMOVE.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LMOVE.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination, sourceSide, destinationSide) {
+    return [
+        'LMOVE',
+        source,
+        destination,
+        sourceSide,
+        destinationSide,
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LMPOP.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LMPOP.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(keys, side, options) {
+    return (0, generic_transformers_1.transformLMPopArguments)(['LMPOP'], keys, side, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LOLWUT.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LOLWUT.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(version, ...optionalArguments) {
+    const args = ['LOLWUT'];
+    if (version) {
+        args.push('VERSION', version.toString(), ...optionalArguments.map(String));
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LPOP.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LPOP.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['LPOP', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LPOP_COUNT.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LPOP_COUNT.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, count) {
+    return ['LPOP', key, count.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LPOS.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LPOS.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, element, options) {
+    const args = ['LPOS', key, element];
+    if (typeof options?.RANK === 'number') {
+        args.push('RANK', options.RANK.toString());
+    }
+    if (typeof options?.MAXLEN === 'number') {
+        args.push('MAXLEN', options.MAXLEN.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LPOS_COUNT.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LPOS_COUNT.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+var LPOS_1 = __webpack_require__(/*! ./LPOS */ "../../@redis/client/dist/lib/commands/LPOS.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return LPOS_1.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return LPOS_1.IS_READ_ONLY; } }));
+function transformArguments(key, element, count, options) {
+    const args = ['LPOS', key, element];
+    if (typeof options?.RANK === 'number') {
+        args.push('RANK', options.RANK.toString());
+    }
+    args.push('COUNT', count.toString());
+    if (typeof options?.MAXLEN === 'number') {
+        args.push('MAXLEN', options.MAXLEN.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LPUSH.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LPUSH.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, elements) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['LPUSH', key], elements);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LPUSHX.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LPUSHX.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, element) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['LPUSHX', key], element);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LRANGE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LRANGE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, start, stop) {
+    return [
+        'LRANGE',
+        key,
+        start.toString(),
+        stop.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LREM.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LREM.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, count, element) {
+    return [
+        'LREM',
+        key,
+        count.toString(),
+        element
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LSET.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LSET.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, index, element) {
+    return [
+        'LSET',
+        key,
+        index.toString(),
+        element
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/LTRIM.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/LTRIM.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, start, stop) {
+    return [
+        'LTRIM',
+        key,
+        start.toString(),
+        stop.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MEMORY_DOCTOR.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MEMORY_DOCTOR.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['MEMORY', 'DOCTOR'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MEMORY_MALLOC-STATS.js":
+/*!********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MEMORY_MALLOC-STATS.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['MEMORY', 'MALLOC-STATS'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MEMORY_PURGE.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MEMORY_PURGE.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['MEMORY', 'PURGE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MEMORY_STATS.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MEMORY_STATS.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['MEMORY', 'STATS'];
+}
+exports.transformArguments = transformArguments;
+const FIELDS_MAPPING = {
+    'peak.allocated': 'peakAllocated',
+    'total.allocated': 'totalAllocated',
+    'startup.allocated': 'startupAllocated',
+    'replication.backlog': 'replicationBacklog',
+    'clients.slaves': 'clientsReplicas',
+    'clients.normal': 'clientsNormal',
+    'aof.buffer': 'aofBuffer',
+    'lua.caches': 'luaCaches',
+    'overhead.total': 'overheadTotal',
+    'keys.count': 'keysCount',
+    'keys.bytes-per-key': 'keysBytesPerKey',
+    'dataset.bytes': 'datasetBytes',
+    'dataset.percentage': 'datasetPercentage',
+    'peak.percentage': 'peakPercentage',
+    'allocator.allocated': 'allocatorAllocated',
+    'allocator.active': 'allocatorActive',
+    'allocator.resident': 'allocatorResident',
+    'allocator-fragmentation.ratio': 'allocatorFragmentationRatio',
+    'allocator-fragmentation.bytes': 'allocatorFragmentationBytes',
+    'allocator-rss.ratio': 'allocatorRssRatio',
+    'allocator-rss.bytes': 'allocatorRssBytes',
+    'rss-overhead.ratio': 'rssOverheadRatio',
+    'rss-overhead.bytes': 'rssOverheadBytes',
+    'fragmentation': 'fragmentation',
+    'fragmentation.bytes': 'fragmentationBytes'
+}, DB_FIELDS_MAPPING = {
+    'overhead.hashtable.main': 'overheadHashtableMain',
+    'overhead.hashtable.expires': 'overheadHashtableExpires'
+};
+function transformReply(rawReply) {
+    const reply = {
+        db: {}
+    };
+    for (let i = 0; i < rawReply.length; i += 2) {
+        const key = rawReply[i];
+        if (key.startsWith('db.')) {
+            const dbTuples = rawReply[i + 1], db = {};
+            for (let j = 0; j < dbTuples.length; j += 2) {
+                db[DB_FIELDS_MAPPING[dbTuples[j]]] = dbTuples[j + 1];
+            }
+            reply.db[key.substring(3)] = db;
+            continue;
+        }
+        reply[FIELDS_MAPPING[key]] = Number(rawReply[i + 1]);
+    }
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MEMORY_USAGE.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MEMORY_USAGE.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, options) {
+    const args = ['MEMORY', 'USAGE', key];
+    if (options?.SAMPLES) {
+        args.push('SAMPLES', options.SAMPLES.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MGET.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MGET.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys) {
+    return ['MGET', ...keys];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MIGRATE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MIGRATE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(host, port, key, destinationDb, timeout, options) {
+    const args = ['MIGRATE', host, port.toString()], isKeyArray = Array.isArray(key);
+    if (isKeyArray) {
+        args.push('');
+    }
+    else {
+        args.push(key);
+    }
+    args.push(destinationDb.toString(), timeout.toString());
+    if (options?.COPY) {
+        args.push('COPY');
+    }
+    if (options?.REPLACE) {
+        args.push('REPLACE');
+    }
+    if (options?.AUTH) {
+        if (options.AUTH.username) {
+            args.push('AUTH2', options.AUTH.username, options.AUTH.password);
+        }
+        else {
+            args.push('AUTH', options.AUTH.password);
+        }
+    }
+    if (isKeyArray) {
+        args.push('KEYS', ...key);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MODULE_LIST.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MODULE_LIST.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['MODULE', 'LIST'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MODULE_LOAD.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MODULE_LOAD.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(path, moduleArgs) {
+    const args = ['MODULE', 'LOAD', path];
+    if (moduleArgs) {
+        args.push(...moduleArgs);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MODULE_UNLOAD.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MODULE_UNLOAD.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(name) {
+    return ['MODULE', 'UNLOAD', name];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MOVE.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MOVE.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, db) {
+    return ['MOVE', key, db.toString()];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MSET.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MSET.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(toSet) {
+    const args = ['MSET'];
+    if (Array.isArray(toSet)) {
+        args.push(...toSet.flat());
+    }
+    else {
+        for (const key of Object.keys(toSet)) {
+            args.push(key, toSet[key]);
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/MSETNX.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/MSETNX.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(toSet) {
+    const args = ['MSETNX'];
+    if (Array.isArray(toSet)) {
+        args.push(...toSet.flat());
+    }
+    else {
+        for (const key of Object.keys(toSet)) {
+            args.push(key, toSet[key]);
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/OBJECT_ENCODING.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/OBJECT_ENCODING.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['OBJECT', 'ENCODING', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/OBJECT_FREQ.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/OBJECT_FREQ.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['OBJECT', 'FREQ', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/OBJECT_IDLETIME.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/OBJECT_IDLETIME.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['OBJECT', 'IDLETIME', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/OBJECT_REFCOUNT.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/OBJECT_REFCOUNT.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['OBJECT', 'REFCOUNT', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PERSIST.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PERSIST.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['PERSIST', key];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PEXPIRE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PEXPIRE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, milliseconds, mode) {
+    const args = ['PEXPIRE', key, milliseconds.toString()];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PEXPIREAT.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PEXPIREAT.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, millisecondsTimestamp, mode) {
+    const args = [
+        'PEXPIREAT',
+        key,
+        (0, generic_transformers_1.transformPXAT)(millisecondsTimestamp)
+    ];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PEXPIRETIME.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PEXPIRETIME.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['PEXPIRETIME', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PFADD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PFADD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, element) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['PFADD', key], element);
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PFCOUNT.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PFCOUNT.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['PFCOUNT'], key);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PFMERGE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PFMERGE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, source) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['PFMERGE', destination], source);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PING.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PING.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(message) {
+    const args = ['PING'];
+    if (message) {
+        args.push(message);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PSETEX.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PSETEX.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, milliseconds, value) {
+    return [
+        'PSETEX',
+        key,
+        milliseconds.toString(),
+        value
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PTTL.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PTTL.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['PTTL', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PUBLISH.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PUBLISH.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(channel, message) {
+    return ['PUBLISH', channel, message];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PUBSUB_CHANNELS.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PUBSUB_CHANNELS.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(pattern) {
+    const args = ['PUBSUB', 'CHANNELS'];
+    if (pattern) {
+        args.push(pattern);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PUBSUB_NUMPAT.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PUBSUB_NUMPAT.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['PUBSUB', 'NUMPAT'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PUBSUB_NUMSUB.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PUBSUB_NUMSUB.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(channels) {
+    const args = ['PUBSUB', 'NUMSUB'];
+    if (channels)
+        return (0, generic_transformers_1.pushVerdictArguments)(args, channels);
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    const transformedReply = Object.create(null);
+    for (let i = 0; i < rawReply.length; i += 2) {
+        transformedReply[rawReply[i]] = rawReply[i + 1];
+    }
+    return transformedReply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/PUBSUB_SHARDCHANNELS.js":
+/*!*********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/PUBSUB_SHARDCHANNELS.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(pattern) {
+    const args = ['PUBSUB', 'SHARDCHANNELS'];
+    if (pattern)
+        args.push(pattern);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RANDOMKEY.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RANDOMKEY.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['RANDOMKEY'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/READONLY.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/READONLY.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['READONLY'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/READWRITE.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/READWRITE.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['READWRITE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RENAME.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RENAME.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, newKey) {
+    return ['RENAME', key, newKey];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RENAMENX.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RENAMENX.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, newKey) {
+    return ['RENAMENX', key, newKey];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/REPLICAOF.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/REPLICAOF.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(host, port) {
+    return ['REPLICAOF', host, port.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RESTORE-ASKING.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RESTORE-ASKING.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['RESTORE-ASKING'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ROLE.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ROLE.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['ROLE'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    switch (reply[0]) {
+        case 'master':
+            return {
+                role: 'master',
+                replicationOffest: reply[1],
+                replicas: reply[2].map(([ip, port, replicationOffest]) => ({
+                    ip,
+                    port: Number(port),
+                    replicationOffest: Number(replicationOffest)
+                }))
+            };
+        case 'slave':
+            return {
+                role: 'slave',
+                master: {
+                    ip: reply[1],
+                    port: reply[2]
+                },
+                state: reply[3],
+                dataReceived: reply[4]
+            };
+        case 'sentinel':
+            return {
+                role: 'sentinel',
+                masterNames: reply[1]
+            };
+    }
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RPOP.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RPOP.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['RPOP', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RPOPLPUSH.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RPOPLPUSH.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination) {
+    return ['RPOPLPUSH', source, destination];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RPOP_COUNT.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RPOP_COUNT.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, count) {
+    return ['RPOP', key, count.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RPUSH.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RPUSH.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, element) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['RPUSH', key], element);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/RPUSHX.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/RPUSHX.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, element) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['RPUSHX', key], element);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, members) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SADD', key], members);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SAVE.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SAVE.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['SAVE'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCAN.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCAN.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(cursor, options) {
+    const args = (0, generic_transformers_1.pushScanArguments)(['SCAN'], cursor, options);
+    if (options?.TYPE) {
+        args.push('TYPE', options.TYPE);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply([cursor, keys]) {
+    return {
+        cursor: Number(cursor),
+        keys
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCARD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCARD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['SCARD', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCRIPT_DEBUG.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCRIPT_DEBUG.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode) {
+    return ['SCRIPT', 'DEBUG', mode];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCRIPT_EXISTS.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCRIPT_EXISTS.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(sha1) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SCRIPT', 'EXISTS'], sha1);
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCRIPT_FLUSH.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCRIPT_FLUSH.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode) {
+    const args = ['SCRIPT', 'FLUSH'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCRIPT_KILL.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCRIPT_KILL.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['SCRIPT', 'KILL'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SCRIPT_LOAD.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SCRIPT_LOAD.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(script) {
+    return ['SCRIPT', 'LOAD', script];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SDIFF.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SDIFF.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SDIFF'], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SDIFFSTORE.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SDIFFSTORE.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SDIFFSTORE', destination], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SET.js":
+/*!****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SET.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, value, options) {
+    const args = [
+        'SET',
+        key,
+        typeof value === 'number' ? value.toString() : value
+    ];
+    if (options?.EX !== undefined) {
+        args.push('EX', options.EX.toString());
+    }
+    else if (options?.PX !== undefined) {
+        args.push('PX', options.PX.toString());
+    }
+    else if (options?.EXAT !== undefined) {
+        args.push('EXAT', options.EXAT.toString());
+    }
+    else if (options?.PXAT !== undefined) {
+        args.push('PXAT', options.PXAT.toString());
+    }
+    else if (options?.KEEPTTL) {
+        args.push('KEEPTTL');
+    }
+    if (options?.NX) {
+        args.push('NX');
+    }
+    else if (options?.XX) {
+        args.push('XX');
+    }
+    if (options?.GET) {
+        args.push('GET');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SETBIT.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SETBIT.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, offset, value) {
+    return ['SETBIT', key, offset.toString(), value.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SETEX.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SETEX.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, seconds, value) {
+    return [
+        'SETEX',
+        key,
+        seconds.toString(),
+        value
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SETNX.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SETNX.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, value) {
+    return ['SETNX', key, value];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SETRANGE.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SETRANGE.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, offset, value) {
+    return ['SETRANGE', key, offset.toString(), value];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SHUTDOWN.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SHUTDOWN.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(mode) {
+    const args = ['SHUTDOWN'];
+    if (mode) {
+        args.push(mode);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SINTER.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SINTER.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SINTER'], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SINTERCARD.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SINTERCARD.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys, limit) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['SINTERCARD'], keys);
+    if (limit) {
+        args.push('LIMIT', limit.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SINTERSTORE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SINTERSTORE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SINTERSTORE', destination], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SISMEMBER.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SISMEMBER.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, member) {
+    return ['SISMEMBER', key, member];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SMEMBERS.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SMEMBERS.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['SMEMBERS', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SMISMEMBER.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SMISMEMBER.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, members) {
+    return ['SMISMEMBER', key, ...members];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SMOVE.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SMOVE.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination, member) {
+    return ['SMOVE', source, destination, member];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SORT.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SORT.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, options) {
+    return (0, generic_transformers_1.pushSortArguments)(['SORT', key], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SORT_RO.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SORT_RO.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, options) {
+    return (0, generic_transformers_1.pushSortArguments)(['SORT_RO', key], options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SORT_STORE.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SORT_STORE.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const SORT_1 = __webpack_require__(/*! ./SORT */ "../../@redis/client/dist/lib/commands/SORT.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(source, destination, options) {
+    const args = (0, SORT_1.transformArguments)(source, options);
+    args.push('STORE', destination);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SPOP.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SPOP.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, count) {
+    const args = ['SPOP', key];
+    if (typeof count === 'number') {
+        args.push(count.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SPUBLISH.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SPUBLISH.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(channel, message) {
+    return ['SPUBLISH', channel, message];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SRANDMEMBER.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SRANDMEMBER.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['SRANDMEMBER', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SRANDMEMBER_COUNT.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SRANDMEMBER_COUNT.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const SRANDMEMBER_1 = __webpack_require__(/*! ./SRANDMEMBER */ "../../@redis/client/dist/lib/commands/SRANDMEMBER.js");
+var SRANDMEMBER_2 = __webpack_require__(/*! ./SRANDMEMBER */ "../../@redis/client/dist/lib/commands/SRANDMEMBER.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return SRANDMEMBER_2.FIRST_KEY_INDEX; } }));
+function transformArguments(key, count) {
+    return [
+        ...(0, SRANDMEMBER_1.transformArguments)(key),
+        count.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SREM.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SREM.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, members) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SREM', key], members);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SSCAN.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SSCAN.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, cursor, options) {
+    return (0, generic_transformers_1.pushScanArguments)([
+        'SSCAN',
+        key,
+    ], cursor, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply([cursor, members]) {
+    return {
+        cursor: Number(cursor),
+        members
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/STRLEN.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/STRLEN.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['STRLEN', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SUNION.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SUNION.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SUNION'], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SUNIONSTORE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SUNIONSTORE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, keys) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['SUNIONSTORE', destination], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/SWAPDB.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/SWAPDB.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(index1, index2) {
+    return ['SWAPDB', index1.toString(), index2.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/TIME.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/TIME.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments() {
+    return ['TIME'];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    const seconds = Number(reply[0]), microseconds = Number(reply[1]), d = new Date(seconds * 1000 + microseconds / 1000);
+    d.microseconds = microseconds;
+    return d;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/TOUCH.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/TOUCH.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['TOUCH'], key);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/TTL.js":
+/*!****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/TTL.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['TTL', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/TYPE.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/TYPE.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['TYPE', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/UNLINK.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/UNLINK.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['UNLINK'], key);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/UNWATCH.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/UNWATCH.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['UNWATCH'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/WAIT.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/WAIT.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(numberOfReplicas, timeout) {
+    return ['WAIT', numberOfReplicas.toString(), timeout.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/WATCH.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/WATCH.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['WATCH'], key);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XACK.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XACK.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, group, id) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['XACK', key, group], id);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, id, message, options) {
+    const args = ['XADD', key];
+    if (options?.NOMKSTREAM) {
+        args.push('NOMKSTREAM');
+    }
+    if (options?.TRIM) {
+        if (options.TRIM.strategy) {
+            args.push(options.TRIM.strategy);
+        }
+        if (options.TRIM.strategyModifier) {
+            args.push(options.TRIM.strategyModifier);
+        }
+        args.push(options.TRIM.threshold.toString());
+        if (options.TRIM.limit) {
+            args.push('LIMIT', options.TRIM.limit.toString());
+        }
+    }
+    args.push(id);
+    for (const [key, value] of Object.entries(message)) {
+        args.push(key, value);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XAUTOCLAIM.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XAUTOCLAIM.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, group, consumer, minIdleTime, start, options) {
+    const args = ['XAUTOCLAIM', key, group, consumer, minIdleTime.toString(), start];
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        nextId: reply[0],
+        messages: (0, generic_transformers_1.transformStreamMessagesReply)(reply[1])
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XAUTOCLAIM_JUSTID.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XAUTOCLAIM_JUSTID.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const XAUTOCLAIM_1 = __webpack_require__(/*! ./XAUTOCLAIM */ "../../@redis/client/dist/lib/commands/XAUTOCLAIM.js");
+var XAUTOCLAIM_2 = __webpack_require__(/*! ./XAUTOCLAIM */ "../../@redis/client/dist/lib/commands/XAUTOCLAIM.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return XAUTOCLAIM_2.FIRST_KEY_INDEX; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, XAUTOCLAIM_1.transformArguments)(...args),
+        'JUSTID'
+    ];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        nextId: reply[0],
+        messages: reply[1]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XCLAIM.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XCLAIM.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, group, consumer, minIdleTime, id, options) {
+    const args = (0, generic_transformers_1.pushVerdictArguments)(['XCLAIM', key, group, consumer, minIdleTime.toString()], id);
+    if (options?.IDLE) {
+        args.push('IDLE', options.IDLE.toString());
+    }
+    if (options?.TIME) {
+        args.push('TIME', (typeof options.TIME === 'number' ? options.TIME : options.TIME.getTime()).toString());
+    }
+    if (options?.RETRYCOUNT) {
+        args.push('RETRYCOUNT', options.RETRYCOUNT.toString());
+    }
+    if (options?.FORCE) {
+        args.push('FORCE');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformStreamMessagesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XCLAIM_JUSTID.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XCLAIM_JUSTID.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const XCLAIM_1 = __webpack_require__(/*! ./XCLAIM */ "../../@redis/client/dist/lib/commands/XCLAIM.js");
+var XCLAIM_2 = __webpack_require__(/*! ./XCLAIM */ "../../@redis/client/dist/lib/commands/XCLAIM.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return XCLAIM_2.FIRST_KEY_INDEX; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, XCLAIM_1.transformArguments)(...args),
+        'JUSTID'
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XDEL.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XDEL.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, id) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['XDEL', key], id);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XGROUP_CREATE.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XGROUP_CREATE.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(key, group, id, options) {
+    const args = ['XGROUP', 'CREATE', key, group, id];
+    if (options?.MKSTREAM) {
+        args.push('MKSTREAM');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XGROUP_CREATECONSUMER.js":
+/*!**********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XGROUP_CREATECONSUMER.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(key, group, consumer) {
+    return ['XGROUP', 'CREATECONSUMER', key, group, consumer];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XGROUP_DELCONSUMER.js":
+/*!*******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XGROUP_DELCONSUMER.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(key, group, consumer) {
+    return ['XGROUP', 'DELCONSUMER', key, group, consumer];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XGROUP_DESTROY.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XGROUP_DESTROY.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(key, group) {
+    return ['XGROUP', 'DESTROY', key, group];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XGROUP_SETID.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XGROUP_SETID.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(key, group, id) {
+    return ['XGROUP', 'SETID', key, group, id];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XINFO_CONSUMERS.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XINFO_CONSUMERS.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, group) {
+    return ['XINFO', 'CONSUMERS', key, group];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    return rawReply.map(consumer => ({
+        name: consumer[1],
+        pending: consumer[3],
+        idle: consumer[5],
+        inactive: consumer[7]
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XINFO_GROUPS.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XINFO_GROUPS.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['XINFO', 'GROUPS', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    return rawReply.map(group => ({
+        name: group[1],
+        consumers: group[3],
+        pending: group[5],
+        lastDeliveredId: group[7]
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XINFO_STREAM.js":
+/*!*************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XINFO_STREAM.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['XINFO', 'STREAM', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    const parsedReply = {};
+    for (let i = 0; i < rawReply.length; i += 2) {
+        switch (rawReply[i]) {
+            case 'length':
+                parsedReply.length = rawReply[i + 1];
+                break;
+            case 'radix-tree-keys':
+                parsedReply.radixTreeKeys = rawReply[i + 1];
+                break;
+            case 'radix-tree-nodes':
+                parsedReply.radixTreeNodes = rawReply[i + 1];
+                break;
+            case 'groups':
+                parsedReply.groups = rawReply[i + 1];
+                break;
+            case 'last-generated-id':
+                parsedReply.lastGeneratedId = rawReply[i + 1];
+                break;
+            case 'first-entry':
+                parsedReply.firstEntry = rawReply[i + 1] ? {
+                    id: rawReply[i + 1][0],
+                    message: (0, generic_transformers_1.transformTuplesReply)(rawReply[i + 1][1])
+                } : null;
+                break;
+            case 'last-entry':
+                parsedReply.lastEntry = rawReply[i + 1] ? {
+                    id: rawReply[i + 1][0],
+                    message: (0, generic_transformers_1.transformTuplesReply)(rawReply[i + 1][1])
+                } : null;
+                break;
+        }
+    }
+    return parsedReply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XLEN.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XLEN.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['XLEN', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XPENDING.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XPENDING.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, group) {
+    return ['XPENDING', key, group];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        pending: reply[0],
+        firstId: reply[1],
+        lastId: reply[2],
+        consumers: reply[3] === null ? null : reply[3].map(([name, deliveriesCounter]) => ({
+            name,
+            deliveriesCounter: Number(deliveriesCounter)
+        }))
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XPENDING_RANGE.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XPENDING_RANGE.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, group, start, end, count, options) {
+    const args = ['XPENDING', key, group];
+    if (options?.IDLE) {
+        args.push('IDLE', options.IDLE.toString());
+    }
+    args.push(start, end, count.toString());
+    if (options?.consumer) {
+        args.push(options.consumer);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(([id, owner, millisecondsSinceLastDelivery, deliveriesCounter]) => ({
+        id,
+        owner,
+        millisecondsSinceLastDelivery,
+        deliveriesCounter
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XRANGE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XRANGE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, start, end, options) {
+    const args = ['XRANGE', key, start, end];
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformStreamMessagesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XREAD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XREAD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const FIRST_KEY_INDEX = (streams) => {
+    return Array.isArray(streams) ? streams[0].key : streams.key;
+};
+exports.FIRST_KEY_INDEX = FIRST_KEY_INDEX;
+exports.IS_READ_ONLY = true;
+function transformArguments(streams, options) {
+    const args = ['XREAD'];
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    if (typeof options?.BLOCK === 'number') {
+        args.push('BLOCK', options.BLOCK.toString());
+    }
+    args.push('STREAMS');
+    const streamsArray = Array.isArray(streams) ? streams : [streams], argsLength = args.length;
+    for (let i = 0; i < streamsArray.length; i++) {
+        const stream = streamsArray[i];
+        args[argsLength + i] = stream.key;
+        args[argsLength + streamsArray.length + i] = stream.id;
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformStreamsMessagesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XREADGROUP.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XREADGROUP.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const FIRST_KEY_INDEX = (_group, _consumer, streams) => {
+    return Array.isArray(streams) ? streams[0].key : streams.key;
+};
+exports.FIRST_KEY_INDEX = FIRST_KEY_INDEX;
+exports.IS_READ_ONLY = true;
+function transformArguments(group, consumer, streams, options) {
+    const args = ['XREADGROUP', 'GROUP', group, consumer];
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    if (typeof options?.BLOCK === 'number') {
+        args.push('BLOCK', options.BLOCK.toString());
+    }
+    if (options?.NOACK) {
+        args.push('NOACK');
+    }
+    args.push('STREAMS');
+    const streamsArray = Array.isArray(streams) ? streams : [streams], argsLength = args.length;
+    for (let i = 0; i < streamsArray.length; i++) {
+        const stream = streamsArray[i];
+        args[argsLength + i] = stream.key;
+        args[argsLength + streamsArray.length + i] = stream.id;
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformStreamsMessagesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XREVRANGE.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XREVRANGE.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, start, end, options) {
+    const args = ['XREVRANGE', key, start, end];
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformStreamMessagesReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XSETID.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XSETID.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, lastId, options) {
+    const args = ['XSETID', key, lastId];
+    if (options?.ENTRIESADDED) {
+        args.push('ENTRIESADDED', options.ENTRIESADDED.toString());
+    }
+    if (options?.MAXDELETEDID) {
+        args.push('MAXDELETEDID', options.MAXDELETEDID);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/XTRIM.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/XTRIM.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, strategy, threshold, options) {
+    const args = ['XTRIM', key, strategy];
+    if (options?.strategyModifier) {
+        args.push(options.strategyModifier);
+    }
+    args.push(threshold.toString());
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, members, options) {
+    const args = ['ZADD', key];
+    if (options?.NX) {
+        args.push('NX');
+    }
+    else {
+        if (options?.XX) {
+            args.push('XX');
+        }
+        if (options?.GT) {
+            args.push('GT');
+        }
+        else if (options?.LT) {
+            args.push('LT');
+        }
+    }
+    if (options?.CH) {
+        args.push('CH');
+    }
+    if (options?.INCR) {
+        args.push('INCR');
+    }
+    for (const { score, value } of (Array.isArray(members) ? members : [members])) {
+        args.push((0, generic_transformers_1.transformNumberInfinityArgument)(score), value);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformNumberInfinityReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZCARD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZCARD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['ZCARD', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZCOUNT.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZCOUNT.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, min, max) {
+    return [
+        'ZCOUNT',
+        key,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZDIFF.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZDIFF.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys) {
+    return (0, generic_transformers_1.pushVerdictArgument)(['ZDIFF'], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZDIFFSTORE.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZDIFFSTORE.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, keys) {
+    return (0, generic_transformers_1.pushVerdictArgument)(['ZDIFFSTORE', destination], keys);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZDIFF_WITHSCORES.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZDIFF_WITHSCORES.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZDIFF_1 = __webpack_require__(/*! ./ZDIFF */ "../../@redis/client/dist/lib/commands/ZDIFF.js");
+var ZDIFF_2 = __webpack_require__(/*! ./ZDIFF */ "../../@redis/client/dist/lib/commands/ZDIFF.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZDIFF_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZDIFF_2.IS_READ_ONLY; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, ZDIFF_1.transformArguments)(...args),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZINCRBY.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZINCRBY.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, increment, member) {
+    return [
+        'ZINCRBY',
+        key,
+        (0, generic_transformers_1.transformNumberInfinityArgument)(increment),
+        member
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformNumberInfinityReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZINTER.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZINTER.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys, options) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['ZINTER'], keys);
+    if (options?.WEIGHTS) {
+        args.push('WEIGHTS', ...options.WEIGHTS.map(weight => weight.toString()));
+    }
+    if (options?.AGGREGATE) {
+        args.push('AGGREGATE', options.AGGREGATE);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZINTERCARD.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZINTERCARD.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys, limit) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['ZINTERCARD'], keys);
+    if (limit) {
+        args.push('LIMIT', limit.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZINTERSTORE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZINTERSTORE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, keys, options) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['ZINTERSTORE', destination], keys);
+    if (options?.WEIGHTS) {
+        args.push('WEIGHTS', ...options.WEIGHTS.map(weight => weight.toString()));
+    }
+    if (options?.AGGREGATE) {
+        args.push('AGGREGATE', options.AGGREGATE);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZINTER_WITHSCORES.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZINTER_WITHSCORES.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZINTER_1 = __webpack_require__(/*! ./ZINTER */ "../../@redis/client/dist/lib/commands/ZINTER.js");
+var ZINTER_2 = __webpack_require__(/*! ./ZINTER */ "../../@redis/client/dist/lib/commands/ZINTER.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZINTER_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZINTER_2.IS_READ_ONLY; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, ZINTER_1.transformArguments)(...args),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZLEXCOUNT.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZLEXCOUNT.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, min, max) {
+    return [
+        'ZLEXCOUNT',
+        key,
+        min,
+        max
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZMPOP.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZMPOP.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(keys, side, options) {
+    return (0, generic_transformers_1.transformZMPopArguments)(['ZMPOP'], keys, side, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply === null ? null : {
+        key: reply[0],
+        elements: reply[1].map(generic_transformers_1.transformSortedSetMemberReply)
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZMSCORE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZMSCORE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['ZMSCORE', key], member);
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_2 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_2.transformNumberInfinityNullArrayReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZPOPMAX.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZPOPMAX.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return [
+        'ZPOPMAX',
+        key
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetMemberNullReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZPOPMAX_COUNT.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZPOPMAX_COUNT.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const ZPOPMAX_1 = __webpack_require__(/*! ./ZPOPMAX */ "../../@redis/client/dist/lib/commands/ZPOPMAX.js");
+var ZPOPMAX_2 = __webpack_require__(/*! ./ZPOPMAX */ "../../@redis/client/dist/lib/commands/ZPOPMAX.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZPOPMAX_2.FIRST_KEY_INDEX; } }));
+function transformArguments(key, count) {
+    return [
+        ...(0, ZPOPMAX_1.transformArguments)(key),
+        count.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZPOPMIN.js":
+/*!********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZPOPMIN.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return [
+        'ZPOPMIN',
+        key
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetMemberNullReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZPOPMIN_COUNT.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZPOPMIN_COUNT.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const ZPOPMIN_1 = __webpack_require__(/*! ./ZPOPMIN */ "../../@redis/client/dist/lib/commands/ZPOPMIN.js");
+var ZPOPMIN_2 = __webpack_require__(/*! ./ZPOPMIN */ "../../@redis/client/dist/lib/commands/ZPOPMIN.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZPOPMIN_2.FIRST_KEY_INDEX; } }));
+function transformArguments(key, count) {
+    return [
+        ...(0, ZPOPMIN_1.transformArguments)(key),
+        count.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANDMEMBER.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANDMEMBER.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['ZRANDMEMBER', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZRANDMEMBER_1 = __webpack_require__(/*! ./ZRANDMEMBER */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER.js");
+var ZRANDMEMBER_2 = __webpack_require__(/*! ./ZRANDMEMBER */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZRANDMEMBER_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZRANDMEMBER_2.IS_READ_ONLY; } }));
+function transformArguments(key, count) {
+    return [
+        ...(0, ZRANDMEMBER_1.transformArguments)(key),
+        count.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT_WITHSCORES.js":
+/*!*****************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT_WITHSCORES.js ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZRANDMEMBER_COUNT_1 = __webpack_require__(/*! ./ZRANDMEMBER_COUNT */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT.js");
+var ZRANDMEMBER_COUNT_2 = __webpack_require__(/*! ./ZRANDMEMBER_COUNT */ "../../@redis/client/dist/lib/commands/ZRANDMEMBER_COUNT.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZRANDMEMBER_COUNT_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZRANDMEMBER_COUNT_2.IS_READ_ONLY; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, ZRANDMEMBER_COUNT_1.transformArguments)(...args),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANGE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANGE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, min, max, options) {
+    const args = [
+        'ZRANGE',
+        key,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+    switch (options?.BY) {
+        case 'SCORE':
+            args.push('BYSCORE');
+            break;
+        case 'LEX':
+            args.push('BYLEX');
+            break;
+    }
+    if (options?.REV) {
+        args.push('REV');
+    }
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.offset.toString(), options.LIMIT.count.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANGEBYLEX.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANGEBYLEX.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, min, max, options) {
+    const args = [
+        'ZRANGEBYLEX',
+        key,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.offset.toString(), options.LIMIT.count.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANGEBYSCORE.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANGEBYSCORE.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, min, max, options) {
+    const args = [
+        'ZRANGEBYSCORE',
+        key,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.offset.toString(), options.LIMIT.count.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANGEBYSCORE_WITHSCORES.js":
+/*!*************************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANGEBYSCORE_WITHSCORES.js ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZRANGEBYSCORE_1 = __webpack_require__(/*! ./ZRANGEBYSCORE */ "../../@redis/client/dist/lib/commands/ZRANGEBYSCORE.js");
+var ZRANGEBYSCORE_2 = __webpack_require__(/*! ./ZRANGEBYSCORE */ "../../@redis/client/dist/lib/commands/ZRANGEBYSCORE.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZRANGEBYSCORE_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZRANGEBYSCORE_2.IS_READ_ONLY; } }));
+function transformArguments(key, min, max, options) {
+    return [
+        ...(0, ZRANGEBYSCORE_1.transformArguments)(key, min, max, options),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANGESTORE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANGESTORE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(dst, src, min, max, options) {
+    const args = [
+        'ZRANGESTORE',
+        dst,
+        src,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+    switch (options?.BY) {
+        case 'SCORE':
+            args.push('BYSCORE');
+            break;
+        case 'LEX':
+            args.push('BYLEX');
+            break;
+    }
+    if (options?.REV) {
+        args.push('REV');
+    }
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.offset.toString(), options.LIMIT.count.toString());
+    }
+    if (options?.WITHSCORES) {
+        args.push('WITHSCORES');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    if (typeof reply !== 'number') {
+        throw new TypeError(`Upgrade to Redis 6.2.5 and up (https://github.com/redis/redis/pull/9089)`);
+    }
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANGE_WITHSCORES.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANGE_WITHSCORES.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZRANGE_1 = __webpack_require__(/*! ./ZRANGE */ "../../@redis/client/dist/lib/commands/ZRANGE.js");
+var ZRANGE_2 = __webpack_require__(/*! ./ZRANGE */ "../../@redis/client/dist/lib/commands/ZRANGE.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZRANGE_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZRANGE_2.IS_READ_ONLY; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, ZRANGE_1.transformArguments)(...args),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZRANK.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZRANK.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member) {
+    return ['ZRANK', key, member];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZREM.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZREM.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, member) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['ZREM', key], member);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZREMRANGEBYLEX.js":
+/*!***************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZREMRANGEBYLEX.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, min, max) {
+    return [
+        'ZREMRANGEBYLEX',
+        key,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZREMRANGEBYRANK.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZREMRANGEBYRANK.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, start, stop) {
+    return ['ZREMRANGEBYRANK', key, start.toString(), stop.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZREMRANGEBYSCORE.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZREMRANGEBYSCORE.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, min, max) {
+    return [
+        'ZREMRANGEBYSCORE',
+        key,
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(min),
+        (0, generic_transformers_1.transformStringNumberInfinityArgument)(max)
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZREVRANK.js":
+/*!*********************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZREVRANK.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member) {
+    return ['ZREVRANK', key, member];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZSCAN.js":
+/*!******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZSCAN.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, cursor, options) {
+    return (0, generic_transformers_1.pushScanArguments)([
+        'ZSCAN',
+        key
+    ], cursor, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply([cursor, rawMembers]) {
+    const parsedMembers = [];
+    for (let i = 0; i < rawMembers.length; i += 2) {
+        parsedMembers.push({
+            value: rawMembers[i],
+            score: (0, generic_transformers_1.transformNumberInfinityReply)(rawMembers[i + 1])
+        });
+    }
+    return {
+        cursor: Number(cursor),
+        members: parsedMembers
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZSCORE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZSCORE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, member) {
+    return ['ZSCORE', key, member];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformNumberInfinityNullReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZUNION.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZUNION.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 2;
+exports.IS_READ_ONLY = true;
+function transformArguments(keys, options) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['ZUNION'], keys);
+    if (options?.WEIGHTS) {
+        args.push('WEIGHTS', ...options.WEIGHTS.map(weight => weight.toString()));
+    }
+    if (options?.AGGREGATE) {
+        args.push('AGGREGATE', options.AGGREGATE);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZUNIONSTORE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZUNIONSTORE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(destination, keys, options) {
+    const args = (0, generic_transformers_1.pushVerdictArgument)(['ZUNIONSTORE', destination], keys);
+    if (options?.WEIGHTS) {
+        args.push('WEIGHTS', ...options.WEIGHTS.map(weight => weight.toString()));
+    }
+    if (options?.AGGREGATE) {
+        args.push('AGGREGATE', options.AGGREGATE);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/ZUNION_WITHSCORES.js":
+/*!******************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/ZUNION_WITHSCORES.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const ZUNION_1 = __webpack_require__(/*! ./ZUNION */ "../../@redis/client/dist/lib/commands/ZUNION.js");
+var ZUNION_2 = __webpack_require__(/*! ./ZUNION */ "../../@redis/client/dist/lib/commands/ZUNION.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return ZUNION_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return ZUNION_2.IS_READ_ONLY; } }));
+function transformArguments(...args) {
+    return [
+        ...(0, ZUNION_1.transformArguments)(...args),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! ./generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformSortedSetWithScoresReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/commands/generic-transformers.js":
+/*!*********************************************************************!*\
+  !*** ../../@redis/client/dist/lib/commands/generic-transformers.js ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformRangeReply = exports.pushSlotRangesArguments = exports.pushSortArguments = exports.transformFunctionListItemReply = exports.RedisFunctionFlags = exports.transformCommandReply = exports.CommandCategories = exports.CommandFlags = exports.pushOptionalVerdictArgument = exports.pushVerdictArgument = exports.pushVerdictNumberArguments = exports.pushVerdictArguments = exports.pushEvalArguments = exports.evalFirstKeyIndex = exports.transformPXAT = exports.transformEXAT = exports.transformGeoMembersWithReply = exports.GeoReplyWith = exports.pushGeoRadiusStoreArguments = exports.pushGeoRadiusArguments = exports.pushGeoSearchArguments = exports.pushGeoCountArgument = exports.transformLMPopArguments = exports.transformZMPopArguments = exports.transformSortedSetWithScoresReply = exports.transformSortedSetMemberReply = exports.transformSortedSetMemberNullReply = exports.transformStreamsMessagesReply = exports.transformStreamMessagesReply = exports.transformTuplesReply = exports.transformStringNumberInfinityArgument = exports.transformNumberInfinityArgument = exports.transformNumberInfinityNullArrayReply = exports.transformNumberInfinityNullReply = exports.transformNumberInfinityReply = exports.pushScanArguments = exports.transformBooleanArrayReply = exports.transformBooleanReply = void 0;
+function transformBooleanReply(reply) {
+    return reply === 1;
+}
+exports.transformBooleanReply = transformBooleanReply;
+function transformBooleanArrayReply(reply) {
+    return reply.map(transformBooleanReply);
+}
+exports.transformBooleanArrayReply = transformBooleanArrayReply;
+function pushScanArguments(args, cursor, options) {
+    args.push(cursor.toString());
+    if (options?.MATCH) {
+        args.push('MATCH', options.MATCH);
+    }
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.pushScanArguments = pushScanArguments;
+function transformNumberInfinityReply(reply) {
+    switch (reply.toString()) {
+        case '+inf':
+            return Infinity;
+        case '-inf':
+            return -Infinity;
+        default:
+            return Number(reply);
+    }
+}
+exports.transformNumberInfinityReply = transformNumberInfinityReply;
+function transformNumberInfinityNullReply(reply) {
+    if (reply === null)
+        return null;
+    return transformNumberInfinityReply(reply);
+}
+exports.transformNumberInfinityNullReply = transformNumberInfinityNullReply;
+function transformNumberInfinityNullArrayReply(reply) {
+    return reply.map(transformNumberInfinityNullReply);
+}
+exports.transformNumberInfinityNullArrayReply = transformNumberInfinityNullArrayReply;
+function transformNumberInfinityArgument(num) {
+    switch (num) {
+        case Infinity:
+            return '+inf';
+        case -Infinity:
+            return '-inf';
+        default:
+            return num.toString();
+    }
+}
+exports.transformNumberInfinityArgument = transformNumberInfinityArgument;
+function transformStringNumberInfinityArgument(num) {
+    if (typeof num !== 'number')
+        return num;
+    return transformNumberInfinityArgument(num);
+}
+exports.transformStringNumberInfinityArgument = transformStringNumberInfinityArgument;
+function transformTuplesReply(reply) {
+    const message = Object.create(null);
+    for (let i = 0; i < reply.length; i += 2) {
+        message[reply[i].toString()] = reply[i + 1];
+    }
+    return message;
+}
+exports.transformTuplesReply = transformTuplesReply;
+function transformStreamMessagesReply(reply) {
+    const messages = [];
+    for (const [id, message] of reply) {
+        messages.push({
+            id,
+            message: transformTuplesReply(message)
+        });
+    }
+    return messages;
+}
+exports.transformStreamMessagesReply = transformStreamMessagesReply;
+function transformStreamsMessagesReply(reply) {
+    if (reply === null)
+        return null;
+    return reply.map(([name, rawMessages]) => ({
+        name,
+        messages: transformStreamMessagesReply(rawMessages)
+    }));
+}
+exports.transformStreamsMessagesReply = transformStreamsMessagesReply;
+function transformSortedSetMemberNullReply(reply) {
+    if (!reply.length)
+        return null;
+    return transformSortedSetMemberReply(reply);
+}
+exports.transformSortedSetMemberNullReply = transformSortedSetMemberNullReply;
+function transformSortedSetMemberReply(reply) {
+    return {
+        value: reply[0],
+        score: transformNumberInfinityReply(reply[1])
+    };
+}
+exports.transformSortedSetMemberReply = transformSortedSetMemberReply;
+function transformSortedSetWithScoresReply(reply) {
+    const members = [];
+    for (let i = 0; i < reply.length; i += 2) {
+        members.push({
+            value: reply[i],
+            score: transformNumberInfinityReply(reply[i + 1])
+        });
+    }
+    return members;
+}
+exports.transformSortedSetWithScoresReply = transformSortedSetWithScoresReply;
+function transformZMPopArguments(args, keys, side, options) {
+    pushVerdictArgument(args, keys);
+    args.push(side);
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformZMPopArguments = transformZMPopArguments;
+function transformLMPopArguments(args, keys, side, options) {
+    pushVerdictArgument(args, keys);
+    args.push(side);
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformLMPopArguments = transformLMPopArguments;
+function pushGeoCountArgument(args, count) {
+    if (typeof count === 'number') {
+        args.push('COUNT', count.toString());
+    }
+    else if (count) {
+        args.push('COUNT', count.value.toString());
+        if (count.ANY) {
+            args.push('ANY');
+        }
+    }
+    return args;
+}
+exports.pushGeoCountArgument = pushGeoCountArgument;
+function pushGeoSearchArguments(args, key, from, by, options) {
+    args.push(key);
+    if (typeof from === 'string') {
+        args.push('FROMMEMBER', from);
+    }
+    else {
+        args.push('FROMLONLAT', from.longitude.toString(), from.latitude.toString());
+    }
+    if ('radius' in by) {
+        args.push('BYRADIUS', by.radius.toString());
+    }
+    else {
+        args.push('BYBOX', by.width.toString(), by.height.toString());
+    }
+    args.push(by.unit);
+    if (options?.SORT) {
+        args.push(options.SORT);
+    }
+    pushGeoCountArgument(args, options?.COUNT);
+    return args;
+}
+exports.pushGeoSearchArguments = pushGeoSearchArguments;
+function pushGeoRadiusArguments(args, key, from, radius, unit, options) {
+    args.push(key);
+    if (typeof from === 'string') {
+        args.push(from);
+    }
+    else {
+        args.push(from.longitude.toString(), from.latitude.toString());
+    }
+    args.push(radius.toString(), unit);
+    if (options?.SORT) {
+        args.push(options.SORT);
+    }
+    pushGeoCountArgument(args, options?.COUNT);
+    return args;
+}
+exports.pushGeoRadiusArguments = pushGeoRadiusArguments;
+function pushGeoRadiusStoreArguments(args, key, from, radius, unit, destination, options) {
+    pushGeoRadiusArguments(args, key, from, radius, unit, options);
+    if (options?.STOREDIST) {
+        args.push('STOREDIST', destination);
+    }
+    else {
+        args.push('STORE', destination);
+    }
+    return args;
+}
+exports.pushGeoRadiusStoreArguments = pushGeoRadiusStoreArguments;
+var GeoReplyWith;
+(function (GeoReplyWith) {
+    GeoReplyWith["DISTANCE"] = "WITHDIST";
+    GeoReplyWith["HASH"] = "WITHHASH";
+    GeoReplyWith["COORDINATES"] = "WITHCOORD";
+})(GeoReplyWith = exports.GeoReplyWith || (exports.GeoReplyWith = {}));
+function transformGeoMembersWithReply(reply, replyWith) {
+    const replyWithSet = new Set(replyWith);
+    let index = 0;
+    const distanceIndex = replyWithSet.has(GeoReplyWith.DISTANCE) && ++index, hashIndex = replyWithSet.has(GeoReplyWith.HASH) && ++index, coordinatesIndex = replyWithSet.has(GeoReplyWith.COORDINATES) && ++index;
+    return reply.map(member => {
+        const transformedMember = {
+            member: member[0]
+        };
+        if (distanceIndex) {
+            transformedMember.distance = member[distanceIndex];
+        }
+        if (hashIndex) {
+            transformedMember.hash = member[hashIndex];
+        }
+        if (coordinatesIndex) {
+            const [longitude, latitude] = member[coordinatesIndex];
+            transformedMember.coordinates = {
+                longitude,
+                latitude
+            };
+        }
+        return transformedMember;
+    });
+}
+exports.transformGeoMembersWithReply = transformGeoMembersWithReply;
+function transformEXAT(EXAT) {
+    return (typeof EXAT === 'number' ? EXAT : Math.floor(EXAT.getTime() / 1000)).toString();
+}
+exports.transformEXAT = transformEXAT;
+function transformPXAT(PXAT) {
+    return (typeof PXAT === 'number' ? PXAT : PXAT.getTime()).toString();
+}
+exports.transformPXAT = transformPXAT;
+function evalFirstKeyIndex(options) {
+    return options?.keys?.[0];
+}
+exports.evalFirstKeyIndex = evalFirstKeyIndex;
+function pushEvalArguments(args, options) {
+    if (options?.keys) {
+        args.push(options.keys.length.toString(), ...options.keys);
+    }
+    else {
+        args.push('0');
+    }
+    if (options?.arguments) {
+        args.push(...options.arguments);
+    }
+    return args;
+}
+exports.pushEvalArguments = pushEvalArguments;
+function pushVerdictArguments(args, value) {
+    if (Array.isArray(value)) {
+        // https://github.com/redis/node-redis/pull/2160
+        args = args.concat(value);
+    }
+    else {
+        args.push(value);
+    }
+    return args;
+}
+exports.pushVerdictArguments = pushVerdictArguments;
+function pushVerdictNumberArguments(args, value) {
+    if (Array.isArray(value)) {
+        for (const item of value) {
+            args.push(item.toString());
+        }
+    }
+    else {
+        args.push(value.toString());
+    }
+    return args;
+}
+exports.pushVerdictNumberArguments = pushVerdictNumberArguments;
+function pushVerdictArgument(args, value) {
+    if (Array.isArray(value)) {
+        args.push(value.length.toString(), ...value);
+    }
+    else {
+        args.push('1', value);
+    }
+    return args;
+}
+exports.pushVerdictArgument = pushVerdictArgument;
+function pushOptionalVerdictArgument(args, name, value) {
+    if (value === undefined)
+        return args;
+    args.push(name);
+    return pushVerdictArgument(args, value);
+}
+exports.pushOptionalVerdictArgument = pushOptionalVerdictArgument;
+var CommandFlags;
+(function (CommandFlags) {
+    CommandFlags["WRITE"] = "write";
+    CommandFlags["READONLY"] = "readonly";
+    CommandFlags["DENYOOM"] = "denyoom";
+    CommandFlags["ADMIN"] = "admin";
+    CommandFlags["PUBSUB"] = "pubsub";
+    CommandFlags["NOSCRIPT"] = "noscript";
+    CommandFlags["RANDOM"] = "random";
+    CommandFlags["SORT_FOR_SCRIPT"] = "sort_for_script";
+    CommandFlags["LOADING"] = "loading";
+    CommandFlags["STALE"] = "stale";
+    CommandFlags["SKIP_MONITOR"] = "skip_monitor";
+    CommandFlags["ASKING"] = "asking";
+    CommandFlags["FAST"] = "fast";
+    CommandFlags["MOVABLEKEYS"] = "movablekeys"; // keys have no pre-determined position. You must discover keys yourself.
+})(CommandFlags = exports.CommandFlags || (exports.CommandFlags = {}));
+var CommandCategories;
+(function (CommandCategories) {
+    CommandCategories["KEYSPACE"] = "@keyspace";
+    CommandCategories["READ"] = "@read";
+    CommandCategories["WRITE"] = "@write";
+    CommandCategories["SET"] = "@set";
+    CommandCategories["SORTEDSET"] = "@sortedset";
+    CommandCategories["LIST"] = "@list";
+    CommandCategories["HASH"] = "@hash";
+    CommandCategories["STRING"] = "@string";
+    CommandCategories["BITMAP"] = "@bitmap";
+    CommandCategories["HYPERLOGLOG"] = "@hyperloglog";
+    CommandCategories["GEO"] = "@geo";
+    CommandCategories["STREAM"] = "@stream";
+    CommandCategories["PUBSUB"] = "@pubsub";
+    CommandCategories["ADMIN"] = "@admin";
+    CommandCategories["FAST"] = "@fast";
+    CommandCategories["SLOW"] = "@slow";
+    CommandCategories["BLOCKING"] = "@blocking";
+    CommandCategories["DANGEROUS"] = "@dangerous";
+    CommandCategories["CONNECTION"] = "@connection";
+    CommandCategories["TRANSACTION"] = "@transaction";
+    CommandCategories["SCRIPTING"] = "@scripting";
+})(CommandCategories = exports.CommandCategories || (exports.CommandCategories = {}));
+function transformCommandReply([name, arity, flags, firstKeyIndex, lastKeyIndex, step, categories]) {
+    return {
+        name,
+        arity,
+        flags: new Set(flags),
+        firstKeyIndex,
+        lastKeyIndex,
+        step,
+        categories: new Set(categories)
+    };
+}
+exports.transformCommandReply = transformCommandReply;
+var RedisFunctionFlags;
+(function (RedisFunctionFlags) {
+    RedisFunctionFlags["NO_WRITES"] = "no-writes";
+    RedisFunctionFlags["ALLOW_OOM"] = "allow-oom";
+    RedisFunctionFlags["ALLOW_STALE"] = "allow-stale";
+    RedisFunctionFlags["NO_CLUSTER"] = "no-cluster";
+})(RedisFunctionFlags = exports.RedisFunctionFlags || (exports.RedisFunctionFlags = {}));
+function transformFunctionListItemReply(reply) {
+    return {
+        libraryName: reply[1],
+        engine: reply[3],
+        functions: reply[5].map(fn => ({
+            name: fn[1],
+            description: fn[3],
+            flags: fn[5]
+        }))
+    };
+}
+exports.transformFunctionListItemReply = transformFunctionListItemReply;
+function pushSortArguments(args, options) {
+    if (options?.BY) {
+        args.push('BY', options.BY);
+    }
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.offset.toString(), options.LIMIT.count.toString());
+    }
+    if (options?.GET) {
+        for (const pattern of (typeof options.GET === 'string' ? [options.GET] : options.GET)) {
+            args.push('GET', pattern);
+        }
+    }
+    if (options?.DIRECTION) {
+        args.push(options.DIRECTION);
+    }
+    if (options?.ALPHA) {
+        args.push('ALPHA');
+    }
+    return args;
+}
+exports.pushSortArguments = pushSortArguments;
+function pushSlotRangeArguments(args, range) {
+    args.push(range.start.toString(), range.end.toString());
+}
+function pushSlotRangesArguments(args, ranges) {
+    if (Array.isArray(ranges)) {
+        for (const range of ranges) {
+            pushSlotRangeArguments(args, range);
+        }
+    }
+    else {
+        pushSlotRangeArguments(args, ranges);
+    }
+    return args;
+}
+exports.pushSlotRangesArguments = pushSlotRangesArguments;
+function transformRangeReply([start, end]) {
+    return {
+        start,
+        end
+    };
+}
+exports.transformRangeReply = transformRangeReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/errors.js":
+/*!**********************************************!*\
+  !*** ../../@redis/client/dist/lib/errors.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ErrorReply = exports.ReconnectStrategyError = exports.RootNodesUnavailableError = exports.SocketClosedUnexpectedlyError = exports.DisconnectsClientError = exports.ClientOfflineError = exports.ClientClosedError = exports.ConnectionTimeoutError = exports.WatchError = exports.AbortError = void 0;
+class AbortError extends Error {
+    constructor() {
+        super('The command was aborted');
+    }
+}
+exports.AbortError = AbortError;
+class WatchError extends Error {
+    constructor() {
+        super('One (or more) of the watched keys has been changed');
+    }
+}
+exports.WatchError = WatchError;
+class ConnectionTimeoutError extends Error {
+    constructor() {
+        super('Connection timeout');
+    }
+}
+exports.ConnectionTimeoutError = ConnectionTimeoutError;
+class ClientClosedError extends Error {
+    constructor() {
+        super('The client is closed');
+    }
+}
+exports.ClientClosedError = ClientClosedError;
+class ClientOfflineError extends Error {
+    constructor() {
+        super('The client is offline');
+    }
+}
+exports.ClientOfflineError = ClientOfflineError;
+class DisconnectsClientError extends Error {
+    constructor() {
+        super('Disconnects client');
+    }
+}
+exports.DisconnectsClientError = DisconnectsClientError;
+class SocketClosedUnexpectedlyError extends Error {
+    constructor() {
+        super('Socket closed unexpectedly');
+    }
+}
+exports.SocketClosedUnexpectedlyError = SocketClosedUnexpectedlyError;
+class RootNodesUnavailableError extends Error {
+    constructor() {
+        super('All the root nodes are unavailable');
+    }
+}
+exports.RootNodesUnavailableError = RootNodesUnavailableError;
+class ReconnectStrategyError extends Error {
+    constructor(originalError, socketError) {
+        super(originalError.message);
+        Object.defineProperty(this, "originalError", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        Object.defineProperty(this, "socketError", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: void 0
+        });
+        this.originalError = originalError;
+        this.socketError = socketError;
+    }
+}
+exports.ReconnectStrategyError = ReconnectStrategyError;
+class ErrorReply extends Error {
+    constructor(message) {
+        super(message);
+        this.stack = undefined;
+    }
+}
+exports.ErrorReply = ErrorReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/lua-script.js":
+/*!**************************************************!*\
+  !*** ../../@redis/client/dist/lib/lua-script.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.scriptSha1 = exports.defineScript = void 0;
+const crypto_1 = __webpack_require__(/*! crypto */ "crypto");
+function defineScript(script) {
+    return {
+        ...script,
+        SHA1: scriptSha1(script.SCRIPT)
+    };
+}
+exports.defineScript = defineScript;
+function scriptSha1(script) {
+    return (0, crypto_1.createHash)('sha1').update(script).digest('hex');
+}
+exports.scriptSha1 = scriptSha1;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/multi-command.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/client/dist/lib/multi-command.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const commander_1 = __webpack_require__(/*! ./commander */ "../../@redis/client/dist/lib/commander.js");
+const errors_1 = __webpack_require__(/*! ./errors */ "../../@redis/client/dist/lib/errors.js");
+class RedisMultiCommand {
+    constructor() {
+        Object.defineProperty(this, "queue", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: []
+        });
+        Object.defineProperty(this, "scriptsInUse", {
+            enumerable: true,
+            configurable: true,
+            writable: true,
+            value: new Set()
+        });
+    }
+    static generateChainId() {
+        return Symbol('RedisMultiCommand Chain Id');
+    }
+    addCommand(args, transformReply) {
+        this.queue.push({
+            args,
+            transformReply
+        });
+    }
+    addFunction(name, fn, args) {
+        const transformedArguments = (0, commander_1.fCallArguments)(name, fn, fn.transformArguments(...args));
+        this.queue.push({
+            args: transformedArguments,
+            transformReply: fn.transformReply
+        });
+        return transformedArguments;
+    }
+    addScript(script, args) {
+        const transformedArguments = [];
+        if (this.scriptsInUse.has(script.SHA1)) {
+            transformedArguments.push('EVALSHA', script.SHA1);
+        }
+        else {
+            this.scriptsInUse.add(script.SHA1);
+            transformedArguments.push('EVAL', script.SCRIPT);
+        }
+        if (script.NUMBER_OF_KEYS !== undefined) {
+            transformedArguments.push(script.NUMBER_OF_KEYS.toString());
+        }
+        const scriptArguments = script.transformArguments(...args);
+        transformedArguments.push(...scriptArguments);
+        if (scriptArguments.preserve) {
+            transformedArguments.preserve = scriptArguments.preserve;
+        }
+        this.addCommand(transformedArguments, script.transformReply);
+        return transformedArguments;
+    }
+    handleExecReplies(rawReplies) {
+        const execReply = rawReplies[rawReplies.length - 1];
+        if (execReply === null) {
+            throw new errors_1.WatchError();
+        }
+        return this.transformReplies(execReply);
+    }
+    transformReplies(rawReplies) {
+        return rawReplies.map((reply, i) => {
+            const { transformReply, args } = this.queue[i];
+            return transformReply ? transformReply(reply, args.preserve) : reply;
+        });
+    }
+}
+exports["default"] = RedisMultiCommand;
+
+
+/***/ }),
+
+/***/ "../../@redis/client/dist/lib/utils.js":
+/*!*********************************************!*\
+  !*** ../../@redis/client/dist/lib/utils.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.promiseTimeout = void 0;
+function promiseTimeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+exports.promiseTimeout = promiseTimeout;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/CONFIG_GET.js":
+/*!******************************************************!*\
+  !*** ../../@redis/graph/dist/commands/CONFIG_GET.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(configKey) {
+    return ['GRAPH.CONFIG', 'GET', configKey];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/CONFIG_SET.js":
+/*!******************************************************!*\
+  !*** ../../@redis/graph/dist/commands/CONFIG_SET.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(configKey, value) {
+    return [
+        'GRAPH.CONFIG',
+        'SET',
+        configKey,
+        value.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/DELETE.js":
+/*!**************************************************!*\
+  !*** ../../@redis/graph/dist/commands/DELETE.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['GRAPH.DELETE', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/EXPLAIN.js":
+/*!***************************************************!*\
+  !*** ../../@redis/graph/dist/commands/EXPLAIN.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, query) {
+    return ['GRAPH.EXPLAIN', key, query];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/LIST.js":
+/*!************************************************!*\
+  !*** ../../@redis/graph/dist/commands/LIST.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments() {
+    return ['GRAPH.LIST'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/PROFILE.js":
+/*!***************************************************!*\
+  !*** ../../@redis/graph/dist/commands/PROFILE.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, query) {
+    return ['GRAPH.PROFILE', key, query];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/QUERY.js":
+/*!*************************************************!*\
+  !*** ../../@redis/graph/dist/commands/QUERY.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/graph/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(graph, query, options, compact) {
+    return (0, _1.pushQueryArguments)(['GRAPH.QUERY'], graph, query, options, compact);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.length === 1 ? {
+        headers: undefined,
+        data: undefined,
+        metadata: reply[0]
+    } : {
+        headers: reply[0],
+        data: reply[1],
+        metadata: reply[2]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/RO_QUERY.js":
+/*!****************************************************!*\
+  !*** ../../@redis/graph/dist/commands/RO_QUERY.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/graph/dist/commands/index.js");
+var QUERY_1 = __webpack_require__(/*! ./QUERY */ "../../@redis/graph/dist/commands/QUERY.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return QUERY_1.FIRST_KEY_INDEX; } }));
+exports.IS_READ_ONLY = true;
+function transformArguments(graph, query, options, compact) {
+    return (0, _1.pushQueryArguments)(['GRAPH.RO_QUERY'], graph, query, options, compact);
+}
+exports.transformArguments = transformArguments;
+var QUERY_2 = __webpack_require__(/*! ./QUERY */ "../../@redis/graph/dist/commands/QUERY.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return QUERY_2.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/SLOWLOG.js":
+/*!***************************************************!*\
+  !*** ../../@redis/graph/dist/commands/SLOWLOG.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key) {
+    return ['GRAPH.SLOWLOG', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(logs) {
+    return logs.map(([timestamp, command, query, took]) => ({
+        timestamp: new Date(Number(timestamp) * 1000),
+        command,
+        query,
+        took: Number(took)
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/commands/index.js":
+/*!*************************************************!*\
+  !*** ../../@redis/graph/dist/commands/index.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.pushQueryArguments = void 0;
+const CONFIG_GET = __webpack_require__(/*! ./CONFIG_GET */ "../../@redis/graph/dist/commands/CONFIG_GET.js");
+const CONFIG_SET = __webpack_require__(/*! ./CONFIG_SET */ "../../@redis/graph/dist/commands/CONFIG_SET.js");
+;
+const DELETE = __webpack_require__(/*! ./DELETE */ "../../@redis/graph/dist/commands/DELETE.js");
+const EXPLAIN = __webpack_require__(/*! ./EXPLAIN */ "../../@redis/graph/dist/commands/EXPLAIN.js");
+const LIST = __webpack_require__(/*! ./LIST */ "../../@redis/graph/dist/commands/LIST.js");
+const PROFILE = __webpack_require__(/*! ./PROFILE */ "../../@redis/graph/dist/commands/PROFILE.js");
+const QUERY = __webpack_require__(/*! ./QUERY */ "../../@redis/graph/dist/commands/QUERY.js");
+const RO_QUERY = __webpack_require__(/*! ./RO_QUERY */ "../../@redis/graph/dist/commands/RO_QUERY.js");
+const SLOWLOG = __webpack_require__(/*! ./SLOWLOG */ "../../@redis/graph/dist/commands/SLOWLOG.js");
+exports["default"] = {
+    CONFIG_GET,
+    configGet: CONFIG_GET,
+    CONFIG_SET,
+    configSet: CONFIG_SET,
+    DELETE,
+    delete: DELETE,
+    EXPLAIN,
+    explain: EXPLAIN,
+    LIST,
+    list: LIST,
+    PROFILE,
+    profile: PROFILE,
+    QUERY,
+    query: QUERY,
+    RO_QUERY,
+    roQuery: RO_QUERY,
+    SLOWLOG,
+    slowLog: SLOWLOG
+};
+function pushQueryArguments(args, graph, query, options, compact) {
+    args.push(graph);
+    if (typeof options === 'number') {
+        args.push(query);
+        pushTimeout(args, options);
+    }
+    else {
+        args.push(options?.params ?
+            `CYPHER ${queryParamsToString(options.params)} ${query}` :
+            query);
+        if (options?.TIMEOUT !== undefined) {
+            pushTimeout(args, options.TIMEOUT);
+        }
+    }
+    if (compact) {
+        args.push('--compact');
+    }
+    return args;
+}
+exports.pushQueryArguments = pushQueryArguments;
+function pushTimeout(args, timeout) {
+    args.push('TIMEOUT', timeout.toString());
+}
+function queryParamsToString(params) {
+    const parts = [];
+    for (const [key, value] of Object.entries(params)) {
+        parts.push(`${key}=${queryParamToString(value)}`);
+    }
+    return parts.join(' ');
+}
+function queryParamToString(param) {
+    if (param === null) {
+        return 'null';
+    }
+    switch (typeof param) {
+        case 'string':
+            return `"${param.replace(/["\\]/g, '\\$&')}"`;
+        case 'number':
+        case 'boolean':
+            return param.toString();
+    }
+    if (Array.isArray(param)) {
+        return `[${param.map(queryParamToString).join(',')}]`;
+    }
+    else if (typeof param === 'object') {
+        const body = [];
+        for (const [key, value] of Object.entries(param)) {
+            body.push(`${key}:${queryParamToString(value)}`);
+        }
+        return `{${body.join(',')}}`;
+    }
+    else {
+        throw new TypeError(`Unexpected param type ${typeof param} ${param}`);
+    }
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/graph.js":
+/*!****************************************!*\
+  !*** ../../@redis/graph/dist/graph.js ***!
+  \****************************************/
+/***/ (function(__unused_webpack_module, exports) {
+
+"use strict";
+
+var __classPrivateFieldSet = (this && this.__classPrivateFieldSet) || function (receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+};
+var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+};
+var _Graph_instances, _Graph_client, _Graph_name, _Graph_metadata, _Graph_setMetadataPromise, _Graph_updateMetadata, _Graph_setMetadata, _Graph_cleanMetadataArray, _Graph_getMetadata, _Graph_getMetadataAsync, _Graph_parseReply, _Graph_parseValue, _Graph_parseEdge, _Graph_parseNode, _Graph_parseProperties;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+// https://github.com/RedisGraph/RedisGraph/blob/master/src/resultset/formatters/resultset_formatter.h#L20
+var GraphValueTypes;
+(function (GraphValueTypes) {
+    GraphValueTypes[GraphValueTypes["UNKNOWN"] = 0] = "UNKNOWN";
+    GraphValueTypes[GraphValueTypes["NULL"] = 1] = "NULL";
+    GraphValueTypes[GraphValueTypes["STRING"] = 2] = "STRING";
+    GraphValueTypes[GraphValueTypes["INTEGER"] = 3] = "INTEGER";
+    GraphValueTypes[GraphValueTypes["BOOLEAN"] = 4] = "BOOLEAN";
+    GraphValueTypes[GraphValueTypes["DOUBLE"] = 5] = "DOUBLE";
+    GraphValueTypes[GraphValueTypes["ARRAY"] = 6] = "ARRAY";
+    GraphValueTypes[GraphValueTypes["EDGE"] = 7] = "EDGE";
+    GraphValueTypes[GraphValueTypes["NODE"] = 8] = "NODE";
+    GraphValueTypes[GraphValueTypes["PATH"] = 9] = "PATH";
+    GraphValueTypes[GraphValueTypes["MAP"] = 10] = "MAP";
+    GraphValueTypes[GraphValueTypes["POINT"] = 11] = "POINT";
+})(GraphValueTypes || (GraphValueTypes = {}));
+class Graph {
+    constructor(client, name) {
+        _Graph_instances.add(this);
+        _Graph_client.set(this, void 0);
+        _Graph_name.set(this, void 0);
+        _Graph_metadata.set(this, void 0);
+        _Graph_setMetadataPromise.set(this, void 0);
+        __classPrivateFieldSet(this, _Graph_client, client, "f");
+        __classPrivateFieldSet(this, _Graph_name, name, "f");
+    }
+    async query(query, options) {
+        return __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseReply).call(this, await __classPrivateFieldGet(this, _Graph_client, "f").graph.query(__classPrivateFieldGet(this, _Graph_name, "f"), query, options, true));
+    }
+    async roQuery(query, options) {
+        return __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseReply).call(this, await __classPrivateFieldGet(this, _Graph_client, "f").graph.roQuery(__classPrivateFieldGet(this, _Graph_name, "f"), query, options, true));
+    }
+}
+exports["default"] = Graph;
+_Graph_client = new WeakMap(), _Graph_name = new WeakMap(), _Graph_metadata = new WeakMap(), _Graph_setMetadataPromise = new WeakMap(), _Graph_instances = new WeakSet(), _Graph_updateMetadata = function _Graph_updateMetadata() {
+    __classPrivateFieldSet(this, _Graph_setMetadataPromise, __classPrivateFieldGet(this, _Graph_setMetadataPromise, "f") ?? __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_setMetadata).call(this)
+        .finally(() => __classPrivateFieldSet(this, _Graph_setMetadataPromise, undefined, "f")), "f");
+    return __classPrivateFieldGet(this, _Graph_setMetadataPromise, "f");
+}, _Graph_setMetadata = 
+// DO NOT use directly, use #updateMetadata instead
+async function _Graph_setMetadata() {
+    const [labels, relationshipTypes, propertyKeys] = await Promise.all([
+        __classPrivateFieldGet(this, _Graph_client, "f").graph.roQuery(__classPrivateFieldGet(this, _Graph_name, "f"), 'CALL db.labels()'),
+        __classPrivateFieldGet(this, _Graph_client, "f").graph.roQuery(__classPrivateFieldGet(this, _Graph_name, "f"), 'CALL db.relationshipTypes()'),
+        __classPrivateFieldGet(this, _Graph_client, "f").graph.roQuery(__classPrivateFieldGet(this, _Graph_name, "f"), 'CALL db.propertyKeys()')
+    ]);
+    __classPrivateFieldSet(this, _Graph_metadata, {
+        labels: __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_cleanMetadataArray).call(this, labels.data),
+        relationshipTypes: __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_cleanMetadataArray).call(this, relationshipTypes.data),
+        propertyKeys: __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_cleanMetadataArray).call(this, propertyKeys.data)
+    }, "f");
+    return __classPrivateFieldGet(this, _Graph_metadata, "f");
+}, _Graph_cleanMetadataArray = function _Graph_cleanMetadataArray(arr) {
+    return arr.map(([value]) => value);
+}, _Graph_getMetadata = function _Graph_getMetadata(key, id) {
+    return __classPrivateFieldGet(this, _Graph_metadata, "f")?.[key][id] ?? __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_getMetadataAsync).call(this, key, id);
+}, _Graph_getMetadataAsync = 
+// DO NOT use directly, use #getMetadata instead
+async function _Graph_getMetadataAsync(key, id) {
+    const value = (await __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_updateMetadata).call(this))[key][id];
+    if (value === undefined)
+        throw new Error(`Cannot find value from ${key}[${id}]`);
+    return value;
+}, _Graph_parseReply = async function _Graph_parseReply(reply) {
+    if (!reply.data)
+        return reply;
+    const promises = [], parsed = {
+        metadata: reply.metadata,
+        data: reply.data.map((row) => {
+            const data = {};
+            for (let i = 0; i < row.length; i++) {
+                data[reply.headers[i][1]] = __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseValue).call(this, row[i], promises);
+            }
+            return data;
+        })
+    };
+    if (promises.length)
+        await Promise.all(promises);
+    return parsed;
+}, _Graph_parseValue = function _Graph_parseValue([valueType, value], promises) {
+    switch (valueType) {
+        case GraphValueTypes.NULL:
+            return null;
+        case GraphValueTypes.STRING:
+        case GraphValueTypes.INTEGER:
+            return value;
+        case GraphValueTypes.BOOLEAN:
+            return value === 'true';
+        case GraphValueTypes.DOUBLE:
+            return parseFloat(value);
+        case GraphValueTypes.ARRAY:
+            return value.map(x => __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseValue).call(this, x, promises));
+        case GraphValueTypes.EDGE:
+            return __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseEdge).call(this, value, promises);
+        case GraphValueTypes.NODE:
+            return __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseNode).call(this, value, promises);
+        case GraphValueTypes.PATH:
+            return {
+                nodes: value[0][1].map(([, node]) => __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseNode).call(this, node, promises)),
+                edges: value[1][1].map(([, edge]) => __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseEdge).call(this, edge, promises))
+            };
+        case GraphValueTypes.MAP:
+            const map = {};
+            for (let i = 0; i < value.length; i++) {
+                map[value[i++]] = __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseValue).call(this, value[i], promises);
+            }
+            return map;
+        case GraphValueTypes.POINT:
+            return {
+                latitude: parseFloat(value[0]),
+                longitude: parseFloat(value[1])
+            };
+        default:
+            throw new Error(`unknown scalar type: ${valueType}`);
+    }
+}, _Graph_parseEdge = function _Graph_parseEdge([id, relationshipTypeId, sourceId, destinationId, properties], promises) {
+    const edge = {
+        id,
+        sourceId,
+        destinationId,
+        properties: __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseProperties).call(this, properties, promises)
+    };
+    const relationshipType = __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_getMetadata).call(this, 'relationshipTypes', relationshipTypeId);
+    if (relationshipType instanceof Promise) {
+        promises.push(relationshipType.then(value => edge.relationshipType = value));
+    }
+    else {
+        edge.relationshipType = relationshipType;
+    }
+    return edge;
+}, _Graph_parseNode = function _Graph_parseNode([id, labelIds, properties], promises) {
+    const labels = new Array(labelIds.length);
+    for (let i = 0; i < labelIds.length; i++) {
+        const value = __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_getMetadata).call(this, 'labels', labelIds[i]);
+        if (value instanceof Promise) {
+            promises.push(value.then(value => labels[i] = value));
+        }
+        else {
+            labels[i] = value;
+        }
+    }
+    return {
+        id,
+        labels,
+        properties: __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseProperties).call(this, properties, promises)
+    };
+}, _Graph_parseProperties = function _Graph_parseProperties(raw, promises) {
+    const parsed = {};
+    for (const [id, type, value] of raw) {
+        const parsedValue = __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_parseValue).call(this, [type, value], promises), key = __classPrivateFieldGet(this, _Graph_instances, "m", _Graph_getMetadata).call(this, 'propertyKeys', id);
+        if (key instanceof Promise) {
+            promises.push(key.then(key => parsed[key] = parsedValue));
+        }
+        else {
+            parsed[key] = parsedValue;
+        }
+    }
+    return parsed;
+};
+
+
+/***/ }),
+
+/***/ "../../@redis/graph/dist/index.js":
+/*!****************************************!*\
+  !*** ../../@redis/graph/dist/index.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Graph = exports["default"] = void 0;
+var commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/graph/dist/commands/index.js");
+Object.defineProperty(exports, "default", ({ enumerable: true, get: function () { return commands_1.default; } }));
+var graph_1 = __webpack_require__(/*! ./graph */ "../../@redis/graph/dist/graph.js");
+Object.defineProperty(exports, "Graph", ({ enumerable: true, get: function () { return graph_1.default; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/ARRAPPEND.js":
+/*!****************************************************!*\
+  !*** ../../@redis/json/dist/commands/ARRAPPEND.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, ...jsons) {
+    const args = ['JSON.ARRAPPEND', key, path];
+    for (const json of jsons) {
+        args.push((0, _1.transformRedisJsonArgument)(json));
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/ARRINDEX.js":
+/*!***************************************************!*\
+  !*** ../../@redis/json/dist/commands/ARRINDEX.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, path, json, start, stop) {
+    const args = ['JSON.ARRINDEX', key, path, (0, _1.transformRedisJsonArgument)(json)];
+    if (start !== undefined && start !== null) {
+        args.push(start.toString());
+        if (stop !== undefined && stop !== null) {
+            args.push(stop.toString());
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/ARRINSERT.js":
+/*!****************************************************!*\
+  !*** ../../@redis/json/dist/commands/ARRINSERT.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, index, ...jsons) {
+    const args = ['JSON.ARRINSERT', key, path, index.toString()];
+    for (const json of jsons) {
+        args.push((0, _1.transformRedisJsonArgument)(json));
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/ARRLEN.js":
+/*!*************************************************!*\
+  !*** ../../@redis/json/dist/commands/ARRLEN.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, path) {
+    const args = ['JSON.ARRLEN', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/ARRPOP.js":
+/*!*************************************************!*\
+  !*** ../../@redis/json/dist/commands/ARRPOP.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, index) {
+    const args = ['JSON.ARRPOP', key];
+    if (path) {
+        args.push(path);
+        if (index !== undefined && index !== null) {
+            args.push(index.toString());
+        }
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    if (reply === null)
+        return null;
+    if (Array.isArray(reply)) {
+        return reply.map(_1.transformRedisJsonNullReply);
+    }
+    return (0, _1.transformRedisJsonNullReply)(reply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/ARRTRIM.js":
+/*!**************************************************!*\
+  !*** ../../@redis/json/dist/commands/ARRTRIM.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, start, stop) {
+    return ['JSON.ARRTRIM', key, path, start.toString(), stop.toString()];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/DEBUG_MEMORY.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/json/dist/commands/DEBUG_MEMORY.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 2;
+function transformArguments(key, path) {
+    const args = ['JSON.DEBUG', 'MEMORY', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/DEL.js":
+/*!**********************************************!*\
+  !*** ../../@redis/json/dist/commands/DEL.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path) {
+    const args = ['JSON.DEL', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/FORGET.js":
+/*!*************************************************!*\
+  !*** ../../@redis/json/dist/commands/FORGET.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path) {
+    const args = ['JSON.FORGET', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/GET.js":
+/*!**********************************************!*\
+  !*** ../../@redis/json/dist/commands/GET.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, options) {
+    let args = ['JSON.GET', key];
+    if (options?.path) {
+        args = (0, generic_transformers_1.pushVerdictArguments)(args, options.path);
+    }
+    if (options?.INDENT) {
+        args.push('INDENT', options.INDENT);
+    }
+    if (options?.NEWLINE) {
+        args.push('NEWLINE', options.NEWLINE);
+    }
+    if (options?.SPACE) {
+        args.push('SPACE', options.SPACE);
+    }
+    if (options?.NOESCAPE) {
+        args.push('NOESCAPE');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformRedisJsonNullReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/MGET.js":
+/*!***********************************************!*\
+  !*** ../../@redis/json/dist/commands/MGET.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(keys, path) {
+    return [
+        'JSON.MGET',
+        ...keys,
+        path
+    ];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(_1.transformRedisJsonNullReply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/NUMINCRBY.js":
+/*!****************************************************!*\
+  !*** ../../@redis/json/dist/commands/NUMINCRBY.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, by) {
+    return ['JSON.NUMINCRBY', key, path, by.toString()];
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformNumbersReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/NUMMULTBY.js":
+/*!****************************************************!*\
+  !*** ../../@redis/json/dist/commands/NUMMULTBY.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, by) {
+    return ['JSON.NUMMULTBY', key, path, by.toString()];
+}
+exports.transformArguments = transformArguments;
+var _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _1.transformNumbersReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/OBJKEYS.js":
+/*!**************************************************!*\
+  !*** ../../@redis/json/dist/commands/OBJKEYS.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path) {
+    const args = ['JSON.OBJKEYS', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/OBJLEN.js":
+/*!*************************************************!*\
+  !*** ../../@redis/json/dist/commands/OBJLEN.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path) {
+    const args = ['JSON.OBJLEN', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/RESP.js":
+/*!***********************************************!*\
+  !*** ../../@redis/json/dist/commands/RESP.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path) {
+    const args = ['JSON.RESP', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/SET.js":
+/*!**********************************************!*\
+  !*** ../../@redis/json/dist/commands/SET.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path, json, options) {
+    const args = ['JSON.SET', key, path, (0, _1.transformRedisJsonArgument)(json)];
+    if (options?.NX) {
+        args.push('NX');
+    }
+    else if (options?.XX) {
+        args.push('XX');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/STRAPPEND.js":
+/*!****************************************************!*\
+  !*** ../../@redis/json/dist/commands/STRAPPEND.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/json/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(...[key, pathOrAppend, append]) {
+    const args = ['JSON.STRAPPEND', key];
+    if (append !== undefined && append !== null) {
+        args.push(pathOrAppend, (0, _1.transformRedisJsonArgument)(append));
+    }
+    else {
+        args.push((0, _1.transformRedisJsonArgument)(pathOrAppend));
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/STRLEN.js":
+/*!*************************************************!*\
+  !*** ../../@redis/json/dist/commands/STRLEN.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, path) {
+    const args = ['JSON.STRLEN', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/TYPE.js":
+/*!***********************************************!*\
+  !*** ../../@redis/json/dist/commands/TYPE.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, path) {
+    const args = ['JSON.TYPE', key];
+    if (path) {
+        args.push(path);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/commands/index.js":
+/*!************************************************!*\
+  !*** ../../@redis/json/dist/commands/index.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformNumbersReply = exports.transformRedisJsonNullReply = exports.transformRedisJsonReply = exports.transformRedisJsonArgument = void 0;
+const ARRAPPEND = __webpack_require__(/*! ./ARRAPPEND */ "../../@redis/json/dist/commands/ARRAPPEND.js");
+const ARRINDEX = __webpack_require__(/*! ./ARRINDEX */ "../../@redis/json/dist/commands/ARRINDEX.js");
+const ARRINSERT = __webpack_require__(/*! ./ARRINSERT */ "../../@redis/json/dist/commands/ARRINSERT.js");
+const ARRLEN = __webpack_require__(/*! ./ARRLEN */ "../../@redis/json/dist/commands/ARRLEN.js");
+const ARRPOP = __webpack_require__(/*! ./ARRPOP */ "../../@redis/json/dist/commands/ARRPOP.js");
+const ARRTRIM = __webpack_require__(/*! ./ARRTRIM */ "../../@redis/json/dist/commands/ARRTRIM.js");
+const DEBUG_MEMORY = __webpack_require__(/*! ./DEBUG_MEMORY */ "../../@redis/json/dist/commands/DEBUG_MEMORY.js");
+const DEL = __webpack_require__(/*! ./DEL */ "../../@redis/json/dist/commands/DEL.js");
+const FORGET = __webpack_require__(/*! ./FORGET */ "../../@redis/json/dist/commands/FORGET.js");
+const GET = __webpack_require__(/*! ./GET */ "../../@redis/json/dist/commands/GET.js");
+const MGET = __webpack_require__(/*! ./MGET */ "../../@redis/json/dist/commands/MGET.js");
+const NUMINCRBY = __webpack_require__(/*! ./NUMINCRBY */ "../../@redis/json/dist/commands/NUMINCRBY.js");
+const NUMMULTBY = __webpack_require__(/*! ./NUMMULTBY */ "../../@redis/json/dist/commands/NUMMULTBY.js");
+const OBJKEYS = __webpack_require__(/*! ./OBJKEYS */ "../../@redis/json/dist/commands/OBJKEYS.js");
+const OBJLEN = __webpack_require__(/*! ./OBJLEN */ "../../@redis/json/dist/commands/OBJLEN.js");
+const RESP = __webpack_require__(/*! ./RESP */ "../../@redis/json/dist/commands/RESP.js");
+const SET = __webpack_require__(/*! ./SET */ "../../@redis/json/dist/commands/SET.js");
+const STRAPPEND = __webpack_require__(/*! ./STRAPPEND */ "../../@redis/json/dist/commands/STRAPPEND.js");
+const STRLEN = __webpack_require__(/*! ./STRLEN */ "../../@redis/json/dist/commands/STRLEN.js");
+const TYPE = __webpack_require__(/*! ./TYPE */ "../../@redis/json/dist/commands/TYPE.js");
+exports["default"] = {
+    ARRAPPEND,
+    arrAppend: ARRAPPEND,
+    ARRINDEX,
+    arrIndex: ARRINDEX,
+    ARRINSERT,
+    arrInsert: ARRINSERT,
+    ARRLEN,
+    arrLen: ARRLEN,
+    ARRPOP,
+    arrPop: ARRPOP,
+    ARRTRIM,
+    arrTrim: ARRTRIM,
+    DEBUG_MEMORY,
+    debugMemory: DEBUG_MEMORY,
+    DEL,
+    del: DEL,
+    FORGET,
+    forget: FORGET,
+    GET,
+    get: GET,
+    MGET,
+    mGet: MGET,
+    NUMINCRBY,
+    numIncrBy: NUMINCRBY,
+    NUMMULTBY,
+    numMultBy: NUMMULTBY,
+    OBJKEYS,
+    objKeys: OBJKEYS,
+    OBJLEN,
+    objLen: OBJLEN,
+    RESP,
+    resp: RESP,
+    SET,
+    set: SET,
+    STRAPPEND,
+    strAppend: STRAPPEND,
+    STRLEN,
+    strLen: STRLEN,
+    TYPE,
+    type: TYPE
+};
+function transformRedisJsonArgument(json) {
+    return JSON.stringify(json);
+}
+exports.transformRedisJsonArgument = transformRedisJsonArgument;
+function transformRedisJsonReply(json) {
+    return JSON.parse(json);
+}
+exports.transformRedisJsonReply = transformRedisJsonReply;
+function transformRedisJsonNullReply(json) {
+    if (json === null)
+        return null;
+    return transformRedisJsonReply(json);
+}
+exports.transformRedisJsonNullReply = transformRedisJsonNullReply;
+function transformNumbersReply(reply) {
+    return JSON.parse(reply);
+}
+exports.transformNumbersReply = transformNumbersReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/json/dist/index.js":
+/*!***************************************!*\
+  !*** ../../@redis/json/dist/index.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports["default"] = void 0;
+var commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/json/dist/commands/index.js");
+Object.defineProperty(exports, "default", ({ enumerable: true, get: function () { return commands_1.default; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/AGGREGATE.js":
+/*!******************************************************!*\
+  !*** ../../@redis/search/dist/commands/AGGREGATE.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.pushAggregatehOptions = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = exports.AggregateGroupByReducers = exports.AggregateSteps = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+var AggregateSteps;
+(function (AggregateSteps) {
+    AggregateSteps["GROUPBY"] = "GROUPBY";
+    AggregateSteps["SORTBY"] = "SORTBY";
+    AggregateSteps["APPLY"] = "APPLY";
+    AggregateSteps["LIMIT"] = "LIMIT";
+    AggregateSteps["FILTER"] = "FILTER";
+})(AggregateSteps = exports.AggregateSteps || (exports.AggregateSteps = {}));
+var AggregateGroupByReducers;
+(function (AggregateGroupByReducers) {
+    AggregateGroupByReducers["COUNT"] = "COUNT";
+    AggregateGroupByReducers["COUNT_DISTINCT"] = "COUNT_DISTINCT";
+    AggregateGroupByReducers["COUNT_DISTINCTISH"] = "COUNT_DISTINCTISH";
+    AggregateGroupByReducers["SUM"] = "SUM";
+    AggregateGroupByReducers["MIN"] = "MIN";
+    AggregateGroupByReducers["MAX"] = "MAX";
+    AggregateGroupByReducers["AVG"] = "AVG";
+    AggregateGroupByReducers["STDDEV"] = "STDDEV";
+    AggregateGroupByReducers["QUANTILE"] = "QUANTILE";
+    AggregateGroupByReducers["TOLIST"] = "TOLIST";
+    AggregateGroupByReducers["TO_LIST"] = "TOLIST";
+    AggregateGroupByReducers["FIRST_VALUE"] = "FIRST_VALUE";
+    AggregateGroupByReducers["RANDOM_SAMPLE"] = "RANDOM_SAMPLE";
+})(AggregateGroupByReducers = exports.AggregateGroupByReducers || (exports.AggregateGroupByReducers = {}));
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(index, query, options) {
+    return pushAggregatehOptions(['FT.AGGREGATE', index, query], options);
+}
+exports.transformArguments = transformArguments;
+function pushAggregatehOptions(args, options) {
+    if (options?.VERBATIM) {
+        args.push('VERBATIM');
+    }
+    if (options?.LOAD) {
+        args.push('LOAD');
+        (0, _1.pushArgumentsWithLength)(args, () => {
+            if (Array.isArray(options.LOAD)) {
+                for (const load of options.LOAD) {
+                    pushLoadField(args, load);
+                }
+            }
+            else {
+                pushLoadField(args, options.LOAD);
+            }
+        });
+    }
+    if (options?.STEPS) {
+        for (const step of options.STEPS) {
+            switch (step.type) {
+                case AggregateSteps.GROUPBY:
+                    args.push('GROUPBY');
+                    if (!step.properties) {
+                        args.push('0');
+                    }
+                    else {
+                        (0, generic_transformers_1.pushVerdictArgument)(args, step.properties);
+                    }
+                    if (Array.isArray(step.REDUCE)) {
+                        for (const reducer of step.REDUCE) {
+                            pushGroupByReducer(args, reducer);
+                        }
+                    }
+                    else {
+                        pushGroupByReducer(args, step.REDUCE);
+                    }
+                    break;
+                case AggregateSteps.SORTBY:
+                    (0, _1.pushSortByArguments)(args, 'SORTBY', step.BY);
+                    if (step.MAX) {
+                        args.push('MAX', step.MAX.toString());
+                    }
+                    break;
+                case AggregateSteps.APPLY:
+                    args.push('APPLY', step.expression, 'AS', step.AS);
+                    break;
+                case AggregateSteps.LIMIT:
+                    args.push('LIMIT', step.from.toString(), step.size.toString());
+                    break;
+                case AggregateSteps.FILTER:
+                    args.push('FILTER', step.expression);
+                    break;
+            }
+        }
+    }
+    (0, _1.pushParamsArgs)(args, options?.PARAMS);
+    if (options?.DIALECT) {
+        args.push('DIALECT', options.DIALECT.toString());
+    }
+    if (options?.TIMEOUT !== undefined) {
+        args.push('TIMEOUT', options.TIMEOUT.toString());
+    }
+    return args;
+}
+exports.pushAggregatehOptions = pushAggregatehOptions;
+function pushLoadField(args, toLoad) {
+    if (typeof toLoad === 'string') {
+        args.push(toLoad);
+    }
+    else {
+        args.push(toLoad.identifier);
+        if (toLoad.AS) {
+            args.push('AS', toLoad.AS);
+        }
+    }
+}
+function pushGroupByReducer(args, reducer) {
+    args.push('REDUCE', reducer.type);
+    switch (reducer.type) {
+        case AggregateGroupByReducers.COUNT:
+            args.push('0');
+            break;
+        case AggregateGroupByReducers.COUNT_DISTINCT:
+        case AggregateGroupByReducers.COUNT_DISTINCTISH:
+        case AggregateGroupByReducers.SUM:
+        case AggregateGroupByReducers.MIN:
+        case AggregateGroupByReducers.MAX:
+        case AggregateGroupByReducers.AVG:
+        case AggregateGroupByReducers.STDDEV:
+        case AggregateGroupByReducers.TOLIST:
+            args.push('1', reducer.property);
+            break;
+        case AggregateGroupByReducers.QUANTILE:
+            args.push('2', reducer.property, reducer.quantile.toString());
+            break;
+        case AggregateGroupByReducers.FIRST_VALUE: {
+            (0, _1.pushArgumentsWithLength)(args, () => {
+                args.push(reducer.property);
+                if (reducer.BY) {
+                    args.push('BY');
+                    if (typeof reducer.BY === 'string') {
+                        args.push(reducer.BY);
+                    }
+                    else {
+                        args.push(reducer.BY.property);
+                        if (reducer.BY.direction) {
+                            args.push(reducer.BY.direction);
+                        }
+                    }
+                }
+            });
+            break;
+        }
+        case AggregateGroupByReducers.RANDOM_SAMPLE:
+            args.push('2', reducer.property, reducer.sampleSize.toString());
+            break;
+    }
+    if (reducer.AS) {
+        args.push('AS', reducer.AS);
+    }
+}
+function transformReply(rawReply) {
+    const results = [];
+    for (let i = 1; i < rawReply.length; i++) {
+        results.push((0, generic_transformers_1.transformTuplesReply)(rawReply[i]));
+    }
+    return {
+        total: rawReply[0],
+        results
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/AGGREGATE_WITHCURSOR.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/search/dist/commands/AGGREGATE_WITHCURSOR.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const AGGREGATE_1 = __webpack_require__(/*! ./AGGREGATE */ "../../@redis/search/dist/commands/AGGREGATE.js");
+var AGGREGATE_2 = __webpack_require__(/*! ./AGGREGATE */ "../../@redis/search/dist/commands/AGGREGATE.js");
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return AGGREGATE_2.FIRST_KEY_INDEX; } }));
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return AGGREGATE_2.IS_READ_ONLY; } }));
+function transformArguments(index, query, options) {
+    const args = (0, AGGREGATE_1.transformArguments)(index, query, options);
+    args.push('WITHCURSOR');
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        ...(0, AGGREGATE_1.transformReply)(reply[0]),
+        cursor: reply[1]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/ALIASADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/search/dist/commands/ALIASADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(name, index) {
+    return ['FT.ALIASADD', name, index];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/ALIASDEL.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/search/dist/commands/ALIASDEL.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(name, index) {
+    return ['FT.ALIASDEL', name, index];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/ALIASUPDATE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/search/dist/commands/ALIASUPDATE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(name, index) {
+    return ['FT.ALIASUPDATE', name, index];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/ALTER.js":
+/*!**************************************************!*\
+  !*** ../../@redis/search/dist/commands/ALTER.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+function transformArguments(index, schema) {
+    const args = ['FT.ALTER', index, 'SCHEMA', 'ADD'];
+    (0, _1.pushSchema)(args, schema);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/CONFIG_GET.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/search/dist/commands/CONFIG_GET.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(option) {
+    return ['FT.CONFIG', 'GET', option];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    const transformedReply = Object.create(null);
+    for (const [key, value] of rawReply) {
+        transformedReply[key] = value;
+    }
+    return transformedReply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/CONFIG_SET.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/search/dist/commands/CONFIG_SET.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(option, value) {
+    return ['FT.CONFIG', 'SET', option, value];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/CREATE.js":
+/*!***************************************************!*\
+  !*** ../../@redis/search/dist/commands/CREATE.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+function transformArguments(index, schema, options) {
+    const args = ['FT.CREATE', index];
+    if (options?.ON) {
+        args.push('ON', options.ON);
+    }
+    (0, generic_transformers_1.pushOptionalVerdictArgument)(args, 'PREFIX', options?.PREFIX);
+    if (options?.FILTER) {
+        args.push('FILTER', options.FILTER);
+    }
+    if (options?.LANGUAGE) {
+        args.push('LANGUAGE', options.LANGUAGE);
+    }
+    if (options?.LANGUAGE_FIELD) {
+        args.push('LANGUAGE_FIELD', options.LANGUAGE_FIELD);
+    }
+    if (options?.SCORE) {
+        args.push('SCORE', options.SCORE.toString());
+    }
+    if (options?.SCORE_FIELD) {
+        args.push('SCORE_FIELD', options.SCORE_FIELD);
+    }
+    // if (options?.PAYLOAD_FIELD) {
+    //     args.push('PAYLOAD_FIELD', options.PAYLOAD_FIELD);
+    // }
+    if (options?.MAXTEXTFIELDS) {
+        args.push('MAXTEXTFIELDS');
+    }
+    if (options?.TEMPORARY) {
+        args.push('TEMPORARY', options.TEMPORARY.toString());
+    }
+    if (options?.NOOFFSETS) {
+        args.push('NOOFFSETS');
+    }
+    if (options?.NOHL) {
+        args.push('NOHL');
+    }
+    if (options?.NOFIELDS) {
+        args.push('NOFIELDS');
+    }
+    if (options?.NOFREQS) {
+        args.push('NOFREQS');
+    }
+    if (options?.SKIPINITIALSCAN) {
+        args.push('SKIPINITIALSCAN');
+    }
+    (0, generic_transformers_1.pushOptionalVerdictArgument)(args, 'STOPWORDS', options?.STOPWORDS);
+    args.push('SCHEMA');
+    (0, _1.pushSchema)(args, schema);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/CURSOR_DEL.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/search/dist/commands/CURSOR_DEL.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(index, cursorId) {
+    return [
+        'FT.CURSOR',
+        'DEL',
+        index,
+        cursorId.toString()
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/CURSOR_READ.js":
+/*!********************************************************!*\
+  !*** ../../@redis/search/dist/commands/CURSOR_READ.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(index, cursor, options) {
+    const args = [
+        'FT.CURSOR',
+        'READ',
+        index,
+        cursor.toString()
+    ];
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+var AGGREGATE_WITHCURSOR_1 = __webpack_require__(/*! ./AGGREGATE_WITHCURSOR */ "../../@redis/search/dist/commands/AGGREGATE_WITHCURSOR.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return AGGREGATE_WITHCURSOR_1.transformReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/DICTADD.js":
+/*!****************************************************!*\
+  !*** ../../@redis/search/dist/commands/DICTADD.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(dictionary, term) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['FT.DICTADD', dictionary], term);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/DICTDEL.js":
+/*!****************************************************!*\
+  !*** ../../@redis/search/dist/commands/DICTDEL.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(dictionary, term) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['FT.DICTDEL', dictionary], term);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/DICTDUMP.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/search/dist/commands/DICTDUMP.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(dictionary) {
+    return ['FT.DICTDUMP', dictionary];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/DROPINDEX.js":
+/*!******************************************************!*\
+  !*** ../../@redis/search/dist/commands/DROPINDEX.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(index, options) {
+    const args = ['FT.DROPINDEX', index];
+    if (options?.DD) {
+        args.push('DD');
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/EXPLAIN.js":
+/*!****************************************************!*\
+  !*** ../../@redis/search/dist/commands/EXPLAIN.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(index, query, options) {
+    const args = ['FT.EXPLAIN', index, query];
+    (0, _1.pushParamsArgs)(args, options?.PARAMS);
+    if (options?.DIALECT) {
+        args.push('DIALECT', options.DIALECT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/EXPLAINCLI.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/search/dist/commands/EXPLAINCLI.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(index, query) {
+    return ['FT.EXPLAINCLI', index, query];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/INFO.js":
+/*!*************************************************!*\
+  !*** ../../@redis/search/dist/commands/INFO.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(index) {
+    return ['FT.INFO', index];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    return {
+        indexName: rawReply[1],
+        indexOptions: rawReply[3],
+        indexDefinition: (0, generic_transformers_1.transformTuplesReply)(rawReply[5]),
+        attributes: rawReply[7].map(attribute => (0, generic_transformers_1.transformTuplesReply)(attribute)),
+        numDocs: rawReply[9],
+        maxDocId: rawReply[11],
+        numTerms: rawReply[13],
+        numRecords: rawReply[15],
+        invertedSzMb: rawReply[17],
+        vectorIndexSzMb: rawReply[19],
+        totalInvertedIndexBlocks: rawReply[21],
+        offsetVectorsSzMb: rawReply[23],
+        docTableSizeMb: rawReply[25],
+        sortableValuesSizeMb: rawReply[27],
+        keyTableSizeMb: rawReply[29],
+        recordsPerDocAvg: rawReply[31],
+        bytesPerRecordAvg: rawReply[33],
+        offsetsPerTermAvg: rawReply[35],
+        offsetBitsPerRecordAvg: rawReply[37],
+        hashIndexingFailures: rawReply[39],
+        indexing: rawReply[41],
+        percentIndexed: rawReply[43],
+        gcStats: {
+            bytesCollected: rawReply[45][1],
+            totalMsRun: rawReply[45][3],
+            totalCycles: rawReply[45][5],
+            averageCycleTimeMs: rawReply[45][7],
+            lastRunTimeMs: rawReply[45][9],
+            gcNumericTreesMissed: rawReply[45][11],
+            gcBlocksDenied: rawReply[45][13]
+        },
+        cursorStats: {
+            globalIdle: rawReply[47][1],
+            globalTotal: rawReply[47][3],
+            indexCapacity: rawReply[47][5],
+            idnexTotal: rawReply[47][7]
+        },
+        stopWords: rawReply[49]
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/PROFILE_AGGREGATE.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/search/dist/commands/PROFILE_AGGREGATE.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const AGGREGATE_1 = __webpack_require__(/*! ./AGGREGATE */ "../../@redis/search/dist/commands/AGGREGATE.js");
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(index, query, options) {
+    const args = ['FT.PROFILE', index, 'AGGREGATE'];
+    if (options?.LIMITED) {
+        args.push('LIMITED');
+    }
+    args.push('QUERY', query);
+    (0, AGGREGATE_1.pushAggregatehOptions)(args, options);
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        results: (0, AGGREGATE_1.transformReply)(reply[0]),
+        profile: (0, _1.transformProfile)(reply[1])
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/PROFILE_SEARCH.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/search/dist/commands/PROFILE_SEARCH.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const SEARCH_1 = __webpack_require__(/*! ./SEARCH */ "../../@redis/search/dist/commands/SEARCH.js");
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(index, query, options) {
+    let args = ['FT.PROFILE', index, 'SEARCH'];
+    if (options?.LIMITED) {
+        args.push('LIMITED');
+    }
+    args.push('QUERY', query);
+    return (0, _1.pushSearchOptions)(args, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply, withoutDocuments) {
+    return {
+        results: (0, SEARCH_1.transformReply)(reply[0], withoutDocuments),
+        profile: (0, _1.transformProfile)(reply[1])
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SEARCH.js":
+/*!***************************************************!*\
+  !*** ../../@redis/search/dist/commands/SEARCH.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/search/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(index, query, options) {
+    return (0, _1.pushSearchOptions)(['FT.SEARCH', index, query], options);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply, withoutDocuments) {
+    const documents = [];
+    let i = 1;
+    while (i < reply.length) {
+        documents.push({
+            id: reply[i++],
+            value: withoutDocuments ? Object.create(null) : documentValue(reply[i++])
+        });
+    }
+    return {
+        total: reply[0],
+        documents
+    };
+}
+exports.transformReply = transformReply;
+function documentValue(tuples) {
+    const message = Object.create(null);
+    let i = 0;
+    while (i < tuples.length) {
+        const key = tuples[i++], value = tuples[i++];
+        if (key === '$') { // might be a JSON reply
+            try {
+                Object.assign(message, JSON.parse(value));
+                continue;
+            }
+            catch {
+                // set as a regular property if not a valid JSON
+            }
+        }
+        message[key] = value;
+    }
+    return message;
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SPELLCHECK.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/search/dist/commands/SPELLCHECK.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(index, query, options) {
+    const args = ['FT.SPELLCHECK', index, query];
+    if (options?.DISTANCE) {
+        args.push('DISTANCE', options.DISTANCE.toString());
+    }
+    if (options?.TERMS) {
+        if (Array.isArray(options.TERMS)) {
+            for (const term of options.TERMS) {
+                pushTerms(args, term);
+            }
+        }
+        else {
+            pushTerms(args, options.TERMS);
+        }
+    }
+    if (options?.DIALECT) {
+        args.push('DIALECT', options.DIALECT.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+function pushTerms(args, { mode, dictionary }) {
+    args.push('TERMS', mode, dictionary);
+}
+function transformReply(rawReply) {
+    return rawReply.map(([, term, suggestions]) => ({
+        term,
+        suggestions: suggestions.map(([score, suggestion]) => ({
+            score: Number(score),
+            suggestion
+        }))
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGADD.js":
+/*!***************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGADD.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(key, string, score, options) {
+    const args = ['FT.SUGADD', key, string, score.toString()];
+    if (options?.INCR) {
+        args.push('INCR');
+    }
+    if (options?.PAYLOAD) {
+        args.push('PAYLOAD', options.PAYLOAD);
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGDEL.js":
+/*!***************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGDEL.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = void 0;
+function transformArguments(key, string) {
+    return ['FT.SUGDEL', key, string];
+}
+exports.transformArguments = transformArguments;
+var generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return generic_transformers_1.transformBooleanReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGGET.js":
+/*!***************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGGET.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, prefix, options) {
+    const args = ['FT.SUGGET', key, prefix];
+    if (options?.FUZZY) {
+        args.push('FUZZY');
+    }
+    if (options?.MAX) {
+        args.push('MAX', options.MAX.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGGET_WITHPAYLOADS.js":
+/*!****************************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGGET_WITHPAYLOADS.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const SUGGET_1 = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+var SUGGET_2 = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return SUGGET_2.IS_READ_ONLY; } }));
+function transformArguments(key, prefix, options) {
+    return [
+        ...(0, SUGGET_1.transformArguments)(key, prefix, options),
+        'WITHPAYLOADS'
+    ];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    if (rawReply === null)
+        return null;
+    const transformedReply = [];
+    for (let i = 0; i < rawReply.length; i += 2) {
+        transformedReply.push({
+            suggestion: rawReply[i],
+            payload: rawReply[i + 1]
+        });
+    }
+    return transformedReply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGGET_WITHSCORES.js":
+/*!**************************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGGET_WITHSCORES.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const SUGGET_1 = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+var SUGGET_2 = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return SUGGET_2.IS_READ_ONLY; } }));
+function transformArguments(key, prefix, options) {
+    return [
+        ...(0, SUGGET_1.transformArguments)(key, prefix, options),
+        'WITHSCORES'
+    ];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    if (rawReply === null)
+        return null;
+    const transformedReply = [];
+    for (let i = 0; i < rawReply.length; i += 2) {
+        transformedReply.push({
+            suggestion: rawReply[i],
+            score: Number(rawReply[i + 1])
+        });
+    }
+    return transformedReply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGGET_WITHSCORES_WITHPAYLOADS.js":
+/*!***************************************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGGET_WITHSCORES_WITHPAYLOADS.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const SUGGET_1 = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+var SUGGET_2 = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return SUGGET_2.IS_READ_ONLY; } }));
+function transformArguments(key, prefix, options) {
+    return [
+        ...(0, SUGGET_1.transformArguments)(key, prefix, options),
+        'WITHSCORES',
+        'WITHPAYLOADS'
+    ];
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    if (rawReply === null)
+        return null;
+    const transformedReply = [];
+    for (let i = 0; i < rawReply.length; i += 3) {
+        transformedReply.push({
+            suggestion: rawReply[i],
+            score: Number(rawReply[i + 1]),
+            payload: rawReply[i + 2]
+        });
+    }
+    return transformedReply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SUGLEN.js":
+/*!***************************************************!*\
+  !*** ../../@redis/search/dist/commands/SUGLEN.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['FT.SUGLEN', key];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SYNDUMP.js":
+/*!****************************************************!*\
+  !*** ../../@redis/search/dist/commands/SYNDUMP.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(index) {
+    return ['FT.SYNDUMP', index];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/SYNUPDATE.js":
+/*!******************************************************!*\
+  !*** ../../@redis/search/dist/commands/SYNUPDATE.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+function transformArguments(index, groupId, terms, options) {
+    const args = ['FT.SYNUPDATE', index, groupId];
+    if (options?.SKIPINITIALSCAN) {
+        args.push('SKIPINITIALSCAN');
+    }
+    return (0, generic_transformers_1.pushVerdictArguments)(args, terms);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/TAGVALS.js":
+/*!****************************************************!*\
+  !*** ../../@redis/search/dist/commands/TAGVALS.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments(index, fieldName) {
+    return ['FT.TAGVALS', index, fieldName];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/_LIST.js":
+/*!**************************************************!*\
+  !*** ../../@redis/search/dist/commands/_LIST.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = void 0;
+function transformArguments() {
+    return ['FT._LIST'];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/commands/index.js":
+/*!**************************************************!*\
+  !*** ../../@redis/search/dist/commands/index.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformProfile = exports.pushSearchOptions = exports.pushParamsArgs = exports.pushSchema = exports.VectorAlgorithms = exports.SchemaTextFieldPhonetics = exports.SchemaFieldTypes = exports.pushArgumentsWithLength = exports.pushSortByArguments = exports.pushSortByProperty = exports.RedisSearchLanguages = void 0;
+const _LIST = __webpack_require__(/*! ./_LIST */ "../../@redis/search/dist/commands/_LIST.js");
+const ALTER = __webpack_require__(/*! ./ALTER */ "../../@redis/search/dist/commands/ALTER.js");
+const AGGREGATE_WITHCURSOR = __webpack_require__(/*! ./AGGREGATE_WITHCURSOR */ "../../@redis/search/dist/commands/AGGREGATE_WITHCURSOR.js");
+const AGGREGATE = __webpack_require__(/*! ./AGGREGATE */ "../../@redis/search/dist/commands/AGGREGATE.js");
+const ALIASADD = __webpack_require__(/*! ./ALIASADD */ "../../@redis/search/dist/commands/ALIASADD.js");
+const ALIASDEL = __webpack_require__(/*! ./ALIASDEL */ "../../@redis/search/dist/commands/ALIASDEL.js");
+const ALIASUPDATE = __webpack_require__(/*! ./ALIASUPDATE */ "../../@redis/search/dist/commands/ALIASUPDATE.js");
+const CONFIG_GET = __webpack_require__(/*! ./CONFIG_GET */ "../../@redis/search/dist/commands/CONFIG_GET.js");
+const CONFIG_SET = __webpack_require__(/*! ./CONFIG_SET */ "../../@redis/search/dist/commands/CONFIG_SET.js");
+const CREATE = __webpack_require__(/*! ./CREATE */ "../../@redis/search/dist/commands/CREATE.js");
+const CURSOR_DEL = __webpack_require__(/*! ./CURSOR_DEL */ "../../@redis/search/dist/commands/CURSOR_DEL.js");
+const CURSOR_READ = __webpack_require__(/*! ./CURSOR_READ */ "../../@redis/search/dist/commands/CURSOR_READ.js");
+const DICTADD = __webpack_require__(/*! ./DICTADD */ "../../@redis/search/dist/commands/DICTADD.js");
+const DICTDEL = __webpack_require__(/*! ./DICTDEL */ "../../@redis/search/dist/commands/DICTDEL.js");
+const DICTDUMP = __webpack_require__(/*! ./DICTDUMP */ "../../@redis/search/dist/commands/DICTDUMP.js");
+const DROPINDEX = __webpack_require__(/*! ./DROPINDEX */ "../../@redis/search/dist/commands/DROPINDEX.js");
+const EXPLAIN = __webpack_require__(/*! ./EXPLAIN */ "../../@redis/search/dist/commands/EXPLAIN.js");
+const EXPLAINCLI = __webpack_require__(/*! ./EXPLAINCLI */ "../../@redis/search/dist/commands/EXPLAINCLI.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/search/dist/commands/INFO.js");
+const PROFILESEARCH = __webpack_require__(/*! ./PROFILE_SEARCH */ "../../@redis/search/dist/commands/PROFILE_SEARCH.js");
+const PROFILEAGGREGATE = __webpack_require__(/*! ./PROFILE_AGGREGATE */ "../../@redis/search/dist/commands/PROFILE_AGGREGATE.js");
+const SEARCH = __webpack_require__(/*! ./SEARCH */ "../../@redis/search/dist/commands/SEARCH.js");
+const SPELLCHECK = __webpack_require__(/*! ./SPELLCHECK */ "../../@redis/search/dist/commands/SPELLCHECK.js");
+const SUGADD = __webpack_require__(/*! ./SUGADD */ "../../@redis/search/dist/commands/SUGADD.js");
+const SUGDEL = __webpack_require__(/*! ./SUGDEL */ "../../@redis/search/dist/commands/SUGDEL.js");
+const SUGGET_WITHPAYLOADS = __webpack_require__(/*! ./SUGGET_WITHPAYLOADS */ "../../@redis/search/dist/commands/SUGGET_WITHPAYLOADS.js");
+const SUGGET_WITHSCORES_WITHPAYLOADS = __webpack_require__(/*! ./SUGGET_WITHSCORES_WITHPAYLOADS */ "../../@redis/search/dist/commands/SUGGET_WITHSCORES_WITHPAYLOADS.js");
+const SUGGET_WITHSCORES = __webpack_require__(/*! ./SUGGET_WITHSCORES */ "../../@redis/search/dist/commands/SUGGET_WITHSCORES.js");
+const SUGGET = __webpack_require__(/*! ./SUGGET */ "../../@redis/search/dist/commands/SUGGET.js");
+const SUGLEN = __webpack_require__(/*! ./SUGLEN */ "../../@redis/search/dist/commands/SUGLEN.js");
+const SYNDUMP = __webpack_require__(/*! ./SYNDUMP */ "../../@redis/search/dist/commands/SYNDUMP.js");
+const SYNUPDATE = __webpack_require__(/*! ./SYNUPDATE */ "../../@redis/search/dist/commands/SYNUPDATE.js");
+const TAGVALS = __webpack_require__(/*! ./TAGVALS */ "../../@redis/search/dist/commands/TAGVALS.js");
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports["default"] = {
+    _LIST,
+    _list: _LIST,
+    ALTER,
+    alter: ALTER,
+    AGGREGATE_WITHCURSOR,
+    aggregateWithCursor: AGGREGATE_WITHCURSOR,
+    AGGREGATE,
+    aggregate: AGGREGATE,
+    ALIASADD,
+    aliasAdd: ALIASADD,
+    ALIASDEL,
+    aliasDel: ALIASDEL,
+    ALIASUPDATE,
+    aliasUpdate: ALIASUPDATE,
+    CONFIG_GET,
+    configGet: CONFIG_GET,
+    CONFIG_SET,
+    configSet: CONFIG_SET,
+    CREATE,
+    create: CREATE,
+    CURSOR_DEL,
+    cursorDel: CURSOR_DEL,
+    CURSOR_READ,
+    cursorRead: CURSOR_READ,
+    DICTADD,
+    dictAdd: DICTADD,
+    DICTDEL,
+    dictDel: DICTDEL,
+    DICTDUMP,
+    dictDump: DICTDUMP,
+    DROPINDEX,
+    dropIndex: DROPINDEX,
+    EXPLAIN,
+    explain: EXPLAIN,
+    EXPLAINCLI,
+    explainCli: EXPLAINCLI,
+    INFO,
+    info: INFO,
+    PROFILESEARCH,
+    profileSearch: PROFILESEARCH,
+    PROFILEAGGREGATE,
+    profileAggregate: PROFILEAGGREGATE,
+    SEARCH,
+    search: SEARCH,
+    SPELLCHECK,
+    spellCheck: SPELLCHECK,
+    SUGADD,
+    sugAdd: SUGADD,
+    SUGDEL,
+    sugDel: SUGDEL,
+    SUGGET_WITHPAYLOADS,
+    sugGetWithPayloads: SUGGET_WITHPAYLOADS,
+    SUGGET_WITHSCORES_WITHPAYLOADS,
+    sugGetWithScoresWithPayloads: SUGGET_WITHSCORES_WITHPAYLOADS,
+    SUGGET_WITHSCORES,
+    sugGetWithScores: SUGGET_WITHSCORES,
+    SUGGET,
+    sugGet: SUGGET,
+    SUGLEN,
+    sugLen: SUGLEN,
+    SYNDUMP,
+    synDump: SYNDUMP,
+    SYNUPDATE,
+    synUpdate: SYNUPDATE,
+    TAGVALS,
+    tagVals: TAGVALS
+};
+var RedisSearchLanguages;
+(function (RedisSearchLanguages) {
+    RedisSearchLanguages["ARABIC"] = "Arabic";
+    RedisSearchLanguages["BASQUE"] = "Basque";
+    RedisSearchLanguages["CATALANA"] = "Catalan";
+    RedisSearchLanguages["DANISH"] = "Danish";
+    RedisSearchLanguages["DUTCH"] = "Dutch";
+    RedisSearchLanguages["ENGLISH"] = "English";
+    RedisSearchLanguages["FINNISH"] = "Finnish";
+    RedisSearchLanguages["FRENCH"] = "French";
+    RedisSearchLanguages["GERMAN"] = "German";
+    RedisSearchLanguages["GREEK"] = "Greek";
+    RedisSearchLanguages["HUNGARIAN"] = "Hungarian";
+    RedisSearchLanguages["INDONESAIN"] = "Indonesian";
+    RedisSearchLanguages["IRISH"] = "Irish";
+    RedisSearchLanguages["ITALIAN"] = "Italian";
+    RedisSearchLanguages["LITHUANIAN"] = "Lithuanian";
+    RedisSearchLanguages["NEPALI"] = "Nepali";
+    RedisSearchLanguages["NORWEIGAN"] = "Norwegian";
+    RedisSearchLanguages["PORTUGUESE"] = "Portuguese";
+    RedisSearchLanguages["ROMANIAN"] = "Romanian";
+    RedisSearchLanguages["RUSSIAN"] = "Russian";
+    RedisSearchLanguages["SPANISH"] = "Spanish";
+    RedisSearchLanguages["SWEDISH"] = "Swedish";
+    RedisSearchLanguages["TAMIL"] = "Tamil";
+    RedisSearchLanguages["TURKISH"] = "Turkish";
+    RedisSearchLanguages["CHINESE"] = "Chinese";
+})(RedisSearchLanguages = exports.RedisSearchLanguages || (exports.RedisSearchLanguages = {}));
+function pushSortByProperty(args, sortBy) {
+    if (typeof sortBy === 'string') {
+        args.push(sortBy);
+    }
+    else {
+        args.push(sortBy.BY);
+        if (sortBy.DIRECTION) {
+            args.push(sortBy.DIRECTION);
+        }
+    }
+}
+exports.pushSortByProperty = pushSortByProperty;
+function pushSortByArguments(args, name, sortBy) {
+    const lengthBefore = args.push(name, '' // will be overwritten
+    );
+    if (Array.isArray(sortBy)) {
+        for (const field of sortBy) {
+            pushSortByProperty(args, field);
+        }
+    }
+    else {
+        pushSortByProperty(args, sortBy);
+    }
+    args[lengthBefore - 1] = (args.length - lengthBefore).toString();
+    return args;
+}
+exports.pushSortByArguments = pushSortByArguments;
+function pushArgumentsWithLength(args, fn) {
+    const lengthIndex = args.push('') - 1;
+    fn(args);
+    args[lengthIndex] = (args.length - lengthIndex - 1).toString();
+    return args;
+}
+exports.pushArgumentsWithLength = pushArgumentsWithLength;
+var SchemaFieldTypes;
+(function (SchemaFieldTypes) {
+    SchemaFieldTypes["TEXT"] = "TEXT";
+    SchemaFieldTypes["NUMERIC"] = "NUMERIC";
+    SchemaFieldTypes["GEO"] = "GEO";
+    SchemaFieldTypes["TAG"] = "TAG";
+    SchemaFieldTypes["VECTOR"] = "VECTOR";
+})(SchemaFieldTypes = exports.SchemaFieldTypes || (exports.SchemaFieldTypes = {}));
+var SchemaTextFieldPhonetics;
+(function (SchemaTextFieldPhonetics) {
+    SchemaTextFieldPhonetics["DM_EN"] = "dm:en";
+    SchemaTextFieldPhonetics["DM_FR"] = "dm:fr";
+    SchemaTextFieldPhonetics["FM_PT"] = "dm:pt";
+    SchemaTextFieldPhonetics["DM_ES"] = "dm:es";
+})(SchemaTextFieldPhonetics = exports.SchemaTextFieldPhonetics || (exports.SchemaTextFieldPhonetics = {}));
+var VectorAlgorithms;
+(function (VectorAlgorithms) {
+    VectorAlgorithms["FLAT"] = "FLAT";
+    VectorAlgorithms["HNSW"] = "HNSW";
+})(VectorAlgorithms = exports.VectorAlgorithms || (exports.VectorAlgorithms = {}));
+function pushSchema(args, schema) {
+    for (const [field, fieldOptions] of Object.entries(schema)) {
+        args.push(field);
+        if (typeof fieldOptions === 'string') {
+            args.push(fieldOptions);
+            continue;
+        }
+        if (fieldOptions.AS) {
+            args.push('AS', fieldOptions.AS);
+        }
+        args.push(fieldOptions.type);
+        switch (fieldOptions.type) {
+            case SchemaFieldTypes.TEXT:
+                if (fieldOptions.NOSTEM) {
+                    args.push('NOSTEM');
+                }
+                if (fieldOptions.WEIGHT) {
+                    args.push('WEIGHT', fieldOptions.WEIGHT.toString());
+                }
+                if (fieldOptions.PHONETIC) {
+                    args.push('PHONETIC', fieldOptions.PHONETIC);
+                }
+                if (fieldOptions.WITHSUFFIXTRIE) {
+                    args.push('WITHSUFFIXTRIE');
+                }
+                break;
+            // case SchemaFieldTypes.NUMERIC:
+            // case SchemaFieldTypes.GEO:
+            //     break;
+            case SchemaFieldTypes.TAG:
+                if (fieldOptions.SEPARATOR) {
+                    args.push('SEPARATOR', fieldOptions.SEPARATOR);
+                }
+                if (fieldOptions.CASESENSITIVE) {
+                    args.push('CASESENSITIVE');
+                }
+                if (fieldOptions.WITHSUFFIXTRIE) {
+                    args.push('WITHSUFFIXTRIE');
+                }
+                break;
+            case SchemaFieldTypes.VECTOR:
+                args.push(fieldOptions.ALGORITHM);
+                pushArgumentsWithLength(args, () => {
+                    args.push('TYPE', fieldOptions.TYPE, 'DIM', fieldOptions.DIM.toString(), 'DISTANCE_METRIC', fieldOptions.DISTANCE_METRIC);
+                    if (fieldOptions.INITIAL_CAP) {
+                        args.push('INITIAL_CAP', fieldOptions.INITIAL_CAP.toString());
+                    }
+                    switch (fieldOptions.ALGORITHM) {
+                        case VectorAlgorithms.FLAT:
+                            if (fieldOptions.BLOCK_SIZE) {
+                                args.push('BLOCK_SIZE', fieldOptions.BLOCK_SIZE.toString());
+                            }
+                            break;
+                        case VectorAlgorithms.HNSW:
+                            if (fieldOptions.M) {
+                                args.push('M', fieldOptions.M.toString());
+                            }
+                            if (fieldOptions.EF_CONSTRUCTION) {
+                                args.push('EF_CONSTRUCTION', fieldOptions.EF_CONSTRUCTION.toString());
+                            }
+                            if (fieldOptions.EF_RUNTIME) {
+                                args.push('EF_RUNTIME', fieldOptions.EF_RUNTIME.toString());
+                            }
+                            break;
+                    }
+                });
+                continue; // vector fields do not contain SORTABLE and NOINDEX options
+        }
+        if (fieldOptions.SORTABLE) {
+            args.push('SORTABLE');
+            if (fieldOptions.SORTABLE === 'UNF') {
+                args.push('UNF');
+            }
+        }
+        if (fieldOptions.NOINDEX) {
+            args.push('NOINDEX');
+        }
+    }
+}
+exports.pushSchema = pushSchema;
+function pushParamsArgs(args, params) {
+    if (params) {
+        const enrties = Object.entries(params);
+        args.push('PARAMS', (enrties.length * 2).toString());
+        for (const [key, value] of enrties) {
+            args.push(key, typeof value === 'number' ? value.toString() : value);
+        }
+    }
+    return args;
+}
+exports.pushParamsArgs = pushParamsArgs;
+function pushSearchOptions(args, options) {
+    if (options?.VERBATIM) {
+        args.push('VERBATIM');
+    }
+    if (options?.NOSTOPWORDS) {
+        args.push('NOSTOPWORDS');
+    }
+    // if (options?.WITHSCORES) {
+    //     args.push('WITHSCORES');
+    // }
+    // if (options?.WITHPAYLOADS) {
+    //     args.push('WITHPAYLOADS');
+    // }
+    (0, generic_transformers_1.pushOptionalVerdictArgument)(args, 'INKEYS', options?.INKEYS);
+    (0, generic_transformers_1.pushOptionalVerdictArgument)(args, 'INFIELDS', options?.INFIELDS);
+    (0, generic_transformers_1.pushOptionalVerdictArgument)(args, 'RETURN', options?.RETURN);
+    if (options?.SUMMARIZE) {
+        args.push('SUMMARIZE');
+        if (typeof options.SUMMARIZE === 'object') {
+            if (options.SUMMARIZE.FIELDS) {
+                args.push('FIELDS');
+                (0, generic_transformers_1.pushVerdictArgument)(args, options.SUMMARIZE.FIELDS);
+            }
+            if (options.SUMMARIZE.FRAGS) {
+                args.push('FRAGS', options.SUMMARIZE.FRAGS.toString());
+            }
+            if (options.SUMMARIZE.LEN) {
+                args.push('LEN', options.SUMMARIZE.LEN.toString());
+            }
+            if (options.SUMMARIZE.SEPARATOR) {
+                args.push('SEPARATOR', options.SUMMARIZE.SEPARATOR);
+            }
+        }
+    }
+    if (options?.HIGHLIGHT) {
+        args.push('HIGHLIGHT');
+        if (typeof options.HIGHLIGHT === 'object') {
+            if (options.HIGHLIGHT.FIELDS) {
+                args.push('FIELDS');
+                (0, generic_transformers_1.pushVerdictArgument)(args, options.HIGHLIGHT.FIELDS);
+            }
+            if (options.HIGHLIGHT.TAGS) {
+                args.push('TAGS', options.HIGHLIGHT.TAGS.open, options.HIGHLIGHT.TAGS.close);
+            }
+        }
+    }
+    if (options?.SLOP) {
+        args.push('SLOP', options.SLOP.toString());
+    }
+    if (options?.INORDER) {
+        args.push('INORDER');
+    }
+    if (options?.LANGUAGE) {
+        args.push('LANGUAGE', options.LANGUAGE);
+    }
+    if (options?.EXPANDER) {
+        args.push('EXPANDER', options.EXPANDER);
+    }
+    if (options?.SCORER) {
+        args.push('SCORER', options.SCORER);
+    }
+    // if (options?.EXPLAINSCORE) {
+    //     args.push('EXPLAINSCORE');
+    // }
+    // if (options?.PAYLOAD) {
+    //     args.push('PAYLOAD', options.PAYLOAD);
+    // }
+    if (options?.SORTBY) {
+        args.push('SORTBY');
+        pushSortByProperty(args, options.SORTBY);
+    }
+    // if (options?.MSORTBY) {
+    //     pushSortByArguments(args, 'MSORTBY', options.MSORTBY);
+    // }
+    if (options?.LIMIT) {
+        args.push('LIMIT', options.LIMIT.from.toString(), options.LIMIT.size.toString());
+    }
+    if (options?.PARAMS) {
+        pushParamsArgs(args, options.PARAMS);
+    }
+    if (options?.DIALECT) {
+        args.push('DIALECT', options.DIALECT.toString());
+    }
+    if (options?.RETURN?.length === 0) {
+        args.preserve = true;
+    }
+    if (options?.TIMEOUT !== undefined) {
+        args.push('TIMEOUT', options.TIMEOUT.toString());
+    }
+    return args;
+}
+exports.pushSearchOptions = pushSearchOptions;
+function transformProfile(reply) {
+    return {
+        totalProfileTime: reply[0][1],
+        parsingTime: reply[1][1],
+        pipelineCreationTime: reply[2][1],
+        iteratorsProfile: transformIterators(reply[3][1])
+    };
+}
+exports.transformProfile = transformProfile;
+function transformIterators(IteratorsProfile) {
+    var res = {};
+    for (let i = 0; i < IteratorsProfile.length; i += 2) {
+        const value = IteratorsProfile[i + 1];
+        switch (IteratorsProfile[i]) {
+            case 'Type':
+                res.type = value;
+                break;
+            case 'Counter':
+                res.counter = value;
+                break;
+            case 'Time':
+                res.time = value;
+                break;
+            case 'Query type':
+                res.queryType = value;
+                break;
+            case 'Child iterators':
+                res.childIterators = value.map(transformChildIterators);
+                break;
+        }
+    }
+    return res;
+}
+function transformChildIterators(IteratorsProfile) {
+    var res = {};
+    for (let i = 1; i < IteratorsProfile.length; i += 2) {
+        const value = IteratorsProfile[i + 1];
+        switch (IteratorsProfile[i]) {
+            case 'Type':
+                res.type = value;
+                break;
+            case 'Counter':
+                res.counter = value;
+                break;
+            case 'Time':
+                res.time = value;
+                break;
+            case 'Size':
+                res.size = value;
+                break;
+            case 'Term':
+                res.term = value;
+                break;
+            case 'Child iterators':
+                res.childIterators = value.map(transformChildIterators);
+                break;
+        }
+    }
+    return res;
+}
+
+
+/***/ }),
+
+/***/ "../../@redis/search/dist/index.js":
+/*!*****************************************!*\
+  !*** ../../@redis/search/dist/index.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AggregateGroupByReducers = exports.AggregateSteps = exports.VectorAlgorithms = exports.SchemaTextFieldPhonetics = exports.SchemaFieldTypes = exports["default"] = void 0;
+var commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/search/dist/commands/index.js");
+Object.defineProperty(exports, "default", ({ enumerable: true, get: function () { return commands_1.default; } }));
+var commands_2 = __webpack_require__(/*! ./commands */ "../../@redis/search/dist/commands/index.js");
+Object.defineProperty(exports, "SchemaFieldTypes", ({ enumerable: true, get: function () { return commands_2.SchemaFieldTypes; } }));
+Object.defineProperty(exports, "SchemaTextFieldPhonetics", ({ enumerable: true, get: function () { return commands_2.SchemaTextFieldPhonetics; } }));
+Object.defineProperty(exports, "VectorAlgorithms", ({ enumerable: true, get: function () { return commands_2.VectorAlgorithms; } }));
+var AGGREGATE_1 = __webpack_require__(/*! ./commands/AGGREGATE */ "../../@redis/search/dist/commands/AGGREGATE.js");
+Object.defineProperty(exports, "AggregateSteps", ({ enumerable: true, get: function () { return AGGREGATE_1.AggregateSteps; } }));
+Object.defineProperty(exports, "AggregateGroupByReducers", ({ enumerable: true, get: function () { return AGGREGATE_1.AggregateGroupByReducers; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/ADD.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/ADD.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, timestamp, value, options) {
+    const args = [
+        'TS.ADD',
+        key,
+        (0, _1.transformTimestampArgument)(timestamp),
+        value.toString()
+    ];
+    (0, _1.pushRetentionArgument)(args, options?.RETENTION);
+    (0, _1.pushEncodingArgument)(args, options?.ENCODING);
+    (0, _1.pushChunkSizeArgument)(args, options?.CHUNK_SIZE);
+    if (options?.ON_DUPLICATE) {
+        args.push('ON_DUPLICATE', options.ON_DUPLICATE);
+    }
+    (0, _1.pushLabelsArgument)(args, options?.LABELS);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/ALTER.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/ALTER.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, options) {
+    const args = ['TS.ALTER', key];
+    (0, _1.pushRetentionArgument)(args, options?.RETENTION);
+    (0, _1.pushChunkSizeArgument)(args, options?.CHUNK_SIZE);
+    (0, _1.pushDuplicatePolicy)(args, options?.DUPLICATE_POLICY);
+    (0, _1.pushLabelsArgument)(args, options?.LABELS);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/CREATE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/CREATE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, options) {
+    const args = ['TS.CREATE', key];
+    (0, _1.pushRetentionArgument)(args, options?.RETENTION);
+    (0, _1.pushEncodingArgument)(args, options?.ENCODING);
+    (0, _1.pushChunkSizeArgument)(args, options?.CHUNK_SIZE);
+    (0, _1.pushDuplicatePolicy)(args, options?.DUPLICATE_POLICY);
+    (0, _1.pushLabelsArgument)(args, options?.LABELS);
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/CREATERULE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/CREATERULE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(sourceKey, destinationKey, aggregationType, bucketDuration, alignTimestamp) {
+    const args = [
+        'TS.CREATERULE',
+        sourceKey,
+        destinationKey,
+        'AGGREGATION',
+        aggregationType,
+        bucketDuration.toString()
+    ];
+    if (alignTimestamp) {
+        args.push(alignTimestamp.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/DECRBY.js":
+/*!********************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/DECRBY.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, value, options) {
+    return (0, _1.transformIncrDecrArguments)('TS.DECRBY', key, value, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/DEL.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/DEL.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRTS_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRTS_KEY_INDEX = 1;
+function transformArguments(key, fromTimestamp, toTimestamp) {
+    return [
+        'TS.DEL',
+        key,
+        (0, _1.transformTimestampArgument)(fromTimestamp),
+        (0, _1.transformTimestampArgument)(toTimestamp)
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/DELETERULE.js":
+/*!************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/DELETERULE.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(sourceKey, destinationKey) {
+    return [
+        'TS.DELETERULE',
+        sourceKey,
+        destinationKey
+    ];
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/GET.js":
+/*!*****************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/GET.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, options) {
+    return (0, _1.pushLatestArgument)(['TS.GET', key], options?.LATEST);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    if (reply.length === 0)
+        return null;
+    return (0, _1.transformSampleReply)(reply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/INCRBY.js":
+/*!********************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/INCRBY.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(key, value, options) {
+    return (0, _1.transformIncrDecrArguments)('TS.INCRBY', key, value, options);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/INFO.js":
+/*!******************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/INFO.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key) {
+    return ['TS.INFO', key];
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return {
+        totalSamples: reply[1],
+        memoryUsage: reply[3],
+        firstTimestamp: reply[5],
+        lastTimestamp: reply[7],
+        retentionTime: reply[9],
+        chunkCount: reply[11],
+        chunkSize: reply[13],
+        chunkType: reply[15],
+        duplicatePolicy: reply[17],
+        labels: reply[19].map(([name, value]) => ({
+            name,
+            value
+        })),
+        sourceKey: reply[21],
+        rules: reply[23].map(([key, timeBucket, aggregationType]) => ({
+            key,
+            timeBucket,
+            aggregationType
+        }))
+    };
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/INFO_DEBUG.js":
+/*!************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/INFO_DEBUG.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.FIRST_KEY_INDEX = exports.IS_READ_ONLY = void 0;
+const INFO_1 = __webpack_require__(/*! ./INFO */ "../../@redis/time-series/dist/commands/INFO.js");
+var INFO_2 = __webpack_require__(/*! ./INFO */ "../../@redis/time-series/dist/commands/INFO.js");
+Object.defineProperty(exports, "IS_READ_ONLY", ({ enumerable: true, get: function () { return INFO_2.IS_READ_ONLY; } }));
+Object.defineProperty(exports, "FIRST_KEY_INDEX", ({ enumerable: true, get: function () { return INFO_2.FIRST_KEY_INDEX; } }));
+function transformArguments(key) {
+    const args = (0, INFO_1.transformArguments)(key);
+    args.push('DEBUG');
+    return args;
+}
+exports.transformArguments = transformArguments;
+function transformReply(rawReply) {
+    const reply = (0, INFO_1.transformReply)(rawReply);
+    reply.keySelfName = rawReply[25];
+    reply.chunks = rawReply[27].map(chunk => ({
+        startTimestamp: chunk[1],
+        endTimestamp: chunk[3],
+        samples: chunk[5],
+        size: chunk[7],
+        bytesPerSample: chunk[9]
+    }));
+    return reply;
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MADD.js":
+/*!******************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MADD.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+function transformArguments(toAdd) {
+    const args = ['TS.MADD'];
+    for (const { key, timestamp, value } of toAdd) {
+        args.push(key, (0, _1.transformTimestampArgument)(timestamp), value.toString());
+    }
+    return args;
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MGET.js":
+/*!******************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MGET.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(filter, options) {
+    const args = (0, _1.pushLatestArgument)(['TS.MGET'], options?.LATEST);
+    return (0, _1.pushFilterArgument)(args, filter);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return reply.map(([key, _, sample]) => ({
+        key,
+        sample: (0, _1.transformSampleReply)(sample)
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MGET_WITHLABELS.js":
+/*!*****************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MGET_WITHLABELS.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(filter, options) {
+    const args = (0, _1.pushWithLabelsArgument)(['TS.MGET'], options?.SELECTED_LABELS);
+    return (0, _1.pushFilterArgument)(args, filter);
+}
+exports.transformArguments = transformArguments;
+;
+function transformReply(reply) {
+    return reply.map(([key, labels, sample]) => ({
+        key,
+        labels: (0, _1.transformLablesReply)(labels),
+        sample: (0, _1.transformSampleReply)(sample)
+    }));
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MRANGE.js":
+/*!********************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MRANGE.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(fromTimestamp, toTimestamp, filters, options) {
+    return (0, _1.pushMRangeArguments)(['TS.MRANGE'], fromTimestamp, toTimestamp, filters, options);
+}
+exports.transformArguments = transformArguments;
+var _2 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _2.transformMRangeReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MRANGE_WITHLABELS.js":
+/*!*******************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MRANGE_WITHLABELS.js ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(fromTimestamp, toTimestamp, filters, options) {
+    return (0, _1.pushMRangeWithLabelsArguments)(['TS.MRANGE'], fromTimestamp, toTimestamp, filters, options);
+}
+exports.transformArguments = transformArguments;
+var _2 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _2.transformMRangeWithLabelsReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MREVRANGE.js":
+/*!***********************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MREVRANGE.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(fromTimestamp, toTimestamp, filters, options) {
+    return (0, _1.pushMRangeArguments)(['TS.MREVRANGE'], fromTimestamp, toTimestamp, filters, options);
+}
+exports.transformArguments = transformArguments;
+var _2 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _2.transformMRangeReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/MREVRANGE_WITHLABELS.js":
+/*!**********************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/MREVRANGE_WITHLABELS.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(fromTimestamp, toTimestamp, filters, options) {
+    return (0, _1.pushMRangeWithLabelsArguments)(['TS.MREVRANGE'], fromTimestamp, toTimestamp, filters, options);
+}
+exports.transformArguments = transformArguments;
+var _2 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+Object.defineProperty(exports, "transformReply", ({ enumerable: true, get: function () { return _2.transformMRangeWithLabelsReply; } }));
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/QUERYINDEX.js":
+/*!************************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/QUERYINDEX.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformArguments = exports.IS_READ_ONLY = void 0;
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports.IS_READ_ONLY = true;
+function transformArguments(filter) {
+    return (0, generic_transformers_1.pushVerdictArguments)(['TS.QUERYINDEX'], filter);
+}
+exports.transformArguments = transformArguments;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/RANGE.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/RANGE.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, fromTimestamp, toTimestamp, options) {
+    return (0, _1.pushRangeArguments)(['TS.RANGE', key], fromTimestamp, toTimestamp, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return (0, _1.transformRangeReply)(reply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/REVRANGE.js":
+/*!**********************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/REVRANGE.js ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.transformReply = exports.transformArguments = exports.IS_READ_ONLY = exports.FIRST_KEY_INDEX = void 0;
+const _1 = __webpack_require__(/*! . */ "../../@redis/time-series/dist/commands/index.js");
+exports.FIRST_KEY_INDEX = 1;
+exports.IS_READ_ONLY = true;
+function transformArguments(key, fromTimestamp, toTimestamp, options) {
+    return (0, _1.pushRangeArguments)(['TS.REVRANGE', key], fromTimestamp, toTimestamp, options);
+}
+exports.transformArguments = transformArguments;
+function transformReply(reply) {
+    return (0, _1.transformRangeReply)(reply);
+}
+exports.transformReply = transformReply;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/commands/index.js":
+/*!*******************************************************!*\
+  !*** ../../@redis/time-series/dist/commands/index.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.pushLatestArgument = exports.transformMRangeWithLabelsReply = exports.transformMRangeReply = exports.transformRangeReply = exports.pushMRangeWithLabelsArguments = exports.pushWithLabelsArgument = exports.pushMRangeArguments = exports.pushFilterArgument = exports.pushMRangeGroupByArguments = exports.pushRangeArguments = exports.TimeSeriesBucketTimestamp = exports.transformSampleReply = exports.transformIncrDecrArguments = exports.pushLabelsArgument = exports.transformLablesReply = exports.pushDuplicatePolicy = exports.pushChunkSizeArgument = exports.pushEncodingArgument = exports.TimeSeriesEncoding = exports.pushRetentionArgument = exports.transformTimestampArgument = exports.TimeSeriesReducers = exports.TimeSeriesDuplicatePolicies = exports.TimeSeriesAggregationType = void 0;
+const ADD = __webpack_require__(/*! ./ADD */ "../../@redis/time-series/dist/commands/ADD.js");
+const ALTER = __webpack_require__(/*! ./ALTER */ "../../@redis/time-series/dist/commands/ALTER.js");
+const CREATE = __webpack_require__(/*! ./CREATE */ "../../@redis/time-series/dist/commands/CREATE.js");
+const CREATERULE = __webpack_require__(/*! ./CREATERULE */ "../../@redis/time-series/dist/commands/CREATERULE.js");
+const DECRBY = __webpack_require__(/*! ./DECRBY */ "../../@redis/time-series/dist/commands/DECRBY.js");
+const DEL = __webpack_require__(/*! ./DEL */ "../../@redis/time-series/dist/commands/DEL.js");
+const DELETERULE = __webpack_require__(/*! ./DELETERULE */ "../../@redis/time-series/dist/commands/DELETERULE.js");
+const GET = __webpack_require__(/*! ./GET */ "../../@redis/time-series/dist/commands/GET.js");
+const INCRBY = __webpack_require__(/*! ./INCRBY */ "../../@redis/time-series/dist/commands/INCRBY.js");
+const INFO_DEBUG = __webpack_require__(/*! ./INFO_DEBUG */ "../../@redis/time-series/dist/commands/INFO_DEBUG.js");
+const INFO = __webpack_require__(/*! ./INFO */ "../../@redis/time-series/dist/commands/INFO.js");
+const MADD = __webpack_require__(/*! ./MADD */ "../../@redis/time-series/dist/commands/MADD.js");
+const MGET = __webpack_require__(/*! ./MGET */ "../../@redis/time-series/dist/commands/MGET.js");
+const MGET_WITHLABELS = __webpack_require__(/*! ./MGET_WITHLABELS */ "../../@redis/time-series/dist/commands/MGET_WITHLABELS.js");
+const QUERYINDEX = __webpack_require__(/*! ./QUERYINDEX */ "../../@redis/time-series/dist/commands/QUERYINDEX.js");
+const RANGE = __webpack_require__(/*! ./RANGE */ "../../@redis/time-series/dist/commands/RANGE.js");
+const REVRANGE = __webpack_require__(/*! ./REVRANGE */ "../../@redis/time-series/dist/commands/REVRANGE.js");
+const MRANGE = __webpack_require__(/*! ./MRANGE */ "../../@redis/time-series/dist/commands/MRANGE.js");
+const MRANGE_WITHLABELS = __webpack_require__(/*! ./MRANGE_WITHLABELS */ "../../@redis/time-series/dist/commands/MRANGE_WITHLABELS.js");
+const MREVRANGE = __webpack_require__(/*! ./MREVRANGE */ "../../@redis/time-series/dist/commands/MREVRANGE.js");
+const MREVRANGE_WITHLABELS = __webpack_require__(/*! ./MREVRANGE_WITHLABELS */ "../../@redis/time-series/dist/commands/MREVRANGE_WITHLABELS.js");
+const generic_transformers_1 = __webpack_require__(/*! @redis/client/dist/lib/commands/generic-transformers */ "../../@redis/client/dist/lib/commands/generic-transformers.js");
+exports["default"] = {
+    ADD,
+    add: ADD,
+    ALTER,
+    alter: ALTER,
+    CREATE,
+    create: CREATE,
+    CREATERULE,
+    createRule: CREATERULE,
+    DECRBY,
+    decrBy: DECRBY,
+    DEL,
+    del: DEL,
+    DELETERULE,
+    deleteRule: DELETERULE,
+    GET,
+    get: GET,
+    INCRBY,
+    incrBy: INCRBY,
+    INFO_DEBUG,
+    infoDebug: INFO_DEBUG,
+    INFO,
+    info: INFO,
+    MADD,
+    mAdd: MADD,
+    MGET,
+    mGet: MGET,
+    MGET_WITHLABELS,
+    mGetWithLabels: MGET_WITHLABELS,
+    QUERYINDEX,
+    queryIndex: QUERYINDEX,
+    RANGE,
+    range: RANGE,
+    REVRANGE,
+    revRange: REVRANGE,
+    MRANGE,
+    mRange: MRANGE,
+    MRANGE_WITHLABELS,
+    mRangeWithLabels: MRANGE_WITHLABELS,
+    MREVRANGE,
+    mRevRange: MREVRANGE,
+    MREVRANGE_WITHLABELS,
+    mRevRangeWithLabels: MREVRANGE_WITHLABELS
+};
+var TimeSeriesAggregationType;
+(function (TimeSeriesAggregationType) {
+    TimeSeriesAggregationType["AVG"] = "AVG";
+    // @deprecated
+    TimeSeriesAggregationType["AVERAGE"] = "AVG";
+    TimeSeriesAggregationType["FIRST"] = "FIRST";
+    TimeSeriesAggregationType["LAST"] = "LAST";
+    TimeSeriesAggregationType["MIN"] = "MIN";
+    // @deprecated
+    TimeSeriesAggregationType["MINIMUM"] = "MIN";
+    TimeSeriesAggregationType["MAX"] = "MAX";
+    // @deprecated
+    TimeSeriesAggregationType["MAXIMUM"] = "MAX";
+    TimeSeriesAggregationType["SUM"] = "SUM";
+    TimeSeriesAggregationType["RANGE"] = "RANGE";
+    TimeSeriesAggregationType["COUNT"] = "COUNT";
+    TimeSeriesAggregationType["STD_P"] = "STD.P";
+    TimeSeriesAggregationType["STD_S"] = "STD.S";
+    TimeSeriesAggregationType["VAR_P"] = "VAR.P";
+    TimeSeriesAggregationType["VAR_S"] = "VAR.S";
+    TimeSeriesAggregationType["TWA"] = "TWA";
+})(TimeSeriesAggregationType = exports.TimeSeriesAggregationType || (exports.TimeSeriesAggregationType = {}));
+var TimeSeriesDuplicatePolicies;
+(function (TimeSeriesDuplicatePolicies) {
+    TimeSeriesDuplicatePolicies["BLOCK"] = "BLOCK";
+    TimeSeriesDuplicatePolicies["FIRST"] = "FIRST";
+    TimeSeriesDuplicatePolicies["LAST"] = "LAST";
+    TimeSeriesDuplicatePolicies["MIN"] = "MIN";
+    TimeSeriesDuplicatePolicies["MAX"] = "MAX";
+    TimeSeriesDuplicatePolicies["SUM"] = "SUM";
+})(TimeSeriesDuplicatePolicies = exports.TimeSeriesDuplicatePolicies || (exports.TimeSeriesDuplicatePolicies = {}));
+var TimeSeriesReducers;
+(function (TimeSeriesReducers) {
+    TimeSeriesReducers["AVG"] = "AVG";
+    TimeSeriesReducers["SUM"] = "SUM";
+    TimeSeriesReducers["MIN"] = "MIN";
+    // @deprecated
+    TimeSeriesReducers["MINIMUM"] = "MIN";
+    TimeSeriesReducers["MAX"] = "MAX";
+    // @deprecated
+    TimeSeriesReducers["MAXIMUM"] = "MAX";
+    TimeSeriesReducers["RANGE"] = "range";
+    TimeSeriesReducers["COUNT"] = "COUNT";
+    TimeSeriesReducers["STD_P"] = "STD.P";
+    TimeSeriesReducers["STD_S"] = "STD.S";
+    TimeSeriesReducers["VAR_P"] = "VAR.P";
+    TimeSeriesReducers["VAR_S"] = "VAR.S";
+})(TimeSeriesReducers = exports.TimeSeriesReducers || (exports.TimeSeriesReducers = {}));
+function transformTimestampArgument(timestamp) {
+    if (typeof timestamp === 'string')
+        return timestamp;
+    return (typeof timestamp === 'number' ?
+        timestamp :
+        timestamp.getTime()).toString();
+}
+exports.transformTimestampArgument = transformTimestampArgument;
+function pushRetentionArgument(args, retention) {
+    if (retention) {
+        args.push('RETENTION', retention.toString());
+    }
+    return args;
+}
+exports.pushRetentionArgument = pushRetentionArgument;
+var TimeSeriesEncoding;
+(function (TimeSeriesEncoding) {
+    TimeSeriesEncoding["COMPRESSED"] = "COMPRESSED";
+    TimeSeriesEncoding["UNCOMPRESSED"] = "UNCOMPRESSED";
+})(TimeSeriesEncoding = exports.TimeSeriesEncoding || (exports.TimeSeriesEncoding = {}));
+function pushEncodingArgument(args, encoding) {
+    if (encoding) {
+        args.push('ENCODING', encoding);
+    }
+    return args;
+}
+exports.pushEncodingArgument = pushEncodingArgument;
+function pushChunkSizeArgument(args, chunkSize) {
+    if (chunkSize) {
+        args.push('CHUNK_SIZE', chunkSize.toString());
+    }
+    return args;
+}
+exports.pushChunkSizeArgument = pushChunkSizeArgument;
+function pushDuplicatePolicy(args, duplicatePolicy) {
+    if (duplicatePolicy) {
+        args.push('DUPLICATE_POLICY', duplicatePolicy);
+    }
+    return args;
+}
+exports.pushDuplicatePolicy = pushDuplicatePolicy;
+function transformLablesReply(reply) {
+    const labels = {};
+    for (const [key, value] of reply) {
+        labels[key] = value;
+    }
+    return labels;
+}
+exports.transformLablesReply = transformLablesReply;
+function pushLabelsArgument(args, labels) {
+    if (labels) {
+        args.push('LABELS');
+        for (const [label, value] of Object.entries(labels)) {
+            args.push(label, value);
+        }
+    }
+    return args;
+}
+exports.pushLabelsArgument = pushLabelsArgument;
+function transformIncrDecrArguments(command, key, value, options) {
+    const args = [
+        command,
+        key,
+        value.toString()
+    ];
+    if (options?.TIMESTAMP !== undefined && options?.TIMESTAMP !== null) {
+        args.push('TIMESTAMP', transformTimestampArgument(options.TIMESTAMP));
+    }
+    pushRetentionArgument(args, options?.RETENTION);
+    if (options?.UNCOMPRESSED) {
+        args.push('UNCOMPRESSED');
+    }
+    pushChunkSizeArgument(args, options?.CHUNK_SIZE);
+    pushLabelsArgument(args, options?.LABELS);
+    return args;
+}
+exports.transformIncrDecrArguments = transformIncrDecrArguments;
+function transformSampleReply(reply) {
+    return {
+        timestamp: reply[0],
+        value: Number(reply[1])
+    };
+}
+exports.transformSampleReply = transformSampleReply;
+var TimeSeriesBucketTimestamp;
+(function (TimeSeriesBucketTimestamp) {
+    TimeSeriesBucketTimestamp["LOW"] = "-";
+    TimeSeriesBucketTimestamp["HIGH"] = "+";
+    TimeSeriesBucketTimestamp["MID"] = "~";
+})(TimeSeriesBucketTimestamp = exports.TimeSeriesBucketTimestamp || (exports.TimeSeriesBucketTimestamp = {}));
+function pushRangeArguments(args, fromTimestamp, toTimestamp, options) {
+    args.push(transformTimestampArgument(fromTimestamp), transformTimestampArgument(toTimestamp));
+    pushLatestArgument(args, options?.LATEST);
+    if (options?.FILTER_BY_TS) {
+        args.push('FILTER_BY_TS');
+        for (const ts of options.FILTER_BY_TS) {
+            args.push(transformTimestampArgument(ts));
+        }
+    }
+    if (options?.FILTER_BY_VALUE) {
+        args.push('FILTER_BY_VALUE', options.FILTER_BY_VALUE.min.toString(), options.FILTER_BY_VALUE.max.toString());
+    }
+    if (options?.COUNT) {
+        args.push('COUNT', options.COUNT.toString());
+    }
+    if (options?.ALIGN) {
+        args.push('ALIGN', transformTimestampArgument(options.ALIGN));
+    }
+    if (options?.AGGREGATION) {
+        args.push('AGGREGATION', options.AGGREGATION.type, transformTimestampArgument(options.AGGREGATION.timeBucket));
+        if (options.AGGREGATION.BUCKETTIMESTAMP) {
+            args.push('BUCKETTIMESTAMP', options.AGGREGATION.BUCKETTIMESTAMP);
+        }
+        if (options.AGGREGATION.EMPTY) {
+            args.push('EMPTY');
+        }
+    }
+    return args;
+}
+exports.pushRangeArguments = pushRangeArguments;
+function pushMRangeGroupByArguments(args, groupBy) {
+    if (groupBy) {
+        args.push('GROUPBY', groupBy.label, 'REDUCE', groupBy.reducer);
+    }
+    return args;
+}
+exports.pushMRangeGroupByArguments = pushMRangeGroupByArguments;
+function pushFilterArgument(args, filter) {
+    args.push('FILTER');
+    return (0, generic_transformers_1.pushVerdictArguments)(args, filter);
+}
+exports.pushFilterArgument = pushFilterArgument;
+function pushMRangeArguments(args, fromTimestamp, toTimestamp, filter, options) {
+    args = pushRangeArguments(args, fromTimestamp, toTimestamp, options);
+    args = pushFilterArgument(args, filter);
+    return pushMRangeGroupByArguments(args, options?.GROUPBY);
+}
+exports.pushMRangeArguments = pushMRangeArguments;
+function pushWithLabelsArgument(args, selectedLabels) {
+    if (!selectedLabels) {
+        args.push('WITHLABELS');
+    }
+    else {
+        args.push('SELECTED_LABELS');
+        args = (0, generic_transformers_1.pushVerdictArguments)(args, selectedLabels);
+    }
+    return args;
+}
+exports.pushWithLabelsArgument = pushWithLabelsArgument;
+function pushMRangeWithLabelsArguments(args, fromTimestamp, toTimestamp, filter, options) {
+    args = pushRangeArguments(args, fromTimestamp, toTimestamp, options);
+    args = pushWithLabelsArgument(args, options?.SELECTED_LABELS);
+    args = pushFilterArgument(args, filter);
+    return pushMRangeGroupByArguments(args, options?.GROUPBY);
+}
+exports.pushMRangeWithLabelsArguments = pushMRangeWithLabelsArguments;
+function transformRangeReply(reply) {
+    return reply.map(transformSampleReply);
+}
+exports.transformRangeReply = transformRangeReply;
+function transformMRangeReply(reply) {
+    const args = [];
+    for (const [key, _, sample] of reply) {
+        args.push({
+            key,
+            samples: sample.map(transformSampleReply)
+        });
+    }
+    return args;
+}
+exports.transformMRangeReply = transformMRangeReply;
+function transformMRangeWithLabelsReply(reply) {
+    const args = [];
+    for (const [key, labels, samples] of reply) {
+        args.push({
+            key,
+            labels: transformLablesReply(labels),
+            samples: samples.map(transformSampleReply)
+        });
+    }
+    return args;
+}
+exports.transformMRangeWithLabelsReply = transformMRangeWithLabelsReply;
+function pushLatestArgument(args, latest) {
+    if (latest) {
+        args.push('LATEST');
+    }
+    return args;
+}
+exports.pushLatestArgument = pushLatestArgument;
+
+
+/***/ }),
+
+/***/ "../../@redis/time-series/dist/index.js":
+/*!**********************************************!*\
+  !*** ../../@redis/time-series/dist/index.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TimeSeriesBucketTimestamp = exports.TimeSeriesReducers = exports.TimeSeriesAggregationType = exports.TimeSeriesEncoding = exports.TimeSeriesDuplicatePolicies = exports["default"] = void 0;
+var commands_1 = __webpack_require__(/*! ./commands */ "../../@redis/time-series/dist/commands/index.js");
+Object.defineProperty(exports, "default", ({ enumerable: true, get: function () { return commands_1.default; } }));
+var commands_2 = __webpack_require__(/*! ./commands */ "../../@redis/time-series/dist/commands/index.js");
+Object.defineProperty(exports, "TimeSeriesDuplicatePolicies", ({ enumerable: true, get: function () { return commands_2.TimeSeriesDuplicatePolicies; } }));
+Object.defineProperty(exports, "TimeSeriesEncoding", ({ enumerable: true, get: function () { return commands_2.TimeSeriesEncoding; } }));
+Object.defineProperty(exports, "TimeSeriesAggregationType", ({ enumerable: true, get: function () { return commands_2.TimeSeriesAggregationType; } }));
+Object.defineProperty(exports, "TimeSeriesReducers", ({ enumerable: true, get: function () { return commands_2.TimeSeriesReducers; } }));
+Object.defineProperty(exports, "TimeSeriesBucketTimestamp", ({ enumerable: true, get: function () { return commands_2.TimeSeriesBucketTimestamp; } }));
+
+
+/***/ }),
+
 /***/ "../../asynckit/index.js":
 /*!*******************************!*\
   !*** ../../asynckit/index.js ***!
@@ -531,6 +18045,9 @@ __webpack_require__.r(__webpack_exports__);
 
 const token = __webpack_require__(/*! ../handlers/jwt */ "../../../handlers/jwt.js");
 const axios = __webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs");
+
+// a lot of these don't need to be exported
+
 const fetchRecentSongs = async event => {
   const userToken = event;
   const axiosInstance = getAxios(userToken);
@@ -708,6 +18225,56 @@ const genreSort = songs => {
 
 /***/ }),
 
+/***/ "../../../utils/redis.js":
+/*!*******************************!*\
+  !*** ../../../utils/redis.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addToHash: () => (/* binding */ addToHash),
+/* harmony export */   addToList: () => (/* binding */ addToList),
+/* harmony export */   createRedisClient: () => (/* binding */ createRedisClient)
+/* harmony export */ });
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
+
+const redis = __webpack_require__(/*! redis */ "../../redis/dist/index.js");
+(__webpack_require__(/*! dotenv */ "../../dotenv/lib/main.js").config)();
+const createRedisClient = () => {
+  const redisClient = redis.createClient({
+    host: process.env.CLUSTER_ENDPOINT,
+    port: process.env.REDIS_PORT
+  });
+  return redisClient;
+};
+const addToHash = async songs => {
+  const redisClient = createRedisClient();
+  try {
+    for (const key in songs) {
+      if (songs.hasOwnProperty(key)) {
+        const value = songs[key];
+        await redisClient.hSet("genre-hash", key, value);
+      }
+    }
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+const addToList = async songs => {
+  const client = createRedisClient();
+  client.on('error', err => console.log('Redis Client Error', err));
+  await client.connect();
+  await client.set('key', 'value');
+  const value = await client.get('key');
+  await client.disconnect();
+  return value;
+};
+
+/***/ }),
+
 /***/ "../../buffer-equal-constant-time/index.js":
 /*!*************************************************!*\
   !*** ../../buffer-equal-constant-time/index.js ***!
@@ -838,6 +18405,182 @@ function bufferFrom (value, encodingOrOffset, length) {
 }
 
 module.exports = bufferFrom
+
+
+/***/ }),
+
+/***/ "../../cluster-key-slot/lib/index.js":
+/*!*******************************************!*\
+  !*** ../../cluster-key-slot/lib/index.js ***!
+  \*******************************************/
+/***/ ((module) => {
+
+/*
+ * Copyright 2001-2010 Georges Menie (www.menie.org)
+ * Copyright 2010 Salvatore Sanfilippo (adapted to Redis coding style)
+ * Copyright 2015 Zihua Li (http://zihua.li) (ported to JavaScript)
+ * Copyright 2016 Mike Diarmid (http://github.com/salakar) (re-write for performance, ~700% perf inc)
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ *     * Redistributions of source code must retain the above copyright
+ *       notice, this list of conditions and the following disclaimer.
+ *     * Redistributions in binary form must reproduce the above copyright
+ *       notice, this list of conditions and the following disclaimer in the
+ *       documentation and/or other materials provided with the distribution.
+ *     * Neither the name of the University of California, Berkeley nor the
+ *       names of its contributors may be used to endorse or promote products
+ *       derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE REGENTS AND CONTRIBUTORS BE LIABLE FOR ANY
+ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* CRC16 implementation according to CCITT standards.
+ *
+ * Note by @antirez: this is actually the XMODEM CRC 16 algorithm, using the
+ * following parameters:
+ *
+ * Name                       : "XMODEM", also known as "ZMODEM", "CRC-16/ACORN"
+ * Width                      : 16 bit
+ * Poly                       : 1021 (That is actually x^16 + x^12 + x^5 + 1)
+ * Initialization             : 0000
+ * Reflect Input byte         : False
+ * Reflect Output CRC         : False
+ * Xor constant to output CRC : 0000
+ * Output for "123456789"     : 31C3
+ */
+
+var lookup = [
+  0x0000, 0x1021, 0x2042, 0x3063, 0x4084, 0x50a5, 0x60c6, 0x70e7,
+  0x8108, 0x9129, 0xa14a, 0xb16b, 0xc18c, 0xd1ad, 0xe1ce, 0xf1ef,
+  0x1231, 0x0210, 0x3273, 0x2252, 0x52b5, 0x4294, 0x72f7, 0x62d6,
+  0x9339, 0x8318, 0xb37b, 0xa35a, 0xd3bd, 0xc39c, 0xf3ff, 0xe3de,
+  0x2462, 0x3443, 0x0420, 0x1401, 0x64e6, 0x74c7, 0x44a4, 0x5485,
+  0xa56a, 0xb54b, 0x8528, 0x9509, 0xe5ee, 0xf5cf, 0xc5ac, 0xd58d,
+  0x3653, 0x2672, 0x1611, 0x0630, 0x76d7, 0x66f6, 0x5695, 0x46b4,
+  0xb75b, 0xa77a, 0x9719, 0x8738, 0xf7df, 0xe7fe, 0xd79d, 0xc7bc,
+  0x48c4, 0x58e5, 0x6886, 0x78a7, 0x0840, 0x1861, 0x2802, 0x3823,
+  0xc9cc, 0xd9ed, 0xe98e, 0xf9af, 0x8948, 0x9969, 0xa90a, 0xb92b,
+  0x5af5, 0x4ad4, 0x7ab7, 0x6a96, 0x1a71, 0x0a50, 0x3a33, 0x2a12,
+  0xdbfd, 0xcbdc, 0xfbbf, 0xeb9e, 0x9b79, 0x8b58, 0xbb3b, 0xab1a,
+  0x6ca6, 0x7c87, 0x4ce4, 0x5cc5, 0x2c22, 0x3c03, 0x0c60, 0x1c41,
+  0xedae, 0xfd8f, 0xcdec, 0xddcd, 0xad2a, 0xbd0b, 0x8d68, 0x9d49,
+  0x7e97, 0x6eb6, 0x5ed5, 0x4ef4, 0x3e13, 0x2e32, 0x1e51, 0x0e70,
+  0xff9f, 0xefbe, 0xdfdd, 0xcffc, 0xbf1b, 0xaf3a, 0x9f59, 0x8f78,
+  0x9188, 0x81a9, 0xb1ca, 0xa1eb, 0xd10c, 0xc12d, 0xf14e, 0xe16f,
+  0x1080, 0x00a1, 0x30c2, 0x20e3, 0x5004, 0x4025, 0x7046, 0x6067,
+  0x83b9, 0x9398, 0xa3fb, 0xb3da, 0xc33d, 0xd31c, 0xe37f, 0xf35e,
+  0x02b1, 0x1290, 0x22f3, 0x32d2, 0x4235, 0x5214, 0x6277, 0x7256,
+  0xb5ea, 0xa5cb, 0x95a8, 0x8589, 0xf56e, 0xe54f, 0xd52c, 0xc50d,
+  0x34e2, 0x24c3, 0x14a0, 0x0481, 0x7466, 0x6447, 0x5424, 0x4405,
+  0xa7db, 0xb7fa, 0x8799, 0x97b8, 0xe75f, 0xf77e, 0xc71d, 0xd73c,
+  0x26d3, 0x36f2, 0x0691, 0x16b0, 0x6657, 0x7676, 0x4615, 0x5634,
+  0xd94c, 0xc96d, 0xf90e, 0xe92f, 0x99c8, 0x89e9, 0xb98a, 0xa9ab,
+  0x5844, 0x4865, 0x7806, 0x6827, 0x18c0, 0x08e1, 0x3882, 0x28a3,
+  0xcb7d, 0xdb5c, 0xeb3f, 0xfb1e, 0x8bf9, 0x9bd8, 0xabbb, 0xbb9a,
+  0x4a75, 0x5a54, 0x6a37, 0x7a16, 0x0af1, 0x1ad0, 0x2ab3, 0x3a92,
+  0xfd2e, 0xed0f, 0xdd6c, 0xcd4d, 0xbdaa, 0xad8b, 0x9de8, 0x8dc9,
+  0x7c26, 0x6c07, 0x5c64, 0x4c45, 0x3ca2, 0x2c83, 0x1ce0, 0x0cc1,
+  0xef1f, 0xff3e, 0xcf5d, 0xdf7c, 0xaf9b, 0xbfba, 0x8fd9, 0x9ff8,
+  0x6e17, 0x7e36, 0x4e55, 0x5e74, 0x2e93, 0x3eb2, 0x0ed1, 0x1ef0
+];
+
+/**
+ * Convert a string to a UTF8 array - faster than via buffer
+ * @param str
+ * @returns {Array}
+ */
+var toUTF8Array = function toUTF8Array(str) {
+  var char;
+  var i = 0;
+  var p = 0;
+  var utf8 = [];
+  var len = str.length;
+
+  for (; i < len; i++) {
+    char = str.charCodeAt(i);
+    if (char < 128) {
+      utf8[p++] = char;
+    } else if (char < 2048) {
+      utf8[p++] = (char >> 6) | 192;
+      utf8[p++] = (char & 63) | 128;
+    } else if (
+        ((char & 0xFC00) === 0xD800) && (i + 1) < str.length &&
+        ((str.charCodeAt(i + 1) & 0xFC00) === 0xDC00)) {
+      char = 0x10000 + ((char & 0x03FF) << 10) + (str.charCodeAt(++i) & 0x03FF);
+      utf8[p++] = (char >> 18) | 240;
+      utf8[p++] = ((char >> 12) & 63) | 128;
+      utf8[p++] = ((char >> 6) & 63) | 128;
+      utf8[p++] = (char & 63) | 128;
+    } else {
+      utf8[p++] = (char >> 12) | 224;
+      utf8[p++] = ((char >> 6) & 63) | 128;
+      utf8[p++] = (char & 63) | 128;
+    }
+  }
+
+  return utf8;
+};
+
+/**
+ * Convert a string into a redis slot hash.
+ * @param str
+ * @returns {number}
+ */
+var generate = module.exports = function generate(str) {
+  var char;
+  var i = 0;
+  var start = -1;
+  var result = 0;
+  var resultHash = 0;
+  var utf8 = typeof str === 'string' ? toUTF8Array(str) : str;
+  var len = utf8.length;
+
+  while (i < len) {
+    char = utf8[i++];
+    if (start === -1) {
+      if (char === 0x7B) {
+        start = i;
+      }
+    } else if (char !== 0x7D) {
+      resultHash = lookup[(char ^ (resultHash >> 8)) & 0xFF] ^ (resultHash << 8);
+    } else if (i - 1 !== start) {
+      return resultHash & 0x3FFF;
+    }
+
+    result = lookup[(char ^ (result >> 8)) & 0xFF] ^ (result << 8);
+  }
+
+  return result & 0x3FFF;
+};
+
+/**
+ * Convert an array of multiple strings into a redis slot hash.
+ * Returns -1 if one of the keys is not for the same slot as the others
+ * @param keys
+ * @returns {number}
+ */
+module.exports.generateMulti = function generateMulti(keys) {
+  var i = 1;
+  var len = keys.length;
+  var base = generate(keys[0]);
+
+  while (i < len) {
+    if (generate(keys[i++]) !== base) return -1;
+  }
+
+  return base;
+};
 
 
 /***/ }),
@@ -3398,6 +21141,1830 @@ module.exports = function(dst, src) {
   });
 
   return dst;
+};
+
+
+/***/ }),
+
+/***/ "../../generic-pool/index.js":
+/*!***********************************!*\
+  !*** ../../generic-pool/index.js ***!
+  \***********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+const Pool = __webpack_require__(/*! ./lib/Pool */ "../../generic-pool/lib/Pool.js");
+const Deque = __webpack_require__(/*! ./lib/Deque */ "../../generic-pool/lib/Deque.js");
+const PriorityQueue = __webpack_require__(/*! ./lib/PriorityQueue */ "../../generic-pool/lib/PriorityQueue.js");
+const DefaultEvictor = __webpack_require__(/*! ./lib/DefaultEvictor */ "../../generic-pool/lib/DefaultEvictor.js");
+module.exports = {
+  Pool: Pool,
+  Deque: Deque,
+  PriorityQueue: PriorityQueue,
+  DefaultEvictor: DefaultEvictor,
+  createPool: function(factory, config) {
+    return new Pool(DefaultEvictor, Deque, PriorityQueue, factory, config);
+  }
+};
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/DefaultEvictor.js":
+/*!************************************************!*\
+  !*** ../../generic-pool/lib/DefaultEvictor.js ***!
+  \************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+class DefaultEvictor {
+  evict(config, pooledResource, availableObjectsCount) {
+    const idleTime = Date.now() - pooledResource.lastIdleTime;
+
+    if (
+      config.softIdleTimeoutMillis > 0 &&
+      config.softIdleTimeoutMillis < idleTime &&
+      config.min < availableObjectsCount
+    ) {
+      return true;
+    }
+
+    if (config.idleTimeoutMillis < idleTime) {
+      return true;
+    }
+
+    return false;
+  }
+}
+
+module.exports = DefaultEvictor;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/Deferred.js":
+/*!******************************************!*\
+  !*** ../../generic-pool/lib/Deferred.js ***!
+  \******************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * This is apparently a bit like a Jquery deferred, hence the name
+ */
+
+class Deferred {
+  constructor(Promise) {
+    this._state = Deferred.PENDING;
+    this._resolve = undefined;
+    this._reject = undefined;
+
+    this._promise = new Promise((resolve, reject) => {
+      this._resolve = resolve;
+      this._reject = reject;
+    });
+  }
+
+  get state() {
+    return this._state;
+  }
+
+  get promise() {
+    return this._promise;
+  }
+
+  reject(reason) {
+    if (this._state !== Deferred.PENDING) {
+      return;
+    }
+    this._state = Deferred.REJECTED;
+    this._reject(reason);
+  }
+
+  resolve(value) {
+    if (this._state !== Deferred.PENDING) {
+      return;
+    }
+    this._state = Deferred.FULFILLED;
+    this._resolve(value);
+  }
+}
+
+// TODO: should these really live here? or be a seperate 'state' enum
+Deferred.PENDING = "PENDING";
+Deferred.FULFILLED = "FULFILLED";
+Deferred.REJECTED = "REJECTED";
+
+module.exports = Deferred;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/Deque.js":
+/*!***************************************!*\
+  !*** ../../generic-pool/lib/Deque.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const DoublyLinkedList = __webpack_require__(/*! ./DoublyLinkedList */ "../../generic-pool/lib/DoublyLinkedList.js");
+const DequeIterator = __webpack_require__(/*! ./DequeIterator */ "../../generic-pool/lib/DequeIterator.js");
+/**
+ * DoublyLinkedList backed double ended queue
+ * implements just enough to keep the Pool
+ */
+class Deque {
+  constructor() {
+    this._list = new DoublyLinkedList();
+  }
+
+  /**
+   * removes and returns the first element from the queue
+   * @return {any} [description]
+   */
+  shift() {
+    if (this.length === 0) {
+      return undefined;
+    }
+
+    const node = this._list.head;
+    this._list.remove(node);
+
+    return node.data;
+  }
+
+  /**
+   * adds one elemts to the beginning of the queue
+   * @param  {any} element [description]
+   * @return {any}         [description]
+   */
+  unshift(element) {
+    const node = DoublyLinkedList.createNode(element);
+
+    this._list.insertBeginning(node);
+  }
+
+  /**
+   * adds one to the end of the queue
+   * @param  {any} element [description]
+   * @return {any}         [description]
+   */
+  push(element) {
+    const node = DoublyLinkedList.createNode(element);
+
+    this._list.insertEnd(node);
+  }
+
+  /**
+   * removes and returns the last element from the queue
+   */
+  pop() {
+    if (this.length === 0) {
+      return undefined;
+    }
+
+    const node = this._list.tail;
+    this._list.remove(node);
+
+    return node.data;
+  }
+
+  [Symbol.iterator]() {
+    return new DequeIterator(this._list);
+  }
+
+  iterator() {
+    return new DequeIterator(this._list);
+  }
+
+  reverseIterator() {
+    return new DequeIterator(this._list, true);
+  }
+
+  /**
+   * get a reference to the item at the head of the queue
+   * @return {any} [description]
+   */
+  get head() {
+    if (this.length === 0) {
+      return undefined;
+    }
+    const node = this._list.head;
+    return node.data;
+  }
+
+  /**
+   * get a reference to the item at the tail of the queue
+   * @return {any} [description]
+   */
+  get tail() {
+    if (this.length === 0) {
+      return undefined;
+    }
+    const node = this._list.tail;
+    return node.data;
+  }
+
+  get length() {
+    return this._list.length;
+  }
+}
+
+module.exports = Deque;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/DequeIterator.js":
+/*!***********************************************!*\
+  !*** ../../generic-pool/lib/DequeIterator.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const DoublyLinkedListIterator = __webpack_require__(/*! ./DoublyLinkedListIterator */ "../../generic-pool/lib/DoublyLinkedListIterator.js");
+/**
+ * Thin wrapper around an underlying DDL iterator
+ */
+class DequeIterator extends DoublyLinkedListIterator {
+  next() {
+    const result = super.next();
+
+    // unwrap the node...
+    if (result.value) {
+      result.value = result.value.data;
+    }
+
+    return result;
+  }
+}
+
+module.exports = DequeIterator;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/DoublyLinkedList.js":
+/*!**************************************************!*\
+  !*** ../../generic-pool/lib/DoublyLinkedList.js ***!
+  \**************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * A Doubly Linked List, because there aren't enough in the world...
+ * this is pretty much a direct JS port of the one wikipedia
+ * https://en.wikipedia.org/wiki/Doubly_linked_list
+ *
+ * For most usage 'insertBeginning' and 'insertEnd' should be enough
+ *
+ * nodes are expected to something like a POJSO like
+ * {
+ *   prev: null,
+ *   next: null,
+ *   something: 'whatever you like'
+ * }
+ */
+class DoublyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+
+  insertBeginning(node) {
+    if (this.head === null) {
+      this.head = node;
+      this.tail = node;
+      node.prev = null;
+      node.next = null;
+      this.length++;
+    } else {
+      this.insertBefore(this.head, node);
+    }
+  }
+
+  insertEnd(node) {
+    if (this.tail === null) {
+      this.insertBeginning(node);
+    } else {
+      this.insertAfter(this.tail, node);
+    }
+  }
+
+  insertAfter(node, newNode) {
+    newNode.prev = node;
+    newNode.next = node.next;
+    if (node.next === null) {
+      this.tail = newNode;
+    } else {
+      node.next.prev = newNode;
+    }
+    node.next = newNode;
+    this.length++;
+  }
+
+  insertBefore(node, newNode) {
+    newNode.prev = node.prev;
+    newNode.next = node;
+    if (node.prev === null) {
+      this.head = newNode;
+    } else {
+      node.prev.next = newNode;
+    }
+    node.prev = newNode;
+    this.length++;
+  }
+
+  remove(node) {
+    if (node.prev === null) {
+      this.head = node.next;
+    } else {
+      node.prev.next = node.next;
+    }
+    if (node.next === null) {
+      this.tail = node.prev;
+    } else {
+      node.next.prev = node.prev;
+    }
+    node.prev = null;
+    node.next = null;
+    this.length--;
+  }
+
+  // FIXME: this should not live here and has become a dumping ground...
+  static createNode(data) {
+    return {
+      prev: null,
+      next: null,
+      data: data
+    };
+  }
+}
+
+module.exports = DoublyLinkedList;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/DoublyLinkedListIterator.js":
+/*!**********************************************************!*\
+  !*** ../../generic-pool/lib/DoublyLinkedListIterator.js ***!
+  \**********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+/**
+ * Creates an interator for a DoublyLinkedList starting at the given node
+ * It's internal cursor will remains relative to the last "iterated" node as that
+ * node moves through the list until it either iterates to the end of the list,
+ * or the the node it's tracking is removed from the list. Until the first 'next'
+ * call it tracks the head/tail of the linked list. This means that one can create
+ * an iterator on an empty list, then add nodes, and then the iterator will follow
+ * those nodes. Because the DoublyLinkedList nodes don't track their owning "list" and
+ * it's highly inefficient to walk the list for every iteration, the iterator won't know
+ * if the node has been detached from one List and added to another list, or if the iterator
+ *
+ * The created object is an es6 compatible iterator
+ */
+class DoublyLinkedListIterator {
+  /**
+   * @param  {Object} doublyLinkedList     a node that is part of a doublyLinkedList
+   * @param  {Boolean} [reverse=false]     is this a reverse iterator? default: false
+   */
+  constructor(doublyLinkedList, reverse) {
+    this._list = doublyLinkedList;
+    // NOTE: these key names are tied to the DoublyLinkedListIterator
+    this._direction = reverse === true ? "prev" : "next";
+    this._startPosition = reverse === true ? "tail" : "head";
+    this._started = false;
+    this._cursor = null;
+    this._done = false;
+  }
+
+  _start() {
+    this._cursor = this._list[this._startPosition];
+    this._started = true;
+  }
+
+  _advanceCursor() {
+    if (this._started === false) {
+      this._started = true;
+      this._cursor = this._list[this._startPosition];
+      return;
+    }
+    this._cursor = this._cursor[this._direction];
+  }
+
+  reset() {
+    this._done = false;
+    this._started = false;
+    this._cursor = null;
+  }
+
+  remove() {
+    if (
+      this._started === false ||
+      this._done === true ||
+      this._isCursorDetached()
+    ) {
+      return false;
+    }
+    this._list.remove(this._cursor);
+  }
+
+  next() {
+    if (this._done === true) {
+      return { done: true };
+    }
+
+    this._advanceCursor();
+
+    // if there is no node at the cursor or the node at the cursor is no longer part of
+    // a doubly linked list then we are done/finished/kaput
+    if (this._cursor === null || this._isCursorDetached()) {
+      this._done = true;
+      return { done: true };
+    }
+
+    return {
+      value: this._cursor,
+      done: false
+    };
+  }
+
+  /**
+   * Is the node detached from a list?
+   * NOTE: you can trick/bypass/confuse this check by removing a node from one DoublyLinkedList
+   * and adding it to another.
+   * TODO: We can make this smarter by checking the direction of travel and only checking
+   * the required next/prev/head/tail rather than all of them
+   * @return {Boolean}      [description]
+   */
+  _isCursorDetached() {
+    return (
+      this._cursor.prev === null &&
+      this._cursor.next === null &&
+      this._list.tail !== this._cursor &&
+      this._list.head !== this._cursor
+    );
+  }
+}
+
+module.exports = DoublyLinkedListIterator;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/Pool.js":
+/*!**************************************!*\
+  !*** ../../generic-pool/lib/Pool.js ***!
+  \**************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const EventEmitter = (__webpack_require__(/*! events */ "events").EventEmitter);
+
+const factoryValidator = __webpack_require__(/*! ./factoryValidator */ "../../generic-pool/lib/factoryValidator.js");
+const PoolOptions = __webpack_require__(/*! ./PoolOptions */ "../../generic-pool/lib/PoolOptions.js");
+const ResourceRequest = __webpack_require__(/*! ./ResourceRequest */ "../../generic-pool/lib/ResourceRequest.js");
+const ResourceLoan = __webpack_require__(/*! ./ResourceLoan */ "../../generic-pool/lib/ResourceLoan.js");
+const PooledResource = __webpack_require__(/*! ./PooledResource */ "../../generic-pool/lib/PooledResource.js");
+const DefaultEvictor = __webpack_require__(/*! ./DefaultEvictor */ "../../generic-pool/lib/DefaultEvictor.js");
+const Deque = __webpack_require__(/*! ./Deque */ "../../generic-pool/lib/Deque.js");
+const Deferred = __webpack_require__(/*! ./Deferred */ "../../generic-pool/lib/Deferred.js");
+const PriorityQueue = __webpack_require__(/*! ./PriorityQueue */ "../../generic-pool/lib/PriorityQueue.js");
+const DequeIterator = __webpack_require__(/*! ./DequeIterator */ "../../generic-pool/lib/DequeIterator.js");
+
+const reflector = (__webpack_require__(/*! ./utils */ "../../generic-pool/lib/utils.js").reflector);
+
+/**
+ * TODO: move me
+ */
+const FACTORY_CREATE_ERROR = "factoryCreateError";
+const FACTORY_DESTROY_ERROR = "factoryDestroyError";
+
+class Pool extends EventEmitter {
+  /**
+   * Generate an Object pool with a specified `factory` and `config`.
+   *
+   * @param {typeof DefaultEvictor} Evictor
+   * @param {typeof Deque} Deque
+   * @param {typeof PriorityQueue} PriorityQueue
+   * @param {Object} factory
+   *   Factory to be used for generating and destroying the items.
+   * @param {Function} factory.create
+   *   Should create the item to be acquired,
+   *   and call it's first callback argument with the generated item as it's argument.
+   * @param {Function} factory.destroy
+   *   Should gently close any resources that the item is using.
+   *   Called before the items is destroyed.
+   * @param {Function} factory.validate
+   *   Test if a resource is still valid .Should return a promise that resolves to a boolean, true if resource is still valid and false
+   *   If it should be removed from pool.
+   * @param {Object} options
+   */
+  constructor(Evictor, Deque, PriorityQueue, factory, options) {
+    super();
+
+    factoryValidator(factory);
+
+    this._config = new PoolOptions(options);
+
+    // TODO: fix up this ugly glue-ing
+    this._Promise = this._config.Promise;
+
+    this._factory = factory;
+    this._draining = false;
+    this._started = false;
+    /**
+     * Holds waiting clients
+     * @type {PriorityQueue}
+     */
+    this._waitingClientsQueue = new PriorityQueue(this._config.priorityRange);
+
+    /**
+     * Collection of promises for resource creation calls made by the pool to factory.create
+     * @type {Set}
+     */
+    this._factoryCreateOperations = new Set();
+
+    /**
+     * Collection of promises for resource destruction calls made by the pool to factory.destroy
+     * @type {Set}
+     */
+    this._factoryDestroyOperations = new Set();
+
+    /**
+     * A queue/stack of pooledResources awaiting acquisition
+     * TODO: replace with LinkedList backed array
+     * @type {Deque}
+     */
+    this._availableObjects = new Deque();
+
+    /**
+     * Collection of references for any resource that are undergoing validation before being acquired
+     * @type {Set}
+     */
+    this._testOnBorrowResources = new Set();
+
+    /**
+     * Collection of references for any resource that are undergoing validation before being returned
+     * @type {Set}
+     */
+    this._testOnReturnResources = new Set();
+
+    /**
+     * Collection of promises for any validations currently in process
+     * @type {Set}
+     */
+    this._validationOperations = new Set();
+
+    /**
+     * All objects associated with this pool in any state (except destroyed)
+     * @type {Set}
+     */
+    this._allObjects = new Set();
+
+    /**
+     * Loans keyed by the borrowed resource
+     * @type {Map}
+     */
+    this._resourceLoans = new Map();
+
+    /**
+     * Infinitely looping iterator over available object
+     * @type {DequeIterator}
+     */
+    this._evictionIterator = this._availableObjects.iterator();
+
+    this._evictor = new Evictor();
+
+    /**
+     * handle for setTimeout for next eviction run
+     * @type {(number|null)}
+     */
+    this._scheduledEviction = null;
+
+    // create initial resources (if factory.min > 0)
+    if (this._config.autostart === true) {
+      this.start();
+    }
+  }
+
+  _destroy(pooledResource) {
+    // FIXME: do we need another state for "in destruction"?
+    pooledResource.invalidate();
+    this._allObjects.delete(pooledResource);
+    // NOTE: this maybe very bad promise usage?
+    const destroyPromise = this._factory.destroy(pooledResource.obj);
+    const wrappedDestroyPromise = this._config.destroyTimeoutMillis
+      ? this._Promise.resolve(this._applyDestroyTimeout(destroyPromise))
+      : this._Promise.resolve(destroyPromise);
+
+    this._trackOperation(
+      wrappedDestroyPromise,
+      this._factoryDestroyOperations
+    ).catch(reason => {
+      this.emit(FACTORY_DESTROY_ERROR, reason);
+    });
+
+    // TODO: maybe ensuring minimum pool size should live outside here
+    this._ensureMinimum();
+  }
+
+  _applyDestroyTimeout(promise) {
+    const timeoutPromise = new this._Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject(new Error("destroy timed out"));
+      }, this._config.destroyTimeoutMillis).unref();
+    });
+    return this._Promise.race([timeoutPromise, promise]);
+  }
+
+  /**
+   * Attempt to move an available resource into test and then onto a waiting client
+   * @return {Boolean} could we move an available resource into test
+   */
+  _testOnBorrow() {
+    if (this._availableObjects.length < 1) {
+      return false;
+    }
+
+    const pooledResource = this._availableObjects.shift();
+    // Mark the resource as in test
+    pooledResource.test();
+    this._testOnBorrowResources.add(pooledResource);
+    const validationPromise = this._factory.validate(pooledResource.obj);
+    const wrappedValidationPromise = this._Promise.resolve(validationPromise);
+
+    this._trackOperation(
+      wrappedValidationPromise,
+      this._validationOperations
+    ).then(isValid => {
+      this._testOnBorrowResources.delete(pooledResource);
+
+      if (isValid === false) {
+        pooledResource.invalidate();
+        this._destroy(pooledResource);
+        this._dispense();
+        return;
+      }
+      this._dispatchPooledResourceToNextWaitingClient(pooledResource);
+    });
+
+    return true;
+  }
+
+  /**
+   * Attempt to move an available resource to a waiting client
+   * @return {Boolean} [description]
+   */
+  _dispatchResource() {
+    if (this._availableObjects.length < 1) {
+      return false;
+    }
+
+    const pooledResource = this._availableObjects.shift();
+    this._dispatchPooledResourceToNextWaitingClient(pooledResource);
+    return false;
+  }
+
+  /**
+   * Attempt to resolve an outstanding resource request using an available resource from
+   * the pool, or creating new ones
+   *
+   * @private
+   */
+  _dispense() {
+    /**
+     * Local variables for ease of reading/writing
+     * these don't (shouldn't) change across the execution of this fn
+     */
+    const numWaitingClients = this._waitingClientsQueue.length;
+
+    // If there aren't any waiting requests then there is nothing to do
+    // so lets short-circuit
+    if (numWaitingClients < 1) {
+      return;
+    }
+
+    const resourceShortfall =
+      numWaitingClients - this._potentiallyAllocableResourceCount;
+
+    const actualNumberOfResourcesToCreate = Math.min(
+      this.spareResourceCapacity,
+      resourceShortfall
+    );
+    for (let i = 0; actualNumberOfResourcesToCreate > i; i++) {
+      this._createResource();
+    }
+
+    // If we are doing test-on-borrow see how many more resources need to be moved into test
+    // to help satisfy waitingClients
+    if (this._config.testOnBorrow === true) {
+      // how many available resources do we need to shift into test
+      const desiredNumberOfResourcesToMoveIntoTest =
+        numWaitingClients - this._testOnBorrowResources.size;
+      const actualNumberOfResourcesToMoveIntoTest = Math.min(
+        this._availableObjects.length,
+        desiredNumberOfResourcesToMoveIntoTest
+      );
+      for (let i = 0; actualNumberOfResourcesToMoveIntoTest > i; i++) {
+        this._testOnBorrow();
+      }
+    }
+
+    // if we aren't testing-on-borrow then lets try to allocate what we can
+    if (this._config.testOnBorrow === false) {
+      const actualNumberOfResourcesToDispatch = Math.min(
+        this._availableObjects.length,
+        numWaitingClients
+      );
+      for (let i = 0; actualNumberOfResourcesToDispatch > i; i++) {
+        this._dispatchResource();
+      }
+    }
+  }
+
+  /**
+   * Dispatches a pooledResource to the next waiting client (if any) else
+   * puts the PooledResource back on the available list
+   * @param  {PooledResource} pooledResource [description]
+   * @return {Boolean}                [description]
+   */
+  _dispatchPooledResourceToNextWaitingClient(pooledResource) {
+    const clientResourceRequest = this._waitingClientsQueue.dequeue();
+    if (
+      clientResourceRequest === undefined ||
+      clientResourceRequest.state !== Deferred.PENDING
+    ) {
+      // While we were away either all the waiting clients timed out
+      // or were somehow fulfilled. put our pooledResource back.
+      this._addPooledResourceToAvailableObjects(pooledResource);
+      // TODO: do need to trigger anything before we leave?
+      return false;
+    }
+    const loan = new ResourceLoan(pooledResource, this._Promise);
+    this._resourceLoans.set(pooledResource.obj, loan);
+    pooledResource.allocate();
+    clientResourceRequest.resolve(pooledResource.obj);
+    return true;
+  }
+
+  /**
+   * tracks on operation using given set
+   * handles adding/removing from the set and resolve/rejects the value/reason
+   * @param  {Promise} operation
+   * @param  {Set} set       Set holding operations
+   * @return {Promise}       Promise that resolves once operation has been removed from set
+   */
+  _trackOperation(operation, set) {
+    set.add(operation);
+
+    return operation.then(
+      v => {
+        set.delete(operation);
+        return this._Promise.resolve(v);
+      },
+      e => {
+        set.delete(operation);
+        return this._Promise.reject(e);
+      }
+    );
+  }
+
+  /**
+   * @private
+   */
+  _createResource() {
+    // An attempt to create a resource
+    const factoryPromise = this._factory.create();
+    const wrappedFactoryPromise = this._Promise
+      .resolve(factoryPromise)
+      .then(resource => {
+        const pooledResource = new PooledResource(resource);
+        this._allObjects.add(pooledResource);
+        this._addPooledResourceToAvailableObjects(pooledResource);
+      });
+
+    this._trackOperation(wrappedFactoryPromise, this._factoryCreateOperations)
+      .then(() => {
+        this._dispense();
+        // Stop bluebird complaining about this side-effect only handler
+        // - a promise was created in a handler but was not returned from it
+        // https://goo.gl/rRqMUw
+        return null;
+      })
+      .catch(reason => {
+        this.emit(FACTORY_CREATE_ERROR, reason);
+        this._dispense();
+      });
+  }
+
+  /**
+   * @private
+   */
+  _ensureMinimum() {
+    if (this._draining === true) {
+      return;
+    }
+    const minShortfall = this._config.min - this._count;
+    for (let i = 0; i < minShortfall; i++) {
+      this._createResource();
+    }
+  }
+
+  _evict() {
+    const testsToRun = Math.min(
+      this._config.numTestsPerEvictionRun,
+      this._availableObjects.length
+    );
+    const evictionConfig = {
+      softIdleTimeoutMillis: this._config.softIdleTimeoutMillis,
+      idleTimeoutMillis: this._config.idleTimeoutMillis,
+      min: this._config.min
+    };
+    for (let testsHaveRun = 0; testsHaveRun < testsToRun; ) {
+      const iterationResult = this._evictionIterator.next();
+
+      // Safety check incase we could get stuck in infinite loop because we
+      // somehow emptied the array after checking its length.
+      if (iterationResult.done === true && this._availableObjects.length < 1) {
+        this._evictionIterator.reset();
+        return;
+      }
+      // If this happens it should just mean we reached the end of the
+      // list and can reset the cursor.
+      if (iterationResult.done === true && this._availableObjects.length > 0) {
+        this._evictionIterator.reset();
+        continue;
+      }
+
+      const resource = iterationResult.value;
+
+      const shouldEvict = this._evictor.evict(
+        evictionConfig,
+        resource,
+        this._availableObjects.length
+      );
+      testsHaveRun++;
+
+      if (shouldEvict === true) {
+        // take it out of the _availableObjects list
+        this._evictionIterator.remove();
+        this._destroy(resource);
+      }
+    }
+  }
+
+  _scheduleEvictorRun() {
+    // Start eviction if set
+    if (this._config.evictionRunIntervalMillis > 0) {
+      // @ts-ignore
+      this._scheduledEviction = setTimeout(() => {
+        this._evict();
+        this._scheduleEvictorRun();
+      }, this._config.evictionRunIntervalMillis).unref();
+    }
+  }
+
+  _descheduleEvictorRun() {
+    if (this._scheduledEviction) {
+      clearTimeout(this._scheduledEviction);
+    }
+    this._scheduledEviction = null;
+  }
+
+  start() {
+    if (this._draining === true) {
+      return;
+    }
+    if (this._started === true) {
+      return;
+    }
+    this._started = true;
+    this._scheduleEvictorRun();
+    this._ensureMinimum();
+  }
+
+  /**
+   * Request a new resource. The callback will be called,
+   * when a new resource is available, passing the resource to the callback.
+   * TODO: should we add a seperate "acquireWithPriority" function
+   *
+   * @param {Number} [priority=0]
+   *   Optional.  Integer between 0 and (priorityRange - 1).  Specifies the priority
+   *   of the caller if there are no available resources.  Lower numbers mean higher
+   *   priority.
+   *
+   * @returns {Promise}
+   */
+  acquire(priority) {
+    if (this._started === false && this._config.autostart === false) {
+      this.start();
+    }
+
+    if (this._draining) {
+      return this._Promise.reject(
+        new Error("pool is draining and cannot accept work")
+      );
+    }
+
+    // TODO: should we defer this check till after this event loop incase "the situation" changes in the meantime
+    if (
+      this.spareResourceCapacity < 1 &&
+      this._availableObjects.length < 1 &&
+      this._config.maxWaitingClients !== undefined &&
+      this._waitingClientsQueue.length >= this._config.maxWaitingClients
+    ) {
+      return this._Promise.reject(
+        new Error("max waitingClients count exceeded")
+      );
+    }
+
+    const resourceRequest = new ResourceRequest(
+      this._config.acquireTimeoutMillis,
+      this._Promise
+    );
+    this._waitingClientsQueue.enqueue(resourceRequest, priority);
+    this._dispense();
+
+    return resourceRequest.promise;
+  }
+
+  /**
+   * [use method, aquires a resource, passes the resource to a user supplied function and releases it]
+   * @param  {Function} fn [a function that accepts a resource and returns a promise that resolves/rejects once it has finished using the resource]
+   * @return {Promise}      [resolves once the resource is released to the pool]
+   */
+  use(fn, priority) {
+    return this.acquire(priority).then(resource => {
+      return fn(resource).then(
+        result => {
+          this.release(resource);
+          return result;
+        },
+        err => {
+          this.destroy(resource);
+          throw err;
+        }
+      );
+    });
+  }
+
+  /**
+   * Check if resource is currently on loan from the pool
+   *
+   * @param {Function} resource
+   *    Resource for checking.
+   *
+   * @returns {Boolean}
+   *  True if resource belongs to this pool and false otherwise
+   */
+  isBorrowedResource(resource) {
+    return this._resourceLoans.has(resource);
+  }
+
+  /**
+   * Return the resource to the pool when it is no longer required.
+   *
+   * @param {Object} resource
+   *   The acquired object to be put back to the pool.
+   */
+  release(resource) {
+    // check for an outstanding loan
+    const loan = this._resourceLoans.get(resource);
+
+    if (loan === undefined) {
+      return this._Promise.reject(
+        new Error("Resource not currently part of this pool")
+      );
+    }
+
+    this._resourceLoans.delete(resource);
+    loan.resolve();
+    const pooledResource = loan.pooledResource;
+
+    pooledResource.deallocate();
+    this._addPooledResourceToAvailableObjects(pooledResource);
+
+    this._dispense();
+    return this._Promise.resolve();
+  }
+
+  /**
+   * Request the resource to be destroyed. The factory's destroy handler
+   * will also be called.
+   *
+   * This should be called within an acquire() block as an alternative to release().
+   *
+   * @param {Object} resource
+   *   The acquired resource to be destoyed.
+   */
+  destroy(resource) {
+    // check for an outstanding loan
+    const loan = this._resourceLoans.get(resource);
+
+    if (loan === undefined) {
+      return this._Promise.reject(
+        new Error("Resource not currently part of this pool")
+      );
+    }
+
+    this._resourceLoans.delete(resource);
+    loan.resolve();
+    const pooledResource = loan.pooledResource;
+
+    pooledResource.deallocate();
+    this._destroy(pooledResource);
+
+    this._dispense();
+    return this._Promise.resolve();
+  }
+
+  _addPooledResourceToAvailableObjects(pooledResource) {
+    pooledResource.idle();
+    if (this._config.fifo === true) {
+      this._availableObjects.push(pooledResource);
+    } else {
+      this._availableObjects.unshift(pooledResource);
+    }
+  }
+
+  /**
+   * Disallow any new acquire calls and let the request backlog dissapate.
+   * The Pool will no longer attempt to maintain a "min" number of resources
+   * and will only make new resources on demand.
+   * Resolves once all resource requests are fulfilled and all resources are returned to pool and available...
+   * Should probably be called "drain work"
+   * @returns {Promise}
+   */
+  drain() {
+    this._draining = true;
+    return this.__allResourceRequestsSettled()
+      .then(() => {
+        return this.__allResourcesReturned();
+      })
+      .then(() => {
+        this._descheduleEvictorRun();
+      });
+  }
+
+  __allResourceRequestsSettled() {
+    if (this._waitingClientsQueue.length > 0) {
+      // wait for last waiting client to be settled
+      // FIXME: what if they can "resolve" out of order....?
+      return reflector(this._waitingClientsQueue.tail.promise);
+    }
+    return this._Promise.resolve();
+  }
+
+  // FIXME: this is a horrific mess
+  __allResourcesReturned() {
+    const ps = Array.from(this._resourceLoans.values())
+      .map(loan => loan.promise)
+      .map(reflector);
+    return this._Promise.all(ps);
+  }
+
+  /**
+   * Forcibly destroys all available resources regardless of timeout.  Intended to be
+   * invoked as part of a drain.  Does not prevent the creation of new
+   * resources as a result of subsequent calls to acquire.
+   *
+   * Note that if factory.min > 0 and the pool isn't "draining", the pool will destroy all idle resources
+   * in the pool, but replace them with newly created resources up to the
+   * specified factory.min value.  If this is not desired, set factory.min
+   * to zero before calling clear()
+   *
+   */
+  clear() {
+    const reflectedCreatePromises = Array.from(
+      this._factoryCreateOperations
+    ).map(reflector);
+
+    // wait for outstanding factory.create to complete
+    return this._Promise.all(reflectedCreatePromises).then(() => {
+      // Destroy existing resources
+      // @ts-ignore
+      for (const resource of this._availableObjects) {
+        this._destroy(resource);
+      }
+      const reflectedDestroyPromises = Array.from(
+        this._factoryDestroyOperations
+      ).map(reflector);
+      return reflector(this._Promise.all(reflectedDestroyPromises));
+    });
+  }
+
+  /**
+   * Waits until the pool is ready.
+   * We define ready by checking if the current resource number is at least
+   * the minimum number defined.
+   * @returns {Promise} that resolves when the minimum number is ready.
+   */
+  ready() {
+    return new this._Promise(resolve => {
+      const isReady = () => {
+        if (this.available >= this.min) {
+          resolve();
+        } else {
+          setTimeout(isReady, 100);
+        }
+      };
+
+      isReady();
+    });
+  }
+
+  /**
+   * How many resources are available to allocated
+   * (includes resources that have not been tested and may faul validation)
+   * NOTE: internal for now as the name is awful and might not be useful to anyone
+   * @return {Number} number of resources the pool has to allocate
+   */
+  get _potentiallyAllocableResourceCount() {
+    return (
+      this._availableObjects.length +
+      this._testOnBorrowResources.size +
+      this._testOnReturnResources.size +
+      this._factoryCreateOperations.size
+    );
+  }
+
+  /**
+   * The combined count of the currently created objects and those in the
+   * process of being created
+   * Does NOT include resources in the process of being destroyed
+   * sort of legacy...
+   * @return {Number}
+   */
+  get _count() {
+    return this._allObjects.size + this._factoryCreateOperations.size;
+  }
+
+  /**
+   * How many more resources does the pool have room for
+   * @return {Number} number of resources the pool could create before hitting any limits
+   */
+  get spareResourceCapacity() {
+    return (
+      this._config.max -
+      (this._allObjects.size + this._factoryCreateOperations.size)
+    );
+  }
+
+  /**
+   * see _count above
+   * @return {Number} [description]
+   */
+  get size() {
+    return this._count;
+  }
+
+  /**
+   * number of available resources
+   * @return {Number} [description]
+   */
+  get available() {
+    return this._availableObjects.length;
+  }
+
+  /**
+   * number of resources that are currently acquired
+   * @return {Number} [description]
+   */
+  get borrowed() {
+    return this._resourceLoans.size;
+  }
+
+  /**
+   * number of waiting acquire calls
+   * @return {Number} [description]
+   */
+  get pending() {
+    return this._waitingClientsQueue.length;
+  }
+
+  /**
+   * maximum size of the pool
+   * @return {Number} [description]
+   */
+  get max() {
+    return this._config.max;
+  }
+
+  /**
+   * minimum size of the pool
+   * @return {Number} [description]
+   */
+  get min() {
+    return this._config.min;
+  }
+}
+
+module.exports = Pool;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/PoolDefaults.js":
+/*!**********************************************!*\
+  !*** ../../generic-pool/lib/PoolDefaults.js ***!
+  \**********************************************/
+/***/ ((module) => {
+
+"use strict";
+
+/**
+ * Create the default settings used by the pool
+ *
+ * @class
+ */
+class PoolDefaults {
+  constructor() {
+    this.fifo = true;
+    this.priorityRange = 1;
+
+    this.testOnBorrow = false;
+    this.testOnReturn = false;
+
+    this.autostart = true;
+
+    this.evictionRunIntervalMillis = 0;
+    this.numTestsPerEvictionRun = 3;
+    this.softIdleTimeoutMillis = -1;
+    this.idleTimeoutMillis = 30000;
+
+    // FIXME: no defaults!
+    this.acquireTimeoutMillis = null;
+    this.destroyTimeoutMillis = null;
+    this.maxWaitingClients = null;
+
+    this.min = null;
+    this.max = null;
+    // FIXME: this seems odd?
+    this.Promise = Promise;
+  }
+}
+
+module.exports = PoolDefaults;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/PoolOptions.js":
+/*!*********************************************!*\
+  !*** ../../generic-pool/lib/PoolOptions.js ***!
+  \*********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const PoolDefaults = __webpack_require__(/*! ./PoolDefaults */ "../../generic-pool/lib/PoolDefaults.js");
+
+class PoolOptions {
+  /**
+   * @param {Object} opts
+   *   configuration for the pool
+   * @param {Number} [opts.max=null]
+   *   Maximum number of items that can exist at the same time.  Default: 1.
+   *   Any further acquire requests will be pushed to the waiting list.
+   * @param {Number} [opts.min=null]
+   *   Minimum number of items in pool (including in-use). Default: 0.
+   *   When the pool is created, or a resource destroyed, this minimum will
+   *   be checked. If the pool resource count is below the minimum, a new
+   *   resource will be created and added to the pool.
+   * @param {Number} [opts.maxWaitingClients=null]
+   *   maximum number of queued requests allowed after which acquire calls will be rejected
+   * @param {Boolean} [opts.testOnBorrow=false]
+   *   should the pool validate resources before giving them to clients. Requires that
+   *   `factory.validate` is specified.
+   * @param {Boolean} [opts.testOnReturn=false]
+   *   should the pool validate resources before returning them to the pool.
+   * @param {Number} [opts.acquireTimeoutMillis=null]
+   *   Delay in milliseconds after which the an `acquire` call will fail. optional.
+   *   Default: undefined. Should be positive and non-zero
+   * @param {Number} [opts.destroyTimeoutMillis=null]
+   *   Delay in milliseconds after which the an `destroy` call will fail, causing it to emit a factoryDestroyError event. optional.
+   *   Default: undefined. Should be positive and non-zero
+   * @param {Number} [opts.priorityRange=1]
+   *   The range from 1 to be treated as a valid priority
+   * @param {Boolean} [opts.fifo=true]
+   *   Sets whether the pool has LIFO (last in, first out) behaviour with respect to idle objects.
+   *   if false then pool has FIFO behaviour
+   * @param {Boolean} [opts.autostart=true]
+   *   Should the pool start creating resources etc once the constructor is called
+   * @param {Number} [opts.evictionRunIntervalMillis=0]
+   *   How often to run eviction checks.  Default: 0 (does not run).
+   * @param {Number} [opts.numTestsPerEvictionRun=3]
+   *   Number of resources to check each eviction run.  Default: 3.
+   * @param {Number} [opts.softIdleTimeoutMillis=-1]
+   *   amount of time an object may sit idle in the pool before it is eligible
+   *   for eviction by the idle object evictor (if any), with the extra condition
+   *   that at least "min idle" object instances remain in the pool. Default -1 (nothing can get evicted)
+   * @param {Number} [opts.idleTimeoutMillis=30000]
+   *   the minimum amount of time that an object may sit idle in the pool before it is eligible for eviction
+   *   due to idle time. Supercedes "softIdleTimeoutMillis" Default: 30000
+   * @param {typeof Promise} [opts.Promise=Promise]
+   *   What promise implementation should the pool use, defaults to native promises.
+   */
+  constructor(opts) {
+    const poolDefaults = new PoolDefaults();
+
+    opts = opts || {};
+
+    this.fifo = typeof opts.fifo === "boolean" ? opts.fifo : poolDefaults.fifo;
+    this.priorityRange = opts.priorityRange || poolDefaults.priorityRange;
+
+    this.testOnBorrow =
+      typeof opts.testOnBorrow === "boolean"
+        ? opts.testOnBorrow
+        : poolDefaults.testOnBorrow;
+    this.testOnReturn =
+      typeof opts.testOnReturn === "boolean"
+        ? opts.testOnReturn
+        : poolDefaults.testOnReturn;
+
+    this.autostart =
+      typeof opts.autostart === "boolean"
+        ? opts.autostart
+        : poolDefaults.autostart;
+
+    if (opts.acquireTimeoutMillis) {
+      // @ts-ignore
+      this.acquireTimeoutMillis = parseInt(opts.acquireTimeoutMillis, 10);
+    }
+
+    if (opts.destroyTimeoutMillis) {
+      // @ts-ignore
+      this.destroyTimeoutMillis = parseInt(opts.destroyTimeoutMillis, 10);
+    }
+
+    if (opts.maxWaitingClients !== undefined) {
+      // @ts-ignore
+      this.maxWaitingClients = parseInt(opts.maxWaitingClients, 10);
+    }
+
+    // @ts-ignore
+    this.max = parseInt(opts.max, 10);
+    // @ts-ignore
+    this.min = parseInt(opts.min, 10);
+
+    this.max = Math.max(isNaN(this.max) ? 1 : this.max, 1);
+    this.min = Math.min(isNaN(this.min) ? 0 : this.min, this.max);
+
+    this.evictionRunIntervalMillis =
+      opts.evictionRunIntervalMillis || poolDefaults.evictionRunIntervalMillis;
+    this.numTestsPerEvictionRun =
+      opts.numTestsPerEvictionRun || poolDefaults.numTestsPerEvictionRun;
+    this.softIdleTimeoutMillis =
+      opts.softIdleTimeoutMillis || poolDefaults.softIdleTimeoutMillis;
+    this.idleTimeoutMillis =
+      opts.idleTimeoutMillis || poolDefaults.idleTimeoutMillis;
+
+    this.Promise = opts.Promise != null ? opts.Promise : poolDefaults.Promise;
+  }
+}
+
+module.exports = PoolOptions;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/PooledResource.js":
+/*!************************************************!*\
+  !*** ../../generic-pool/lib/PooledResource.js ***!
+  \************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const PooledResourceStateEnum = __webpack_require__(/*! ./PooledResourceStateEnum */ "../../generic-pool/lib/PooledResourceStateEnum.js");
+
+/**
+ * @class
+ * @private
+ */
+class PooledResource {
+  constructor(resource) {
+    this.creationTime = Date.now();
+    this.lastReturnTime = null;
+    this.lastBorrowTime = null;
+    this.lastIdleTime = null;
+    this.obj = resource;
+    this.state = PooledResourceStateEnum.IDLE;
+  }
+
+  // mark the resource as "allocated"
+  allocate() {
+    this.lastBorrowTime = Date.now();
+    this.state = PooledResourceStateEnum.ALLOCATED;
+  }
+
+  // mark the resource as "deallocated"
+  deallocate() {
+    this.lastReturnTime = Date.now();
+    this.state = PooledResourceStateEnum.IDLE;
+  }
+
+  invalidate() {
+    this.state = PooledResourceStateEnum.INVALID;
+  }
+
+  test() {
+    this.state = PooledResourceStateEnum.VALIDATION;
+  }
+
+  idle() {
+    this.lastIdleTime = Date.now();
+    this.state = PooledResourceStateEnum.IDLE;
+  }
+
+  returning() {
+    this.state = PooledResourceStateEnum.RETURNING;
+  }
+}
+
+module.exports = PooledResource;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/PooledResourceStateEnum.js":
+/*!*********************************************************!*\
+  !*** ../../generic-pool/lib/PooledResourceStateEnum.js ***!
+  \*********************************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+const PooledResourceStateEnum = {
+  ALLOCATED: "ALLOCATED", // In use
+  IDLE: "IDLE", // In the queue, not in use.
+  INVALID: "INVALID", // Failed validation
+  RETURNING: "RETURNING", // Resource is in process of returning
+  VALIDATION: "VALIDATION" // Currently being tested
+};
+
+module.exports = PooledResourceStateEnum;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/PriorityQueue.js":
+/*!***********************************************!*\
+  !*** ../../generic-pool/lib/PriorityQueue.js ***!
+  \***********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const Queue = __webpack_require__(/*! ./Queue */ "../../generic-pool/lib/Queue.js");
+
+/**
+ * @class
+ * @private
+ */
+class PriorityQueue {
+  constructor(size) {
+    this._size = Math.max(+size | 0, 1);
+    /** @type {Queue[]} */
+    this._slots = [];
+    // initialize arrays to hold queue elements
+    for (let i = 0; i < this._size; i++) {
+      this._slots.push(new Queue());
+    }
+  }
+
+  get length() {
+    let _length = 0;
+    for (let i = 0, slots = this._slots.length; i < slots; i++) {
+      _length += this._slots[i].length;
+    }
+    return _length;
+  }
+
+  enqueue(obj, priority) {
+    // Convert to integer with a default value of 0.
+    priority = (priority && +priority | 0) || 0;
+
+    if (priority) {
+      if (priority < 0 || priority >= this._size) {
+        priority = this._size - 1;
+        // put obj at the end of the line
+      }
+    }
+    this._slots[priority].push(obj);
+  }
+
+  dequeue() {
+    for (let i = 0, sl = this._slots.length; i < sl; i += 1) {
+      if (this._slots[i].length) {
+        return this._slots[i].shift();
+      }
+    }
+    return;
+  }
+
+  get head() {
+    for (let i = 0, sl = this._slots.length; i < sl; i += 1) {
+      if (this._slots[i].length > 0) {
+        return this._slots[i].head;
+      }
+    }
+    return;
+  }
+
+  get tail() {
+    for (let i = this._slots.length - 1; i >= 0; i--) {
+      if (this._slots[i].length > 0) {
+        return this._slots[i].tail;
+      }
+    }
+    return;
+  }
+}
+
+module.exports = PriorityQueue;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/Queue.js":
+/*!***************************************!*\
+  !*** ../../generic-pool/lib/Queue.js ***!
+  \***************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const DoublyLinkedList = __webpack_require__(/*! ./DoublyLinkedList */ "../../generic-pool/lib/DoublyLinkedList.js");
+const Deque = __webpack_require__(/*! ./Deque */ "../../generic-pool/lib/Deque.js");
+
+/**
+ * Sort of a internal queue for holding the waiting
+ * resource requets for a given "priority".
+ * Also handles managing timeouts rejections on items (is this the best place for this?)
+ * This is the last point where we know which queue a resourceRequest is in
+ *
+ */
+class Queue extends Deque {
+  /**
+   * Adds the obj to the end of the list for this slot
+   * we completely override the parent method because we need access to the
+   * node for our rejection handler
+   * @param {any} resourceRequest [description]
+   */
+  push(resourceRequest) {
+    const node = DoublyLinkedList.createNode(resourceRequest);
+    resourceRequest.promise.catch(this._createTimeoutRejectionHandler(node));
+    this._list.insertEnd(node);
+  }
+
+  _createTimeoutRejectionHandler(node) {
+    return reason => {
+      if (reason.name === "TimeoutError") {
+        this._list.remove(node);
+      }
+    };
+  }
+}
+
+module.exports = Queue;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/ResourceLoan.js":
+/*!**********************************************!*\
+  !*** ../../generic-pool/lib/ResourceLoan.js ***!
+  \**********************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const Deferred = __webpack_require__(/*! ./Deferred */ "../../generic-pool/lib/Deferred.js");
+
+/**
+ * Plan is to maybe add tracking via Error objects
+ * and other fun stuff!
+ */
+
+class ResourceLoan extends Deferred {
+  /**
+   *
+   * @param  {any} pooledResource the PooledResource this loan belongs to
+   * @return {any}                [description]
+   */
+  constructor(pooledResource, Promise) {
+    super(Promise);
+    this._creationTimestamp = Date.now();
+    this.pooledResource = pooledResource;
+  }
+
+  reject() {
+    /**
+     * Loans can only be resolved at the moment
+     */
+  }
+}
+
+module.exports = ResourceLoan;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/ResourceRequest.js":
+/*!*************************************************!*\
+  !*** ../../generic-pool/lib/ResourceRequest.js ***!
+  \*************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+const Deferred = __webpack_require__(/*! ./Deferred */ "../../generic-pool/lib/Deferred.js");
+const errors = __webpack_require__(/*! ./errors */ "../../generic-pool/lib/errors.js");
+
+function fbind(fn, ctx) {
+  return function bound() {
+    return fn.apply(ctx, arguments);
+  };
+}
+
+/**
+ * Wraps a users request for a resource
+ * Basically a promise mashed in with a timeout
+ * @private
+ */
+class ResourceRequest extends Deferred {
+  /**
+   * [constructor description]
+   * @param  {Number} ttl     timeout
+   */
+  constructor(ttl, Promise) {
+    super(Promise);
+    this._creationTimestamp = Date.now();
+    this._timeout = null;
+
+    if (ttl !== undefined) {
+      this.setTimeout(ttl);
+    }
+  }
+
+  setTimeout(delay) {
+    if (this._state !== ResourceRequest.PENDING) {
+      return;
+    }
+    const ttl = parseInt(delay, 10);
+
+    if (isNaN(ttl) || ttl <= 0) {
+      throw new Error("delay must be a positive int");
+    }
+
+    const age = Date.now() - this._creationTimestamp;
+
+    if (this._timeout) {
+      this.removeTimeout();
+    }
+
+    this._timeout = setTimeout(
+      fbind(this._fireTimeout, this),
+      Math.max(ttl - age, 0)
+    );
+  }
+
+  removeTimeout() {
+    if (this._timeout) {
+      clearTimeout(this._timeout);
+    }
+    this._timeout = null;
+  }
+
+  _fireTimeout() {
+    this.reject(new errors.TimeoutError("ResourceRequest timed out"));
+  }
+
+  reject(reason) {
+    this.removeTimeout();
+    super.reject(reason);
+  }
+
+  resolve(value) {
+    this.removeTimeout();
+    super.resolve(value);
+  }
+}
+
+module.exports = ResourceRequest;
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/errors.js":
+/*!****************************************!*\
+  !*** ../../generic-pool/lib/errors.js ***!
+  \****************************************/
+/***/ ((module) => {
+
+"use strict";
+
+
+class ExtendableError extends Error {
+  constructor(message) {
+    super(message);
+    // @ts-ignore
+    this.name = this.constructor.name;
+    this.message = message;
+    if (typeof Error.captureStackTrace === "function") {
+      Error.captureStackTrace(this, this.constructor);
+    } else {
+      this.stack = new Error(message).stack;
+    }
+  }
+}
+
+/* eslint-disable no-useless-constructor */
+class TimeoutError extends ExtendableError {
+  constructor(m) {
+    super(m);
+  }
+}
+/* eslint-enable no-useless-constructor */
+
+module.exports = {
+  TimeoutError: TimeoutError
+};
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/factoryValidator.js":
+/*!**************************************************!*\
+  !*** ../../generic-pool/lib/factoryValidator.js ***!
+  \**************************************************/
+/***/ ((module) => {
+
+module.exports = function(factory) {
+  if (typeof factory.create !== "function") {
+    throw new TypeError("factory.create must be a function");
+  }
+
+  if (typeof factory.destroy !== "function") {
+    throw new TypeError("factory.destroy must be a function");
+  }
+
+  if (
+    typeof factory.validate !== "undefined" &&
+    typeof factory.validate !== "function"
+  ) {
+    throw new TypeError("factory.validate must be a function");
+  }
+};
+
+
+/***/ }),
+
+/***/ "../../generic-pool/lib/utils.js":
+/*!***************************************!*\
+  !*** ../../generic-pool/lib/utils.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+function noop() {}
+
+/**
+ * Reflects a promise but does not expose any
+ * underlying value or rejection from that promise.
+ * @param  {Promise} promise [description]
+ * @return {Promise}         [description]
+ */
+exports.reflector = function(promise) {
+  return promise.then(noop, noop);
 };
 
 
@@ -7044,6 +26611,73 @@ function getEnv(key) {
 }
 
 exports.getProxyForUrl = getProxyForUrl;
+
+
+/***/ }),
+
+/***/ "../../redis/dist/index.js":
+/*!*********************************!*\
+  !*** ../../redis/dist/index.js ***!
+  \*********************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function(m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.createCluster = exports.createClient = void 0;
+const client_1 = __webpack_require__(/*! @redis/client */ "../../@redis/client/dist/index.js");
+const bloom_1 = __webpack_require__(/*! @redis/bloom */ "../../@redis/bloom/dist/index.js");
+const graph_1 = __webpack_require__(/*! @redis/graph */ "../../@redis/graph/dist/index.js");
+const json_1 = __webpack_require__(/*! @redis/json */ "../../@redis/json/dist/index.js");
+const search_1 = __webpack_require__(/*! @redis/search */ "../../@redis/search/dist/index.js");
+const time_series_1 = __webpack_require__(/*! @redis/time-series */ "../../@redis/time-series/dist/index.js");
+__exportStar(__webpack_require__(/*! @redis/client */ "../../@redis/client/dist/index.js"), exports);
+__exportStar(__webpack_require__(/*! @redis/bloom */ "../../@redis/bloom/dist/index.js"), exports);
+__exportStar(__webpack_require__(/*! @redis/graph */ "../../@redis/graph/dist/index.js"), exports);
+__exportStar(__webpack_require__(/*! @redis/json */ "../../@redis/json/dist/index.js"), exports);
+__exportStar(__webpack_require__(/*! @redis/search */ "../../@redis/search/dist/index.js"), exports);
+__exportStar(__webpack_require__(/*! @redis/time-series */ "../../@redis/time-series/dist/index.js"), exports);
+const modules = {
+    ...bloom_1.default,
+    graph: graph_1.default,
+    json: json_1.default,
+    ft: search_1.default,
+    ts: time_series_1.default
+};
+function createClient(options) {
+    return (0, client_1.createClient)({
+        ...options,
+        modules: {
+            ...modules,
+            ...options?.modules
+        }
+    });
+}
+exports.createClient = createClient;
+function createCluster(options) {
+    return (0, client_1.createCluster)({
+        ...options,
+        modules: {
+            ...modules,
+            ...options?.modules
+        }
+    });
+}
+exports.createCluster = createCluster;
 
 
 /***/ }),
@@ -12484,6 +32118,462 @@ exports.SourceNode = __webpack_require__(/*! ./lib/source-node */ "../../source-
 
 /***/ }),
 
+/***/ "../../yallist/iterator.js":
+/*!*********************************!*\
+  !*** ../../yallist/iterator.js ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+
+module.exports = function (Yallist) {
+  Yallist.prototype[Symbol.iterator] = function* () {
+    for (let walker = this.head; walker; walker = walker.next) {
+      yield walker.value
+    }
+  }
+}
+
+
+/***/ }),
+
+/***/ "../../yallist/yallist.js":
+/*!********************************!*\
+  !*** ../../yallist/yallist.js ***!
+  \********************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+module.exports = Yallist
+
+Yallist.Node = Node
+Yallist.create = Yallist
+
+function Yallist (list) {
+  var self = this
+  if (!(self instanceof Yallist)) {
+    self = new Yallist()
+  }
+
+  self.tail = null
+  self.head = null
+  self.length = 0
+
+  if (list && typeof list.forEach === 'function') {
+    list.forEach(function (item) {
+      self.push(item)
+    })
+  } else if (arguments.length > 0) {
+    for (var i = 0, l = arguments.length; i < l; i++) {
+      self.push(arguments[i])
+    }
+  }
+
+  return self
+}
+
+Yallist.prototype.removeNode = function (node) {
+  if (node.list !== this) {
+    throw new Error('removing node which does not belong to this list')
+  }
+
+  var next = node.next
+  var prev = node.prev
+
+  if (next) {
+    next.prev = prev
+  }
+
+  if (prev) {
+    prev.next = next
+  }
+
+  if (node === this.head) {
+    this.head = next
+  }
+  if (node === this.tail) {
+    this.tail = prev
+  }
+
+  node.list.length--
+  node.next = null
+  node.prev = null
+  node.list = null
+
+  return next
+}
+
+Yallist.prototype.unshiftNode = function (node) {
+  if (node === this.head) {
+    return
+  }
+
+  if (node.list) {
+    node.list.removeNode(node)
+  }
+
+  var head = this.head
+  node.list = this
+  node.next = head
+  if (head) {
+    head.prev = node
+  }
+
+  this.head = node
+  if (!this.tail) {
+    this.tail = node
+  }
+  this.length++
+}
+
+Yallist.prototype.pushNode = function (node) {
+  if (node === this.tail) {
+    return
+  }
+
+  if (node.list) {
+    node.list.removeNode(node)
+  }
+
+  var tail = this.tail
+  node.list = this
+  node.prev = tail
+  if (tail) {
+    tail.next = node
+  }
+
+  this.tail = node
+  if (!this.head) {
+    this.head = node
+  }
+  this.length++
+}
+
+Yallist.prototype.push = function () {
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    push(this, arguments[i])
+  }
+  return this.length
+}
+
+Yallist.prototype.unshift = function () {
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    unshift(this, arguments[i])
+  }
+  return this.length
+}
+
+Yallist.prototype.pop = function () {
+  if (!this.tail) {
+    return undefined
+  }
+
+  var res = this.tail.value
+  this.tail = this.tail.prev
+  if (this.tail) {
+    this.tail.next = null
+  } else {
+    this.head = null
+  }
+  this.length--
+  return res
+}
+
+Yallist.prototype.shift = function () {
+  if (!this.head) {
+    return undefined
+  }
+
+  var res = this.head.value
+  this.head = this.head.next
+  if (this.head) {
+    this.head.prev = null
+  } else {
+    this.tail = null
+  }
+  this.length--
+  return res
+}
+
+Yallist.prototype.forEach = function (fn, thisp) {
+  thisp = thisp || this
+  for (var walker = this.head, i = 0; walker !== null; i++) {
+    fn.call(thisp, walker.value, i, this)
+    walker = walker.next
+  }
+}
+
+Yallist.prototype.forEachReverse = function (fn, thisp) {
+  thisp = thisp || this
+  for (var walker = this.tail, i = this.length - 1; walker !== null; i--) {
+    fn.call(thisp, walker.value, i, this)
+    walker = walker.prev
+  }
+}
+
+Yallist.prototype.get = function (n) {
+  for (var i = 0, walker = this.head; walker !== null && i < n; i++) {
+    // abort out of the list early if we hit a cycle
+    walker = walker.next
+  }
+  if (i === n && walker !== null) {
+    return walker.value
+  }
+}
+
+Yallist.prototype.getReverse = function (n) {
+  for (var i = 0, walker = this.tail; walker !== null && i < n; i++) {
+    // abort out of the list early if we hit a cycle
+    walker = walker.prev
+  }
+  if (i === n && walker !== null) {
+    return walker.value
+  }
+}
+
+Yallist.prototype.map = function (fn, thisp) {
+  thisp = thisp || this
+  var res = new Yallist()
+  for (var walker = this.head; walker !== null;) {
+    res.push(fn.call(thisp, walker.value, this))
+    walker = walker.next
+  }
+  return res
+}
+
+Yallist.prototype.mapReverse = function (fn, thisp) {
+  thisp = thisp || this
+  var res = new Yallist()
+  for (var walker = this.tail; walker !== null;) {
+    res.push(fn.call(thisp, walker.value, this))
+    walker = walker.prev
+  }
+  return res
+}
+
+Yallist.prototype.reduce = function (fn, initial) {
+  var acc
+  var walker = this.head
+  if (arguments.length > 1) {
+    acc = initial
+  } else if (this.head) {
+    walker = this.head.next
+    acc = this.head.value
+  } else {
+    throw new TypeError('Reduce of empty list with no initial value')
+  }
+
+  for (var i = 0; walker !== null; i++) {
+    acc = fn(acc, walker.value, i)
+    walker = walker.next
+  }
+
+  return acc
+}
+
+Yallist.prototype.reduceReverse = function (fn, initial) {
+  var acc
+  var walker = this.tail
+  if (arguments.length > 1) {
+    acc = initial
+  } else if (this.tail) {
+    walker = this.tail.prev
+    acc = this.tail.value
+  } else {
+    throw new TypeError('Reduce of empty list with no initial value')
+  }
+
+  for (var i = this.length - 1; walker !== null; i--) {
+    acc = fn(acc, walker.value, i)
+    walker = walker.prev
+  }
+
+  return acc
+}
+
+Yallist.prototype.toArray = function () {
+  var arr = new Array(this.length)
+  for (var i = 0, walker = this.head; walker !== null; i++) {
+    arr[i] = walker.value
+    walker = walker.next
+  }
+  return arr
+}
+
+Yallist.prototype.toArrayReverse = function () {
+  var arr = new Array(this.length)
+  for (var i = 0, walker = this.tail; walker !== null; i++) {
+    arr[i] = walker.value
+    walker = walker.prev
+  }
+  return arr
+}
+
+Yallist.prototype.slice = function (from, to) {
+  to = to || this.length
+  if (to < 0) {
+    to += this.length
+  }
+  from = from || 0
+  if (from < 0) {
+    from += this.length
+  }
+  var ret = new Yallist()
+  if (to < from || to < 0) {
+    return ret
+  }
+  if (from < 0) {
+    from = 0
+  }
+  if (to > this.length) {
+    to = this.length
+  }
+  for (var i = 0, walker = this.head; walker !== null && i < from; i++) {
+    walker = walker.next
+  }
+  for (; walker !== null && i < to; i++, walker = walker.next) {
+    ret.push(walker.value)
+  }
+  return ret
+}
+
+Yallist.prototype.sliceReverse = function (from, to) {
+  to = to || this.length
+  if (to < 0) {
+    to += this.length
+  }
+  from = from || 0
+  if (from < 0) {
+    from += this.length
+  }
+  var ret = new Yallist()
+  if (to < from || to < 0) {
+    return ret
+  }
+  if (from < 0) {
+    from = 0
+  }
+  if (to > this.length) {
+    to = this.length
+  }
+  for (var i = this.length, walker = this.tail; walker !== null && i > to; i--) {
+    walker = walker.prev
+  }
+  for (; walker !== null && i > from; i--, walker = walker.prev) {
+    ret.push(walker.value)
+  }
+  return ret
+}
+
+Yallist.prototype.splice = function (start, deleteCount, ...nodes) {
+  if (start > this.length) {
+    start = this.length - 1
+  }
+  if (start < 0) {
+    start = this.length + start;
+  }
+
+  for (var i = 0, walker = this.head; walker !== null && i < start; i++) {
+    walker = walker.next
+  }
+
+  var ret = []
+  for (var i = 0; walker && i < deleteCount; i++) {
+    ret.push(walker.value)
+    walker = this.removeNode(walker)
+  }
+  if (walker === null) {
+    walker = this.tail
+  }
+
+  if (walker !== this.head && walker !== this.tail) {
+    walker = walker.prev
+  }
+
+  for (var i = 0; i < nodes.length; i++) {
+    walker = insert(this, walker, nodes[i])
+  }
+  return ret;
+}
+
+Yallist.prototype.reverse = function () {
+  var head = this.head
+  var tail = this.tail
+  for (var walker = head; walker !== null; walker = walker.prev) {
+    var p = walker.prev
+    walker.prev = walker.next
+    walker.next = p
+  }
+  this.head = tail
+  this.tail = head
+  return this
+}
+
+function insert (self, node, value) {
+  var inserted = node === self.head ?
+    new Node(value, null, node, self) :
+    new Node(value, node, node.next, self)
+
+  if (inserted.next === null) {
+    self.tail = inserted
+  }
+  if (inserted.prev === null) {
+    self.head = inserted
+  }
+
+  self.length++
+
+  return inserted
+}
+
+function push (self, item) {
+  self.tail = new Node(item, self.tail, null, self)
+  if (!self.head) {
+    self.head = self.tail
+  }
+  self.length++
+}
+
+function unshift (self, item) {
+  self.head = new Node(item, null, self.head, self)
+  if (!self.tail) {
+    self.tail = self.head
+  }
+  self.length++
+}
+
+function Node (value, prev, next, list) {
+  if (!(this instanceof Node)) {
+    return new Node(value, prev, next, list)
+  }
+
+  this.list = list
+  this.value = value
+
+  if (prev) {
+    prev.next = this
+    this.prev = prev
+  } else {
+    this.prev = null
+  }
+
+  if (next) {
+    next.prev = this
+    this.next = next
+  } else {
+    this.next = null
+  }
+}
+
+try {
+  // add if support for Symbol.iterator is present
+  __webpack_require__(/*! ./iterator.js */ "../../yallist/iterator.js")(Yallist)
+} catch (er) {}
+
+
+/***/ }),
+
 /***/ "assert":
 /*!*************************!*\
   !*** external "assert" ***!
@@ -12602,6 +32692,28 @@ module.exports = require("path");
 
 "use strict";
 module.exports = require("stream");
+
+/***/ }),
+
+/***/ "string_decoder":
+/*!*********************************!*\
+  !*** external "string_decoder" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("string_decoder");
+
+/***/ }),
+
+/***/ "tls":
+/*!**********************!*\
+  !*** external "tls" ***!
+  \**********************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("tls");
 
 /***/ }),
 
@@ -16578,7 +36690,7 @@ module.exports = JSON.parse('{"application/1d-interleaved-parityfec":{"source":"
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
@@ -16653,35 +36765,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
 const apple = __webpack_require__(/*! ../utils/musicApi */ "../../../utils/musicApi.js");
+const redis = __webpack_require__(/*! ../utils/redis */ "../../../utils/redis.js");
 const fetchProfile = async event => {
   const recentArtistsSongs = [];
   const userToken = event.headers.Authorization.split(' ')[1];
-
-  // get genre hash
   try {
     const recentArtists = await apple.searchRecentArtists(userToken);
     for (const item of recentArtists) {
       const songs = await apple.fetchArtistSongs(userToken, item);
       recentArtistsSongs.push(...songs.data);
     }
-    const sortedSongs = apple.genreSort(recentArtistsSongs);
+    const sortedSongs = apple.genreSort(recentArtistsSongs); // create hash of songs sorted by genre
     console.log(sortedSongs);
+    redis.addtoRedisCluster(sortedSongs);
+
     // put genre dict into redis cluster hash
-    // get item from hash
 
     const response = {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': 'https://playlinq.io',
-        // maybe set this as .env var?
+        // 'Access-Control-Allow-Origin': 'https://playlinq.io',   // maybe set this as .env var?
         'Access-Control-Allow-Origin': 'http://localhost:3001',
         'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify({
-        message: recentArtistsSongs
-      }, null,
-      // lets figure out what all this means
-      2)
+        message: sessionId // return session id or undef
+      }, null, 2)
     };
     return response;
   } catch (error) {
