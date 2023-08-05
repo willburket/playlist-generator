@@ -1,7 +1,7 @@
 
 .grid-container{
     position: absolute;
-    top: 60px; /* Adjust the top position to accommodate the navbar height */
+    top: 100px; /* Adjust the top position to accommodate the navbar height */
     left: 0; /* Align the grid container to the left edge */
     /* height: calc(100vh - 60px);  */
     /* right: 0;
@@ -126,7 +126,7 @@
 
 @media (max-width: 800px){
     .grid-container{
-        top: 120px;
+        top: 200px;
         /* height: calc(100vh - 180px);  */
     }
     .album-cover-grid{
@@ -172,7 +172,7 @@
 
 @media (max-width: 500px){
     .grid-container{
-        top: 180px;
+        top: 220px;
     }
 
 }

@@ -51,7 +51,7 @@ function Main(){
             if(selected){
                 setLoading(true);
                 await new Promise((resolve) => setTimeout(resolve, 2000))
-                const response = await fetch('http://localhost:3000/dev/genre ', {  //http://localhost:3000/dev/genre for dev
+                const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
                 method: 'POST',                                              
                 headers: {
                     'Content-Type': 'text/plain'
@@ -151,6 +151,11 @@ function Main(){
         return(                                     
             <nav className= "navbar" >
                 <ul className= "navbar-nav" data-testid = "drop">
+                    <div>
+                    <div className="title-box">
+                        <h1>playlinq.io</h1>
+                    </div>
+                    <div className = "buttons-box">
                     <GenreNavItem icon= {<MusicIcon/>} value= "genre">
                         <DropdownMenu>
                             <GenreDropdownItem name = "Pop" id = "14"/>           
@@ -166,8 +171,9 @@ function Main(){
                         </DropdownMenu>   
                     </GenreNavItem>
                     <SearchButton onClick = {genreSearch}/>
-                    {/* <Auth music = {music}/> */}
                     <AuthButton music = {music} onClick = {handleStatusChange} auth = {isAuthorized}/>
+                    </div>
+                    </div>
                 </ul>
             </nav>  
         );
