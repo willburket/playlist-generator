@@ -17,10 +17,14 @@ function PopUp(){
     useEffect(() =>{
         if(music){
             if(firstSearch && !music.isAuthorized){
-                setShowPopup(true);
+                const timeout = setTimeout(() => {
+                    setShowPopup(true);
+                }, 1000);
                 setFirstSearch(false);
+                return () => clearTimeout(timeout);
             }
         } 
+        
        
     }, [search]);
 

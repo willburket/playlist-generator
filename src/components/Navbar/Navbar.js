@@ -140,7 +140,8 @@ function Main(){
             return (              
                     <li className = "nav-item">
                     <a href="#" className="icon-button" onClick={() => clickChange()} ref={dropdownRef} data-testid = "genre">
-                        {selected === null ? props.icon : selected.name}
+                        {/* {selected === null ? props.icon : selected.name} */}
+                        {selected === null ?  'Genres' : selected.name}
                     </a>
                     {open && props.children}
                     </li>
@@ -156,7 +157,7 @@ function Main(){
                         <h1>playlinq.io</h1>
                     </div>
                     <div className = "buttons-box">
-                    <GenreNavItem icon= {<MusicIcon/>} value= "genre">
+                    <GenreNavItem icon= {<MusicIcon/>} value= "genre"> 
                         <DropdownMenu>
                             <GenreDropdownItem name = "Pop" id = "14"/>           
                             <GenreDropdownItem name = "Hip-Hop/Rap" id ="18"/>
@@ -184,7 +185,6 @@ function Main(){
         <div data-testid = "navbar">
             <Navbar/>
             <SearchContext.Provider value = {searchResult}>
-            {/* <MusicPlayer/> */}
             <Player/>
                     <LoadContext.Provider value = {loading}>
                         <Home/> 

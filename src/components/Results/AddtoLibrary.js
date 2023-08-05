@@ -19,7 +19,7 @@ function AddSong(props){
         
       if (!music.isAuthorized){
         // console.log("please sign in");
-        alert("Please sign into your Apple Music");
+        alert("Please sign into your Apple Music Account");
         return
       }
       else{
