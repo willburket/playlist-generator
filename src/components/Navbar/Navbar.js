@@ -26,8 +26,9 @@ function Main(){
         useEffect(() => {
             if (music){
                 setIsAuthorized(music.isAuthorized)
+                
             }
-        }, [music, loading]);
+        }, [music,loading]);
             
         
         async function genreSearch(){
@@ -64,6 +65,13 @@ function Main(){
             shuffle(charts);
             setSearchResult(charts);  
             setLoading(false);
+            console.log(searchResult)
+
+            // check array size for client side cache
+            const jsonString = JSON.stringify(searchResult);
+            const bytes = new TextEncoder().encode(jsonString).length
+            const megabytes = bytes/(1024*1024);
+            console.log(`approx size: ${megabytes.toFixed(2)} MB`);
             }
 
         }

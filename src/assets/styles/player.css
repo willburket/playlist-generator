@@ -41,6 +41,10 @@
   transform: translateX(-3px);
 }
 
+.back-icon{
+  transform: rotate(180deg); 
+}
+
 .display-right{
   display: flex;
   width: 60%;
@@ -162,7 +166,8 @@
     top: var(--nav-size);
     width: 100%;
     left: 0%;
-    height: calc(var(--nav-size));
+    /* height: calc(var(--nav-size)); */
+    height: 75px;
     transform: translateY(10%);
   }
 
@@ -174,7 +179,8 @@
     top: var(--nav-size);
     width: 100%;
     left: 0%;
-    height: calc(var(--nav-size)*2);
+    /* height: calc(var(--nav-size)*2); */
+    height: 120px;
     transform: translateY(-5%);
   }
   .display{

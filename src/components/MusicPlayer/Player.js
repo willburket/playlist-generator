@@ -100,7 +100,9 @@ function Player(){
         <div className="display-container" data-testid = "player">
             <div className="display">
                 <div className="display-left">
+                    <div className= "back-icon">
                     <DisplayButton onClick = {back} icon = {<BackIcon/>}/>
+                    </div>
                     <PlayButton onClick = {play} status = {playing} data-testid = "play-button"/>
                     <DisplayButton onClick = {next} icon = {<NextIcon/>}/>
                 </div>
