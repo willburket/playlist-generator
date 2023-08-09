@@ -6,18 +6,6 @@ function NowPlaying(props){
     const [imgLink, setImgLink] = useState(null);
     const [svgSize,setSvgSize] = useState(null)
 
-    // const getSvgSize = () =>{
-    //     if (window.innerWidth >= 500) {
-    //         // Return the larger SVG size for screens larger than or equal to 768px
-    //         return 50;
-    //       } 
-    //     else {
-    //         // Return the smaller SVG size for screens smaller than 768px
-    //         return 80;
-    //       }
-
-    // }
-
     useEffect(() => {
         if (window.innerWidth >= 500) {
             // Return the larger SVG size for screens larger than or equal to 768px

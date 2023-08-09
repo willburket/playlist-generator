@@ -19,7 +19,7 @@ function PopUp(){
             if(firstSearch && !music.isAuthorized){
                 const timeout = setTimeout(() => {
                     setShowPopup(true);
-                }, 1000);
+                }, 2000);
                 setFirstSearch(false);
                 return () => clearTimeout(timeout);
             }

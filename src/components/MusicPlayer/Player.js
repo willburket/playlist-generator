@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../Navbar/Navbar";
+// import { SearchContext } from "../Navbar/Navbar";
+import { SearchContext } from "../Navbar/Main";
 import { MusicKitContext } from "../../App";
 // import { MusicKitContext } from "../../Application";
 import { ReactComponent as NextIcon } from "../../assets/images/next.svg"

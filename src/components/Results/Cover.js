@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../Navbar/Navbar";
+// import { SearchContext } from "../Navbar/Navbar";
+import { SearchContext } from "../Navbar/Main";
 import AddSong from "./AddtoLibrary";
 import Play from "./Play";
 
@@ -8,7 +9,7 @@ function Album(props){
     const [hasSearched, sethasSearched] = useState(false);
     const [imgLink, setImgLink] = useState(null);
     const [isHovered,setIsHovered] = useState(false);
-    const playlist = search.slice(0,20);
+    const [playlist,setPlaylist] = useState([]);
 
     const hoverOn = () => { 
         setIsHovered(true);
@@ -18,8 +19,10 @@ function Album(props){
     }
 
     useEffect(() => {
+        
         if(search && search.length !== 0){
             sethasSearched(true);
+            setPlaylist(search.slice(0,20))
             const link = window.MusicKit.formatArtworkURL(props.song.attributes.artwork,200,200)
             setImgLink(link)
         }     

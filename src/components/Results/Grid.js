@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { SearchContext, LoadContext } from "../Navbar/Navbar";
+// import { SearchContext, LoadContext } from "../Navbar/Navbar";
+import { SearchContext, LoadContext } from "../Navbar/Main";
 import Album from "./Cover";
 
 function AlbumCovers(){
@@ -9,10 +10,10 @@ function AlbumCovers(){
     const [playlist,setPlaylist] = useState([]);
 
     useEffect(() => {
+        
         if(search && search.length !== 0){
             sethasSearched(true)
             setPlaylist([...search.slice(0,20)]);
-            
         }     
     }, [search]);
 

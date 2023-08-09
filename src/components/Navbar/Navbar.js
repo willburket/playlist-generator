@@ -10,12 +10,15 @@ import { MusicKitContext } from "../../App";
 import Player from "../MusicPlayer/Player";
 
 
+
+
 const SearchContext = createContext(null);  
 const LoadContext = createContext(null);
 
 function Main(){
     
     const music = useContext(MusicKitContext);
+    
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
     const [selected, setSelected] = useState(null);

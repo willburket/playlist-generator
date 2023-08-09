@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
-import { LoadContext, SearchContext } from "../Navbar/Navbar";
+// import { LoadContext, SearchContext } from "../Navbar/Navbar";
+import { LoadContext, SearchContext } from "../Navbar/Main";
 import {ReactComponent as MusicIcon} from "../../assets/images/music.svg"
 import {ReactComponent as LoadIcon} from "../../assets/images/loading.svg"
 
@@ -7,7 +8,7 @@ function Home(){
     const load = useContext(LoadContext);
     const search = useContext(SearchContext);
 
-    if(!load && search.length === 0){
+    if(!load && search === null){
         return (
         <div className="center-container">
             <div className="prompt">            
