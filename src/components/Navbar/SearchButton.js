@@ -5,9 +5,9 @@ function SearchButton (props){
     
     return(
         <li className = "nav-item">
-            <a href="#" className="icon-button" onClick = {onClick} data-testid = "search-button">
+            <div className="icon-button" onClick = {onClick} data-testid = "search-button">
                 Search
-            </a>
+            </div>
         </li>
     );
 }

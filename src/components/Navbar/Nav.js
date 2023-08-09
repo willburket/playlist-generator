@@ -1,11 +1,8 @@
-import React, {useEffect, useState, useContext, createContext, useRef } from "react";
+import React, {useEffect, useState, useContext, useRef } from "react";
 import { ReactComponent as MusicIcon } from "../../assets/images/music.svg";
 import SearchButton from "./SearchButton";
 import { DropdownMenu } from "./Dropdown";
 import { MusicKitContext } from "../../App";
-
-
-//test 
 import Auth from "./Auth";
 import { shuffle } from "../../services/Playlist";
 
@@ -99,10 +96,9 @@ function Nav({handleCallback}){
 
             return (              
                     <li className = "nav-item">
-                    <a href="#" className="icon-button" onClick={() => clickChange()} ref={dropdownRef} data-testid = "genre">
-                        {/* {selected === null ? props.icon : selected.name} */}
+                    <div className="icon-button" onClick={() => clickChange()} ref={dropdownRef} >
                         {selected === null ?  'Genres' : selected.name}
-                    </a>
+                    </div>
                     {open && props.children}
                     </li>
                 

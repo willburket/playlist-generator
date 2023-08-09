@@ -8,18 +8,18 @@ function PlayButton(props){
     const onClick = props.onClick;
 
     return(           
-        <a href="#" className="player-button" onClick = {onClick} data-testid = "play-button">
+        <div className="player-button" onClick = {onClick} data-testid = "play-button">
             {playing ? <PauseIcon/> : <PlayIcon/>}
-        </a>            
+        </div>            
     );
 }
 
 function DisplayButton(props){
     
     return (           
-        <a href="#" className="player-button" onClick = {props.onClick} data-testid = "display-button">
+        <div className="player-button" onClick = {props.onClick} data-testid = "display-button">
             {props.icon}
-        </a>           
+        </div>           
     );
 }
 

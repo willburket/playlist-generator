@@ -120,6 +120,8 @@
   min-width: 50px;
   justify-content: center;
   transition: filter 300ms;
+  color: var(--text-color);
+  text-decoration: none;
   /* border: .5px solid black; */
 }
   
