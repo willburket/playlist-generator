@@ -36,9 +36,9 @@ function AddSong(props){
     // we want it to turn to a check mark svg if the song is already added 
     return(
         <div className="add-container">
-            <a href = "#" className="grid-button" onClick={onClick}>
+            <div className="grid-button" onClick={onClick}>
               {added ? <CheckIcon/> : <AddIcon/>}
-            </a>
+            </div>
         </div>
     );
 

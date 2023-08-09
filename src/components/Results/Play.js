@@ -65,9 +65,9 @@ function Play(props){
 
     return(
     <div className="play-container">
-        <a href = "#" className="grid-button" >
+        <div className="grid-button" >
             {playing ? <PauseIcon onClick = {pauseClick}/> : <PlayIcon onClick = {playClick}/>}
-        </a>
+        </div>
     </div>
     );
 }

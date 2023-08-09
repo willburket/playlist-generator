@@ -32,9 +32,9 @@ function PopUp(){
 
         return(
             <div>
-                <a href = "#" className="icon-button"  id = "popup-button" onClick={handleCloseDiv}>
+                <div className="icon-button"  id = "popup-button" onClick={handleCloseDiv}>
                     {props.text}
-                </a>
+                </div>
             </div>
         );
     }
