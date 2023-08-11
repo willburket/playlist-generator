@@ -33,7 +33,6 @@ cert/CA/myCA.key
 # experimental options - can change as needed
 src/Application.js
 src/components/Loaders
-src/components/Navbar/Auth.js
 src/components/Results/AppleCovers.js
 
 #env
