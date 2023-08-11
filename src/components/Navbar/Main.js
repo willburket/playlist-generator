@@ -1,8 +1,7 @@
-import React, {useEffect, useState, useContext, createContext, useRef } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import PopUp from "../Error/Unauthorized";
 import AlbumCovers from "../Results/Grid";
 import Home from "../Home/Home";
-import { MusicKitContext } from "../../App";
 import Player from "../MusicPlayer/Player";
 import { Nav } from "./Nav";
 
@@ -12,27 +11,27 @@ const LoadContext = createContext(null);
 
 function Main(){
     
-    const music = useContext(MusicKitContext);
-    
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
-
-    useEffect(() =>{
-        console.log("main results:")
-        console.log(searchResult)
-    }, [searchResult])
    
     const navCallback = (data) =>{
-        setSearchResult(data)
+        console.log("callback called")
+        if(data){
+            console.log(data)
+            setSearchResult(data)
+        }
+    }
+    const loadCallback = (load) =>{
+        setLoading(load)
     }
 
     return(
         <div data-testid = "navbar">
-            <Nav handleCallback = {navCallback}/>
+            <Nav handleCallback = {navCallback} onLoadingChange = {loadCallback}/>
             <SearchContext.Provider value = {searchResult}>
             <Player/>
                     <LoadContext.Provider value = {loading}>
-                        {/* <Home/>  */}
+                        <Home/> 
                         <PopUp/>
                         <AlbumCovers/> 
                     </LoadContext.Provider>

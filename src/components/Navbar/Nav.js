@@ -7,21 +7,19 @@ import Auth from "./Auth";
 import { shuffle } from "../../services/Playlist";
 
 
-function Nav({handleCallback}){   
+function Nav({handleCallback, onLoadingChange}){   
     const music = useContext(MusicKitContext)
     const [selected, setSelected] = useState(null)
     const [searchResult, setSearchResult] = useState([])
-    const [loading, setLoading] = useState(false)
 
     useEffect(() =>{
         handleCallback(searchResult)
-        // console.log(searchResult)
     }, [searchResult])
 
     async function genreSearch(){
 
         if(selected){
-            setLoading(true);       // need to figure out load 
+            onLoadingChange(true)
             await new Promise((resolve) => setTimeout(resolve, 2000))
             const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
             method: 'POST',                                              
@@ -35,9 +33,7 @@ function Nav({handleCallback}){
         const charts = [...data.message.songs[0].data];
         shuffle(charts);
         setSearchResult(charts);  
-        setLoading(false);
-        // parentCallback(searchResult)
-        //console.log(searchResult)
+        onLoadingChange(false)
         }
     }
     

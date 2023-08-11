@@ -1,9 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { ReactComponent as PlayIcon} from "../../assets/images/play-circle.svg";  
 import { ReactComponent as PauseIcon} from "../../assets/images/pause-circle.svg";  
-import { playItem, isTrackPlaying } from "../../services/MusicApi";
-import { MusicKitContext } from "../../App";
-
+import { playItem } from "../../services/MusicApi";
 
 function Play(props){
     const song = props.song;

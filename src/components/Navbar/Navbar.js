@@ -122,7 +122,6 @@ function Main(){
                 if (open && active != null){
                     setActive(null);
                     setOpen(!open);
-                    
                 }
                 else{
                     setActive(props.value);

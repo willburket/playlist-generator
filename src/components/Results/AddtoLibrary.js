@@ -1,11 +1,9 @@
 import React, {useState} from "react";
 import { ReactComponent as AddIcon} from "../../assets/images/add-button.svg";
-import { ReactComponent as CheckIcon} from "../../assets/images/check-symbol.svg";      //check-symbol is best overall, check-circle is best icon
+import { ReactComponent as CheckIcon} from "../../assets/images/check-symbol.svg";     
 import { useContext } from "react";
 import { MusicKitContext, TokenContext } from "../../App";
 import { addToLibrary } from "../../services/MusicApi";
-import AddedPopUp from "./AddedPopUp";
-
 
 function AddSong(props){
     const music = useContext(MusicKitContext);
