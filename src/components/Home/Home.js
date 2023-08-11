@@ -8,7 +8,7 @@ function Home(){
     const load = useContext(LoadContext);
     const search = useContext(SearchContext);
 
-    if(!load && search === null){
+    if(!load && search.length === 0){
         return (
         <div className="center-container">
             <div className="prompt">            
