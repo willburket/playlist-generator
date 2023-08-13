@@ -83,19 +83,17 @@ function Player(){
       }, [music]);
 
     useEffect(() => {
-        
-            if(music){
-                const subscription = music.addEventListener('queuePositionDidChange', () =>{      
-                    const currentSong = music.queue.currentItem;
-                    //console.log(currentSong);
-                    setSong(currentSong);
-                });
-    
-                return () =>{
-                    music.removeEventListener('queuePositionDidChange', subscription);
-                }
+        if(music){
+            const subscription = music.addEventListener('queuePositionDidChange', () =>{      
+                const currentSong = music.queue.currentItem;
+                setSong(currentSong);
+            });
+
+            return () =>{
+                music.removeEventListener('queuePositionDidChange', subscription);
             }
-        }, [music]);
+        }
+    }, [music]);
 
     return(
         <div className="display-container" data-testid = "player">

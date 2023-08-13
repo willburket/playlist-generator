@@ -22,7 +22,8 @@ function Album(props){
         
         if(search && search.length !== 0){
             sethasSearched(true);
-            setPlaylist(search.slice(0,20))
+            // setPlaylist(search.slice(0,20))
+            setPlaylist(search)
             const link = window.MusicKit.formatArtworkURL(props.song.attributes.artwork,200,200)
             setImgLink(link)
         }     

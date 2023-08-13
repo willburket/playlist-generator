@@ -96,7 +96,9 @@
   align-items: center;
   border-radius: var(--border-radius);
   transition: var(--speed);
-  padding: 0.5rem
+  padding: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;
 }
 
 .menu-item:hover{

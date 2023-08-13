@@ -11,7 +11,7 @@ provider:
   name: aws
   memorySize: 2048
   stage: dev
-  timeout: 15
+  timeout: 45
   region: us-east-1
   runtime: nodejs16.x
 
@@ -45,9 +45,9 @@ functions:
           path: /genre
           method: post
 
-  recent:
-    handler: handlers/recent.fetchRecentSongs
+  profile:
+    handler: handlers/profile.fetchProfile
     events:
       - http:
-          path: /history
+          path: /profile
           method: get

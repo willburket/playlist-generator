@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { MusicKitContext } from "../../App";
 import { ReactComponent as Account} from '../../assets/images/account.svg'
-import { SearchContext } from "../Navbar/Navbar";
+import { SearchContext } from "../Navbar/Main";
 
 function PopUp(){
     const music = useContext(MusicKitContext); 

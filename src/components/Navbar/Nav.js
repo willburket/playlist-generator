@@ -4,21 +4,27 @@ import SearchButton from "./SearchButton";
 import { DropdownMenu } from "./Dropdown";
 import { MusicKitContext } from "../../App";
 import Auth from "./Auth";
-import { shuffle } from "../../services/Playlist";
+
+// test 
+import { fetchProfile } from "../../services/MusicApi";
+import { genreSearchToCache, getFromCache } from "../../services/Cache";
 
 
 function Nav({handleCallback, onLoadingChange}){   
     const music = useContext(MusicKitContext)
     const [selected, setSelected] = useState(null)
     const [searchResult, setSearchResult] = useState([])
-
+    const [fetchedGenres, setFetchedGenres] = useState([])  
+                                                        
     useEffect(() =>{
         handleCallback(searchResult)
     }, [searchResult])
 
     async function genreSearch(){
+        const sessionDataJSON = sessionStorage.getItem('songCache')
+        const sessionData = JSON.parse(sessionDataJSON)
 
-        if(selected){
+        if(selected && !fetchedGenres.includes(selected.id)){
             onLoadingChange(true)
             await new Promise((resolve) => setTimeout(resolve, 2000))
             const response = await fetch('http://localhost:3000/dev/genre', {  //http://localhost:3000/dev/genre for dev
@@ -30,10 +36,27 @@ function Nav({handleCallback, onLoadingChange}){
             })
         const data = await response.json();
         
-        const charts = [...data.message.songs[0].data];
-        shuffle(charts);
-        setSearchResult(charts);  
-        onLoadingChange(false)
+        const charts = [...data.message.songs[0].data];     
+        const cacheCharts = genreSearchToCache(selected.val,charts) // place array of songs in session storage, return first 20 
+        setSearchResult(cacheCharts);        
+        onLoadingChange(false);
+        setFetchedGenres([...fetchedGenres,selected.id])
+        console.log(fetchedGenres)
+
+        // test 
+        // const profile = await fetchProfile();
+        // console.log(profile)
+        }
+        else if(selected && fetchedGenres.includes(selected.id)){
+            console.log(fetchedGenres)
+            const target = selected.id
+            const callCount = fetchedGenres.filter(item => item === target).length
+            const cacheSongs = getFromCache(selected.val, callCount)
+            setSearchResult(cacheSongs)
+            setFetchedGenres([...fetchedGenres,selected.id])
+
+
+            // just grab from session storage
         }
     }
     
@@ -45,11 +68,11 @@ function Nav({handleCallback, onLoadingChange}){
 
 
         return(
-            <a href="#" className = "menu-item" onClick = {itemClick}>
+            <div className = "menu-item" onClick = {itemClick}>
                 <div className="dropdown-button">
                     {props.name} 
                 </div>
-            </a>
+            </div>
         );
     }
 
@@ -111,16 +134,16 @@ function Nav({handleCallback, onLoadingChange}){
                     <div className = "buttons-box">
                     <GenreNavItem icon= {<MusicIcon/>} value= "genre"> 
                         <DropdownMenu>
-                            <GenreDropdownItem name = "Pop" id = "14"/>           
-                            <GenreDropdownItem name = "Hip-Hop/Rap" id ="18"/>
-                            <GenreDropdownItem name = "Rock" id = "21" />
-                            <GenreDropdownItem name = "R&B/Soul" id = "15" />
-                            <GenreDropdownItem name = "Alternative" id = "20" />
-                            <GenreDropdownItem name = "Dance" id = "17" />
-                            <GenreDropdownItem name = "Country" id = "6" />
-                            <GenreDropdownItem name = "Latin" id = "12" />
-                            <GenreDropdownItem name = "Raggae" id = "24" />      
-                            <GenreDropdownItem name = "Classical" id = "5" />
+                            <GenreDropdownItem name = "Pop" id = "14" val = "pop"/>           
+                            <GenreDropdownItem name = "Hip-Hop/Rap" id ="18" val = "hip-hop/rap"/>
+                            <GenreDropdownItem name = "Rock" id = "21" val = "rock"/>
+                            <GenreDropdownItem name = "R&B/Soul" id = "15" val = "r&b/soul"/>
+                            <GenreDropdownItem name = "Alternative" id = "20" val = "alternative"/>
+                            <GenreDropdownItem name = "Dance" id = "17" val = "dance"/>
+                            <GenreDropdownItem name = "Country" id = "6" val = "country"/>
+                            <GenreDropdownItem name = "Latin" id = "12" val = "latin"/>
+                            <GenreDropdownItem name = "Raggae" id = "24" val = "raggae"/>      
+                            <GenreDropdownItem name = "Classical" id = "5" val = "classical"/>
                         </DropdownMenu>   
                     </GenreNavItem>
                     <SearchButton onClick = {genreSearch} />

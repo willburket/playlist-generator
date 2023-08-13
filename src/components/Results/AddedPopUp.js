@@ -7,10 +7,6 @@ function AddedPopUp(props){
     useEffect(() =>{
         if(props.added === true){
             setShow(true)
-            // const timeout = setTimeout(() => {
-            //     setShow(false);
-            //   }, 3000);
-            // return () => clearTimeout(timeout);
         }
     }, [props.added])
 

@@ -504,6 +504,213 @@ const token = jwt.sign({}, private_key, {
 
 /***/ }),
 
+/***/ "../../../utils/musicApi.js":
+/*!**********************************!*\
+  !*** ../../../utils/musicApi.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   fetchArtistSongs: () => (/* binding */ fetchArtistSongs),
+/* harmony export */   fetchLibrary: () => (/* binding */ fetchLibrary),
+/* harmony export */   fetchLibraryArtists: () => (/* binding */ fetchLibraryArtists),
+/* harmony export */   fetchRecentArtists: () => (/* binding */ fetchRecentArtists),
+/* harmony export */   fetchRecentSongs: () => (/* binding */ fetchRecentSongs),
+/* harmony export */   genreSort: () => (/* binding */ genreSort),
+/* harmony export */   getArtistIds: () => (/* binding */ getArtistIds),
+/* harmony export */   getAxios: () => (/* binding */ getAxios),
+/* harmony export */   processArtistSet: () => (/* binding */ processArtistSet),
+/* harmony export */   searchArtist: () => (/* binding */ searchArtist),
+/* harmony export */   searchArtistId: () => (/* binding */ searchArtistId),
+/* harmony export */   searchRecentArtists: () => (/* binding */ searchRecentArtists)
+/* harmony export */ });
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
+/* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
+
+const token = __webpack_require__(/*! ../handlers/jwt */ "../../../handlers/jwt.js");
+const axios = __webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs");
+
+// a lot of these don't need to be exported
+
+const fetchRecentSongs = async event => {
+  const userToken = event;
+  const axiosInstance = getAxios(userToken);
+  try {
+    const recent = await axiosInstance.get(`/v1/me/recent/played/tracks`, {
+      params: {
+        types: 'songs',
+        limit: 30
+      }
+    });
+    const songs = recent.data;
+    return songs;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const fetchLibrary = async event => {
+  const userToken = event;
+  const axiosInstance = getAxios(userToken);
+  try {
+    const recent = await axiosInstance.get(`/v1/me/library/songs`, {
+      params: {
+        limit: 30
+      }
+    });
+    const songs = recent.data;
+    return songs;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const fetchLibraryArtists = async event => {
+  const userToken = event;
+  const axiosInstance = getAxios(userToken);
+  try {
+    const recent = await axiosInstance.get(`/v1/me/library/artists`, {
+      params: {
+        limit: 30
+      }
+    });
+    const songs = recent.data;
+    return songs;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const fetchArtistSongs = async (userToken, id) => {
+  const axiosInstance = getAxios(userToken);
+  const storefront = 'us';
+  try {
+    const recent = await axiosInstance.get(`/v1/catalog/${storefront}/artists/${id}/songs`);
+    const songs = recent.data;
+    return songs;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const getAxios = event => {
+  const userToken = event;
+  const axiosInstance = axios.create({
+    baseURL: 'https://api.music.apple.com',
+    headers: {
+      Authorization: `Bearer ${token.token}`,
+      // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
+      'Music-User-Token': userToken
+    }
+  });
+  return axiosInstance;
+};
+const fetchRecentArtists = async event => {
+  const userToken = event;
+  try {
+    const recent = await fetchRecentSongs(userToken);
+    const recentArray = recent.data;
+    const recentArtists = recentArray.map(song => song.attributes.artistName);
+    const recentArtistsSet = new Set(recentArtists);
+    return recentArtistsSet;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const searchRecentArtists = async event => {
+  const userToken = event;
+  try {
+    const recentArtists = await fetchRecentArtists(userToken);
+    const recentArtistIds = await getArtistIds(userToken, recentArtists);
+    return recentArtistIds;
+  } catch (error) {
+    console.log(error);
+  }
+};
+const searchArtist = async (userToken, searchTerm) => {
+  const axiosInstance = getAxios(userToken);
+  const storefront = 'us';
+  try {
+    // search terms doesn't guarantee results are from that artist
+    const search = await axiosInstance.get(`/v1/catalog/${storefront}/search`, {
+      params: {
+        term: searchTerm,
+        limit: 5,
+        types: 'songs'
+      }
+    });
+    const songs = search.data.results.songs.data;
+    return songs;
+  } catch (error) {
+    console.log(error);
+  }
+  ;
+};
+const processArtistSet = async (userToken, artists) => {
+  const recentArtistsSongs = new Set();
+  for (const item of artists) {
+    const songs = await searchArtist(userToken, item);
+    console.log(songs);
+    recentArtistsSongs.add(...songs);
+  }
+  return recentArtistsSongs;
+};
+const getArtistIds = async (userToken, artists) => {
+  const recentArtistIds = new Set();
+  for (const item of artists) {
+    const id = await searchArtistId(userToken, item);
+    if (id !== undefined) {
+      recentArtistIds.add(id);
+    }
+  }
+  console.log(recentArtistIds);
+  return recentArtistIds;
+};
+const searchArtistId = async (userToken, searchTerm) => {
+  const axiosInstance = getAxios(userToken);
+  const storefront = 'us';
+  try {
+    const search = await axiosInstance.get(`/v1/catalog/${storefront}/search`, {
+      params: {
+        term: searchTerm,
+        limit: 1,
+        types: 'artists'
+      }
+    });
+    const artistId = search.data.results.artists.data[0].id;
+    return artistId;
+  } catch (error) {
+    // console.log(error);
+  }
+  ;
+};
+const genreSort = songs => {
+  const genreDict = {
+    'hip-hop/rap': [],
+    'pop': [],
+    'rock': [],
+    'r&b/soul': [],
+    'alternative': [],
+    'dance': [],
+    'country': [],
+    'latin': [],
+    'raggae': [],
+    'classical': []
+  };
+  for (const item of songs) {
+    const genre = item.attributes.genreNames[0].toLowerCase();
+    if (genre in genreDict) {
+      genreDict[genre].push(item);
+    }
+  }
+  return genreDict;
+};
+
+/***/ }),
+
 /***/ "../../buffer-equal-constant-time/index.js":
 /*!*************************************************!*\
   !*** ../../buffer-equal-constant-time/index.js ***!
@@ -16438,52 +16645,42 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
-/*!***********************************!*\
-  !*** ../../../handlers/recent.js ***!
-  \***********************************/
+/*!************************************!*\
+  !*** ../../../handlers/profile.js ***!
+  \************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   fetchRecentSongs: () => (/* binding */ fetchRecentSongs)
+/* harmony export */   fetchProfile: () => (/* binding */ fetchProfile)
 /* harmony export */ });
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! source-map-support/register */ "../../source-map-support/register.js");
 /* harmony import */ var source_map_support_register__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(source_map_support_register__WEBPACK_IMPORTED_MODULE_0__);
 
-const token = __webpack_require__(/*! ./jwt */ "../../../handlers/jwt.js");
-const axios = (__webpack_require__(/*! axios */ "../../axios/dist/node/axios.cjs").create)({
-  baseURL: 'https://api.music.apple.com',
-  headers: {
-    Authorization: `Bearer ${token.token}` // this signs every time we fetch a new genre, probably want to do it differently (cache?, s3?)
-  }
-});
-
-const fetchRecentSongs = async event => {
-  //   const requestBody = JSON.parse(event.body);
-
+const apple = __webpack_require__(/*! ../utils/musicApi */ "../../../utils/musicApi.js");
+const fetchProfile = async event => {
+  const recentArtistsSongs = [];
+  const userToken = event.headers.Authorization.split(' ')[1];
   try {
-    const recent = await axios.get(`/v1/me/recent/played/tracks`, {
-      params: {
-        types: 'songs',
-        limit: 30
-        // genre: requestBody,
-      }
-    });
-
-    const songs = recent.data.results;
+    const recentArtists = await apple.searchRecentArtists(userToken);
+    for (const item of recentArtists) {
+      const songs = await apple.fetchArtistSongs(userToken, item);
+      recentArtistsSongs.push(...songs.data);
+    }
+    const sortedSongs = apple.genreSort(recentArtistsSongs); // create hash of songs sorted by genre
+    console.log(sortedSongs);
     const response = {
       statusCode: 200,
       headers: {
-        'Access-Control-Allow-Origin': 'https://playlinq.io',
-        // maybe set this as .env var?
+        // 'Access-Control-Allow-Origin': 'https://playlinq.io',   // maybe set this as .env var?
+        'Access-Control-Allow-Origin': 'http://localhost:3001',
         'Access-Control-Allow-Credentials': true
       },
       body: JSON.stringify({
-        message: songs
-      }, null,
-      // lets figure out what all this means
-      2)
+        message: sortedSongs
+      }, null, 2)
     };
     return response;
   } catch (error) {
+    console.log(error);
     return {
       statusCode: 500,
       body: JSON.stringify({
@@ -16493,6 +16690,12 @@ const fetchRecentSongs = async event => {
   }
   ;
 };
+
+// grab songs from artists in recent, library, recs, etc.
+// filter out songs in recent, lib, recs, etc.
+// create set?
+// sort by genre
+// cache
 })();
 
 var __webpack_export_target__ = exports;
@@ -16500,4 +16703,4 @@ for(var i in __webpack_exports__) __webpack_export_target__[i] = __webpack_expor
 if(__webpack_exports__.__esModule) Object.defineProperty(__webpack_export_target__, "__esModule", { value: true });
 /******/ })()
 ;
-//# sourceMappingURL=recent.js.map
+//# sourceMappingURL=profile.js.map

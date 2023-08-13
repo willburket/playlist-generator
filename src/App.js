@@ -1,6 +1,6 @@
 import React, {createContext} from "react";
-// import {Main} from "./components/Navbar/Navbar";
 import { Main } from "./components/Navbar/Main";
+import { cacheCreate } from "./services/Cache";
 
 const MusicKitContext = createContext(null); 
 const TokenContext = createContext(null);
@@ -37,7 +37,8 @@ class App extends React.Component{
       const music = window.MusicKit.getInstance()
       this.setState({music:music})
       this.setState({token:token})
-      console.log("configuration success")
+      // console.log("configuration success")
+      cacheCreate()
     }
     catch(err){
       console.log(err)

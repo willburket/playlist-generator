@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { fetchProfile } from '../../services/MusicApi';
 
 function Auth(props){             
    // const music = window.MusicKit.getInstance()
@@ -9,6 +10,12 @@ function Auth(props){
         try{
             if (isAuthorized === false){               
                 await music.authorize();
+                
+                // loader with "creating user profile"
+                // const profile = await fetchProfile();
+                // console.log(profile)
+                // save to session storage 
+
             }
             else{
                 await music.unauthorize();

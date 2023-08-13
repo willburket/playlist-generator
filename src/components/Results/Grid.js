@@ -13,7 +13,8 @@ function AlbumCovers(){
         
         if(search && search.length !== 0){
             sethasSearched(true)
-            setPlaylist([...search.slice(0,20)]);
+            // setPlaylist([...search.slice(0,20)]);
+            setPlaylist([...search])
         }     
     }, [search]);
 

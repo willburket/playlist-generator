@@ -5,7 +5,6 @@ import Home from "../Home/Home";
 import Player from "../MusicPlayer/Player";
 import { Nav } from "./Nav";
 
-
 const SearchContext = createContext(null);  
 const LoadContext = createContext(null);
 
