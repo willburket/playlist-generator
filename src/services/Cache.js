@@ -69,8 +69,25 @@ export const getFromCache = (genre, searchNum) => {
     }
 }
 
-export const profileToCache = () => {
+export const profileToCache = (songs) => {
+    try{
+        const sessionDataJSON = sessionStorage.getItem('songCache')
+        const sessionData = JSON.parse(sessionDataJSON)
 
+        for (const key in songs){
+            if(songs[key].length > 0){
+                sessionData[key] = sessionData[key].concat(...songs[key])
+                shuffle(sessionData[key])     // shuffle full array
+            }
+        }
+        const updatedSessionDataJSON = JSON.stringify(sessionData)
+        sessionStorage.setItem('songCache', updatedSessionDataJSON)
+        console.log("songs added to session storage")
+    } catch(error){
+        console.log(error)
+    }
 }
+
+
 
 // how do we know if session storage is full? make sure we don't over add 

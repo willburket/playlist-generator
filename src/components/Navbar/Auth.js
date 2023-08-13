@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { fetchProfile } from '../../services/MusicApi';
+import { profileToCache, cacheCreate } from '../../services/Cache';
 
 function Auth(props){             
-   // const music = window.MusicKit.getInstance()
-    const music = props.music
+    const music = props.music       // can just use context? want to use callback for loader
     const [isAuthorized, setIsAuthorized] = useState(false)
 
     async function handleStatusChange(){
         try{
+            setIsAuthorized(!isAuthorized);
             if (isAuthorized === false){               
                 await music.authorize();
                 
                 // loader with "creating user profile"
-                // const profile = await fetchProfile();
-                // console.log(profile)
-                // save to session storage 
-
+                const profile = await fetchProfile();
+                const songs = profile.message;
+                profileToCache(songs)
             }
             else{
                 await music.unauthorize();
+                cacheCreate()   // clears cache by creating new empty cache
             }
-            setIsAuthorized(!isAuthorized);
         }
         catch(err){
             console.log(err);
@@ -34,8 +34,6 @@ function Auth(props){
         
     }, [music]); 
         
-
-
     return(
         <div className='nav-item'>
             <div className="icon-button" value = {isAuthorized} onClick = {handleStatusChange} data-testid = "auth-button">
@@ -45,6 +43,5 @@ function Auth(props){
     );
 
 }
-
 
 export default Auth;

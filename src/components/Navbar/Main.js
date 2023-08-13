@@ -1,4 +1,4 @@
-import React, { useEffect, useState, createContext } from "react";
+import React, { useState, createContext } from "react";
 import PopUp from "../Error/Unauthorized";
 import AlbumCovers from "../Results/Grid";
 import Home from "../Home/Home";
